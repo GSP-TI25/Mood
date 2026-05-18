@@ -147,6 +147,8 @@ const Testimonials = () => {
                     loading='lazy'
                     width={400}
                     height={600}
+                    crossOrigin='anonymous'
+                    referrerPolicy='no-referrer'
                   />
                   <div className='review-card__content'>
                     <div className='review-card__meta'>

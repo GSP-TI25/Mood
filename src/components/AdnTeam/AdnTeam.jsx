@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react';
 import Linkedin from '../Icons/Linkedin';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnTeam.scss';
@@ -131,6 +131,8 @@ const AdnTeam = () => {
                         src={member.image}
                         alt={member.name}
                         className='team-card__image'
+                        crossOrigin='anonymous'
+                        referrerPolicy='no-referrer'
                       />
                       <a
                         href={member.linkedin}
@@ -149,7 +151,7 @@ const AdnTeam = () => {
                         className='team-card__action-btn'
                         aria-label='Ver perfil completo'
                       >
-                        <ChevronRight
+                        <ArrowUpRight
                           size={20}
                           strokeWidth={2.5}
                         />

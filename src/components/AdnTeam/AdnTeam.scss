@@ -118,7 +118,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: rgba($negro, 0.6);
+    color: rgba($negro, 0.75);
 
     &-dot {
       width: 8px;
@@ -223,7 +223,7 @@
   &__role {
     font-size: 0.75rem;
     font-weight: 600;
-    color: rgba($negro, 0.4);
+    color: rgba($negro, 0.65);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin: 0;
@@ -294,7 +294,7 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding-bottom: 2rem;
-    width: 100%; // Garantiza que ocupe todo el ancho disponible
+    width: 100%;
 
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -359,14 +359,13 @@
   }
 }
 
-// --- ESTILOS DE LA CARTA DE TEXTO REDUCIDA (4 POR FILA) ---
+// --- ESTILOS DE LA CARTA DE TEXTO REDUCIDA ---
 .member-card {
-  // MAGIA: Calcula 4 tarjetas exactas restando los 3 gaps de 1.5rem (4.5rem total)
   flex: 0 0 calc((100% - 4.5rem) / 4);
-  height: 210px; // Reducimos un poco la altura para la nueva proporción
+  height: 210px;
   background-color: $blanco;
-  border-radius: 16px; // Bordes un poco más finos
-  padding: 1.5rem; // Padding interior ajustado
+  border-radius: 16px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -377,7 +376,6 @@
     background-color 0.4s ease,
     box-shadow 0.4s ease;
 
-  // Responsivo: Adaptamos a 3, 2 y 1 carta según la pantalla
   @media (max-width: 1024px) {
     flex: 0 0 calc((100% - 3rem) / 3);
   }
@@ -387,7 +385,8 @@
     padding: 1.25rem;
   }
   @media (max-width: 480px) {
-    flex: 0 0 85%;
+    /* MAGIA: En móviles muy estrechos, la tarjeta ocupa el 100% exacto */
+    flex: 0 0 100%;
   }
 
   &:hover {
@@ -419,7 +418,7 @@
   }
 
   &__name {
-    font-size: 1.15rem; // Texto ligeramente más chico
+    font-size: 1.15rem;
     font-weight: 500;
     color: $negro;
     margin: 0;
@@ -428,9 +427,9 @@
   }
 
   &__role {
-    font-size: 0.7rem; // Texto más chico
+    font-size: 0.7rem;
     font-weight: 600;
-    color: rgba($negro, 0.4);
+    color: rgba($negro, 0.65);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin: 0;
@@ -456,7 +455,7 @@
 
   &__btn {
     @extend %shiny-animation;
-    width: 36px; // Botón más compacto
+    width: 36px;
     height: 36px;
     border-radius: 10px 10px 10px 0;
     background-color: #e5fabb;

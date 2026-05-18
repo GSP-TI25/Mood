@@ -16,6 +16,8 @@ const AdnWork = () => {
             src='https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80'
             alt='Equipo de Mood'
             className='adn-work__image'
+            crossOrigin='anonymous'
+            referrerPolicy='no-referrer'
           />
         </FadeContent>
 

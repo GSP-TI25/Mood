@@ -67,6 +67,8 @@ const AdnHero = () => {
             src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=492&q=80'
             alt='Equipo Mood trabajando en Desktop'
             className='adn-hero__image'
+            crossOrigin='anonymous'
+            referrerPolicy='no-referrer'
           />
         </FadeContent>
       </div>
@@ -82,6 +84,8 @@ const AdnHero = () => {
             src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
             alt='Equipo Mood trabajando en Móvil'
             className='adn-hero__image'
+            crossOrigin='anonymous'
+            referrerPolicy='no-referrer'
           />
         </FadeContent>
       </div>
