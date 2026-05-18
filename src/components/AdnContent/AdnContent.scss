@@ -1,0 +1,94 @@
+@use '../../styles/variables' as *;
+
+.adn-content {
+  width: 100%;
+  padding: 8rem 2rem;
+  background-color: $blanco;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    // Creamos la asimetría: 250px para el badge, el resto para el texto
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  // --- COLUMNA IZQUIERDA ---
+  &__left {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid rgba($negro, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba($negro, 0.03); // Sombra súper sutil como en la imagen
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $negro;
+
+    &-dot {
+      width: 10px;
+      height: 10px;
+      background-color: $primary;
+      border-radius: 2px; // Cuadrado ligeramente redondeado
+    }
+  }
+
+  // --- COLUMNA DERECHA ---
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; // Espacio entre el texto gigante y los hashtags
+  }
+
+  &__text {
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 500; // Peso medio para dar ese look de revista moderna
+    line-height: 1.2;
+    color: $negro;
+    margin: 0;
+    letter-spacing: -0.03em;
+
+    &-light {
+      color: rgba($negro, 0.25); // El final del texto desvanecido
+    }
+  }
+
+  &__hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    span {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba($negro, 0.6);
+      padding: 0.5rem 1.2rem;
+      background-color: rgba($negro, 0.04); // Fondo gris muy claro
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      cursor: default;
+
+      &:hover {
+        background-color: rgba($primary, 0.2); // Efecto sutil al pasar el mouse
+        color: $negro;
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // <-- IMPORTAMOS useLocation
 import { Sparkles } from 'lucide-react';
 import './Navbar.scss';
 import logoMood from '../../assets/Logo_mood.svg';
@@ -8,7 +9,9 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Efecto para detectar el scroll de la página
+  // NUEVO: Obtenemos la ruta actual
+  const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -18,17 +21,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // NUEVO: Efecto para bloquear el scroll del fondo cuando el menú está abierto
   useEffect(() => {
     if (isMenuOpen) {
-      // Bloquea el scroll
       document.body.style.overflow = 'hidden';
     } else {
-      // Restaura el scroll
       document.body.style.overflow = '';
     }
 
-    // Limpieza de seguridad en caso de que el componente se desmonte
     return () => {
       document.body.style.overflow = '';
     };
@@ -41,8 +40,8 @@ const Navbar = () => {
       className={`header ${isScrolled ? 'header--scrolled' : ''} ${isMenuOpen ? 'header--menu-open' : ''}`}
     >
       <nav className='navbar'>
-        <a
-          href='/'
+        <Link
+          to='/'
           className='navbar__brand'
           aria-label='Ir al inicio'
           onClick={closeMenu}
@@ -54,20 +53,22 @@ const Navbar = () => {
             width='120'
             height='40'
           />
-        </a>
+        </Link>
 
         <ul className='navbar__nav navbar__desktop-only'>
           <li className='navbar__item'>
-            <a
-              href='#adn'
-              className='navbar__link'
+            <Link
+              to='/adn-mood'
+              // LÓGICA ACTIVE: Si la ruta es '/adn-mood', agregamos la clase activa
+              className={`navbar__link ${location.pathname === '/adn-mood' ? 'navbar__link--active' : ''}`}
             >
               ADN Mood
-            </a>
+            </Link>
           </li>
           <li className='navbar__item'>
+            {/* CORRECCIÓN: Agregamos la '/' para que funcione desde cualquier página */}
             <a
-              href='#print'
+              href='/#print'
               className='navbar__link'
             >
               Mood Print
@@ -75,7 +76,7 @@ const Navbar = () => {
           </li>
           <li className='navbar__item'>
             <a
-              href='#what'
+              href='/#what'
               className='navbar__link'
             >
               #What'sYourMood
@@ -100,7 +101,7 @@ const Navbar = () => {
           </div>
 
           <a
-            href='#contacto'
+            href='/#contacto'
             className='btn btn--contact'
           >
             <span>Contacto</span>
@@ -125,17 +126,18 @@ const Navbar = () => {
       <div className={`mobile-panel ${isMenuOpen ? 'mobile-panel--open' : ''}`}>
         <ul className='mobile-panel__nav'>
           <li>
-            <a
-              href='#adn'
-              className='mobile-panel__link'
+            <Link
+              to='/adn-mood'
+              // LÓGICA ACTIVE PARA MÓVIL
+              className={`mobile-panel__link ${location.pathname === '/adn-mood' ? 'mobile-panel__link--active' : ''}`}
               onClick={closeMenu}
             >
               ADN Mood
-            </a>
+            </Link>
           </li>
           <li>
             <a
-              href='#print'
+              href='/#print'
               className='mobile-panel__link'
               onClick={closeMenu}
             >
@@ -144,7 +146,7 @@ const Navbar = () => {
           </li>
           <li>
             <a
-              href='#what'
+              href='/#what'
               className='mobile-panel__link'
               onClick={closeMenu}
             >
@@ -176,7 +178,7 @@ const Navbar = () => {
           </div>
 
           <a
-            href='#contacto'
+            href='/#contacto'
             className='btn btn--contact mobile-panel__btn'
             onClick={closeMenu}
           >

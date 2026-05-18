@@ -1,0 +1,156 @@
+@use '../../styles/variables' as *;
+
+.adn-hero {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8rem;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  &__container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  // --- 1. ZONA DEL TÍTULO ---
+  &__header {
+    text-align: left;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: $negro;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin: 0;
+
+    &.adn-hero__title-light {
+      color: rgba($negro, 0.3);
+      font-weight: 500;
+    }
+  }
+
+  // --- 2. ZONA MEDIA (Botón y Párrafo) ---
+  &__middle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 1rem; // Reducido al quitar la línea
+    width: 100%;
+    // BORDER-TOP ELIMINADO PARA LIMPIAR EL DISEÑO
+
+    @media (max-width: 768px) {
+      flex-direction: column-reverse;
+      gap: 2rem;
+    }
+  }
+
+  &__scroll-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: $negro;
+    color: $blanco;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+
+    position: relative;
+    overflow: hidden;
+
+    svg {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -120%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: skewX(-25deg);
+      transition: transform 0.6s ease-in-out;
+      z-index: 1;
+    }
+
+    &:hover {
+      background-color: $primary;
+      color: $negro;
+
+      &::after {
+        transform: translateX(350%) skewX(-25deg);
+      }
+    }
+  }
+
+  &__paragraph-wrapper {
+    max-width: 450px;
+    text-align: right;
+
+    @media (max-width: 768px) {
+      text-align: left;
+      max-width: 100%;
+    }
+  }
+
+  &__paragraph {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: $negro;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  // --- 3. ZONA DE LA IMAGEN ---
+  &__image-wrapper {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+
+    // MAGIA: Asegura que el div del FadeContent tome todo el alto disponible
+    & > div {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 48px 48px 0 0;
+    // CORRECCIÓN MAGISTRAL: Elimina el espacio fantasma de la línea roja
+    display: block;
+  }
+}
