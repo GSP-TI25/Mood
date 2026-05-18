@@ -5,12 +5,12 @@ import './AdnHero.scss';
 
 const AdnHero = () => {
   const handleScroll = () => {
-    // Busca el elemento al que queremos ir (asegúrate de que AdnContent tenga id='adn-content')
     const element = document.getElementById('adn-content');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
   return (
     <section className='adn-hero'>
       <div className='adn-hero__container'>
@@ -46,8 +46,7 @@ const AdnHero = () => {
 
           <div className='adn-hero__paragraph-wrapper'>
             <BlurText
-              text='Creamos estrategias basadas en datos y diseño
-con propósito para hacer destacar tu marca.'
+              text='Creamos estrategias basadas en datos y diseño con propósito para hacer destacar tu marca.'
               delay={40}
               animateBy='words'
               direction='top'
@@ -58,16 +57,30 @@ con propósito para hacer destacar tu marca.'
         </div>
       </div>
 
-      {/* 3. Imagen inferior */}
-      <div className='adn-hero__image-wrapper'>
+      {/* 3A. IMAGEN EXCLUSIVA PARA DESKTOP */}
+      <div className='adn-hero__image-wrapper adn-hero__image-wrapper--desktop'>
         <FadeContent
           duration={1}
           delay={0.5}
         >
           <img
-            // Añadimos h=600 en lugar de 300 para que no se pixelee en monitores grandes
             src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=492&q=80'
-            alt='Equipo Mood trabajando'
+            alt='Equipo Mood trabajando en Desktop'
+            className='adn-hero__image'
+          />
+        </FadeContent>
+      </div>
+
+      {/* 3B. IMAGEN EXCLUSIVA PARA TABLET Y MÓVIL */}
+      <div className='adn-hero__image-wrapper adn-hero__image-wrapper--mobile'>
+        <FadeContent
+          duration={1}
+          delay={0.5}
+        >
+          <img
+            // Sin altura predefinida para que fluya hasta el final de la pantalla
+            src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
+            alt='Equipo Mood trabajando en Móvil'
             className='adn-hero__image'
           />
         </FadeContent>
