@@ -3,6 +3,8 @@ import Footer from '../../components/Footer/Footer';
 import GradualBlur from '../../components/GradualBlur/GradualBlur';
 import AdnHero from '../../components/AdnHero/AdnHero';
 import AdnContent from '../../components/AdnContent/AdnContent';
+import AdnWork from '../../components/AdnWork/AdnWork';
+import AdnTeam from '../../components/AdnTeam/AdnTeam';
 import './AdnMood.scss';
 
 const AdnMood = () => {
@@ -16,6 +18,8 @@ const AdnMood = () => {
 
       {/* Contenido principal de la filosofía de la empresa */}
       <AdnContent />
+      <AdnWork />
+      <AdnTeam />
 
       {/* Footer reutilizado */}
       <div className='adn__footer-area'>

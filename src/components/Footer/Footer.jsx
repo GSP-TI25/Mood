@@ -1,4 +1,4 @@
-import { ArrowUp, ArrowRight } from 'lucide-react';
+import { ChevronRight, ChevronUp } from 'lucide-react';
 import Linkedin from '../Icons/Linkedin';
 import Instagram from '../Icons/Instagram';
 import Facebook from '../Icons/Facebook';
@@ -39,7 +39,7 @@ const Footer = () => {
                 {/* Estructura perfecta para la animación compleja */}
                 <span className='btn-jobs__text'>Únete al equipo</span>
                 <span className='btn-jobs__icon'>
-                  <ArrowRight size={18} />
+                  <ChevronRight size={18} />
                 </span>
               </a>
             </div>
@@ -127,7 +127,7 @@ const Footer = () => {
               onClick={scrollToTop}
               aria-label='Volver arriba'
             >
-              <ArrowUp
+              <ChevronUp
                 size={20}
                 strokeWidth={1.5}
               />

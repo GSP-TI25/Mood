@@ -1,0 +1,155 @@
+@use '../../styles/variables' as *;
+
+/* --- EL MISMO EFECTO DE REFLEJO DEL FOOTER --- */
+%shiny-animation {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+  }
+
+  &:hover::after {
+    transform: translateX(400%) skewX(-25deg);
+  }
+}
+
+.adn-work {
+  width: 100%;
+  padding: 8rem 2rem 10rem; // Un poco más de padding arriba para respirar
+  background-color: #1c1c1e; // CAMBIO: Fondo oscuro
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 5rem;
+    align-items: flex-start;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  // --- COLUMNA DE IMAGEN ---
+  &__image-col {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); // Sombra más dura para fondo negro
+
+    @media (max-width: 768px) {
+      min-height: 300px;
+    }
+  }
+
+  // --- COLUMNA DE CONTENIDO ---
+  &__content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding-top: 1rem;
+  }
+
+  &__texts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: rgba($blanco, 0.85); // CAMBIO: Texto claro para fondo oscuro
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  /* --- BOTÓN OSCURO IDÉNTICO AL FOOTER --- */
+  .btn-jobs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    & > span {
+      @extend %shiny-animation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      height: 48px;
+      border-radius: 12px;
+      transition: all 0.4s ease;
+
+      span,
+      svg {
+        position: relative;
+        z-index: 2;
+      }
+    }
+
+    &__text {
+      background-color: rgba($blanco, 0.1); // Fondo translúcido oscuro
+      color: $blanco;
+      padding: 0 1.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    &__icon {
+      background-color: $primary;
+      color: $negro;
+      width: 48px;
+    }
+
+    &:hover {
+      .btn-jobs__text {
+        background-color: $primary;
+        color: $negro;
+      }
+
+      .btn-jobs__icon {
+        background-color: rgba($blanco, 0.1);
+        color: $blanco;
+      }
+    }
+  }
+}

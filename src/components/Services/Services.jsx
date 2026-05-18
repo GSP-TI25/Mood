@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import BlurText from '../BlurText/BlurText';
 import FadeContent from '../FadeContent/FadeContent';
@@ -132,7 +132,7 @@ const Services = () => {
               className='btn-service'
             >
               <span>Ver proyectos</span>
-              <ArrowRight
+              <ChevronRight
                 size={18}
                 strokeWidth={2}
               />

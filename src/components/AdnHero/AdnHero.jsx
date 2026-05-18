@@ -1,4 +1,4 @@
-import { ArrowDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import BlurText from '../BlurText/BlurText';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnHero.scss';
@@ -41,7 +41,7 @@ const AdnHero = () => {
             aria-label='Ir a la siguiente sección'
             onClick={handleScroll}
           >
-            <ArrowDown size={24} />
+            <ChevronDown size={24} />
           </button>
 
           <div className='adn-hero__paragraph-wrapper'>
