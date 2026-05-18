@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 import Linkedin from '../Icons/Linkedin';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnTeam.scss';
@@ -151,7 +151,7 @@ const AdnTeam = () => {
                         className='team-card__action-btn'
                         aria-label='Ver perfil completo'
                       >
-                        <ArrowUpRight
+                        <ChevronRight
                           size={20}
                           strokeWidth={2.5}
                         />
