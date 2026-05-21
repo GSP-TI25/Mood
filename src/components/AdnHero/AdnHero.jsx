@@ -1,9 +1,12 @@
 import { ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import BlurText from '../BlurText/BlurText';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnHero.scss';
 
 const AdnHero = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
   const handleScroll = () => {
     const element = document.getElementById('adn-content');
     if (element) {
@@ -17,7 +20,7 @@ const AdnHero = () => {
         {/* 1. Título dividido en dos BlurText */}
         <div className='adn-hero__header'>
           <BlurText
-            text='Más que una agencia,'
+            text={t('adnHero.title1')}
             delay={30}
             animateBy='words'
             direction='top'
@@ -25,7 +28,7 @@ const AdnHero = () => {
             className='adn-hero__title'
           />
           <BlurText
-            text='tu partner creativo.'
+            text={t('adnHero.title2')}
             delay={50}
             animateBy='words'
             direction='top'
@@ -38,7 +41,7 @@ const AdnHero = () => {
         <div className='adn-hero__middle'>
           <button
             className='adn-hero__scroll-btn'
-            aria-label='Ir a la siguiente sección'
+            aria-label={t('adnHero.ariaScroll')}
             onClick={handleScroll}
           >
             <ChevronDown size={24} />
@@ -46,7 +49,7 @@ const AdnHero = () => {
 
           <div className='adn-hero__paragraph-wrapper'>
             <BlurText
-              text='Creamos estrategias basadas en datos y diseño con propósito para hacer destacar tu marca.'
+              text={t('adnHero.paragraph')}
               delay={40}
               animateBy='words'
               direction='top'
@@ -65,7 +68,7 @@ const AdnHero = () => {
         >
           <img
             src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=492&q=80'
-            alt='Equipo Mood trabajando en Desktop'
+            alt={t('adnHero.altDesktop')}
             className='adn-hero__image'
             crossOrigin='anonymous'
             referrerPolicy='no-referrer'
@@ -82,7 +85,7 @@ const AdnHero = () => {
           <img
             // Sin altura predefinida para que fluya hasta el final de la pantalla
             src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
-            alt='Equipo Mood trabajando en Móvil'
+            alt={t('adnHero.altMobile')}
             className='adn-hero__image'
             crossOrigin='anonymous'
             referrerPolicy='no-referrer'

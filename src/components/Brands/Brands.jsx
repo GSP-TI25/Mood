@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import LogoLoop from '../LogoLoop/LogoLoop';
 import './Brands.scss';
 
@@ -33,6 +34,7 @@ const brandLogos = [
 ];
 
 const Brands = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
   const half = Math.ceil(brandLogos.length / 2);
   const firstRowLogos = brandLogos.slice(0, half);
   const secondRowLogos = brandLogos.slice(half);
@@ -40,12 +42,12 @@ const Brands = () => {
   return (
     <section className='brands'>
       <div className='brands__container'>
-        <p className='brands__subtitle'>Marcas que confían en nosotros</p>
-
+        <p className='brands__subtitle'>{t('brands.subtitle')}</p>{' '}
+        {/* <-- Traducción dinámica */}
         <div className='brands__carousel-wrapper'>
           <LogoLoop
             logos={firstRowLogos}
-            speed={30} // <-- Velocidad reducida a 30
+            speed={30}
             direction='left'
             logoHeight={45}
             gap={60}
@@ -56,7 +58,7 @@ const Brands = () => {
 
           <LogoLoop
             logos={secondRowLogos}
-            speed={30} // <-- Velocidad reducida a 30
+            speed={30}
             direction='right'
             logoHeight={45}
             gap={60}

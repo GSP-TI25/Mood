@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import BlurText from '../BlurText/BlurText';
 import './MoodPrintHero.scss';
 
@@ -11,6 +12,8 @@ const CATEGORIES = [
 ];
 
 const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
   return (
     <section className='mood-print-hero'>
       <div className='mood-print-hero__container'>
@@ -18,7 +21,7 @@ const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
           <div className='mood-print-hero__title-group'>
             <div className='mood-print-hero__line'>
               <BlurText
-                text='Creamos'
+                text={t('moodPrintHero.title1')}
                 delay={30}
                 animateBy='words'
                 direction='top'
@@ -29,7 +32,7 @@ const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
 
             <div className='mood-print-hero__line'>
               <BlurText
-                text='marcas'
+                text={t('moodPrintHero.title2')}
                 delay={45}
                 animateBy='words'
                 direction='top'
@@ -37,7 +40,7 @@ const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
                 className='mood-print-hero__highlight'
               />
               <BlurText
-                text='extraordinarias.'
+                text={t('moodPrintHero.title3')}
                 delay={60}
                 animateBy='words'
                 direction='top'
@@ -47,20 +50,16 @@ const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
             </div>
           </div>
 
-          {/* Animación CSS segura que no falla al hacer scroll */}
           <div
             className='mood-print-hero__fade-in'
             style={{ animationDelay: '0.4s' }}
           >
             <p className='mood-print-hero__subtitle'>
-              Explora nuestro portafolio. Selecciona una categoría para
-              descubrir los proyectos que han transformado el futuro de grandes
-              marcas.
+              {t('moodPrintHero.subtitle')}
             </p>
           </div>
         </div>
 
-        {/* Animación CSS segura que no falla al hacer scroll */}
         <div
           className='mood-print-hero__categories mood-print-hero__fade-in'
           style={{ animationDelay: '0.6s' }}
@@ -70,9 +69,12 @@ const MoodPrintHero = ({ activeCategory, onCategoryClick }) => {
               <li
                 key={index}
                 className={`category-list__item ${activeCategory === category ? 'category-list__item--active' : ''}`}
-                onClick={() => onCategoryClick(category)}
+                onClick={() => onCategoryClick(category)} // Mantén el string original para que no se rompa el filtro
               >
-                <span className='category-list__text'>{category}</span>
+                {/* Traducimos solo el texto visual usando la categoría original como llave */}
+                <span className='category-list__text'>
+                  {t(`moodPrintHero.categories.${category}`)}
+                </span>
               </li>
             ))}
           </ul>

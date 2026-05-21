@@ -1,0 +1,263 @@
+{
+  "navbar": {
+    "adn": "ADN Mood",
+    "print": "Mood Print",
+    "contact": "Contacto"
+  },
+  "adnContent": {
+    "badge": "HISTORIA",
+    "textMain": "Somos una red de espacios creativos en LATAM. Llevamos una década de éxito gestionando proyectos de comunicación y transformación digital, impulsando marcas con ideas disruptivas en ",
+    "textLight": "un mundo hiperconectado y complejo.",
+    "tags": {
+      "content": "#Contenido",
+      "web": "#DesarrolloWeb"
+    }
+  },
+  "adnHero": {
+    "title1": "Más que una agencia,",
+    "title2": "tu partner creativo.",
+    "paragraph": "Creamos estrategias basadas en datos y diseño con propósito para hacer destacar tu marca.",
+    "ariaScroll": "Ir a la siguiente sección",
+    "altDesktop": "Equipo Mood trabajando en Desktop",
+    "altMobile": "Equipo Mood trabajando en Móvil"
+  },
+  "adnTeam": {
+    "title1": "Conoce al ",
+    "title2": "Equipo",
+    "badgeLeadership": "LIDERAZGO",
+    "descLeadership": "Nuestro equipo de liderazgo encarna la misión de Mood, combinando experiencia en innovación, estrategia digital y creatividad para transformar el futuro y crecimiento de tu marca.",
+    "badgeTeam": "EQUIPO",
+    "descTeam": "Desafiamos lo convencional con estrategias audaces para transformar el futuro de tu marca.",
+    "roles": {
+      "matthias": "Director General & Socio",
+      "vasco": "Director General & Socio",
+      "carolina": "Directora General",
+      "alejandro": "Gerente General",
+      "sofia": "Head of Content",
+      "diego": "Performance Lead",
+      "valeria": "Senior UX/UI Designer",
+      "martin": "Creative Director",
+      "lucia": "Data Analyst",
+      "andres": "Frontend Developer"
+    }
+  },
+  "adnWork": {
+    "altImage": "Equipo de Mood",
+    "p1": "Construimos un ecosistema de estrategias digitales decodificando la complejidad del mercado. Inspirados por la disrupción y los datos, la metodología de nuestro equipo ha logrado conectar marcas tradicionales con el consumidor moderno de manera escalable.",
+    "p2": "Hoy, nos enfocamos en combatir la irrelevancia, con el objetivo a largo plazo de transformar la forma fundamental en que las empresas interactúan y crecen en su entorno.",
+    "btn": "Trabaja con nosotros"
+  },
+  "brands": {
+    "subtitle": "Marcas que confían en nosotros"
+  },
+  "contactHero": {
+    "title1": "Hagamos algo",
+    "title2": "increíble",
+    "title3": "juntos.",
+    "subtitle": "¿Tienes un proyecto en mente o necesitas escalar tu marca? Déjanos tus datos y un estratega de nuestro equipo se pondrá en contacto contigo en menos de 24 horas.",
+    "form": {
+      "header": "Empieza tu transformación",
+      "labels": {
+        "name": "Nombre completo",
+        "email": "Correo de empresa",
+        "phone": "Celular / WhatsApp",
+        "country": "País",
+        "message": "Cuéntanos sobre tu proyecto"
+      },
+      "placeholders": {
+        "name": "Ej. Carlos Mendoza",
+        "email": "carlos@tuempresa.com",
+        "phone": "+51 987 654 321",
+        "select": "Selecciona...",
+        "message": "¿Qué objetivos quieres alcanzar?"
+      },
+      "countries": {
+        "peru": "Perú",
+        "mexico": "México",
+        "colombia": "Colombia",
+        "chile": "Chile",
+        "argentina": "Argentina",
+        "spain": "España",
+        "other": "Otro"
+      },
+      "buttons": {
+        "sending": "Enviando...",
+        "send": "Enviar mensaje"
+      },
+      "feedback": {
+        "success": "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+        "error": "Hubo un error al enviar tu mensaje. Inténtalo de nuevo."
+      }
+    }
+  },
+  "footer": {
+    "slogan": "Impulsando marcas con lógica cinética y creatividad pura.",
+    "btnJoin": "Únete al equipo",
+    "navTitle": "NAVEGAR",
+    "connectTitle": "CONECTAR",
+    "copyright": "Mood. Todos los derechos reservados."
+  },
+  "hero": {
+    "title": "Diseñamos experiencias con proposito",
+    "highlight": "experiencias",
+    "paragraph": "La agencia de comunicación que revoluciona el marketing. Especialistas en ATL, Digital, PR y BTL, ofrecemos soluciones para potenciar tu marca.",
+    "skills": {
+      "branding": "Branding",
+      "web": "Diseño Web",
+      "marketing": "Marketing Digital",
+      "social": "Social Media",
+      "av": "Contenido AudioVisual"
+    },
+    "buttons": {
+      "talk": "Hablemos",
+      "projects": "Ver Proyectos"
+    }
+  },
+  "moodPrintHero": {
+    "title1": "Creamos",
+    "title2": "marcas",
+    "title3": "extraordinarias.",
+    "subtitle": "Explora nuestro portafolio. Selecciona una categoría para descubrir los proyectos que han transformado el futuro de grandes marcas.",
+    "categories": {
+      "Todos": "Todos",
+      "Branding": "Branding",
+      "Diseño Web": "Diseño Web",
+      "Marketing Digital": "Marketing Digital",
+      "Social Media": "Social Media",
+      "Contenido Audiovisual": "Contenido Audiovisual"
+    }
+  },
+  "moodPrintProjects": {
+    "emptyState": "Aún no hay proyectos en esta categoría.",
+    "categoryInfo": {
+      "Todos": {
+        "title": "Proyectos Destacados",
+        "desc": "Casos de éxito donde la creatividad y la estrategia se unen para lograr resultados que desafían lo convencional."
+      },
+      "Branding": {
+        "title": "Branding & Identidad",
+        "desc": "Construimos marcas con alma. Diseñamos identidades visuales que conectan profundamente con tu audiencia."
+      },
+      "Diseño Web": {
+        "title": "Desarrollo & UX/UI",
+        "desc": "Plataformas digitales rápidas, intuitivas y diseñadas meticulosamente para convertir visitantes en clientes."
+      },
+      "Marketing Digital": {
+        "title": "Marketing de Resultados",
+        "desc": "Campañas estratégicas impulsadas por datos para maximizar tu retorno de inversión y escalar tu negocio."
+      },
+      "Social Media": {
+        "title": "Gestión de Comunidades",
+        "desc": "No solo publicamos, creamos conversaciones. Estrategias de contenido que generan engagement real."
+      },
+      "Contenido Audiovisual": {
+        "title": "Producción Audiovisual",
+        "desc": "Contamos tu historia a través del lente. Fotografía y video de alta calidad que capturan la esencia de tu marca."
+      }
+    },
+    "projects": {
+      "1": {
+        "title": "Rebranding Integral",
+        "description": "Desarrollamos una nueva identidad visual que transmite innovación y confianza. El proyecto incluyó desde el rediseño del logotipo hasta la implementación del manual de marca en todos los puntos de contacto digitales."
+      },
+      "2": {
+        "title": "E-commerce Deportivo",
+        "description": "Diseño y desarrollo de una plataforma e-commerce ultra rápida y optimizada para conversión, reduciendo la tasa de abandono en un 40% durante el primer mes."
+      },
+      "3": {
+        "title": "Campaña \"El Nuevo Horizonte\"",
+        "description": "Estrategia integral de pauta digital que combinó Google Ads y Meta Ads, logrando un alcance de más de 2 millones de impresiones y un ROI superior al 300%."
+      },
+      "4": {
+        "title": "Lanzamiento Colección Verano",
+        "description": "Generación de contenido dinámico y gestión de comunidades durante 3 meses, incrementando el engagement rate orgánico en un asombroso 125%."
+      },
+      "5": {
+        "title": "Comercial TV Nacional",
+        "description": "Producción, dirección y edición de una pieza audiovisual publicitaria de 45 segundos transmitida en televisión abierta y medios digitales."
+      },
+      "6": {
+        "title": "Packaging Premium",
+        "description": "Diseño estructural y gráfico de empaques para una línea exclusiva de café de exportación, destacando las texturas y la elegancia minimalista."
+      },
+      "7": {
+        "title": "Portal Corporativo",
+        "description": "Arquitectura de la información, diseño UX/UI y desarrollo en React para la nueva web corporativa de una startup líder en soluciones financieras."
+      }
+    }
+  },
+  "projectModal": {
+    "closeAria": "Cerrar modal",
+    "client": "Cliente:",
+    "date": "Fecha:",
+    "btnView": "Ver Proyecto"
+  },
+  "services": {
+    "title1": "Potenciamos tu ",
+    "titleHighlight": "marca",
+    "headerDesc": "Soluciones creativas estructuradas con lógica cinética para impulsar tu marca en el entorno digital.",
+    "btnProjects": "Ver proyectos",
+    "aria": {
+      "prev": "Servicio anterior",
+      "next": "Siguiente servicio",
+      "goTo": "Ir al servicio ",
+      "viewDetails": "Ver detalles de "
+    },
+    "items": {
+      "branding": {
+        "title": "Branding",
+        "description": "Construimos identidades memorables que conectan profundamente con tu audiencia. No solo creamos logos, diseñamos la esencia y el alma de tu marca para que destaque con autoridad en un mercado saturado."
+      },
+      "web": {
+        "title": "Diseño Web",
+        "description": "Desarrollamos plataformas digitales ultrarrápidas, intuitivas y centradas en la conversión. Tu sitio web no será solo un escaparate bonito, será tu mejor y más rentable herramienta de ventas 24/7."
+      },
+      "marketing": {
+        "title": "Marketing Digital",
+        "description": "Estrategias basadas en datos que multiplican tu ROI. Dominamos el ecosistema digital para posicionar tu mensaje y tus ofertas exactamente donde y cuando están tus clientes potenciales."
+      },
+      "social": {
+        "title": "Social Media",
+        "description": "Transformamos simples seguidores en embajadores de marca. Creamos comunidades activas mediante contenido auténtico y estrategias de interacción que generan impacto real y lealtad."
+      },
+      "audiovisual": {
+        "title": "Contenido AudioVisual",
+        "description": "Contamos la historia de tu marca a través de narrativas visuales de alto impacto. Producción de video y fotografía cinematográfica que capturan la atención desde el primer segundo."
+      }
+    }
+  },
+  "testimonials": {
+    "title1": "Resultados que hablan por ",
+    "title2": "sí solos.",
+    "desc1": "El éxito de tu marca es nuestra mejor carta de presentación. Como ",
+    "descStrong": "agencia de comunicación y marketing digital",
+    "desc2": ", nos enfocamos en generar crecimiento real, escalable y medible.",
+    "reviews": {
+      "1": {
+        "name": "Carlos Mendoza",
+        "company": "Director General, AutoStar",
+        "text": "\"El equipo de Mood transformó por completo nuestra estrategia de captación. No solo rediseñaron nuestra identidad, sino que las ventas online crecieron un 45% en el primer trimestre. Son verdaderos estrategas.\""
+      },
+      "2": {
+        "name": "Lucía Santamarina",
+        "company": "CMO, Grupo Bahía",
+        "text": "\"Buscábamos una agencia que entendiera nuestra visión y la superara. El contenido audiovisual y el diseño web que entregaron están en otro nivel. Entienden perfectamente el lenguaje digital actual.\""
+      },
+      "3": {
+        "name": "Roberto Vilela",
+        "company": "CEO, Marcan",
+        "text": "\"La comunicación y la agilidad de esta agencia son destacables. Estructuraron nuestras campañas de pauta publicitaria bajando nuestro costo de adquisición en tiempo récord. Altamente recomendados.\""
+      },
+      "4": {
+        "name": "Andrea Ruiz",
+        "company": "Founder, Santa Ana",
+        "text": "\"El rebranding que hicieron para nuestra marca superó cualquier expectativa. Desde el logotipo hasta la estrategia en redes sociales, todo respira profesionalismo y creatividad.\""
+      },
+      "5": {
+        "name": "Martín Torres",
+        "company": "Gerente de Marketing, iShop",
+        "text": "\"Una agencia que realmente se compromete con tus resultados. Las métricas de interacción en nuestros canales digitales se multiplicaron gracias a su gestión de comunidades.\""
+      }
+    }
+  }
+}

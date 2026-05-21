@@ -1,20 +1,27 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import Select from 'react-select';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import BlurText from '../BlurText/BlurText';
 import './ContactHero.scss';
 
-const COUNTRY_OPTIONS = [
-  { value: 'Peru', label: 'Perú' },
-  { value: 'Mexico', label: 'México' },
-  { value: 'Colombia', label: 'Colombia' },
-  { value: 'Chile', label: 'Chile' },
-  { value: 'Argentina', label: 'Argentina' },
-  { value: 'Espana', label: 'España' },
-  { value: 'Otro', label: 'Otro' },
-];
-
 const ContactHero = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
+  // Movimos COUNTRY_OPTIONS adentro y usamos useMemo para traducir dinámicamente
+  const COUNTRY_OPTIONS = useMemo(
+    () => [
+      { value: 'Peru', label: t('contactHero.form.countries.peru') },
+      { value: 'Mexico', label: t('contactHero.form.countries.mexico') },
+      { value: 'Colombia', label: t('contactHero.form.countries.colombia') },
+      { value: 'Chile', label: t('contactHero.form.countries.chile') },
+      { value: 'Argentina', label: t('contactHero.form.countries.argentina') },
+      { value: 'Espana', label: t('contactHero.form.countries.spain') },
+      { value: 'Otro', label: t('contactHero.form.countries.other') },
+    ],
+    [t],
+  );
+
   const [formData, setFormData] = useState({
     nombre: '',
     correo: '',
@@ -40,29 +47,26 @@ const ContactHero = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Formateamos los datos exactamente como queremos leerlos en el correo
     const dataToSend = {
       Nombre: formData.nombre,
       Correo: formData.correo,
       Celular: formData.celular,
       País: formData.pais ? formData.pais.label : 'No especificado',
       Mensaje: formData.mensaje,
-      // --- Configuraciones especiales de FormSubmit ---
-      _subject: `¡Nuevo Lead Mood! - ${formData.nombre}`, // Asunto del correo
-      _cc: 'tecnologia@mood.pe', // Correo en copia
-      _captcha: 'false', // Evita que abra una pestaña de "No soy un robot"
-      _template: 'table', // Le da un diseño más bonito al correo que llega
+      _subject: `¡Nuevo Lead Mood! - ${formData.nombre}`,
+      _cc: 'tecnologia@mood.pe',
+      _captcha: 'false',
+      _template: 'table',
     };
 
     try {
-      // Usamos la API AJAX de FormSubmit apuntando al correo principal
       const response = await fetch(
         'https://formsubmit.co/ajax/cbraco@gruposp.pe',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Accept: 'application/json', // Crucial para que no recargue la página
+            Accept: 'application/json',
           },
           body: JSON.stringify(dataToSend),
         },
@@ -94,7 +98,7 @@ const ContactHero = () => {
         <div className='contact-hero__content'>
           <div className='contact-hero__title-group'>
             <BlurText
-              text='Hagamos algo'
+              text={t('contactHero.title1')}
               delay={30}
               animateBy='words'
               direction='top'
@@ -103,7 +107,7 @@ const ContactHero = () => {
             />
             <div className='contact-hero__line'>
               <BlurText
-                text='increíble'
+                text={t('contactHero.title2')}
                 delay={45}
                 animateBy='words'
                 direction='top'
@@ -111,7 +115,7 @@ const ContactHero = () => {
                 className='contact-hero__highlight'
               />
               <BlurText
-                text='juntos.'
+                text={t('contactHero.title3')}
                 delay={60}
                 animateBy='words'
                 direction='top'
@@ -126,9 +130,7 @@ const ContactHero = () => {
             style={{ animationDelay: '0.4s' }}
           >
             <p className='contact-hero__subtitle'>
-              ¿Tienes un proyecto en mente o necesitas escalar tu marca? Déjanos
-              tus datos y un estratega de nuestro equipo se pondrá en contacto
-              contigo en menos de 24 horas.
+              {t('contactHero.subtitle')}
             </p>
           </div>
         </div>
@@ -142,11 +144,13 @@ const ContactHero = () => {
             onSubmit={handleSubmit}
           >
             <div className='contact-form__header'>
-              <h3>Empieza tu transformación</h3>
+              <h3>{t('contactHero.form.header')}</h3>
             </div>
 
             <div className='contact-form__group'>
-              <label htmlFor='nombre'>Nombre completo</label>
+              <label htmlFor='nombre'>
+                {t('contactHero.form.labels.name')}
+              </label>
               <input
                 type='text'
                 id='nombre'
@@ -154,12 +158,14 @@ const ContactHero = () => {
                 value={formData.nombre}
                 onChange={handleChange}
                 required
-                placeholder='Ej. Carlos Mendoza'
+                placeholder={t('contactHero.form.placeholders.name')}
               />
             </div>
 
             <div className='contact-form__group'>
-              <label htmlFor='correo'>Correo de empresa</label>
+              <label htmlFor='correo'>
+                {t('contactHero.form.labels.email')}
+              </label>
               <input
                 type='email'
                 id='correo'
@@ -167,13 +173,15 @@ const ContactHero = () => {
                 value={formData.correo}
                 onChange={handleChange}
                 required
-                placeholder='carlos@tuempresa.com'
+                placeholder={t('contactHero.form.placeholders.email')}
               />
             </div>
 
             <div className='contact-form__row'>
               <div className='contact-form__group'>
-                <label htmlFor='celular'>Celular / WhatsApp</label>
+                <label htmlFor='celular'>
+                  {t('contactHero.form.labels.phone')}
+                </label>
                 <input
                   type='tel'
                   id='celular'
@@ -181,18 +189,20 @@ const ContactHero = () => {
                   value={formData.celular}
                   onChange={handleChange}
                   required
-                  placeholder='+51 987 654 321'
+                  placeholder={t('contactHero.form.placeholders.phone')}
                 />
               </div>
 
               <div className='contact-form__group'>
-                <label htmlFor='pais'>País</label>
+                <label htmlFor='pais'>
+                  {t('contactHero.form.labels.country')}
+                </label>
                 <Select
                   inputId='pais'
                   options={COUNTRY_OPTIONS}
                   value={formData.pais}
                   onChange={handleSelectChange}
-                  placeholder='Selecciona...'
+                  placeholder={t('contactHero.form.placeholders.select')}
                   classNamePrefix='custom-select'
                   required
                 />
@@ -200,7 +210,9 @@ const ContactHero = () => {
             </div>
 
             <div className='contact-form__group'>
-              <label htmlFor='mensaje'>Cuéntanos sobre tu proyecto</label>
+              <label htmlFor='mensaje'>
+                {t('contactHero.form.labels.message')}
+              </label>
               <textarea
                 id='mensaje'
                 name='mensaje'
@@ -208,18 +220,18 @@ const ContactHero = () => {
                 onChange={handleChange}
                 required
                 rows='4'
-                placeholder='¿Qué objetivos quieres alcanzar?'
+                placeholder={t('contactHero.form.placeholders.message')}
               ></textarea>
             </div>
 
             {submitStatus === 'success' && (
               <p className='contact-form__feedback contact-form__feedback--success'>
-                ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
+                {t('contactHero.form.feedback.success')}
               </p>
             )}
             {submitStatus === 'error' && (
               <p className='contact-form__feedback contact-form__feedback--error'>
-                Hubo un error al enviar tu mensaje. Inténtalo de nuevo.
+                {t('contactHero.form.feedback.error')}
               </p>
             )}
 
@@ -232,7 +244,11 @@ const ContactHero = () => {
                 cursor: isSubmitting ? 'not-allowed' : 'pointer',
               }}
             >
-              <span>{isSubmitting ? 'Enviando...' : 'Enviar mensaje'}</span>
+              <span>
+                {isSubmitting
+                  ? t('contactHero.form.buttons.sending')
+                  : t('contactHero.form.buttons.send')}
+              </span>
               {isSubmitting ? (
                 <Loader2
                   size={18}

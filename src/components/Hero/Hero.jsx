@@ -7,37 +7,41 @@ import {
   MessageCircle,
   Briefcase,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
+import { Link } from 'react-router-dom';
 import BlurText from '../BlurText/BlurText';
 import Facebook from '../Icons/Facebook';
 import Instagram from '../Icons/Instagram';
 import Linkedin from '../Icons/Linkedin';
 import './Hero.scss';
-import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
+  // Usamos nameKey en lugar de name fijo para traducirlo abajo
   const skills = [
-    { name: 'Branding', icon: Palette },
-    { name: 'Diseño Web', icon: Monitor },
-    { name: 'Marketing Digital', icon: TrendingUp },
-    { name: 'Social Media', icon: Share2 },
-    { name: 'Contenido AudioVisual', icon: Video },
+    { nameKey: 'branding', icon: Palette },
+    { nameKey: 'web', icon: Monitor },
+    { nameKey: 'marketing', icon: TrendingUp },
+    { nameKey: 'social', icon: Share2 },
+    { nameKey: 'av', icon: Video },
   ];
 
   return (
     <section className='hero'>
       <div className='hero__container'>
         <BlurText
-          text='Diseñamos experiencias con proposito'
+          text={t('hero.title')}
           delay={100}
           animateBy='words'
           direction='top'
           as='h1'
-          highlightWords={['experiencias']}
+          highlightWords={[t('hero.highlight')]} // <-- Resaltado dinámico según el idioma
           className='hero__title'
         />
 
         <BlurText
-          text='La agencia de comunicación que revoluciona el marketing. Especialistas en ATL, Digital, PR y BTL, ofrecemos soluciones para potenciar tu marca.'
+          text={t('hero.paragraph')}
           delay={40}
           animateBy='words'
           direction='top'
@@ -56,7 +60,10 @@ const Hero = () => {
                 className='hero__skill-icon'
                 strokeWidth={1.5}
               />
-              <span className='hero__skill-text'>{skill.name}</span>
+              <span className='hero__skill-text'>
+                {t(`hero.skills.${skill.nameKey}`)}{' '}
+                {/* <-- Traducción dinámica */}
+              </span>
             </div>
           ))}
         </div>
@@ -66,7 +73,7 @@ const Hero = () => {
             to='/contacto'
             className='btn-hero btn-hero--primary'
           >
-            <span>Hablemos</span>
+            <span>{t('hero.buttons.talk')}</span>
 
             <MessageCircle
               size={20}
@@ -77,7 +84,7 @@ const Hero = () => {
             to='/mood-print'
             className='btn-hero btn-hero--secondary'
           >
-            <span>Ver Proyectos</span>
+            <span>{t('hero.buttons.projects')}</span>
 
             <Briefcase
               size={20}

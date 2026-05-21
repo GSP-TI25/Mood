@@ -1,12 +1,14 @@
 import { ChevronRight, ChevronUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import Linkedin from '../Icons/Linkedin';
 import Instagram from '../Icons/Instagram';
 import Facebook from '../Icons/Facebook';
 import logoMood from '../../assets/Logo_Mood.svg';
 import './Footer.scss';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -28,9 +30,7 @@ const Footer = () => {
               className='footer__logo'
             />
 
-            <h2 className='footer__slogan'>
-              Impulsando marcas con lógica cinética y creatividad pura.
-            </h2>
+            <h2 className='footer__slogan'>{t('footer.slogan')}</h2>
 
             <div className='footer__jobs'>
               <a
@@ -38,7 +38,7 @@ const Footer = () => {
                 className='btn-jobs'
               >
                 {/* Estructura perfecta para la animación compleja */}
-                <span className='btn-jobs__text'>Únete al equipo</span>
+                <span className='btn-jobs__text'>{t('footer.btnJoin')}</span>
                 <span className='btn-jobs__icon'>
                   <ChevronRight size={18} />
                 </span>
@@ -50,14 +50,15 @@ const Footer = () => {
           <div className='footer__nav-section'>
             {/* Grupo 1: Navegación */}
             <div className='footer__nav-group'>
-              <h3 className='footer__nav-title'>NAVEGAR</h3>
+              <h3 className='footer__nav-title'>{t('footer.navTitle')}</h3>
               <ul className='footer__nav-list'>
                 <li className='navbar__item'>
                   <Link
                     to='/adn-mood'
                     className='footer__nav-link'
                   >
-                    ADN Mood
+                    {t('navbar.adn')}{' '}
+                    {/* Reutilizamos la traducción del navbar */}
                   </Link>
                 </li>
                 <li className='navbar__item'>
@@ -65,12 +66,13 @@ const Footer = () => {
                     to='/mood-print'
                     className='footer__nav-link'
                   >
-                    Mood Print
+                    {t('navbar.print')}{' '}
+                    {/* Reutilizamos la traducción del navbar */}
                   </Link>
                 </li>
                 <li>
                   <a
-                    href='#what'
+                    href='/#what'
                     className='footer__nav-link'
                   >
                     #TheMoodEdit
@@ -81,7 +83,7 @@ const Footer = () => {
 
             {/* Grupo 2: Redes Sociales */}
             <div className='footer__nav-group'>
-              <h4 className='footer__nav-title'>CONECTAR</h4>
+              <h4 className='footer__nav-title'>{t('footer.connectTitle')}</h4>
               <ul className='footer__nav-list footer__nav-list--social'>
                 <li>
                   <a
@@ -138,7 +140,9 @@ const Footer = () => {
 
         {/* Línea inferior: Copyright */}
         <div className='footer__bottom'>
-          <p>&copy; {currentYear} Mood. Todos los derechos reservados.</p>
+          <p>
+            &copy; {currentYear} {t('footer.copyright')}
+          </p>
         </div>
       </div>
     </footer>

@@ -1,8 +1,11 @@
 import { X, ExternalLink } from 'lucide-react';
-import { createPortal } from 'react-dom'; // <-- MAGIA PURA: React Portal
+import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import './ProjectModal.scss';
 
 const ProjectModal = ({ project, onClose }) => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
   if (!project) return null;
 
   // Renderizamos el modal directamente en el body usando un Portal
@@ -19,7 +22,7 @@ const ProjectModal = ({ project, onClose }) => {
         <button
           className='project-modal__close'
           onClick={onClose}
-          aria-label='Cerrar modal'
+          aria-label={t('projectModal.closeAria')} // <-- Traducción dinámica
         >
           <X size={24} />
         </button>
@@ -34,16 +37,21 @@ const ProjectModal = ({ project, onClose }) => {
         </div>
 
         <div className='project-modal__info'>
-          <span className='project-modal__badge'>{project.category}</span>
+          {/* Usamos categoryTranslated que inyectamos en MoodPrintProjects */}
+          <span className='project-modal__badge'>
+            {project.categoryTranslated || project.category}
+          </span>
 
           <h3 className='project-modal__title'>{project.title}</h3>
 
           <div className='project-modal__meta'>
             <p>
-              <strong>Cliente:</strong> {project.client}
+              <strong>{t('projectModal.client')}</strong> {project.client}{' '}
+              {/* <-- Traducción dinámica */}
             </p>
             <p>
-              <strong>Fecha:</strong> {project.date}
+              <strong>{t('projectModal.date')}</strong> {project.date}{' '}
+              {/* <-- Traducción dinámica */}
             </p>
           </div>
 
@@ -55,7 +63,8 @@ const ProjectModal = ({ project, onClose }) => {
             rel='noopener noreferrer'
             className='project-modal__btn'
           >
-            <span>Ver Proyecto</span> <ExternalLink size={18} />
+            <span>{t('projectModal.btnView')}</span> <ExternalLink size={18} />{' '}
+            {/* <-- Traducción dinámica */}
           </a>
         </div>
       </div>

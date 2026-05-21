@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './styles/main.scss'; // Importamos nuestros estilos globales
+import './i18n/i18n.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

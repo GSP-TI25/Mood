@@ -1,8 +1,12 @@
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom'; // <-- Cambiamos etiqueta <a> por <Link>
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnWork.scss';
 
 const AdnWork = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+
   return (
     <section className='adn-work'>
       <div className='adn-work__container'>
@@ -14,7 +18,7 @@ const AdnWork = () => {
         >
           <img
             src='https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80'
-            alt='Equipo de Mood'
+            alt={t('adnWork.altImage')} // <-- Traducción dinámica
             className='adn-work__image'
             crossOrigin='anonymous'
             referrerPolicy='no-referrer'
@@ -29,11 +33,7 @@ const AdnWork = () => {
               delay={0.4}
             >
               <p>
-                Construimos un ecosistema de estrategias digitales decodificando
-                la complejidad del mercado. Inspirados por la disrupción y los
-                datos, la metodología de nuestro equipo ha logrado conectar
-                marcas tradicionales con el consumidor moderno de manera
-                escalable.
+                {t('adnWork.p1')} {/* <-- Traducción dinámica */}
               </p>
             </FadeContent>
 
@@ -42,9 +42,7 @@ const AdnWork = () => {
               delay={0.5}
             >
               <p>
-                Hoy, nos enfocamos en combatir la irrelevancia, con el objetivo
-                a largo plazo de transformar la forma fundamental en que las
-                empresas interactúan y crecen en su entorno.
+                {t('adnWork.p2')} {/* <-- Traducción dinámica */}
               </p>
             </FadeContent>
           </div>
@@ -54,15 +52,16 @@ const AdnWork = () => {
             delay={0.6}
           >
             <div className='adn-work__actions'>
-              <a
-                href='/#contacto'
+              <Link
+                to='/contacto' // <-- Actualizado a la nueva ruta de contacto
                 className='btn-jobs'
               >
-                <span className='btn-jobs__text'>Trabaja con nosotros</span>
+                <span className='btn-jobs__text'>{t('adnWork.btn')}</span>{' '}
+                {/* <-- Traducción dinámica */}
                 <span className='btn-jobs__icon'>
                   <ChevronRight size={18} />
                 </span>
-              </a>
+              </Link>
             </div>
           </FadeContent>
         </div>

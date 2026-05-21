@@ -1,35 +1,37 @@
 import { useState, useRef } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import Linkedin from '../Icons/Linkedin';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnTeam.scss';
 
 // --- LÍDERES ---
+// Agregamos una propiedad 'roleKey' para saber qué texto buscar en el JSON
 const TEAM_MEMBERS = [
   {
     name: 'Matthias Stimman',
-    role: 'Director General & Socio',
+    roleKey: 'matthias',
     image:
       'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
     linkedin: '#',
   },
   {
     name: 'Vasco Romero',
-    role: 'Director General & Socio',
+    roleKey: 'vasco',
     image:
       'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
     linkedin: '#',
   },
   {
     name: 'Carolina Mendoza',
-    role: 'Directora General',
+    roleKey: 'carolina',
     image:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
     linkedin: '#',
   },
   {
     name: 'Alejandro Torres',
-    role: 'Gerente General',
+    roleKey: 'alejandro',
     image:
       'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80',
     linkedin: '#',
@@ -38,15 +40,16 @@ const TEAM_MEMBERS = [
 
 // --- MIEMBROS DEL EQUIPO ---
 const GENERAL_TEAM = [
-  { name: 'Sofía Reyes', role: 'Head of Content', linkedin: '#' },
-  { name: 'Diego Arango', role: 'Performance Lead', linkedin: '#' },
-  { name: 'Valeria Costa', role: 'Senior UX/UI Designer', linkedin: '#' },
-  { name: 'Martín Soler', role: 'Creative Director', linkedin: '#' },
-  { name: 'Lucía Vallejo', role: 'Data Analyst', linkedin: '#' },
-  { name: 'Andrés Silva', role: 'Frontend Developer', linkedin: '#' },
+  { name: 'Sofía Reyes', roleKey: 'sofia', linkedin: '#' },
+  { name: 'Diego Arango', roleKey: 'diego', linkedin: '#' },
+  { name: 'Valeria Costa', roleKey: 'valeria', linkedin: '#' },
+  { name: 'Martín Soler', roleKey: 'martin', linkedin: '#' },
+  { name: 'Lucía Vallejo', roleKey: 'lucia', linkedin: '#' },
+  { name: 'Andrés Silva', roleKey: 'andres', linkedin: '#' },
 ];
 
 const AdnTeam = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
   const sliderRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -92,7 +95,7 @@ const AdnTeam = () => {
           >
             <div className='adn-team__main-title'>
               <h2>
-                Conoce al <span>Equipo</span>
+                {t('adnTeam.title1')} <span>{t('adnTeam.title2')}</span>
               </h2>
             </div>
           </FadeContent>
@@ -106,14 +109,11 @@ const AdnTeam = () => {
                 <div className='adn-team__badge-wrapper'>
                   <div className='adn-team__badge'>
                     <span className='adn-team__badge-dot'></span>
-                    LIDERAZGO
+                    {t('adnTeam.badgeLeadership')}
                   </div>
                 </div>
                 <p className='adn-team__description'>
-                  Nuestro equipo de liderazgo encarna la misión de Mood,
-                  combinando experiencia en innovación, estrategia digital y
-                  creatividad para transformar el futuro y crecimiento de tu
-                  marca.
+                  {t('adnTeam.descLeadership')}
                 </p>
               </FadeContent>
             </div>
@@ -145,7 +145,10 @@ const AdnTeam = () => {
                     <div className='team-card__info-wrapper'>
                       <div className='team-card__info'>
                         <h3 className='team-card__name'>{member.name}</h3>
-                        <p className='team-card__role'>{member.role}</p>
+                        <p className='team-card__role'>
+                          {t(`adnTeam.roles.${member.roleKey}`)}{' '}
+                          {/* <-- Traducción dinámica */}
+                        </p>
                       </div>
                       <button
                         className='team-card__action-btn'
@@ -172,14 +175,11 @@ const AdnTeam = () => {
                 <div className='team-slider__badge-wrapper'>
                   <div className='adn-team__badge'>
                     <span className='adn-team__badge-dot'></span>
-                    EQUIPO
+                    {t('adnTeam.badgeTeam')}
                   </div>
                 </div>
 
-                <h3 className='team-slider__title'>
-                  Desafiamos lo convencional con estrategias audaces para
-                  transformar el futuro de tu marca.
-                </h3>
+                <h3 className='team-slider__title'>{t('adnTeam.descTeam')}</h3>
               </div>
             </FadeContent>
 
@@ -199,7 +199,10 @@ const AdnTeam = () => {
                   >
                     <div className='member-card__info'>
                       <h4 className='member-card__name'>{member.name}</h4>
-                      <p className='member-card__role'>{member.role}</p>
+                      <p className='member-card__role'>
+                        {t(`adnTeam.roles.${member.roleKey}`)}{' '}
+                        {/* <-- Traducción dinámica */}
+                      </p>
                     </div>
                     <div className='member-card__footer'>
                       <a

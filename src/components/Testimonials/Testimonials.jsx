@@ -1,51 +1,39 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
 import './Testimonials.scss';
 
+// Limpiamos los textos, solo dejamos el ID y la Imagen
 const REVIEWS = [
   {
     id: 1,
-    name: 'Carlos Mendoza',
-    company: 'Director General, AutoStar',
     image:
       'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80&fm=webp',
-    text: '"El equipo de Mood transformó por completo nuestra estrategia de captación. No solo rediseñaron nuestra identidad, sino que las ventas online crecieron un 45% en el primer trimestre. Son verdaderos estrategas."',
   },
   {
     id: 2,
-    name: 'Lucía Santamarina',
-    company: 'CMO, Grupo Bahía',
     image:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80&fm=webp',
-    text: '"Buscábamos una agencia que entendiera nuestra visión y la superara. El contenido audiovisual y el diseño web que entregaron están en otro nivel. Entienden perfectamente el lenguaje digital actual."',
   },
   {
     id: 3,
-    name: 'Roberto Vilela',
-    company: 'CEO, Marcan',
     image:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80&fm=webp',
-    text: '"La comunicación y la agilidad de esta agencia son destacables. Estructuraron nuestras campañas de pauta publicitaria bajando nuestro costo de adquisición en tiempo récord. Altamente recomendados."',
   },
   {
     id: 4,
-    name: 'Andrea Ruiz',
-    company: 'Founder, Santa Ana',
     image:
       'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80&fm=webp',
-    text: '"El rebranding que hicieron para nuestra marca superó cualquier expectativa. Desde el logotipo hasta la estrategia en redes sociales, todo respira profesionalismo y creatividad."',
   },
   {
     id: 5,
-    name: 'Martín Torres',
-    company: 'Gerente de Marketing, iShop',
     image:
       'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80&fm=webp',
-    text: '"Una agencia que realmente se compromete con tus resultados. Las métricas de interacción en nuestros canales digitales se multiplicaron gracias a su gestión de comunidades."',
   },
 ];
 
 const Testimonials = () => {
+  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -100,12 +88,12 @@ const Testimonials = () => {
       <div className='testimonials__container'>
         <div className='testimonials__seo-column'>
           <h2 className='testimonials__title'>
-            Resultados que hablan por <span>sí solos.</span>
+            {t('testimonials.title1')} <span>{t('testimonials.title2')}</span>
           </h2>
           <p className='testimonials__paragraph'>
-            El éxito de tu marca es nuestra mejor carta de presentación. Como{' '}
-            <strong>agencia de comunicación y marketing digital</strong>, nos
-            enfocamos en generar crecimiento real, escalable y medible.
+            {t('testimonials.desc1')}
+            <strong>{t('testimonials.descStrong')}</strong>
+            {t('testimonials.desc2')}
           </p>
         </div>
 
@@ -142,7 +130,7 @@ const Testimonials = () => {
                 >
                   <img
                     src={review.image}
-                    alt={review.name}
+                    alt={t(`testimonials.reviews.${review.id}.name`)} // <-- Traducción dinámica
                     className='review-card__background'
                     loading='lazy'
                     width={400}
@@ -152,12 +140,19 @@ const Testimonials = () => {
                   />
                   <div className='review-card__content'>
                     <div className='review-card__meta'>
-                      <h3 className='review-card__name'>{review.name}</h3>
+                      <h3 className='review-card__name'>
+                        {t(`testimonials.reviews.${review.id}.name`)}{' '}
+                        {/* <-- Traducción dinámica */}
+                      </h3>
                       <span className='review-card__company'>
-                        {review.company}
+                        {t(`testimonials.reviews.${review.id}.company`)}{' '}
+                        {/* <-- Traducción dinámica */}
                       </span>
                     </div>
-                    <p className='review-card__text'>{review.text}</p>
+                    <p className='review-card__text'>
+                      {t(`testimonials.reviews.${review.id}.text`)}{' '}
+                      {/* <-- Traducción dinámica */}
+                    </p>
                   </div>
                 </motion.div>
               );

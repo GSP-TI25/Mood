@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
-import './Navbar.scss';
+import { useTranslation } from 'react-i18next'; // <-- Importamos el hook
 import logoMood from '../../assets/Logo_mood.svg';
+import './Navbar.scss';
 
 const Navbar = () => {
-  const [lang, setLang] = useState('ES');
+  const { t, i18n } = useTranslation(); // <-- Inicializamos la traducción
+  const currentLang = i18n.language; // Obtenemos el idioma actual ('ES' o 'EN')
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  // CORRECCIÓN: El Navbar oscuro ahora solo aplica a Mood Print
+  // El Navbar oscuro ahora solo aplica a Mood Print
   const isDarkMode = location.pathname === '/mood-print';
 
   useEffect(() => {
@@ -64,7 +67,7 @@ const Navbar = () => {
               to='/adn-mood'
               className={`navbar__link ${location.pathname === '/adn-mood' ? 'navbar__link--active' : ''}`}
             >
-              ADN Mood
+              {t('navbar.adn')} {/* <-- Texto traducido */}
             </Link>
           </li>
           <li className='navbar__item'>
@@ -72,7 +75,7 @@ const Navbar = () => {
               to='/mood-print'
               className={`navbar__link ${location.pathname === '/mood-print' ? 'navbar__link--active' : ''}`}
             >
-              Mood Print
+              {t('navbar.print')} {/* <-- Texto traducido */}
             </Link>
           </li>
           <li className='navbar__item'>
@@ -88,14 +91,14 @@ const Navbar = () => {
         <div className='navbar__actions navbar__desktop-only'>
           <div className='navbar__lang-selector'>
             <button
-              className={`navbar__lang-btn ${lang === 'ES' ? 'navbar__lang-btn--active' : ''}`}
-              onClick={() => setLang('ES')}
+              className={`navbar__lang-btn ${currentLang === 'ES' ? 'navbar__lang-btn--active' : ''}`}
+              onClick={() => i18n.changeLanguage('ES')} // <-- Cambia a Español globalmente
             >
               ES
             </button>
             <button
-              className={`navbar__lang-btn ${lang === 'EN' ? 'navbar__lang-btn--active' : ''}`}
-              onClick={() => setLang('EN')}
+              className={`navbar__lang-btn ${currentLang === 'EN' ? 'navbar__lang-btn--active' : ''}`}
+              onClick={() => i18n.changeLanguage('EN')} // <-- Cambia a Inglés globalmente
             >
               EN
             </button>
@@ -105,7 +108,7 @@ const Navbar = () => {
             to='/contacto'
             className='btn btn--contact'
           >
-            <span>Contacto</span>
+            <span>{t('navbar.contact')}</span> {/* <-- Texto traducido */}
             <Sparkles
               size={18}
               className='btn__icon'
@@ -132,7 +135,7 @@ const Navbar = () => {
               className={`mobile-panel__link ${location.pathname === '/adn-mood' ? 'mobile-panel__link--active' : ''}`}
               onClick={closeMenu}
             >
-              ADN Mood
+              {t('navbar.adn')} {/* <-- Texto traducido */}
             </Link>
           </li>
           <li>
@@ -141,7 +144,7 @@ const Navbar = () => {
               className={`mobile-panel__link ${location.pathname === '/mood-print' ? 'mobile-panel__link--active' : ''}`}
               onClick={closeMenu}
             >
-              Mood Print
+              {t('navbar.print')} {/* <-- Texto traducido */}
             </Link>
           </li>
           <li>
@@ -158,18 +161,18 @@ const Navbar = () => {
         <div className='mobile-panel__actions'>
           <div className='navbar__lang-selector'>
             <button
-              className={`navbar__lang-btn ${lang === 'ES' ? 'navbar__lang-btn--active' : ''}`}
+              className={`navbar__lang-btn ${currentLang === 'ES' ? 'navbar__lang-btn--active' : ''}`}
               onClick={() => {
-                setLang('ES');
+                i18n.changeLanguage('ES'); // <-- Cambia idioma y cierra menú
                 closeMenu();
               }}
             >
               ES
             </button>
             <button
-              className={`navbar__lang-btn ${lang === 'EN' ? 'navbar__lang-btn--active' : ''}`}
+              className={`navbar__lang-btn ${currentLang === 'EN' ? 'navbar__lang-btn--active' : ''}`}
               onClick={() => {
-                setLang('EN');
+                i18n.changeLanguage('EN'); // <-- Cambia idioma y cierra menú
                 closeMenu();
               }}
             >
@@ -182,7 +185,7 @@ const Navbar = () => {
             className='btn btn--contact mobile-panel__btn'
             onClick={closeMenu}
           >
-            <span>Contacto</span>
+            <span>{t('navbar.contact')}</span> {/* <-- Texto traducido */}
             <Sparkles
               size={18}
               className='btn__icon'
