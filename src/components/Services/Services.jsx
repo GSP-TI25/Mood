@@ -112,8 +112,7 @@ const Services = () => {
               delay={0.1}
             >
               <p className='services__info-desc'>
-                {t(`services.items.${activeService.id}.description`)} //
-                Traducción dinámica
+                {t(`services.items.${activeService.id}.description`)}
               </p>
             </FadeContent>
 
