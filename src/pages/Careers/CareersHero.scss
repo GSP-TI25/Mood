@@ -36,8 +36,12 @@
 .careers-hero {
   position: relative;
   margin: 1rem;
+  height: 80vh;
   background-color: #ecf0ec;
   border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 5rem 4rem;
   box-sizing: border-box;
   overflow: hidden;
