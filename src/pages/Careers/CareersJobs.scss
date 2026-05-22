@@ -1,0 +1,110 @@
+@import '../../styles/variables';
+
+.careers-jobs {
+  padding: 40px 5% 100px;
+  background-color: $blanco;
+
+  &__container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: 850;
+    margin-bottom: 35px;
+    text-align: left;
+    color: $negro;
+    letter-spacing: -0.03em;
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__empty-state {
+    @extend %glass-pill-style;
+    border-radius: 16px;
+    border: 1px dashed rgba($negro, 0.15);
+    padding: 60px 30px;
+    text-align: center;
+
+    p {
+      color: rgba($negro, 0.6);
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+.job-card {
+  @extend %glass-pill-style;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 35px;
+  box-shadow: 0 4px 20px rgba($negro, 0.01);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  &:hover {
+    border-color: $primary;
+    box-shadow: 0 12px 35px rgba($negro, 0.05);
+    background-color: rgba($blanco, 0.6);
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 750;
+    margin: 0 0 12px 0;
+    color: $negro;
+    letter-spacing: -0.02em;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    @extend %glass-pill-style;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba($negro, 0.75);
+    padding: 6px 14px;
+    box-shadow: none;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: $negro;
+    color: $blanco;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      background-color: $primary;
+      color: $negro;
+      box-shadow: 0 6px 15px rgba($primary, 0.25);
+    }
+  }
+}

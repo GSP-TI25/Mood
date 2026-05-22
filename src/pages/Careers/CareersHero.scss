@@ -1,0 +1,241 @@
+@import '../../styles/variables';
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reutilizamos el efecto de luz brillante que definiste para tus botones */
+%shiny-animation {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+  }
+  &:hover::after {
+    transform: translateX(400%) skewX(-25deg);
+  }
+}
+
+.careers-hero {
+  position: relative;
+  margin: 1rem;
+  background-color: #ecf0ec;
+  border-radius: 16px;
+  padding: 5rem 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 4rem 2rem;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0.5rem;
+    padding: 4rem 1.5rem;
+  }
+
+  &__container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+
+  /* --- COLUMNA IZQUIERDA --- */
+  &__left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: $negro;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+
+  &__highlight {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: $negro !important;
+    background-color: $primary;
+    padding: 0 0.2em;
+    border-radius: 8px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    display: inline-flex;
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba($primary, 0.15);
+  }
+
+  &__subtitle {
+    font-size: 1.15rem;
+    color: rgba($negro, 0.7);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0;
+  }
+
+  /* --- COLUMNA DERECHA --- */
+  &__right-col {
+    background: transparent;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  &__culture-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: $negro;
+    margin: 0 0 35px 0;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 1024px) {
+      text-align: center;
+    }
+  }
+
+  &__culture-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+
+    /* ========================================================
+       EFECTO ESCALERA ESTÁTICO (Sin movimientos cinéticos en Hover)
+       ======================================================== */
+    .culture-card {
+      &:nth-child(1) {
+        transform: translateX(0);
+      }
+      &:nth-child(2) {
+        transform: translateX(25px);
+      }
+      &:nth-child(3) {
+        transform: translateX(50px);
+      }
+
+      @media (max-width: 1024px) {
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+          transform: translateX(0) !important;
+        }
+      }
+
+      /* El Hover ahora es puramente óptico: cambia el borde y dispara el destello de luz */
+      &:hover {
+        border-color: $primary;
+        box-shadow: 0 10px 30px rgba($negro, 0.05);
+        background: rgba($blanco, 0.6);
+        /* 💡 Mantenemos estrictamente su posición en la escalera sin que se mueva */
+      }
+    }
+  }
+
+  &__fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: heroFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+}
+
+/* --- TARJETAS CULTURALES CON DESTELLO DE LUZ --- */
+.culture-card {
+  @extend %glass-pill-style;
+  @extend %shiny-animation; // <-- LIGAMOS LA ANIMACIÓN DE REFLEJO DE LUZ AQUÍ
+  border-radius: 20px;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba($negro, 0.03);
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; // Quitamos transiciones de transform innecesarias
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: $negro !important;
+    background-color: $primary;
+    padding: 12px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba($primary, 0.3);
+    position: relative;
+    z-index: 2; // Queda por encima del destello de luz
+
+    svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    z-index: 2; // Queda por encima del destello de luz
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: $negro;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: rgba($negro, 0.65);
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+}
