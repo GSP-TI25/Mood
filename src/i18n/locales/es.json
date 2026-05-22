@@ -263,5 +263,34 @@
   "tab": {
     "hidden": "¡Vuelve! Las buenas ideas te esperan 💡",
     "visible": "Mood | Agencia Creativa"
+  },
+  "careers": {
+    "hero": {
+      "title1": "Únete a nuestro ",
+      "title2": "equipo.",
+      "subtitle": "Buscamos mentes creativas, estrategas digitales y apasionados por transformar marcas. Si tienes el ADN Mood, este es tu lugar."
+    },
+    "culture": {
+      "title": "Por qué Mood",
+      "items": {
+        "1": {
+          "title": "Creatividad sin límites",
+          "desc": "Fomentamos un espacio donde las ideas locas son escuchadas y ejecutadas."
+        },
+        "2": {
+          "title": "Crecimiento continuo",
+          "desc": "Apostamos por tu desarrollo profesional con retos constantes."
+        },
+        "3": {
+          "title": "Cultura flexible",
+          "desc": "Trabajamos por objetivos, valorando tu tiempo y bienestar."
+        }
+      }
+    },
+    "jobs": {
+      "title": "Posiciones Abiertas",
+      "empty": "Actualmente no tenemos posiciones abiertas, pero siempre estamos buscando talento. Déjanos tu CV y te contactaremos cuando se abra una oportunidad.",
+      "cta": "Enviar mi CV"
+    }
   }
 }

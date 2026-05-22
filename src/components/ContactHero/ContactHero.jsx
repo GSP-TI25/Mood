@@ -1,26 +1,16 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import Select from 'react-select';
-import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
+import { useTranslation } from 'react-i18next';
 import BlurText from '../BlurText/BlurText';
 import './ContactHero.scss';
 
 const ContactHero = () => {
-  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+  const { t, i18n } = useTranslation();
 
-  // Movimos COUNTRY_OPTIONS adentro y usamos useMemo para traducir dinámicamente
-  const COUNTRY_OPTIONS = useMemo(
-    () => [
-      { value: 'Peru', label: t('contactHero.form.countries.peru') },
-      { value: 'Mexico', label: t('contactHero.form.countries.mexico') },
-      { value: 'Colombia', label: t('contactHero.form.countries.colombia') },
-      { value: 'Chile', label: t('contactHero.form.countries.chile') },
-      { value: 'Argentina', label: t('contactHero.form.countries.argentina') },
-      { value: 'Espana', label: t('contactHero.form.countries.spain') },
-      { value: 'Otro', label: t('contactHero.form.countries.other') },
-    ],
-    [t],
-  );
+  // --- NUEVOS ESTADOS: Países y Prefijos Dinámicos ---
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [countryPrefixes, setCountryPrefixes] = useState({});
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -30,8 +20,41 @@ const ContactHero = () => {
     mensaje: '',
   });
 
+  const [honeypot, setHoneypot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  // --- EFECTO: Cargar países desde la Base de Datos ---
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/countries');
+        const data = await response.json();
+
+        if (data.success) {
+          const options = data.data; // [{ value, label, prefix }]
+          const prefixes = {};
+
+          // Construimos el diccionario dinámico de prefijos
+          options.forEach((country) => {
+            prefixes[country.value] = country.prefix;
+          });
+
+          // Agregamos manualmente la opción "Otro" al final, usando tu traducción
+          const otroLabel = t('contactHero.form.countries.other') || 'Otro';
+          options.push({ value: 'Otro', label: otroLabel, prefix: '' });
+          prefixes['Otro'] = '';
+
+          setCountryOptions(options);
+          setCountryPrefixes(prefixes);
+        }
+      } catch (error) {
+        console.error('Error cargando la lista de países:', error);
+      }
+    };
+
+    fetchCountries();
+  }, [t]); // Se ejecuta al montar y si cambia el idioma (para traducir "Otro")
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +62,55 @@ const ContactHero = () => {
   };
 
   const handleSelectChange = (selectedOption) => {
-    setFormData((prev) => ({ ...prev, pais: selectedOption }));
+    setFormData((prev) => {
+      // Leemos el prefijo del estado dinámico
+      const oldPrefix = prev.pais ? countryPrefixes[prev.pais.value] : '';
+      const newPrefix = countryPrefixes[selectedOption.value] || '';
+
+      let numberOnly = prev.celular;
+      if (oldPrefix && numberOnly.startsWith(oldPrefix)) {
+        numberOnly = numberOnly.substring(oldPrefix.length);
+      }
+
+      numberOnly = numberOnly.replace(/\D/g, '');
+
+      return {
+        ...prev,
+        pais: selectedOption,
+        celular: newPrefix + numberOnly,
+      };
+    });
+  };
+
+  const handlePhoneChange = (e) => {
+    let rawValue = e.target.value;
+    const currentCountry = formData.pais?.value;
+    // Leemos el prefijo dinámico
+    const prefix =
+      currentCountry && currentCountry !== 'Otro'
+        ? countryPrefixes[currentCountry]
+        : '';
+
+    if (prefix && !rawValue.startsWith(prefix)) {
+      rawValue = prefix;
+    }
+
+    let userTypedPart = rawValue.substring(prefix.length);
+
+    if (currentCountry === 'Otro') {
+      const hasPlus = userTypedPart.startsWith('+');
+      userTypedPart = userTypedPart.replace(/\D/g, '');
+      if (hasPlus) userTypedPart = '+' + userTypedPart;
+    } else {
+      userTypedPart = userTypedPart.replace(/\D/g, '');
+    }
+
+    if (userTypedPart.length > 15) {
+      const maxLen = userTypedPart.startsWith('+') ? 16 : 15;
+      userTypedPart = userTypedPart.substring(0, maxLen);
+    }
+
+    setFormData((prev) => ({ ...prev, celular: prefix + userTypedPart }));
   };
 
   const handleSubmit = async (e) => {
@@ -47,30 +118,40 @@ const ContactHero = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const dataToSend = {
-      Nombre: formData.nombre,
-      Correo: formData.correo,
-      Celular: formData.celular,
-      País: formData.pais ? formData.pais.label : 'No especificado',
-      Mensaje: formData.mensaje,
-      _subject: `¡Nuevo Lead Mood! - ${formData.nombre}`,
-      _cc: 'tecnologia@mood.pe',
-      _captcha: 'false',
-      _template: 'table',
+    if (honeypot) {
+      console.warn('Bot de spam interceptado y bloqueado.');
+      setTimeout(() => {
+        setSubmitStatus('success');
+        setIsSubmitting(false);
+        setFormData({
+          nombre: '',
+          correo: '',
+          celular: '',
+          pais: null,
+          mensaje: '',
+        });
+      }, 1000);
+      return;
+    }
+
+    const payload = {
+      nombre: formData.nombre,
+      correo: formData.correo,
+      celular: formData.celular,
+      pais: formData.pais ? formData.pais.label : 'No especificado',
+      mensaje: formData.mensaje,
+      idioma: i18n.language || 'es',
     };
 
     try {
-      const response = await fetch(
-        'https://formsubmit.co/ajax/cbraco@gruposp.pe',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(dataToSend),
+      const response = await fetch('http://localhost:5000/api/contacto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
         setSubmitStatus('success');
@@ -85,7 +166,7 @@ const ContactHero = () => {
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Error enviando a FormSubmit:', error);
+      console.error('Error procesando el formulario:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -147,6 +228,24 @@ const ContactHero = () => {
               <h3>{t('contactHero.form.header')}</h3>
             </div>
 
+            <div
+              style={{ position: 'absolute', left: '-9999px' }}
+              aria-hidden='true'
+            >
+              <label htmlFor='_honey'>
+                No llenes este campo si eres humano
+              </label>
+              <input
+                type='text'
+                id='_honey'
+                name='_honey'
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex='-1'
+                autoComplete='off'
+              />
+            </div>
+
             <div className='contact-form__group'>
               <label htmlFor='nombre'>
                 {t('contactHero.form.labels.name')}
@@ -158,6 +257,7 @@ const ContactHero = () => {
                 value={formData.nombre}
                 onChange={handleChange}
                 required
+                maxLength={100}
                 placeholder={t('contactHero.form.placeholders.name')}
               />
             </div>
@@ -173,6 +273,7 @@ const ContactHero = () => {
                 value={formData.correo}
                 onChange={handleChange}
                 required
+                maxLength={150}
                 placeholder={t('contactHero.form.placeholders.email')}
               />
             </div>
@@ -187,7 +288,7 @@ const ContactHero = () => {
                   id='celular'
                   name='celular'
                   value={formData.celular}
-                  onChange={handleChange}
+                  onChange={handlePhoneChange}
                   required
                   placeholder={t('contactHero.form.placeholders.phone')}
                 />
@@ -199,7 +300,7 @@ const ContactHero = () => {
                 </label>
                 <Select
                   inputId='pais'
-                  options={COUNTRY_OPTIONS}
+                  options={countryOptions} // <-- USAMOS EL ESTADO DINÁMICO AQUÍ
                   value={formData.pais}
                   onChange={handleSelectChange}
                   placeholder={t('contactHero.form.placeholders.select')}
@@ -220,6 +321,7 @@ const ContactHero = () => {
                 onChange={handleChange}
                 required
                 rows='4'
+                maxLength={1000}
                 placeholder={t('contactHero.form.placeholders.message')}
               ></textarea>
             </div>

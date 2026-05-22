@@ -1,0 +1,145 @@
+@import '../../styles/variables';
+
+.careers-page {
+  width: 100%;
+  padding-top: 100px; // Ajusta según la altura de tu Navbar
+}
+
+.careers-hero {
+  padding: 80px 5%;
+  text-align: center;
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: $negro; // Asumiendo que tienes esta variable
+    display: inline-block;
+  }
+
+  &__highlight {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: $primary; // Asumiendo que tienes esta variable
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  &__subtitle {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  &__fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards ease-in-out;
+  }
+}
+
+.careers-culture {
+  padding: 80px 5%;
+  background-color: #f9f9f9; // O el color de fondo secundario que uses
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+}
+
+.culture-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    color: $primary;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+.careers-jobs {
+  padding: 80px 5%;
+  text-align: center;
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+
+  &__empty-state {
+    background: white;
+    border: 1px dashed #ccc;
+    padding: 50px 30px;
+    border-radius: 12px;
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__cta {
+    background-color: $primary;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

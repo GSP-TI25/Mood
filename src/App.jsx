@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import AdnMood from './pages/AdnMood/AdnMood';
 import MoodPrint from './pages/MoodPrint/MoodPrint';
 import Contact from './pages/Contact/Contact';
+import Careers from './pages/Careers/Careers';
 
 const App = () => {
   const { t } = useTranslation(); // <-- 2. INICIALIZAMOS LA TRADUCCIÓN
@@ -54,6 +55,10 @@ const App = () => {
         <Route
           path='/contacto'
           element={<Contact />}
+        />
+        <Route
+          path='/trabaja_con_nosotros'
+          element={<Careers />}
         />
       </Routes>
     </>

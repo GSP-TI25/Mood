@@ -263,5 +263,34 @@
   "tab": {
     "hidden": "Come back! Good ideas await 💡",
     "visible": "Mood | Creative Agency"
+  },
+  "careers": {
+    "hero": {
+      "title1": "Join our ",
+      "title2": "team.",
+      "subtitle": "We are looking for creative minds, digital strategists, and people passionate about transforming brands. If you have the Mood DNA, this is your place."
+    },
+    "culture": {
+      "title": "Why Mood",
+      "items": {
+        "1": {
+          "title": "Limitless Creativity",
+          "desc": "We foster a space where crazy ideas are heard and executed."
+        },
+        "2": {
+          "title": "Continuous Growth",
+          "desc": "We are committed to your professional development with constant challenges."
+        },
+        "3": {
+          "title": "Flexible Culture",
+          "desc": "We work by objectives, valuing your time and well-being."
+        }
+      }
+    },
+    "jobs": {
+      "title": "Open Positions",
+      "empty": "We don't have open positions right now, but we are always looking for talent. Send us your CV and we will contact you when an opportunity arises.",
+      "cta": "Send my CV"
+    }
   }
 }
