@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #ffffff; /* Blanco más claro/puro forzado */
+  background-color: #ffffff;
   font-family: inherit;
 
   /* Encabezado fijo superior */
@@ -12,6 +12,9 @@
     padding: 1.5rem 2rem;
     border-bottom: 1px solid rgba($negro, 0.08);
     background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     h2 {
       margin: 0;
@@ -20,6 +23,15 @@
       font-weight: 600;
       letter-spacing: -0.02em;
     }
+  }
+
+  &__step-indicator {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba($negro, 0.5);
+    background-color: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 20px;
   }
 
   /* Área con scroll interno */
@@ -85,7 +97,7 @@
       border-radius: 6px;
       font-size: 0.875rem;
       font-family: inherit;
-      background-color: #ffffff; /* Blanco claro/puro */
+      background-color: #ffffff;
       color: $negro;
       outline: none;
       transition:
@@ -172,6 +184,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 0.5rem;
       padding: 0.5rem 1rem;
       border-radius: 6px;
       font-weight: 500;
@@ -186,19 +199,27 @@
       background: transparent;
       border: 1px solid rgba($negro, 0.15);
       color: $negro;
-
       &:hover {
         background: #f1f5f9;
       }
     }
 
-    .btn-submit {
-      background: $primary; /* 🌟 Verde de tu variable primary */
+    .btn-next {
+      background: $negro;
       border: none;
-      color: $negro; /* Texto oscuro para contrastar perfecto con el verde neón/brillante */
+      color: $blanco;
+      flex: 1;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .btn-submit {
+      background: $primary;
+      border: none;
+      color: $negro;
       flex: 1;
       font-weight: 600;
-
       &:hover {
         opacity: 0.9;
       }

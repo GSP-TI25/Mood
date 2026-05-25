@@ -15,14 +15,13 @@ export const getJobs = async (req, res) => {
   }
 };
 
-// --- OBTENER UN TRABAJO POR ID (Para la vista de JobDetail.jsx) ---
+// --- OBTENER UN TRABAJO POR ID (Con las preguntas incluidas) ---
 export const getJobById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Hacemos un JOIN para traer la info básica y los detalles al mismo tiempo
     const result = await pool.query(
-      `SELECT j.*, d.description, d.responsibilities, d.requirements, d.benefits 
+      `SELECT j.*, d.description, d.responsibilities, d.requirements, d.benefits, d.questions 
        FROM jobs j 
        LEFT JOIN job_details d ON j.id = d.job_id 
        WHERE j.id = $1`,
@@ -40,56 +39,62 @@ export const getJobById = async (req, res) => {
   }
 };
 
-// --- CREAR UN NUEVO TRABAJO (CON SUS DETALLES PARA EL CMS) ---
+// --- CREAR UN NUEVO TRABAJO (Con sus detalles y preguntas filtro) ---
 export const createJob = async (req, res) => {
   const {
     title,
     category,
     type,
     country,
-    date, // Info Básica (Tabla: jobs)
+    date,
     description,
     responsibilities,
     requirements,
-    benefits, // Info Detallada (Tabla: job_details)
+    benefits,
+    questions, // <--- Recibimos el arreglo de preguntas filtro del Paso 2
   } = req.body;
 
-  // Iniciamos una conexión especial para hacer una "transacción"
+  // Iniciamos una transacción para guardar en las 2 tablas al mismo tiempo
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN'); // Iniciar transacción
+    await client.query('BEGIN');
 
-    // 1. Insertar en la tabla principal (jobs)
+    // 1. Insertar en jobs (Tabla principal)
     const jobResult = await client.query(
       `INSERT INTO jobs (title, category, type, country, date) 
        VALUES ($1, $2, $3, $4, $5) RETURNING id`,
       [title, category, type, country, date],
     );
 
-    const newJobId = jobResult.rows[0].id; // El ID recién generado
+    const newJobId = jobResult.rows[0].id;
 
-    // 2. Insertar en la tabla secundaria (job_details) usando el ID anterior
-    // PostgreSQL maneja los arrays nativamente, así que pasamos las listas directo
+    // 2. Insertar en job_details (Incluyendo la columna de preguntas en formato JSON stringificado)
     await client.query(
-      `INSERT INTO job_details (job_id, description, responsibilities, requirements, benefits) 
-       VALUES ($1, $2, $3, $4, $5)`,
-      [newJobId, description, responsibilities, requirements, benefits],
+      `INSERT INTO job_details (job_id, description, responsibilities, requirements, benefits, questions) 
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [
+        newJobId,
+        description,
+        responsibilities,
+        requirements,
+        benefits,
+        JSON.stringify(questions || []), // Convertimos el arreglo de React a JSON de PostgreSQL
+      ],
     );
 
-    await client.query('COMMIT'); // Guardar los cambios definitivamente en ambas tablas
-
+    await client.query('COMMIT');
     res.status(201).json({
-      message: 'Vacante y detalles publicados exitosamente',
+      message: 'Vacante y preguntas publicadas con éxito',
       id: newJobId,
     });
   } catch (error) {
-    await client.query('ROLLBACK'); // Si algo falla, revertimos todo para no dejar datos a medias
-    console.error('Error al crear trabajo completo:', error);
+    await client.query('ROLLBACK');
+    console.error('Error al crear trabajo completo con preguntas:', error);
     res
       .status(500)
-      .json({ message: 'Error al guardar la vacante y sus detalles' });
+      .json({ message: 'Error al guardar la vacante y sus componentes' });
   } finally {
-    client.release(); // Liberar la conexión a la base de datos
+    client.release();
   }
 };

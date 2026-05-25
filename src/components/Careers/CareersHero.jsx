@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Rocket, Brain, Coffee } from 'lucide-react';
-import BlurText from '../../components/BlurText/BlurText';
+import BlurText from '../BlurText/BlurText';
 import './CareersHero.scss';
 
 const CareersHero = () => {

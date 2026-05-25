@@ -1,0 +1,82 @@
+@use '../../styles/variables' as *;
+
+.cms-sidebar-nav {
+  width: 260px;
+  background-color: #1c1c1e; /* 🌟 Oscuro Slate profundo (estilo Shadcn Dark) */
+  border-right: 1px solid rgba($blanco, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  &__brand {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $blanco; /* Texto blanco en fondo oscuro */
+    padding: 0 0.75rem 2rem 0.75rem;
+    span {
+      color: $primary;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba($blanco, 0.65); /* Gris claro para links inactivos */
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba($blanco, 0.08);
+      color: $blanco;
+    }
+
+    &.active {
+      background-color: rgba($blanco, 0.1); /* Destacado sutil en menú oscuro */
+      color: $blanco;
+      font-weight: 600;
+    }
+  }
+
+  &__footer {
+    margin-top: auto; /* Empuja el footer estrictamente hacia abajo */
+    padding-top: 1rem;
+    border-top: 1px solid rgba($blanco, 0.08);
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #f87171; /* Rojo más claro para contrastar en fondo oscuro */
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(248, 113, 113, 0.15);
+    }
+  }
+}

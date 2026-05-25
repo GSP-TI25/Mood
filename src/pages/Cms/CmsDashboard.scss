@@ -1,101 +1,12 @@
 @use '../../styles/variables' as *;
 
-/* Layout Principal */
 .cms-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #f8fafc; /* Color de fondo gris muy tenue estilo shadcn */
+  background-color: #f8fafc;
   font-family: inherit;
 }
 
-/* =========================================
-   NUEVO SIDEBAR DE NAVEGACIÓN (Izquierda)
-   ========================================= */
-.cms-sidebar-nav {
-  width: 260px;
-  background-color: $blanco;
-  border-right: 1px solid rgba($negro, 0.08);
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 1rem;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-
-  &__brand {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: $negro;
-    padding: 0 0.75rem 2rem 0.75rem;
-
-    span {
-      color: $primary;
-    }
-  }
-
-  &__menu {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba($negro, 0.6);
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: rgba($negro, 0.04);
-      color: $negro;
-    }
-
-    &.active {
-      background-color: rgba($negro, 0.04);
-      color: $negro;
-      font-weight: 600;
-    }
-  }
-
-  &__footer {
-    padding-top: 1rem;
-    border-top: 1px solid rgba($negro, 0.08);
-  }
-
-  &__logout {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #dc2626; /* Rojo tenue estilo shadcn */
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: rgba(220, 38, 38, 0.1);
-    }
-  }
-}
-
-/* =========================================
-   CONTENIDO PRINCIPAL (Derecha)
-   ========================================= */
 .cms-main-content {
   flex: 1;
   padding: 2.5rem 3rem;
@@ -123,7 +34,6 @@
   }
 }
 
-/* Botón estilo Shadcn (Primary) */
 .cms-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -133,7 +43,7 @@
   color: $blanco;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 6px; /* Borde más sutil */
+  border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -144,103 +54,31 @@
   }
 }
 
-/* =========================================
-   TABLA ESTILO SHADCN
-   ========================================= */
-.cms-table-wrapper {
-  background-color: $blanco;
-  border-radius: 8px;
-  border: 1px solid rgba($negro, 0.1); /* Borde sutil, no sombras pesadas */
-  overflow: hidden;
-}
-
-.cms-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.9rem;
-
-  th,
-  td {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba($negro, 0.08);
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-
-  th {
-    background-color: #f8fafc; /* Gris extra claro para cabecera */
-    font-weight: 500;
-    color: rgba($negro, 0.6);
-  }
-
-  td {
-    color: rgba($negro, 0.8);
-  }
-
-  .font-medium {
-    font-weight: 500;
-    color: $negro;
-  }
-
-  /* Etiquetas (Badges) estilo Shadcn */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px 10px;
-    border-radius: 9999px; /* Totalmente redondeado */
-    font-size: 0.75rem;
-    font-weight: 500;
-    border: 1px solid transparent;
-
-    &--active {
-      background-color: rgba($primary, 0.15);
-      color: #166534; // Verde oscuro texto
-      border-color: rgba($primary, 0.3);
-    }
-
-    &--inactive {
-      background-color: #f1f5f9;
-      color: #475569;
-      border-color: #e2e8f0;
-    }
-  }
-
-  tbody tr:hover {
-    background-color: rgba($negro, 0.015);
-  }
-}
-
-/* =========================================
-   PANEL DE FORMULARIO (Sheet / Modal Shadcn)
-   ========================================= */
+/* Modal Overlay & Sheet (JobForm Container) */
 .cms-sheet-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4); // Overlay oscuro simple
-  backdrop-filter: blur(2px); // Difuminado muy ligero
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
   z-index: 1000;
   display: flex;
-  justify-content: flex-end; /* 🌟 Ahora el formulario entra por la DERECHA */
+  justify-content: flex-end;
 
   animation: fadeIn 0.2s ease-out forwards;
 }
 
 .cms-sheet-content {
   width: 100%;
-  max-width: 600px; /* Un poco más ancho para dar respiro al formulario */
+  max-width: 600px;
   height: 100vh;
   background-color: $blanco;
   border-left: 1px solid rgba($negro, 0.1);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
   overflow-y: auto;
 
-  /* Animación de entrada desde la derecha */
   transform: translateX(100%);
   animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
@@ -261,7 +99,6 @@
     opacity: 1;
   }
 }
-
 @keyframes slideInRight {
   from {
     transform: translateX(100%);

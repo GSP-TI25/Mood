@@ -1,6 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar'; // <-- Ajusta la ruta según dónde guardas tu Navbar
-import CareersHero from './CareersHero';
-import CareersJobs from './CareersJobs';
+import CareersHero from '../../components/Careers/CareersHero';
+import CareersJobs from '../../components/Careers/CareersJobs';
 import Footer from '../../components/Footer/Footer'; // <-- Opcional por si deseas asegurar el Footer aquí también
 import './Careers.scss';
 
