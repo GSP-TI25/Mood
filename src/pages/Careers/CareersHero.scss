@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
 
 @keyframes heroFadeIn {
   to {
@@ -7,7 +7,6 @@
   }
 }
 
-/* Reutilizamos el efecto de luz brillante que definiste para tus botones */
 %shiny-animation {
   position: relative;
   overflow: hidden;
@@ -37,7 +36,14 @@
   position: relative;
   margin: 1rem;
   height: 80vh;
-  background-color: #ecf0ec;
+
+  background-image:
+    linear-gradient(rgba(#000, 0.7), rgba(#000, 0.85)),
+    url('../../assets/MoodAgencia.webp');
+
+  background-size: cover;
+  background-position: center;
+
   border-radius: 16px;
   display: flex;
   justify-content: center;
@@ -45,6 +51,7 @@
   padding: 5rem 4rem;
   box-sizing: border-box;
   overflow: hidden;
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 1024px) {
     padding: 4rem 2rem;
@@ -53,6 +60,8 @@
   @media (max-width: 768px) {
     margin: 0.5rem;
     padding: 4rem 1.5rem;
+    height: auto;
+    min-height: 80vh;
   }
 
   &__container {
@@ -62,6 +71,8 @@
     grid-template-columns: 1.1fr 0.9fr;
     gap: 4rem;
     align-items: center;
+    position: relative;
+    z-index: 2;
 
     @media (max-width: 1024px) {
       grid-template-columns: 1fr;
@@ -69,7 +80,7 @@
     }
   }
 
-  /* --- COLUMNA IZQUIERDA --- */
+  /* --- COLUMNA IZQUIERDA: MENSAJE --- */
   &__left-col {
     display: flex;
     flex-direction: column;
@@ -85,7 +96,7 @@
   &__title {
     font-size: clamp(2.5rem, 5vw, 3.8rem);
     font-weight: 900;
-    color: $negro;
+    color: $blanco;
     line-height: 1.1;
     letter-spacing: -0.04em;
     margin: 0;
@@ -102,18 +113,19 @@
     letter-spacing: -0.04em;
     display: inline-flex;
     width: fit-content;
-    box-shadow: 0 4px 15px rgba($primary, 0.15);
+    box-shadow: 0 4px 15px rgba($primary, 0.3);
   }
 
   &__subtitle {
     font-size: 1.15rem;
-    color: rgba($negro, 0.7);
+    color: rgba($blanco, 0.85);
     line-height: 1.6;
     max-width: 500px;
     margin: 0;
+    font-weight: 500;
   }
 
-  /* --- COLUMNA DERECHA --- */
+  /* --- COLUMNA DERECHA: CULTURA --- */
   &__right-col {
     background: transparent;
     padding: 1rem;
@@ -123,7 +135,7 @@
   &__culture-title {
     font-size: 1.8rem;
     font-weight: 900;
-    color: $negro;
+    color: $blanco;
     margin: 0 0 35px 0;
     letter-spacing: -0.02em;
 
@@ -138,9 +150,6 @@
     gap: 24px;
     position: relative;
 
-    /* ========================================================
-       EFECTO ESCALERA ESTÁTICO (Sin movimientos cinéticos en Hover)
-       ======================================================== */
     .culture-card {
       &:nth-child(1) {
         transform: translateX(0);
@@ -160,12 +169,9 @@
         }
       }
 
-      /* El Hover ahora es puramente óptico: cambia el borde y dispara el destello de luz */
       &:hover {
-        border-color: $primary;
-        box-shadow: 0 10px 30px rgba($negro, 0.05);
-        background: rgba($blanco, 0.6);
-        /* 💡 Mantenemos estrictamente su posición en la escalera sin que se mueva */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: rgba($blanco, 0.15);
       }
     }
   }
@@ -177,10 +183,10 @@
   }
 }
 
-/* --- TARJETAS CULTURALES CON DESTELLO DE LUZ --- */
+/* --- TARJETAS CULTURALES GLASSMORPHISM --- */
 .culture-card {
   @extend %glass-pill-style;
-  @extend %shiny-animation; // <-- LIGAMOS LA ANIMACIÓN DE REFLEJO DE LUZ AQUÍ
+  @extend %shiny-animation;
   border-radius: 20px;
   padding: 22px 26px;
   display: flex;
@@ -189,18 +195,16 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 500px;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba($negro, 0.03);
+  background: rgba($blanco, 0.1);
+  border: 1px solid rgba($blanco, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition:
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    box-shadow 0.3s ease; // Quitamos transiciones de transform innecesarias
+  transition: all 0.3s ease;
 
   &__icon {
-    width: 24px;
-    height: 24px;
+    /* 🌟 CORRECCIÓN: Dimensiones corregidas a 48px para evitar que el padding aplaste el icono */
+    width: 48px;
+    height: 48px;
     color: $negro !important;
     background-color: $primary;
     padding: 12px;
@@ -211,7 +215,7 @@
     justify-content: center;
     box-shadow: 0 4px 14px rgba($primary, 0.3);
     position: relative;
-    z-index: 2; // Queda por encima del destello de luz
+    z-index: 2;
 
     svg {
       width: 100% !important;
@@ -225,21 +229,22 @@
     flex-direction: column;
     gap: 4px;
     position: relative;
-    z-index: 2; // Queda por encima del destello de luz
+    z-index: 2;
 
     h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: $negro;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $blanco;
       margin: 0;
       letter-spacing: -0.01em;
     }
 
     p {
       font-size: 0.9rem;
-      color: rgba($negro, 0.65);
+      color: rgba($blanco, 0.75);
       line-height: 1.5;
       margin: 0;
+      font-weight: 500;
     }
   }
 }

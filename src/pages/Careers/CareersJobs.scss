@@ -1,4 +1,33 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+/* --- ANIMACIÓN DE REFLEJO DE LUZ --- */
+%shiny-animation {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1;
+  }
+
+  &:hover::after {
+    transform: translateX(400%) skewX(-25deg);
+  }
+}
 
 .careers-jobs {
   padding: 40px 5% 100px;
@@ -18,10 +47,11 @@
     letter-spacing: -0.03em;
   }
 
+  /* 🌟 CORRECCIÓN: Usamos Grid auto-adaptativo igual que en AdnTeam */
   &__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 
   &__empty-state {
@@ -30,6 +60,7 @@
     border: 1px dashed rgba($negro, 0.15);
     padding: 60px 30px;
     text-align: center;
+    grid-column: 1 / -1; // Obliga a ocupar todo el ancho si no hay ofertas
 
     p {
       color: rgba($negro, 0.6);
@@ -40,71 +71,120 @@
   }
 }
 
+/* ==========================================
+   ESTILOS DE LA CARTA AL ESTILO ADN TEAM
+   ========================================== */
 .job-card {
-  @extend %glass-pill-style;
+  height: 210px; // Altura fija idéntica a AdnTeam
+  background-color: #f6f5f0; // Un tono crema un pelo más oscuro que el blanco global para destacar
   border-radius: 16px;
+  padding: 1.5rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 28px 35px;
-  box-shadow: 0 4px 20px rgba($negro, 0.01);
+  box-shadow: 0 10px 30px rgba($negro, 0.02);
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 24px;
+    height: 190px;
+    padding: 1.25rem;
   }
 
+  /* 🌟 MAGIA NEGRA: Inversión de colores al Hover idéntica al Team */
   &:hover {
-    border-color: $primary;
-    box-shadow: 0 12px 35px rgba($negro, 0.05);
-    background-color: rgba($blanco, 0.6);
+    background-color: #1c1c1e; // Oscuro profundo
+    box-shadow: 0 15px 35px rgba($negro, 0.15);
+
+    .job-card__name {
+      color: $blanco;
+    }
+
+    .job-card__role {
+      color: rgba($blanco, 0.6);
+    }
+
+    .job-card__btn {
+      background-color: $primary;
+      color: $negro; // El icono de flecha pasa a negro sobre fondo verde
+
+      &::after {
+        transform: translateX(400%) skewX(-25deg);
+      }
+    }
   }
 
-  &__title {
-    font-size: 1.4rem;
-    font-weight: 750;
-    margin: 0 0 12px 0;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    font-weight: 700;
     color: $negro;
+    margin: 0;
     letter-spacing: -0.02em;
+    transition: color 0.4s ease;
+    line-height: 1.2;
   }
 
   &__meta {
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  &__tag {
-    @extend %glass-pill-style;
-    display: flex;
+  &__role {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
+    gap: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: rgba($negro, 0.75);
-    padding: 6px 14px;
-    box-shadow: none;
+    color: rgba($negro, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    font-family: monospace;
+    transition: color 0.4s ease;
+
+    svg {
+      color: inherit;
+    }
+    &--country-tag {
+      display: none; /* <--- Oculto de la interfaz visual por el momento */
+      color: $primary; /* Listo con tu color premium cuando decidas mostrarlo */
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end; // Empujamos el botón a la derecha
+    align-items: flex-end;
   }
 
   &__btn {
+    @extend %shiny-animation;
+    width: 42px; // Un poco más grande para ser el Call To Action principal
+    height: 42px;
+    border-radius: 12px 12px 12px 0; // Forma geométrica única de AdnTeam
+    background-color: rgba($negro, 0.05); // Fondo neutro antes del hover
+    color: $negro;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-    background-color: $negro;
-    color: $blanco;
-    padding: 14px 28px;
-    border-radius: 10px;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    margin-right: -0.5rem;
+    margin-bottom: -0.5rem;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
 
-    &:hover {
-      background-color: $primary;
-      color: $negro;
-      box-shadow: 0 6px 15px rgba($primary, 0.25);
+    svg {
+      position: relative;
+      z-index: 2;
     }
   }
 }

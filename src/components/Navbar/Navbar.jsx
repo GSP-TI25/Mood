@@ -14,7 +14,9 @@ const Navbar = () => {
   const location = useLocation();
 
   // El Navbar oscuro ahora solo aplica a Mood Print
-  const isDarkMode = location.pathname === '/mood-print';
+  const isDarkMode =
+    location.pathname === '/mood-print' ||
+    location.pathname === '/trabaja_con_nosotros';
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
+import { useTranslation } from 'react-i18next';
 import FadeContent from '../FadeContent/FadeContent';
 import Masonry from '../Masonry/Masonry';
 import ProjectModal from '../ProjectModal/ProjectModal';
 import './MoodPrintProjects.scss';
 
-// Mantenemos la estructura de datos, pero quitamos el título y descripción fijos.
 const PROJECTS_DATA = [
   {
     id: '1',
-    category: 'Branding', // <-- La llave de filtrado no cambia
+    category: 'Branding',
     client: 'AutoStar Motors',
-    date: 'Octubre 2023', // Podrías traducir esto también si lo deseas
+    date: 'Octubre 2023',
     img: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80',
     height: 700,
     url: 'https://ejemplo.com',
@@ -73,10 +72,9 @@ const PROJECTS_DATA = [
 ];
 
 const MoodPrintProjects = ({ selectedCategory }) => {
-  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+  const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // 1. Filtramos los proyectos usando la categoría base en español
   const baseFilteredProjects =
     selectedCategory === 'Todos'
       ? PROJECTS_DATA
@@ -84,12 +82,11 @@ const MoodPrintProjects = ({ selectedCategory }) => {
           (project) => project.category === selectedCategory,
         );
 
-  // 2. Inyectamos la traducción del título, descripción y categoría a cada proyecto filtrado
   const filteredProjects = baseFilteredProjects.map((project) => ({
     ...project,
     title: t(`moodPrintProjects.projects.${project.id}.title`),
     description: t(`moodPrintProjects.projects.${project.id}.description`),
-    categoryTranslated: t(`moodPrintHero.categories.${project.category}`), // Traduce "Diseño Web" -> "Web Design" para el modal
+    categoryTranslated: t(`moodPrintHero.categories.${project.category}`),
   }));
 
   useEffect(() => {
@@ -108,22 +105,21 @@ const MoodPrintProjects = ({ selectedCategory }) => {
       <div className='mood-projects__container'>
         <div className='mood-projects__header'>
           <FadeContent
-            key={selectedCategory} // <-- Cambiado para forzar la re-animación de título
+            key={selectedCategory}
             duration={0.8}
             delay={0.1}
             direction='bottom'
           >
             <h2 className='mood-projects__title'>
-              {t(`moodPrintProjects.categoryInfo.${selectedCategory}.title`)}{' '}
-              {/* <-- Traducción dinámica */}
+              {t(`moodPrintProjects.categoryInfo.${selectedCategory}.title`)}
             </h2>
             <p className='mood-projects__description'>
-              {t(`moodPrintProjects.categoryInfo.${selectedCategory}.desc`)}{' '}
-              {/* <-- Traducción dinámica */}
+              {t(`moodPrintProjects.categoryInfo.${selectedCategory}.desc`)}
             </p>
           </FadeContent>
         </div>
 
+        {/* Mantenemos el contenedor limpio de flags, dejando que Masonry gestione sus opacidades de forma nativa */}
         <div className='mood-projects__grid'>
           {filteredProjects.length > 0 ? (
             <Masonry
@@ -143,8 +139,7 @@ const MoodPrintProjects = ({ selectedCategory }) => {
             <p
               style={{ textAlign: 'center', marginTop: '4rem', color: 'gray' }}
             >
-              {t('moodPrintProjects.emptyState')}{' '}
-              {/* <-- Traducción dinámica */}
+              {t('moodPrintProjects.emptyState')}
             </p>
           )}
         </div>

@@ -26,9 +26,8 @@ const MoodPrint = () => {
         onCategoryClick={handleCategoryClick}
       />
 
-      {/* MAGIA AQUÍ: Envolvemos los Proyectos y el Footer en la misma área oscura */}
+      {/* MANTENEMOS TU ESTRUCTURA ORIGINAL AQUÍ */}
       <div className='mood-print__footer-area'>
-        {/* Usamos el div con la referencia para el scroll suave */}
         <div ref={projectsRef}>
           <MoodPrintProjects selectedCategory={selectedCategory} />
         </div>

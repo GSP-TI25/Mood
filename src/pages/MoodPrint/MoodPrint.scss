@@ -3,19 +3,22 @@
 .mood-print {
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 
-  // Aquí podemos dejar un fondo general si lo deseas,
-  // pero ya no interferirá con el hero ni el footer
-  background-color: ecf0ec;
+  // --- APLICAMOS GRID ÚNICAMENTE AQUÍ ---
+  display: grid;
+  grid-template-rows: auto auto 1fr; // Navbar/Hero ocupan su espacio, el área del footer toma el resto
+  align-items: stretch;
 
-  // --- ZONA DEL FOOTER OSCURO ---
+  // Corregido agregando el '#' para que Sass reconozca el color correctamente
+  background-color: #ecf0ec;
+
+  // --- TU ZONA DEL FOOTER OSCURO SE QUEDA EXACTAMENTE IGUAL ---
   &__footer-area {
     width: 100%;
-    background-color: #1c1c1e; // Igual que en Home
+    background-color: #1c1c1e; // Conserva tu fondo oscuro intacto
     display: flex;
     flex-direction: column;
     position: relative;

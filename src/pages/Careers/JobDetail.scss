@@ -1,4 +1,5 @@
-@import '../../styles/variables';
+@use '../../styles/variables' as *;
+@use 'sass:color';
 
 .job-detail-page {
   padding: 140px 5% 80px;
@@ -113,7 +114,7 @@
       background-color 0.3s;
 
     &:hover {
-      background-color: darken($primary, 10%);
+      background-color: color.adjust($primary, $lightness: -10%);
       transform: translateY(-2px);
     }
   }

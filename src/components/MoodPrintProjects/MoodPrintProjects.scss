@@ -3,9 +3,8 @@
 .mood-projects {
   width: 100%;
   padding: 6rem 2rem 8rem;
-  background-color: $blanco; // Fondo crema de la página
+  background-color: $blanco;
 
-  /* BORDES REDONDEADOS ESTILO TESTIMONIALS */
   border-bottom-left-radius: 48px;
   border-bottom-right-radius: 48px;
 
@@ -52,9 +51,20 @@
     }
   }
 
+  /* --- GRILLA CON RESERVA ESTÁTICA SIN OPACIDADES INTERFERENTES --- */
   &__grid {
     width: 100%;
     position: relative;
     z-index: 2;
+
+    // Sostiene de forma segura la estructura vertical mientras cargan las imágenes
+    min-height: 650px;
+    transition: min-height 0.3s ease;
+
+    @media (max-width: 768px) {
+      min-height: 450px;
+    }
+
+    // ⚠️ Removida por completo la subclase condicional --loading que opacaba tus elementos
   }
 }

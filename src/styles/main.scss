@@ -8,6 +8,8 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100vh;
 }
 
 body {
@@ -27,4 +29,20 @@ body {
   color: $negro;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // 🌟 CONFIGURACIÓN TRIDIMENSIONAL RAÍZ PARA EVITAR FUGAS DE ESPACIO
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+// 🌟 AJUSTE DEL CONTENEDOR DE REACT PARA ADAPTARSE DINÁMICAMENTE EN CADA RUTA
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  width: 100%;
+  min-height: 100vh;
 }

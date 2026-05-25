@@ -12,7 +12,9 @@ const Careers = () => {
         <CareersHero />
         <CareersJobs />
       </main>
-      <Footer />
+      <div className='mood-print__footer-area'>
+        <Footer />
+      </div>
     </>
   );
 };

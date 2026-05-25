@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // <-- 1. IMPORTAMOS EL HOOK
+import { useTranslation } from 'react-i18next';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+
+// --- Páginas Públicas ---
 import Home from './pages/Home/Home';
 import AdnMood from './pages/AdnMood/AdnMood';
 import MoodPrint from './pages/MoodPrint/MoodPrint';
@@ -9,28 +11,27 @@ import Contact from './pages/Contact/Contact';
 import Careers from './pages/Careers/Careers';
 import JobDetail from './pages/Careers/JobDetail';
 
-const App = () => {
-  const { t } = useTranslation(); // <-- 2. INICIALIZAMOS LA TRADUCCIÓN
+// --- Archivos del CMS (Asegúrate de crearlos antes de guardar) ---
+import CmsLogin from './pages/Cms/CmsLogin';
+import CmsDashboard from './pages/Cms/CmsDashboard';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
-  // 3. Lógica para cambiar el título de la pestaña
+const App = () => {
+  const { t } = useTranslation();
+
   useEffect(() => {
-    // Guardamos el título original de la página para restaurarlo
     const originalTitle = document.title;
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        // Cuando el usuario cambia de pestaña
         document.title = t('tab.hidden');
       } else {
-        // Cuando el usuario regresa a nuestra pestaña
         document.title = t('tab.visible') || originalTitle;
       }
     };
 
-    // Escuchamos el evento nativo del navegador
     document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Limpieza del evento cuando se desmonta el componente
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
@@ -39,33 +40,54 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
+      {/* ⚠️ Envolveremos las rutas dentro de AuthProvider cuando termines de crear el archivo */}
+      <AuthProvider>
+        <Routes>
+          {/* =========================================
+              RUTAS PÚBLICAS (ACCESIBLES PARA TODOS)
+              ========================================= */}
+          <Route
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/adn-mood'
+            element={<AdnMood />}
+          />
+          <Route
+            path='/mood-print'
+            element={<MoodPrint />}
+          />
+          <Route
+            path='/contacto'
+            element={<Contact />}
+          />
+          <Route
+            path='/trabaja_con_nosotros'
+            element={<Careers />}
+          />
+          <Route
+            path='/trabaja_con_nosotros/:jobId'
+            element={<JobDetail />}
+          />
 
-      <Routes>
-        <Route
-          path='/'
-          element={<Home />}
-        />
-        <Route
-          path='/adn-mood'
-          element={<AdnMood />}
-        />
-        <Route
-          path='/mood-print'
-          element={<MoodPrint />}
-        />
-        <Route
-          path='/contacto'
-          element={<Contact />}
-        />
-        <Route
-          path='/trabaja_con_nosotros'
-          element={<Careers />}
-        />
-        <Route
-          path='/trabaja-con-nosotros/:jobId'
-          element={<JobDetail />}
-        />
-      </Routes>
+          {/* =========================================
+              RUTAS DEL CMS (ÁREA DE RECURSOS HUMANOS)
+              ========================================= */}
+          <Route
+            path='/cms/login'
+            element={<CmsLogin />}
+          />
+          <Route
+            path='/cms/dashboard'
+            element={
+              <ProtectedRoute>
+                <CmsDashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </>
   );
 };

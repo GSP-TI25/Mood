@@ -5,14 +5,15 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Usamos un setTimeout de 0ms o 10ms.
-    // Esto obliga a React a terminar de "dibujar" todas las animaciones
-    // y el layout de la nueva página ANTES de hacer el scroll.
+    // 🌟 NUEVO: Limpiamos inmediatamente cualquier altura remanente retenida por el DOM
+    document.documentElement.style.height = 'auto';
+    document.body.style.height = 'auto';
+
     const timeoutId = setTimeout(() => {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'instant', // 'instant' fuerza el salto inmediato al tope
+        behavior: 'instant',
       });
     }, 10);
 
