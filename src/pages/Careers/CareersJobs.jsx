@@ -1,36 +1,41 @@
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Briefcase, Calendar, ChevronRight, MapPin } from 'lucide-react'; // <-- Importamos MapPin para el futuro
+import { Briefcase, Calendar, ChevronRight, MapPin } from 'lucide-react';
 import './CareersJobs.scss';
 
 const CareersJobs = () => {
   const { t } = useTranslation();
+  const [jobsList, setJobsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Obtenemos la lista base desde el i18n.
-  const rawJobs = t('careers.jobs.list', { returnObjects: true });
-  const jobsList = Array.isArray(rawJobs) ? rawJobs : [];
+  // 🌟 CONEXIÓN AL BACKEND: Cargamos los puestos reales desde PostgreSQL
+  useEffect(() => {
+    const fetchPublicJobs = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/jobs');
+        if (response.ok) {
+          const data = await response.json();
+          // Filtramos primero para asegurarnos de mostrar SOLO las vacantes que estén "Activas"
+          const activeJobs = data.filter((job) => job.is_active === true);
+          setJobsList(activeJobs);
+        }
+      } catch (error) {
+        console.error('Error al cargar las vacantes públicas:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  /* =======================================================================
-     🚀 INFRAESTRUCTURA MULTI-PAÍS (PREPARADA Y EN MODO INCÓGNITO)
-     Inyectamos la propiedad de país a cada ID correspondiente de tu JSON.
-     Por ejemplo: Puestos 1 y 2 son de Perú. Puesto 3 es de Colombia.
-     ======================================================================= */
-  const jobsWithCountries = jobsList.map((job) => {
-    // Definimos por ID a qué país pertenece estratégicamente en backend/UI
-    let country = 'Peru';
+    fetchPublicJobs();
+  }, []);
 
-    if (job.id === '3' || job.id === '5') {
-      // <--- Ejemplo: El ID 3 y 5 están asignados a Colombia
-      country = 'Colombia';
-    }
-
-    return { ...job, country };
-  });
-
-  /* 🔥 EL FILTRO SECRETO: 
-     Por el momento, filtramos estrictamente para que en pantalla SOLO aparezca 'Peru'.
-     Cuando quieras activar Colombia, simplemente comentas esta línea o añades: || job.country === 'Colombia' */
-  const visibleJobs = jobsWithCountries.filter((job) => job.country === 'Peru');
+  /* 🔥 EL FILTRO SECRETO MULTI-PAÍS: 
+     Ahora lee directamente el país de la base de datos.
+     Por el momento, filtramos para que en pantalla SOLO aparezca Perú. */
+  const visibleJobs = jobsList.filter(
+    (job) => job.country === 'Peru' || job.country === 'Perú',
+  );
 
   return (
     <section className='careers-jobs'>
@@ -38,7 +43,11 @@ const CareersJobs = () => {
         <h2 className='careers-jobs__title'>{t('careers.jobs.title')}</h2>
 
         <div className='careers-jobs__grid'>
-          {visibleJobs.length > 0 ? (
+          {isLoading ? (
+            <div className='careers-jobs__empty-state'>
+              <p>Cargando vacantes disponibles...</p>
+            </div>
+          ) : visibleJobs.length > 0 ? (
             visibleJobs.map((job) => (
               <div
                 className='job-card'
@@ -55,7 +64,7 @@ const CareersJobs = () => {
                       <Calendar size={14} /> {job.date}
                     </span>
 
-                    {/* 🕵️‍♂️ TAG DE PAÍS PREPARADO (Comentado/Oculto por CSS hasta su lanzamiento oficial) */}
+                    {/* 🕵️‍♂️ TAG DE PAÍS PREPARADO (Oculto por CSS hasta el lanzamiento en otros países) */}
                     <span className='job-card__role job-card__role--country-tag'>
                       <MapPin size={14} /> {job.country}
                     </span>

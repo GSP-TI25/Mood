@@ -7,15 +7,38 @@ const CmsLogin = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // ⚠️ TODO: Aquí luego haremos el fetch a PostgreSQL/Node.js
-    // Por ahora, simulamos un login exitoso si llenan los campos
-    if (email && password) {
-      const fakeToken = 'abc.123.xyz'; // Simulamos un JWT
-      login(fakeToken);
-    } else {
+
+    if (!email || !password) {
       alert('Por favor, ingresa tus credenciales.');
+      return;
+    }
+
+    try {
+      // Petición real al backend
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Si PostgreSQL y Node dicen que todo está bien, guardamos el token real
+        login(data.token);
+      } else {
+        // Si la contraseña es incorrecta, mostramos el error del backend
+        alert(data.message || 'Credenciales inválidas');
+      }
+    } catch (error) {
+      console.error('Error de conexión:', error);
+      alert(
+        'Error al conectar con el servidor. Verifica que el backend esté encendido.',
+      );
     }
   };
 

@@ -6,6 +6,8 @@ import helmet from 'helmet';
 // Importamos nuestras rutas
 import contactRoutes from './routes/contact.routes.js';
 import countryRoutes from './routes/country.routes.js';
+import authRoutes from './routes/auth.routes.js';
+import jobsRoutes from './routes/jobs.routes.js';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ app.use(
 // Montamos las rutas
 app.use('/api/contacto', contactRoutes);
 app.use('/api/countries', countryRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobsRoutes);
 
 // Iniciamos el servidor
 app.listen(PORT, () => {
