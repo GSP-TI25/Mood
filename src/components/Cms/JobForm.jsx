@@ -7,7 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
-import FilterQuestions from './FilterQuestions'; // <--- Importamos el nuevo módulo
+import FilterQuestions from './FilterQuestions';
 import './JobForm.scss';
 
 const typeOptions = [
@@ -66,7 +66,6 @@ const customSelectStyles = {
 };
 
 const JobForm = ({ onSubmitSuccess, onCancel }) => {
-  // Controla en qué paso estamos (1: Datos del Puesto, 2: Preguntas)
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState({
@@ -77,7 +76,7 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
     responsibilities: '',
     requirements: '',
     benefits: '',
-    filterQuestions: [], // <--- Estado para guardar las preguntas filtro
+    filterQuestions: [],
   });
 
   const handleInputChange = (e) => {
@@ -111,21 +110,39 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
     setFormData({ ...formData, [field]: formattedText });
   };
 
-  // Avanzar al Paso 2
   const handleNextStep = (e) => {
     e.preventDefault();
     setStep(2);
   };
 
-  // Regresar al Paso 1
   const handlePrevStep = () => {
     setStep(1);
   };
 
-  // Publicación Final (Se ejecuta en el paso 2)
-  const handleFinalSubmit = async () => {
-    const token = localStorage.getItem('cms_token');
+  // 🌟 ACTUALIZADO: Manejo del submit final con confirmación
+  const handleFinalSubmit = async (e) => {
+    e.preventDefault(); // Previene recargas indeseadas al enviar el formulario
 
+    // Validación extra: Verificar si hay preguntas múltiples sin opciones
+    const hasEmptyMultipleChoice = formData.filterQuestions.some(
+      (q) => q.type === 'multiple' && q.options.length === 0,
+    );
+
+    if (hasEmptyMultipleChoice) {
+      alert(
+        "⚠️ Tienes preguntas de 'Opción Múltiple' sin opciones asignadas. Por favor agrega al menos una opción.",
+      );
+      return;
+    }
+
+    // Modal nativo de confirmación
+    const confirmPublish = window.confirm(
+      '¿Estás seguro de publicar esta vacante? \n\nAsegúrate de que las preguntas de filtrado estén correctas.',
+    );
+
+    if (!confirmPublish) return; // Si el usuario cancela, detenemos el proceso
+
+    const token = localStorage.getItem('cms_token');
     const currentDate = new Date();
     const month = currentDate.toLocaleString('es-ES', { month: 'long' });
     const year = currentDate.getFullYear();
@@ -145,7 +162,7 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
       responsibilities: convertToArray(formData.responsibilities),
       requirements: convertToArray(formData.requirements),
       benefits: convertToArray(formData.benefits),
-      questions: formData.filterQuestions, //(Esto lo enviaremos al backend en el futuro)
+      questions: formData.filterQuestions,
     };
 
     try {
@@ -159,10 +176,10 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
       });
 
       if (response.ok) {
-        alert('¡Vacante publicada con éxito!');
+        alert('✅ ¡Vacante y preguntas publicadas con éxito!');
         onSubmitSuccess();
       } else {
-        alert('Hubo un error al publicar la vacante.');
+        alert('❌ Hubo un error al publicar la vacante.');
       }
     } catch (error) {
       console.error('Error al publicar:', error);
@@ -182,8 +199,8 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
           ============================================== */}
       {step === 1 && (
         <form
+          className='cms-job-form__step-wrapper'
           onSubmit={handleNextStep}
-          style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
         >
           <div className='cms-job-form__scroll-area'>
             <div className='cms-job-form__section'>
@@ -244,7 +261,6 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
             <hr className='cms-job-form__divider' />
 
             <div className='cms-job-form__section'>
-              {/* Responsabilidades */}
               <div className='cms-job-form__group'>
                 <div className='cms-job-form__label-bar'>
                   <label>Responsabilidades</label>
@@ -252,14 +268,12 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                     <button
                       type='button'
                       onClick={() => handleFormatText('responsibilities', 'ul')}
-                      title='Lista con viñetas'
                     >
                       <List size={16} />
                     </button>
                     <button
                       type='button'
                       onClick={() => handleFormatText('responsibilities', 'ol')}
-                      title='Lista numerada'
                     >
                       <ListOrdered size={16} />
                     </button>
@@ -269,12 +283,10 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                   name='responsibilities'
                   value={formData.responsibilities}
                   onChange={handleInputChange}
-                  placeholder='Pega las tareas y presiona los botones de arriba...'
                   className='textarea-large'
                 ></textarea>
               </div>
 
-              {/* Requisitos */}
               <div className='cms-job-form__group'>
                 <div className='cms-job-form__label-bar'>
                   <label>Requisitos</label>
@@ -282,14 +294,12 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                     <button
                       type='button'
                       onClick={() => handleFormatText('requirements', 'ul')}
-                      title='Lista con viñetas'
                     >
                       <List size={16} />
                     </button>
                     <button
                       type='button'
                       onClick={() => handleFormatText('requirements', 'ol')}
-                      title='Lista numerada'
                     >
                       <ListOrdered size={16} />
                     </button>
@@ -299,12 +309,10 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                   name='requirements'
                   value={formData.requirements}
                   onChange={handleInputChange}
-                  placeholder='Pega los requisitos...'
                   className='textarea-large'
                 ></textarea>
               </div>
 
-              {/* Beneficios */}
               <div className='cms-job-form__group'>
                 <div className='cms-job-form__label-bar'>
                   <label>Beneficios</label>
@@ -312,14 +320,12 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                     <button
                       type='button'
                       onClick={() => handleFormatText('benefits', 'ul')}
-                      title='Lista con viñetas'
                     >
                       <List size={16} />
                     </button>
                     <button
                       type='button'
                       onClick={() => handleFormatText('benefits', 'ol')}
-                      title='Lista numerada'
                     >
                       <ListOrdered size={16} />
                     </button>
@@ -329,7 +335,6 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
                   name='benefits'
                   value={formData.benefits}
                   onChange={handleInputChange}
-                  placeholder='Pega los beneficios...'
                   className='textarea-large'
                 ></textarea>
               </div>
@@ -358,11 +363,13 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
           PASO 2: PREGUNTAS FILTRO
           ============================================== */}
       {step === 2 && (
-        <div
-          style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+        <form
+          className='cms-job-form__step-wrapper'
+          onSubmit={
+            handleFinalSubmit
+          } /* 🌟 El form captura el Enter y el botón submit */
         >
           <div className='cms-job-form__scroll-area'>
-            {/* Llama al nuevo componente hijo */}
             <FilterQuestions
               questions={formData.filterQuestions}
               onChange={(newQuestions) =>
@@ -380,14 +387,13 @@ const JobForm = ({ onSubmitSuccess, onCancel }) => {
               <ArrowLeft size={16} /> Atrás
             </button>
             <button
-              type='button'
+              type='submit' /* 🌟 Cambiado a tipo submit para activar validación nativa */
               className='btn-submit'
-              onClick={handleFinalSubmit}
             >
               <CheckCircle2 size={16} /> Publicar Vacante
             </button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

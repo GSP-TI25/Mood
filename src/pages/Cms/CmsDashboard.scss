@@ -9,8 +9,13 @@
 
 .cms-main-content {
   flex: 1;
-  padding: 2.5rem 3rem;
-  max-width: 1200px;
+  padding: 3rem;
+  /* 🌟 MAGIA DEL CENTRADO */
+  width: 100%;
+  max-width: 1100px; /* Reduje un poco el max-width para que no se estire tanto */
+  margin: 0 auto; /* Centra el bloque dentro del espacio sobrante */
+  display: flex;
+  flex-direction: column;
 
   &__header {
     display: flex;

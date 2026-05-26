@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import Select from 'react-select';
-import { Plus, Trash2, Type, ListPlus, X } from 'lucide-react';
+import { Plus, Trash2, X } from 'lucide-react';
 import './FilterQuestions.scss';
 
 const typeOptions = [
   { value: 'text', label: 'Respuesta Abierta' },
   { value: 'multiple', label: 'Opción Múltiple' },
+  { value: 'number', label: 'Numérica (Años, Salario)' },
 ];
 
 const customSelectStyles = {
@@ -31,29 +32,26 @@ const customSelectStyles = {
 };
 
 const FilterQuestions = ({ questions, onChange }) => {
-  const [tempOptionText, setTempOptionText] = useState({}); // Estado indexado para los inputs de opciones de cada pregunta
+  const [tempOptionText, setTempOptionText] = useState({});
 
-  // Añadir una nueva pregunta vacía
   const handleAddQuestion = () => {
     const newQuestion = {
       id: Date.now(),
-      type: 'text', // Tipo por defecto
-      label: '', // Enunciado de la pregunta
-      options: [], // Arreglo de opciones (solo para tipo múltiple)
+      type: 'text',
+      label: '',
+      isRequired: true,
+      options: [],
     };
     onChange([...questions, newQuestion]);
   };
 
-  // Eliminar una pregunta
   const handleRemoveQuestion = (id) => {
     onChange(questions.filter((q) => q.id !== id));
   };
 
-  // Cambiar el tipo de pregunta o el enunciado
   const handleUpdateQuestion = (id, field, value) => {
     const updated = questions.map((q) => {
       if (q.id === id) {
-        // Si cambia de tipo, limpiamos sus opciones previas por seguridad
         if (field === 'type') {
           return { ...q, [field]: value, options: [] };
         }
@@ -64,7 +62,6 @@ const FilterQuestions = ({ questions, onChange }) => {
     onChange(updated);
   };
 
-  // Añadir una opción a una pregunta específica (tipo múltiple)
   const handleAddOption = (questionId) => {
     const optionText = tempOptionText[questionId];
     if (!optionText || !optionText.trim()) return;
@@ -77,10 +74,9 @@ const FilterQuestions = ({ questions, onChange }) => {
     });
 
     onChange(updated);
-    setFormDataOptionText(questionId, ''); // Limpiar el input de esa pregunta
+    setFormDataOptionText(questionId, '');
   };
 
-  // Eliminar una opción de una pregunta específica
   const handleRemoveOption = (questionId, optionIndex) => {
     const updated = questions.map((q) => {
       if (q.id === questionId) {
@@ -99,136 +95,145 @@ const FilterQuestions = ({ questions, onChange }) => {
 
   return (
     <div className='cms-filter-questions'>
+      {/* HEADER LIMPIO (Sin el botón) */}
       <div className='cms-filter-questions__header'>
-        <div>
+        <div className='cms-filter-questions__header-text'>
           <h3>Preguntas de Filtrado</h3>
           <p>
-            Define las preguntas obligatorias que responderán los candidatos al
+            Define las preguntas clave que responderán los candidatos al
             postularse.
           </p>
         </div>
-        <button
-          type='button'
-          className='cms-btn-outline'
-          onClick={handleAddQuestion}
-        >
-          <Plus size={16} /> Añadir Pregunta
-        </button>
       </div>
 
       <div className='cms-filter-questions__list'>
-        {questions.length === 0 ? (
-          <div className='cms-filter-questions__empty'>
-            <p>No se han configurado preguntas filtro para esta vacante aún.</p>
-          </div>
-        ) : (
-          questions.map((q, index) => (
-            <div
-              key={q.id}
-              className='question-card'
-            >
-              <div className='question-card__header'>
-                <span className='question-card__badge'>
-                  Pregunta {index + 1}
-                </span>
-                <button
-                  type='button'
-                  className='question-card__delete-btn'
-                  onClick={() => handleRemoveQuestion(q.id)}
-                  title='Eliminar pregunta'
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
+        {/* LISTA DE PREGUNTAS CREADAS */}
+        {questions.map((q, index) => (
+          <div
+            key={q.id}
+            className='question-card'
+          >
+            <div className='question-card__header'>
+              <span className='question-card__badge'>Pregunta {index + 1}</span>
+              <button
+                type='button'
+                className='question-card__delete-btn'
+                onClick={() => handleRemoveQuestion(q.id)}
+                title='Eliminar pregunta'
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
 
-              <div className='question-card__body'>
-                <div className='question-card__row'>
-                  <div className='question-card__group flex-3'>
-                    <label>Enunciado / Pregunta</label>
-                    <input
-                      type='text'
-                      value={q.label}
-                      onChange={(e) =>
-                        handleUpdateQuestion(q.id, 'label', e.target.value)
-                      }
-                      placeholder='Ej. ¿Cuántos años de experiencia tienes manejando React?'
-                      required
-                    />
-                  </div>
-
-                  <div className='question-card__group flex-2'>
-                    <label>Tipo de Respuesta</label>
-                    <Select
-                      options={typeOptions}
-                      value={typeOptions.find((opt) => opt.value === q.type)}
-                      onChange={(opt) =>
-                        handleUpdateQuestion(q.id, 'type', opt.value)
-                      }
-                      styles={customSelectStyles}
-                      isSearchable={false}
-                    />
-                  </div>
+            <div className='question-card__body'>
+              <div className='question-card__row'>
+                <div className='question-card__group flex-3'>
+                  <label>Enunciado / Pregunta</label>
+                  <input
+                    type='text'
+                    value={q.label}
+                    onChange={(e) =>
+                      handleUpdateQuestion(q.id, 'label', e.target.value)
+                    }
+                    placeholder='Ej. ¿Cuántos años de experiencia tienes manejando React?'
+                    required
+                  />
                 </div>
 
-                {/* RENDERIZADO SI ES OPCIÓN MÚLTIPLE */}
-                {q.type === 'multiple' && (
-                  <div className='question-card__options-section'>
-                    <label>Opciones de selección</label>
-
-                    <div className='options-grid'>
-                      {q.options.map((option, optIdx) => (
-                        <div
-                          key={optIdx}
-                          className='option-tag'
-                        >
-                          <span>{option}</span>
-                          <button
-                            type='button'
-                            onClick={() => handleRemoveOption(q.id, optIdx)}
-                          >
-                            <X size={12} />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className='question-card__add-option-bar'>
-                      <input
-                        type='text'
-                        value={tempOptionText[q.id] || ''}
-                        onChange={(e) =>
-                          setFormDataOptionText(q.id, e.target.value)
-                        }
-                        placeholder='Ej. Más de 3 años'
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            e.preventDefault();
-                            handleAddOption(q.id);
-                          }
-                        }}
-                      />
-                      <button
-                        type='button'
-                        onClick={() => handleAddOption(q.id)}
-                      >
-                        Agregar Opc.
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* VISTA PREVIA SI ES TEXTO */}
-                {q.type === 'text' && (
-                  <div className='question-card__preview'>
-                    <div className='preview-textarea'>
-                      El candidato responderá en un campo de texto abierto...
-                    </div>
-                  </div>
-                )}
+                <div className='question-card__group flex-2'>
+                  <label>Tipo de Respuesta</label>
+                  <Select
+                    options={typeOptions}
+                    value={typeOptions.find((opt) => opt.value === q.type)}
+                    onChange={(opt) =>
+                      handleUpdateQuestion(q.id, 'type', opt.value)
+                    }
+                    styles={customSelectStyles}
+                    isSearchable={false}
+                  />
+                </div>
               </div>
+
+              <div className='question-card__settings-row'>
+                <label className='checkbox-setting'>
+                  <input
+                    type='checkbox'
+                    checked={q.isRequired}
+                    onChange={(e) =>
+                      handleUpdateQuestion(q.id, 'isRequired', e.target.checked)
+                    }
+                  />
+                  <span>Pregunta obligatoria</span>
+                </label>
+              </div>
+
+              {q.type === 'multiple' && (
+                <div className='question-card__options-section'>
+                  <label>Opciones de selección</label>
+                  <div className='options-grid'>
+                    {q.options.map((option, optIdx) => (
+                      <div
+                        key={optIdx}
+                        className='option-tag'
+                      >
+                        <span>{option}</span>
+                        <button
+                          type='button'
+                          onClick={() => handleRemoveOption(q.id, optIdx)}
+                        >
+                          <X size={12} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='question-card__add-option-bar'>
+                    <input
+                      type='text'
+                      value={tempOptionText[q.id] || ''}
+                      onChange={(e) =>
+                        setFormDataOptionText(q.id, e.target.value)
+                      }
+                      placeholder='Ej. Más de 3 años'
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddOption(q.id);
+                        }
+                      }}
+                    />
+                    <button
+                      type='button'
+                      onClick={() => handleAddOption(q.id)}
+                    >
+                      Agregar Opc.
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {(q.type === 'text' || q.type === 'number') && (
+                <div className='question-card__preview'>
+                  <div className='preview-textarea'>
+                    {q.type === 'number'
+                      ? 'El candidato ingresará un valor numérico (Ej: 3, 5000, etc.)'
+                      : 'El candidato responderá en un campo de texto abierto...'}
+                  </div>
+                </div>
+              )}
             </div>
-          ))
-        )}
+          </div>
+        ))}
+
+        {/* 🌟 NUEVO BOTÓN ANCHO AL FINAL */}
+        <button
+          type='button'
+          className='cms-btn-add-block'
+          onClick={handleAddQuestion}
+        >
+          <Plus size={18} />
+          <span>Añadir Pregunta</span>
+        </button>
       </div>
     </div>
   );

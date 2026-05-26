@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Briefcase, LogOut } from 'lucide-react';
+import logoMood from '../../assets/Logo_Mood.svg'; // 🌟 Importamos tu Logo
 import './CmsSidebar.scss';
 
 const CmsSidebar = () => {
@@ -9,7 +10,11 @@ const CmsSidebar = () => {
   return (
     <aside className='cms-sidebar-nav'>
       <div className='cms-sidebar-nav__brand'>
-        GTH <span>Mood</span>
+        <img
+          src={logoMood}
+          alt='Mood Agencia Logo'
+          className='cms-sidebar-nav__logo'
+        />
       </div>
 
       <nav className='cms-sidebar-nav__menu'>
