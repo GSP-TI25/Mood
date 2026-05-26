@@ -139,14 +139,15 @@ const JobDetail = () => {
             <div className='footer-content'>
               <div>
                 <h3>¿Listo para unirte al equipo?</h3>
-                <p>Envíanos tu portafolio y CV actualizado.</p>
+                <p>Completa el formulario y cuéntanos sobre ti.</p>
               </div>
-              <a
-                href={`mailto:rrhh@mood.pe?subject=Postulación: ${job.title}`}
+              {/* 🌟 CAMBIO: Redirigimos a la nueva página de postulación */}
+              <Link
+                to={`/trabaja_con_nosotros/${job.id}/postular`}
                 className='btn-apply'
               >
-                Postular ahora <Send size={16} />
-              </a>
+                Completar formulario <Send size={16} />
+              </Link>
             </div>
           </footer>
         </article>

@@ -10,6 +10,7 @@ import MoodPrint from './pages/MoodPrint/MoodPrint';
 import Contact from './pages/Contact/Contact';
 import Careers from './pages/Careers/Careers';
 import JobDetail from './pages/Careers/JobDetail';
+import JobApplication from './pages/Careers/JobApplication';
 
 // --- Archivos del CMS (Asegúrate de crearlos antes de guardar) ---
 import CmsLogin from './pages/Cms/CmsLogin';
@@ -69,6 +70,10 @@ const App = () => {
           <Route
             path='/trabaja_con_nosotros/:jobId'
             element={<JobDetail />}
+          />
+          <Route
+            path='/trabaja_con_nosotros/:jobId/postular'
+            element={<JobApplication />}
           />
 
           {/* =========================================

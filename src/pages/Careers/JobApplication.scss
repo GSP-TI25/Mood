@@ -1,0 +1,351 @@
+@use '../../styles/variables' as *;
+
+.job-app-layout {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 3rem 1.5rem;
+  font-family: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.job-app-wrapper {
+  width: 100%;
+  max-width: 700px; /* Un poco más angosto que el detalle para enfoque */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.job-app__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  width: fit-content;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #0f172a;
+  }
+}
+
+/* =========================================
+   TARJETA DEL FORMULARIO
+   ========================================= */
+.job-app-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.05),
+    0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  &__header {
+    padding: 2.5rem 3rem 2rem 3rem;
+    border-bottom: 1px solid #f1f5f9;
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+    }
+  }
+
+  &__content {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    @media (max-width: 640px) {
+      padding: 1.5rem;
+      gap: 2rem;
+    }
+  }
+
+  &__footer {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: flex-end;
+
+    @media (max-width: 640px) {
+      padding: 1.5rem;
+    }
+  }
+}
+
+/* Secciones Internas */
+.app-section {
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+  }
+}
+
+.app-divider {
+  border: 0;
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 0;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.app-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Inputs y Grupos */
+.app-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='url'],
+  textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background-color: #ffffff;
+    color: #0f172a;
+    outline: none;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      border-color: #0f172a;
+      box-shadow: 0 0 0 1px #0f172a;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+/* Checkboxes estilo shadcn */
+.checkbox-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 400 !important; /* Sobreescribe el label padre */
+  color: #475569 !important;
+
+  input[type='checkbox'] {
+    appearance: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+
+    &:checked {
+      background-color: #0f172a;
+      border-color: #0f172a;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &:hover input[type='checkbox']:not(:checked) {
+    border-color: #94a3b8;
+  }
+}
+
+/* Botón de envío */
+.btn-submit-app {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: $primary;
+  color: #000000;
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #0f172a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.required-asterisk {
+  color: #dc2626; /* Rojo shadcn */
+  margin-left: 2px;
+}
+
+/* =========================================
+   ZONA DE SUBIDA DE CV
+   ========================================= */
+.cv-upload-area {
+  position: relative;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.cv-upload-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.cv-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background-color: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  .icon-upload {
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  .upload-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #0f172a;
+  }
+
+  .upload-hint {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  /* Estado cuando ya se subió un archivo */
+  &.has-file {
+    background-color: rgba(22, 101, 52, 0.05); /* Verde muy suave */
+    border-color: rgba(22, 101, 52, 0.3);
+    border-style: solid;
+
+    .icon-success {
+      color: #166534; /* Verde éxito */
+    }
+
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .file-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .file-size {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .file-change-text {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #3b82f6; /* Azul link */
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: rgba(22, 101, 52, 0.1);
+    }
+  }
+}
