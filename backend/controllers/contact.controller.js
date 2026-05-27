@@ -1,42 +1,43 @@
-import { pool } from '../config/db.js';
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
+import { pool } from "../config/db.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import process from "process";
 
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
+	service: "gmail",
+	auth: {
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASS,
+	},
 });
 
 export const submitContact = async (req, res) => {
-  const { nombre, correo, celular, pais, mensaje, idioma } = req.body;
+	const { nombre, correo, celular, pais, mensaje, idioma } = req.body;
 
-  if (!nombre || !correo || !celular || !pais || !mensaje) {
-    return res.status(400).json({ error: 'Todos los campos son requeridos.' });
-  }
+	if (!nombre || !correo || !celular || !pais || !mensaje) {
+		return res.status(400).json({ error: "Todos los campos son requeridos." });
+	}
 
-  const idiomaGuardado = idioma || 'ES';
+	const idiomaGuardado = idioma || "ES";
 
-  try {
-    const sqlQuery = `
+	try {
+		const sqlQuery = `
       INSERT INTO mensajes_contacto (nombre, correo, celular, pais, mensaje, idioma)
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
     `;
-    const values = [nombre, correo, celular, pais, mensaje, idiomaGuardado];
-    const result = await pool.query(sqlQuery, values);
-    const nuevoId = result.rows[0].id;
+		const values = [nombre, correo, celular, pais, mensaje, idiomaGuardado];
+		const result = await pool.query(sqlQuery, values);
+		const nuevoId = result.rows[0].id;
 
-    // --- DISEÑO HTML INSPIRADO EN SHADCN/UI ---
-    const mailOptions = {
-      from: `"Mood Web" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_DESTINATION,
-      cc: 'tecnologia@mood.pe',
-      subject: `¡Nuevo Lead Mood! - ${nombre}`,
-      html: `
+		// --- DISEÑO HTML INSPIRADO EN SHADCN/UI ---
+		const mailOptions = {
+			from: `"Mood Web" <${process.env.EMAIL_USER}>`,
+			to: process.env.EMAIL_DESTINATION,
+			cc: "tecnologia@mood.pe",
+			subject: `¡Nuevo Lead Mood! - ${nombre}`,
+			html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -108,17 +109,17 @@ export const submitContact = async (req, res) => {
         </body>
         </html>
       `,
-    };
+		};
 
-    await transporter.sendMail(mailOptions);
+		await transporter.sendMail(mailOptions);
 
-    return res
-      .status(201)
-      .json({ success: true, message: 'Mensaje procesado.', id: nuevoId });
-  } catch (error) {
-    console.error('Error al procesar el lead:', error);
-    return res
-      .status(500)
-      .json({ error: 'Error interno al procesar el mensaje.' });
-  }
+		return res
+			.status(201)
+			.json({ success: true, message: "Mensaje procesado.", id: nuevoId });
+	} catch (error) {
+		console.error("Error al procesar el lead:", error);
+		return res
+			.status(500)
+			.json({ error: "Error interno al procesar el mensaje." });
+	}
 };

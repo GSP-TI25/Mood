@@ -1,35 +1,19 @@
-import { Router } from 'express';
-import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import dotenv from 'dotenv';
+import { Router } from "express";
+import multer from "multer";
 import {
-  submitApplication,
-  getApplications,
-} from '../controllers/applications.controller.js'; // 🌟 Importa getApplications
-
-dotenv.config();
+	submitApplication,
+	getApplications,
+	updateApplicationStatus,
+} from "../controllers/applications.controller.js";
 
 const router = Router();
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'mood_cvs',
-    resource_type: 'auto',
-  },
-});
-
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Rutas
-router.post('/', upload.single('cv'), submitApplication);
-router.get('/', getApplications); // 🌟 NUEVA RUTA GET
+router.post("/", upload.single("cv"), submitApplication);
+router.get("/", getApplications);
+router.patch("/:id/status", updateApplicationStatus); // 🌟 NUEVO
 
 export default router;

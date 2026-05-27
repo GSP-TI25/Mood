@@ -1,114 +1,114 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .cms-layout {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f8fafc;
-  font-family: inherit;
+	display: flex;
+	min-height: 100vh;
+	background-color: #f8fafc;
+	font-family: inherit;
 }
 
 .cms-main-content {
-  flex: 1;
-  padding: 3rem;
-  /* 🌟 MAGIA DEL CENTRADO */
-  width: 100%;
-  max-width: 1400px; /* Reduje un poco el max-width para que no se estire tanto */
-  margin: 0 auto; /* Centra el bloque dentro del espacio sobrante */
-  display: flex;
-  flex-direction: column;
+	flex: 1;
+	padding: 3rem;
+	/* 🌟 MAGIA DEL CENTRADO */
+	width: 100%;
+	max-width: 1400px; /* Reduje un poco el max-width para que no se estire tanto */
+	margin: 0 auto; /* Centra el bloque dentro del espacio sobrante */
+	display: flex;
+	flex-direction: column;
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 2rem;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 2rem;
 
-    h1 {
-      margin: 0 0 0.25rem 0;
-      font-size: 1.8rem;
-      color: $negro;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+		h1 {
+			margin: 0 0 0.25rem 0;
+			font-size: 1.8rem;
+			color: $negro;
+			font-weight: 700;
+			letter-spacing: -0.02em;
+		}
 
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: rgba($negro, 0.5);
-    }
-  }
+		p {
+			margin: 0;
+			font-size: 0.9rem;
+			color: rgba($negro, 0.5);
+		}
+	}
 }
 
 .cms-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: $negro;
-  color: $blanco;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	background-color: $negro;
+	color: $blanco;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity 0.2s;
 
-  &:hover {
-    opacity: 0.9;
-  }
+	&:hover {
+		opacity: 0.9;
+	}
 }
 
 /* Modal Overlay & Sheet (JobForm Container) */
 .cms-sheet-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  z-index: 1000;
-  display: flex;
-  justify-content: flex-end;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(2px);
+	z-index: 1000;
+	display: flex;
+	justify-content: flex-end;
 
-  animation: fadeIn 0.2s ease-out forwards;
+	animation: fadeIn 0.2s ease-out forwards;
 }
 
 .cms-sheet-content {
-  width: 100%;
-  max-width: 600px;
-  height: 100vh;
-  background-color: $blanco;
-  border-left: 1px solid rgba($negro, 0.1);
-  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
+	width: 100%;
+	max-width: 600px;
+	height: 100vh;
+	background-color: $blanco;
+	border-left: 1px solid rgba($negro, 0.1);
+	box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+	overflow-y: auto;
 
-  transform: translateX(100%);
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	transform: translateX(100%);
+	animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba($negro, 0.15);
-    border-radius: 10px;
-  }
+	&::-webkit-scrollbar {
+		width: 6px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba($negro, 0.15);
+		border-radius: 10px;
+	}
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 @keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
 }
