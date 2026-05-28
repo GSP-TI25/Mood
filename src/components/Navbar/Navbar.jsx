@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next'; // <-- Importamos el hook
-import logoMood from '../../assets/Logo_mood.svg';
+import logoMood from '../../assets/Logo_Mood.svg';
 import './Navbar.scss';
 
 const Navbar = () => {
