@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Briefcase, Calendar, ChevronRight, MapPin } from 'lucide-react';
 import './CareersJobs.scss';
 
+const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
 const CareersJobs = () => {
   const { t } = useTranslation();
   const [jobsList, setJobsList] = useState([]);
@@ -13,7 +15,7 @@ const CareersJobs = () => {
   useEffect(() => {
     const fetchPublicJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/jobs');
+        const response = await fetch(`${API_URL}/api/jobs`);
         if (response.ok) {
           const data = await response.json();
           // Filtramos primero para asegurarnos de mostrar SOLO las vacantes "Activas"
