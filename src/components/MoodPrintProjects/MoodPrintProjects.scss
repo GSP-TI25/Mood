@@ -58,7 +58,7 @@
     z-index: 2;
 
     // Sostiene de forma segura la estructura vertical mientras cargan las imágenes
-    min-height: 650px;
+    min-height: 800px;
     transition: min-height 0.3s ease;
 
     @media (max-width: 768px) {

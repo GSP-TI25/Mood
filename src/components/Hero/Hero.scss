@@ -37,6 +37,7 @@
   height: 100%;
   padding: 0 2rem;
   box-sizing: border-box;
+  background-color: transparent !important; /* Vital para que se vea el video */
 
   @media (max-width: 768px) {
     padding: 0 1rem;
@@ -66,11 +67,17 @@
 
     font-size: clamp(2.5rem, 8vw, 5.5rem);
     font-weight: 700;
-    color: $negro;
     text-align: center;
     line-height: 1.1;
     margin: 0;
     letter-spacing: -0.04em;
+  }
+
+  &__title-text {
+    color: #ffffff;
+    text-shadow:
+      0px 4px 20px rgba(0, 0, 0, 0.8),
+      0px 2px 4px rgba(0, 0, 0, 0.6);
   }
 
   &__rotating-text {
@@ -81,18 +88,27 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba($primary, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: none;
   }
 
   &__paragraph {
     font-size: 1.25rem;
     font-weight: 400;
-    color: rgba($negro, 0.7);
+    color: rgba(255, 255, 255, 0.95); /* Aumentamos la opacidad */
     text-align: center;
     line-height: 1.6;
     max-width: 700px;
     margin: 0;
     justify-content: center;
+
+    /* 🌟 SOLUCIÓN PROFESIONAL: Sombra de texto ultra fuerte
+       Combinamos dos sombras: una densa (primera) y una difusa (segunda)
+       para aislar las letras de cualquier texto del video o relámpago.
+    */
+    text-shadow:
+      0px 2px 8px rgba(0, 0, 0, 0.95),
+      0px 0px 25px rgba(0, 0, 0, 0.7);
 
     @media (max-width: 768px) {
       font-size: 1rem;
@@ -115,12 +131,14 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background-color: $blanco;
+    /* 🌟 Minimalista: Fondo semi-transparente para integrarlo mejor con el fondo oscuro */
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 0.75rem 1.25rem;
     border-radius: 14px;
-    border: 1px solid rgba($negro, 0.05);
+    border: 1px solid rgba($negro, 0.05); /* Ligeramente más nítida */
     transition: all 0.3s ease;
     cursor: default;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Sombra extra */
 
     @media (max-width: 768px) {
       padding: 0.5rem 0.8rem;
@@ -128,8 +146,9 @@
 
     &:hover {
       border-color: $primary;
+      background-color: #ffffff; /* Sólido en hover */
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba($negro, 0.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 
       .hero__skill-icon {
         color: $primary;
@@ -152,15 +171,13 @@
     }
   }
 
-  /* --- CORRECCIÓN: BOTONES --- */
   &__actions {
     display: flex;
-    flex-direction: row; // Forzamos que estén lado a lado
+    flex-direction: row;
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
 
-    // Cambiamos el quiebre a 480px (solo móviles pequeños)
     @media (max-width: 480px) {
       flex-direction: column;
       width: 100%;
@@ -186,7 +203,6 @@
       color 0.3s ease,
       opacity 0.3s ease;
 
-    // Cambiamos también aquí el quiebre a 480px
     @media (max-width: 480px) {
       width: 100%;
       padding: 1rem;
@@ -247,7 +263,7 @@
     color: $negro;
     border-radius: 14px;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba($negro, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra extra */
     transition: color 0.3s ease;
 
     &:hover {

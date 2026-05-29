@@ -7,7 +7,7 @@ import {
   MessageCircle,
   Briefcase,
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import BlurText from '../BlurText/BlurText';
 import Facebook from '../Icons/Facebook';
@@ -16,9 +16,8 @@ import Linkedin from '../Icons/Linkedin';
 import './Hero.scss';
 
 const Hero = () => {
-  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+  const { t } = useTranslation();
 
-  // Usamos nameKey en lugar de name fijo para traducirlo abajo
   const skills = [
     { nameKey: 'branding', icon: Palette },
     { nameKey: 'web', icon: Monitor },
@@ -36,8 +35,8 @@ const Hero = () => {
           animateBy='words'
           direction='top'
           as='h1'
-          highlightWords={[t('hero.highlight')]} // <-- Resaltado dinámico según el idioma
-          className='hero__title'
+          highlightWords={[t('hero.highlight')]}
+          className='hero__title hero__title-text' // 🌟 Añadida clase extra
         />
 
         <BlurText
@@ -61,8 +60,7 @@ const Hero = () => {
                 strokeWidth={1.5}
               />
               <span className='hero__skill-text'>
-                {t(`hero.skills.${skill.nameKey}`)}{' '}
-                {/* <-- Traducción dinámica */}
+                {t(`hero.skills.${skill.nameKey}`)}
               </span>
             </div>
           ))}
@@ -74,7 +72,6 @@ const Hero = () => {
             className='btn-hero btn-hero--primary'
           >
             <span>{t('hero.buttons.talk')}</span>
-
             <MessageCircle
               size={20}
               strokeWidth={2}
@@ -85,7 +82,6 @@ const Hero = () => {
             className='btn-hero btn-hero--secondary'
           >
             <span>{t('hero.buttons.projects')}</span>
-
             <Briefcase
               size={20}
               strokeWidth={2}
