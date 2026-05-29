@@ -61,7 +61,6 @@ const Masonry = ({
   scaleOnHover = true,
   hoverScale = 0.95,
   blurToFocus = true,
-  colorShiftOnHover = false,
   onItemClick = null,
 }) => {
   const columns = useMedia(
@@ -77,8 +76,11 @@ const Masonry = ({
 
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
-  const tlRef = useRef(null); // Ref para guardar el timeline y limpiarlo de forma segura
 
+  const hasMounted = useRef(false);
+  const ctxRef = useRef(gsap.context(() => {}));
+
+  // 🌟 AQUÍ ESTÁ LA MAGIA Y LA SOLUCIÓN AL BUG
   const getInitialPosition = (item) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
     if (!containerRect) return { x: item.x, y: item.y };
@@ -92,13 +94,13 @@ const Masonry = ({
 
     switch (direction) {
       case 'top':
-        return { x: item.x, y: -200 };
+        return { x: item.x, y: item.y - 150 }; // Antes usaba window.innerHeight
       case 'bottom':
-        return { x: item.x, y: window.innerHeight + 200 };
+        return { x: item.x, y: item.y + 150 }; // 🌟 Antes mandaba la imagen debajo del footer
       case 'left':
-        return { x: -200, y: item.y };
+        return { x: item.x - 150, y: item.y };
       case 'right':
-        return { x: window.innerWidth + 200, y: item.y };
+        return { x: item.x + 150, y: item.y };
       case 'center':
         return {
           x: containerRect.width / 2 - item.w / 2,
@@ -133,82 +135,74 @@ const Masonry = ({
     return { grid: gridItems, finalHeight: Math.max(...colHeights) };
   }, [columns, items, width]);
 
-  const hasMounted = useRef(false);
-
   useLayoutEffect(() => {
-    if (!imagesReady) return;
+    if (!imagesReady || !grid.length) return;
 
     if (!hasMounted.current) {
-      tlRef.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      grid.forEach((item, index) => {
-        const selector = `[data-key="${item.id}"]`;
-        const animationProps = {
-          x: item.x,
-          y: item.y,
-          width: item.w,
-          height: item.h,
-        };
-
-        const initialPos = getInitialPosition(item, index);
-        const initialState = {
-          opacity: 0,
-          x: initialPos.x,
-          y: initialPos.y,
-          width: item.w,
-          height: item.h,
-          ...(blurToFocus && { filter: 'blur(10px)' }),
-        };
-
-        gsap.set(selector, initialState);
-
-        tlRef.current.to(
-          selector,
-          {
-            opacity: 1,
-            ...animationProps,
-            ...(blurToFocus && { filter: 'blur(0px)' }),
-            duration: 0.8,
-            ease: 'power3.out',
+      ctxRef.current.add(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 85%',
           },
-          index * stagger,
-        );
+        });
+
+        grid.forEach((item, index) => {
+          const selector = `[data-key="${item.id}"]`;
+          const initialPos = getInitialPosition(item);
+
+          gsap.set(selector, {
+            opacity: 0,
+            x: initialPos.x,
+            y: initialPos.y,
+            width: item.w,
+            height: item.h,
+            ...(blurToFocus && { filter: 'blur(10px)' }),
+          });
+
+          tl.to(
+            selector,
+            {
+              opacity: 1,
+              x: item.x,
+              y: item.y,
+              width: item.w,
+              height: item.h,
+              ...(blurToFocus && { filter: 'blur(0px)' }),
+              duration: duration,
+              ease: ease,
+            },
+            index * stagger,
+          );
+        });
+
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 150);
       });
 
       hasMounted.current = true;
-
-      // SOLUCIÓN MAGISTRAL: Refrescar el cálculo de GSAP después de pintar el DOM
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 150);
     } else {
-      grid.forEach((item) => {
-        const selector = `[data-key="${item.id}"]`;
-        gsap.to(selector, {
-          x: item.x,
-          y: item.y,
-          width: item.w,
-          height: item.h,
-          duration: duration,
-          ease: ease,
-          overwrite: 'auto',
+      ctxRef.current.add(() => {
+        grid.forEach((item) => {
+          const selector = `[data-key="${item.id}"]`;
+          gsap.to(selector, {
+            x: item.x,
+            y: item.y,
+            width: item.w,
+            height: item.h,
+            duration: duration,
+            ease: ease,
+            overwrite: 'auto',
+          });
         });
       });
     }
-
-    // Limpieza segura: Solo destruimos el ScrollTrigger de este componente
-    return () => {
-      if (tlRef.current && tlRef.current.scrollTrigger) {
-        tlRef.current.scrollTrigger.kill();
-      }
-    };
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+
+  useEffect(() => {
+    return () => ctxRef.current.revert();
+  }, []);
 
   const handleMouseEnter = (e, item) => {
     if (scaleOnHover)

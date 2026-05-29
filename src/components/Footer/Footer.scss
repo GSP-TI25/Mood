@@ -1,287 +1,288 @@
-@use "../../styles/variables" as *;
+@use '../../styles/variables' as *;
 
 $gris-card: #1c1c1e;
 
 /* --- EL MISMO EFECTO DE REFLEJO DEL HERO --- */
 %shiny-animation {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: -50%;
-		left: -120%;
-		width: 60%;
-		height: 200%;
-		background: linear-gradient(
-			100deg,
-			rgba(255, 255, 255, 0) 20%,
-			rgba(255, 255, 255, 0.4) 50%,
-			rgba(255, 255, 255, 0) 80%
-		);
-		transform: skewX(-25deg);
-		transition: transform 0.6s ease-in-out;
-		z-index: 1;
-	}
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+  }
 
-	&:hover::after {
-		transform: translateX(400%) skewX(-25deg);
-	}
+  &:hover::after {
+    transform: translateX(400%) skewX(-25deg);
+  }
 }
 
 .footer {
-	width: 100%;
-	background-color: transparent;
-	color: $blanco;
-	display: flex;
-	justify-content: center;
-	padding: 6rem 2rem 2rem;
-	box-sizing: border-box;
+  width: 100%;
+  background-color: transparent;
+  color: $blanco;
+  display: flex;
+  justify-content: center;
+  padding: 6rem 2rem 2rem;
+  box-sizing: border-box;
+  margin-top: auto;
 
-	&__container {
-		width: 100%;
-		max-width: 1200px;
-		display: flex;
-		flex-direction: column;
-		gap: 5rem;
-	}
+  &__container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
 
-	&__top {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 4rem;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
 
-		@media (max-width: 968px) {
-			flex-direction: column;
-			gap: 3rem;
-		}
-	}
+    @media (max-width: 968px) {
+      flex-direction: column;
+      gap: 3rem;
+    }
+  }
 
-	/* --- SECCIÓN IZQUIERDA (Marca) --- */
-	&__brand-section {
-		max-width: 500px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 1.5rem;
-	}
+  /* --- SECCIÓN IZQUIERDA (Marca) --- */
+  &__brand-section {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
 
-	&__logo {
-		height: 45px;
-		width: auto;
-		object-fit: contain;
-		align-self: flex-start;
-	}
+  &__logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    align-self: flex-start;
+  }
 
-	&__slogan {
-		font-size: clamp(1.5rem, 3vw, 2.2rem);
-		font-weight: 500;
-		line-height: 1.2;
-		color: rgba($blanco, 0.9);
-		margin: 0;
-		letter-spacing: -0.01em;
-		text-align: left;
-	}
+  &__slogan {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: rgba($blanco, 0.9);
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
 
-	&__jobs {
-		margin-top: 1rem;
-	}
+  &__jobs {
+    margin-top: 1rem;
+  }
 
-	/* --- SECCIÓN DERECHA (Navegación) --- */
-	&__nav-section {
-		display: flex;
-		gap: 3rem;
-		align-items: flex-start;
+  /* --- SECCIÓN DERECHA (Navegación) --- */
+  &__nav-section {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
 
-		@media (max-width: 768px) {
-			flex-wrap: wrap;
-			gap: 2rem;
-			width: 100%;
-			justify-content: space-between;
-		}
-	}
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      gap: 2rem;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
 
-	&__nav-group {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		border-left: 1px solid rgba($blanco, 0.1);
-		padding-left: 1.5rem;
-	}
+  &__nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-left: 1px solid rgba($blanco, 0.1);
+    padding-left: 1.5rem;
+  }
 
-	&__nav-title {
-		font-size: 0.75rem;
-		font-weight: 700;
-		color: rgba($blanco, 0.5);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-	}
+  &__nav-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba($blanco, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
 
-	&__nav-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.8rem;
+  &__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 
-		&--social {
-			flex-direction: row;
-			gap: 1.25rem;
-		}
-	}
+    &--social {
+      flex-direction: row;
+      gap: 1.25rem;
+    }
+  }
 
-	&__nav-link {
-		color: $blanco;
-		text-decoration: none;
-		font-size: 1rem;
-		font-weight: 500;
-		transition: opacity 0.3s ease;
+  &__nav-link {
+    color: $blanco;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
 
-		&:hover {
-			opacity: 0.6;
-		}
-	}
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 
-	/* --- ICONOS DE REDES SOCIALES --- */
-	&__social-link {
-		@extend %shiny-animation;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 45px;
-		height: 45px;
-		background-color: rgba($blanco, 0.05);
-		border: 1px solid rgba($blanco, 0.1);
-		border-radius: 12px;
-		color: $blanco;
-		transition: all 0.3s ease;
-		text-decoration: none;
+  /* --- ICONOS DE REDES SOCIALES --- */
+  &__social-link {
+    @extend %shiny-animation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: rgba($blanco, 0.05);
+    border: 1px solid rgba($blanco, 0.1);
+    border-radius: 12px;
+    color: $blanco;
+    transition: all 0.3s ease;
+    text-decoration: none;
 
-		svg {
-			position: relative;
-			z-index: 2;
-			transition: transform 0.3s ease;
-		}
+    svg {
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
 
-		&:hover {
-			background-color: $primary;
-			color: $negro;
-			border-color: $primary;
+    &:hover {
+      background-color: $primary;
+      color: $negro;
+      border-color: $primary;
 
-			svg {
-				transform: scale(1.1);
-			}
-		}
-	}
+      svg {
+        transform: scale(1.1);
+      }
+    }
+  }
 
-	&__social-icon {
-		width: 20px;
-		height: 20px;
-		fill: currentColor;
-	}
+  &__social-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
 
-	/* --- BOTÓN EMPLEOS --- */
-	.btn-jobs {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		text-decoration: none;
-		transition: all 0.3s ease;
+  /* --- BOTÓN EMPLEOS --- */
+  .btn-jobs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-		& > span {
-			@extend %shiny-animation;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			box-sizing: border-box;
-			height: 48px;
-			border-radius: 12px;
-			transition: all 0.4s ease;
+    & > span {
+      @extend %shiny-animation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      height: 48px;
+      border-radius: 12px;
+      transition: all 0.4s ease;
 
-			span,
-			svg {
-				position: relative;
-				z-index: 2;
-			}
-		}
+      span,
+      svg {
+        position: relative;
+        z-index: 2;
+      }
+    }
 
-		&__text {
-			background-color: rgba($blanco, 0.1);
-			color: $blanco;
-			padding: 0 1.5rem;
-			font-weight: 600;
-			font-size: 0.9rem;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-		}
+    &__text {
+      background-color: rgba($blanco, 0.1);
+      color: $blanco;
+      padding: 0 1.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-		&__icon {
-			background-color: $primary;
-			color: $negro;
-			width: 48px;
-		}
+    &__icon {
+      background-color: $primary;
+      color: $negro;
+      width: 48px;
+    }
 
-		/* CORRECCIÓN: Eliminado el transform: scale(1.02) */
-		&:hover {
-			.btn-jobs__text {
-				background-color: $primary;
-				color: $negro;
-			}
+    /* CORRECCIÓN: Eliminado el transform: scale(1.02) */
+    &:hover {
+      .btn-jobs__text {
+        background-color: $primary;
+        color: $negro;
+      }
 
-			.btn-jobs__icon {
-				background-color: rgba($blanco, 0.1);
-				color: $blanco;
-			}
-		}
-	}
+      .btn-jobs__icon {
+        background-color: rgba($blanco, 0.1);
+        color: $blanco;
+      }
+    }
+  }
 
-	/* --- BOTÓN SCROLL TOP --- */
-	&__scroll-top {
-		@extend %shiny-animation;
-		background: rgba($blanco, 0.05);
-		border: 1px solid rgba($blanco, 0.2);
-		color: $blanco;
-		width: 50px;
-		height: 50px;
-		border-radius: 12px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		margin-left: 2rem;
+  /* --- BOTÓN SCROLL TOP --- */
+  &__scroll-top {
+    @extend %shiny-animation;
+    background: rgba($blanco, 0.05);
+    border: 1px solid rgba($blanco, 0.2);
+    color: $blanco;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 2rem;
 
-		svg {
-			position: relative;
-			z-index: 2;
-		}
+    svg {
+      position: relative;
+      z-index: 2;
+    }
 
-		&:hover {
-			background-color: $blanco;
-			color: $negro;
-		}
+    &:hover {
+      background-color: $blanco;
+      color: $negro;
+    }
 
-		@media (max-width: 768px) {
-			margin-left: 0;
-		}
-	}
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
 
-	/* --- LEGALES (Bottom) --- */
-	&__bottom {
-		border-top: 1px solid rgba($blanco, 0.1);
-		padding-top: 2rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+  /* --- LEGALES (Bottom) --- */
+  &__bottom {
+    border-top: 1px solid rgba($blanco, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-		p {
-			margin: 0;
-			font-size: 0.9rem;
-			color: rgba($blanco, 0.5);
-		}
-	}
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba($blanco, 0.5);
+    }
+  }
 }

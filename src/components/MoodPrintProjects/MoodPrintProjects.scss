@@ -51,20 +51,13 @@
     }
   }
 
-  /* --- GRILLA CON RESERVA ESTÁTICA SIN OPACIDADES INTERFERENTES --- */
   &__grid {
     width: 100%;
     position: relative;
     z-index: 2;
-
-    // Sostiene de forma segura la estructura vertical mientras cargan las imágenes
-    min-height: 800px;
-    transition: min-height 0.3s ease;
-
-    @media (max-width: 768px) {
-      min-height: 450px;
-    }
-
-    // ⚠️ Removida por completo la subclase condicional --loading que opacaba tus elementos
+    /* 🌟 ELIMINADO EL min-height: 800px;
+       Ahora la grilla mide exactamente lo que miden las fotos.
+       Si no hay fotos, mide 0, y el Footer sube limpiamente.
+    */
   }
 }

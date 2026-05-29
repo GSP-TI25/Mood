@@ -2,7 +2,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transition: height 0.3s ease;
+
+  /* 🌟 ELIMINADO: transition: height 0.3s ease; 
+     La altura ahora encajará de golpe y GSAP podrá calcular la página con 100% de precisión */
 }
 
 .item-wrapper {
@@ -12,7 +14,7 @@
   cursor: pointer;
   top: 0;
   left: 0;
-  opacity: 0; /* <-- MEJORA: Evita destellos visuales antes de que actúe GSAP */
+  opacity: 0;
 }
 
 .item-wrapper > .item-img {

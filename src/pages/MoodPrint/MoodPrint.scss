@@ -6,21 +6,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  // --- APLICAMOS GRID ÚNICAMENTE AQUÍ ---
-  display: grid;
-  grid-template-rows: auto auto 1fr; // Navbar/Hero ocupan su espacio, el área del footer toma el resto
-  align-items: stretch;
-
-  // Corregido agregando el '#' para que Sass reconozca el color correctamente
+  display: flex;
+  flex-direction: column;
   background-color: #ecf0ec;
 
-  // --- TU ZONA DEL FOOTER OSCURO SE QUEDA EXACTAMENTE IGUAL ---
   &__footer-area {
     width: 100%;
-    background-color: #1c1c1e; // Conserva tu fondo oscuro intacto
+    /* 🌟 Forzamos a que el área oscura mida AL MENOS el tamaño de la pantalla (100vh) */
+    min-height: 100vh;
+    flex-grow: 1;
+    background-color: #1c1c1e;
+
     display: flex;
     flex-direction: column;
+
     position: relative;
     z-index: 999;
   }
