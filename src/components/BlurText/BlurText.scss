@@ -1,16 +1,25 @@
-@use "../../styles/variables" as *;
+@use '../../styles/variables' as *;
 
 .blur-text {
-	&__segment {
-		display: inline-block;
-		will-change: transform, filter, opacity;
+  &__segment {
+    display: inline-block;
+    will-change: transform, filter, opacity;
 
-		&--highlight {
-			background-color: $primary;
-			color: $negro;
-			padding: 0 0.4rem;
-			border-radius: 8px;
-			margin: 0 -0.1rem; // Pequeño ajuste para que el background no se vea separado
-		}
-	}
+    &--highlight {
+      background-color: $primary;
+      color: $negro !important; /* Aseguramos que la letra sea negra */
+      padding: 0 0.4rem;
+      border-radius: 8px;
+      margin: 0 -0.1rem;
+
+      /* 🌟 MATAMOS LA SOMBRA SUCIA HEREDADA */
+      text-shadow: none !important;
+
+      /* 🌟 Le damos una sombra exterior limpia a la pastilla verde */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+
+      /* Suavizado extra para que la letra negra se vea ultra nítida */
+      -webkit-font-smoothing: antialiased;
+    }
+  }
 }
