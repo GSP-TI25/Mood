@@ -7,6 +7,7 @@ import {
   Settings,
   User,
   FolderGit2,
+  IdCard,
 } from 'lucide-react'; // 🌟 Agregamos FolderGit2 para Proyectos
 import logoMood from '../../assets/Logo_Mood.svg';
 import './CmsSidebar.scss';
@@ -50,6 +51,15 @@ const CmsSidebar = ({ activeTab, setActiveTab }) => {
         >
           <FolderGit2 size={18} />
           Proyectos
+        </button>
+
+        {/* 🌟 NUEVO BOTÓN PARA EQUIPO */}
+        <button
+          className={`cms-sidebar-nav__link ${activeTab === 'equipo' ? 'active' : ''}`}
+          onClick={() => setActiveTab('equipo')}
+        >
+          <IdCard size={18} />
+          Equipo Mood
         </button>
 
         {isSuperAdmin && (

@@ -6,8 +6,10 @@ import ApplicationsTable from '../../components/Cms/ApplicationsTable';
 import UsersTable from '../../components/Cms/UsersTable';
 import UserForm from '../../components/Cms/UserForm';
 import Profile from '../../components/Cms/Profile';
-import ProjectsTable from '../../components/Cms/ProjectsTable'; // 🌟 Importado
-import ProjectForm from '../../components/Cms/ProjectForm'; // 🌟 Importado
+import ProjectsTable from '../../components/Cms/ProjectsTable';
+import ProjectForm from '../../components/Cms/ProjectForm';
+import TeamTable from '../../components/Cms/TeamTable'; // 🌟 Importado
+import TeamForm from '../../components/Cms/TeamForm'; // 🌟 Importado
 import { Plus } from 'lucide-react';
 import './CmsDashboard.scss';
 
@@ -23,7 +25,8 @@ const CmsDashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [users, setUsers] = useState([]);
-  const [projects, setProjects] = useState([]); // 🌟 Estado para Proyectos
+  const [projects, setProjects] = useState([]);
+  const [team, setTeam] = useState([]); // 🌟 Estado para Equipo
 
   // Estados Modales
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -32,8 +35,11 @@ const CmsDashboard = () => {
   const [isUserFormOpen, setIsUserFormOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState(null);
 
-  const [isProjectFormOpen, setIsProjectFormOpen] = useState(false); // 🌟 Estado Modal Proyecto
-  const [projectToEdit, setProjectToEdit] = useState(null); // 🌟 Estado Editar Proyecto
+  const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
+  const [projectToEdit, setProjectToEdit] = useState(null);
+
+  const [isTeamFormOpen, setIsTeamFormOpen] = useState(false); // 🌟 Estado Modal Equipo
+  const [teamMemberToEdit, setTeamMemberToEdit] = useState(null); // 🌟 Estado Editar Miembro
 
   const fetchJobs = async () => {
     try {
@@ -67,7 +73,6 @@ const CmsDashboard = () => {
     }
   };
 
-  // 🌟 Nueva función Fetch
   const fetchProjects = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/projects');
@@ -80,20 +85,36 @@ const CmsDashboard = () => {
     }
   };
 
+  // 🌟 Nueva función Fetch
+  const fetchTeam = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/team');
+      if (response.ok) {
+        const data = await response.json();
+        setTeam(data);
+      }
+    } catch (error) {
+      console.error('Error al cargar equipo:', error);
+    }
+  };
+
   useEffect(() => {
     if (activeTab === 'vacantes') fetchJobs();
     if (activeTab === 'postulantes') fetchApplications();
     if (activeTab === 'configuracion') fetchUsers();
-    if (activeTab === 'proyectos') fetchProjects(); // 🌟 Llama si estamos en proyectos
+    if (activeTab === 'proyectos') fetchProjects();
+    if (activeTab === 'equipo') fetchTeam(); // 🌟 Llama si estamos en equipo
   }, [activeTab]);
 
   useEffect(() => {
     document.body.style.overflow =
-      isFormOpen || isUserFormOpen || isProjectFormOpen ? 'hidden' : '';
+      isFormOpen || isUserFormOpen || isProjectFormOpen || isTeamFormOpen
+        ? 'hidden'
+        : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isFormOpen, isUserFormOpen, isProjectFormOpen]);
+  }, [isFormOpen, isUserFormOpen, isProjectFormOpen, isTeamFormOpen]);
 
   // Handlers Success
   const handleSuccess = () => {
@@ -108,6 +129,10 @@ const CmsDashboard = () => {
     setIsProjectFormOpen(false);
     fetchProjects();
   };
+  const handleTeamSuccess = () => {
+    setIsTeamFormOpen(false);
+    fetchTeam();
+  }; // 🌟 Team Success
 
   // Handlers Toggles
   const handleToggleStatus = async (jobId) => {
@@ -150,6 +175,26 @@ const CmsDashboard = () => {
     }
   };
 
+  const handleToggleTeamStatus = async (memberId) => {
+    const token = localStorage.getItem('cms_token');
+    const isConfirmed = window.confirm(
+      '¿Seguro que deseas cambiar la visibilidad de este miembro?',
+    );
+    if (!isConfirmed) return;
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/team/${memberId}/status`,
+        {
+          method: 'PATCH',
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+      if (response.ok) fetchTeam();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   // Open Forms
   const openCreateForm = () => {
     setJobToEdit(null);
@@ -162,6 +207,10 @@ const CmsDashboard = () => {
   const openCreateProjectForm = () => {
     setProjectToEdit(null);
     setIsProjectFormOpen(true);
+  };
+  const openCreateTeamForm = () => {
+    setTeamMemberToEdit(null);
+    setIsTeamFormOpen(true);
   };
 
   const openEditForm = async (jobShort) => {
@@ -182,6 +231,11 @@ const CmsDashboard = () => {
     setIsProjectFormOpen(true);
   };
 
+  const openEditTeamForm = (member) => {
+    setTeamMemberToEdit(member);
+    setIsTeamFormOpen(true);
+  };
+
   return (
     <div className='cms-layout'>
       <CmsSidebar
@@ -198,14 +252,18 @@ const CmsDashboard = () => {
                   ? 'Gestión de Vacantes'
                   : activeTab === 'proyectos'
                     ? 'Portafolio MoodPrint'
-                    : 'Base de Postulantes'}
+                    : activeTab === 'equipo'
+                      ? 'Equipo Mood'
+                      : 'Base de Postulantes'}
               </h1>
               <p>
                 {activeTab === 'vacantes'
                   ? 'Administra los puestos de trabajo disponibles en la agencia.'
                   : activeTab === 'proyectos'
                     ? 'Sube y organiza los casos de éxito de la agencia.'
-                    : 'Revisa y descarga los perfiles de los talentos que han postulado.'}
+                    : activeTab === 'equipo'
+                      ? 'Administra a los líderes y miembros de la agencia.'
+                      : 'Revisa y descarga los perfiles de los talentos que han postulado.'}
               </p>
             </div>
 
@@ -222,7 +280,6 @@ const CmsDashboard = () => {
               </button>
             )}
 
-            {/* 🌟 BOTÓN PARA NUEVO PROYECTO */}
             {activeTab === 'proyectos' && (
               <button
                 className='cms-btn-primary'
@@ -233,6 +290,20 @@ const CmsDashboard = () => {
                   strokeWidth={3}
                 />{' '}
                 Nuevo Proyecto
+              </button>
+            )}
+
+            {/* 🌟 BOTÓN PARA NUEVO MIEMBRO DEL EQUIPO */}
+            {activeTab === 'equipo' && (
+              <button
+                className='cms-btn-primary'
+                onClick={openCreateTeamForm}
+              >
+                <Plus
+                  size={16}
+                  strokeWidth={3}
+                />{' '}
+                Nuevo Miembro
               </button>
             )}
           </header>
@@ -250,12 +321,20 @@ const CmsDashboard = () => {
           <ApplicationsTable applications={applications} />
         )}
 
-        {/* 🌟 TABLA DE PROYECTOS */}
         {activeTab === 'proyectos' && (
           <ProjectsTable
             projects={projects}
             onToggleStatus={handleToggleProjectStatus}
             onEdit={openEditProjectForm}
+          />
+        )}
+
+        {/* 🌟 TABLA DEL EQUIPO */}
+        {activeTab === 'equipo' && (
+          <TeamTable
+            team={team}
+            onToggleStatus={handleToggleTeamStatus}
+            onEdit={openEditTeamForm}
           />
         )}
 
@@ -306,6 +385,25 @@ const CmsDashboard = () => {
               projectToEdit={projectToEdit}
               onSubmitSuccess={handleProjectSuccess}
               onCancel={() => setIsProjectFormOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: EQUIPO */}
+      {isTeamFormOpen && activeTab === 'equipo' && (
+        <div
+          className='cms-sheet-overlay'
+          onClick={() => setIsTeamFormOpen(false)}
+        >
+          <div
+            className='cms-sheet-content'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <TeamForm
+              memberToEdit={teamMemberToEdit}
+              onSubmitSuccess={handleTeamSuccess}
+              onCancel={() => setIsTeamFormOpen(false)}
             />
           </div>
         </div>

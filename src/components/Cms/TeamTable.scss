@@ -1,0 +1,205 @@
+@use '../../styles/variables' as *;
+
+.cms-team-table-wrapper {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  /* Importamos todo el bloque común de tablas que ya tenías */
+  .cms-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.875rem;
+    th,
+    td {
+      padding: 0.875rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    th {
+      background-color: #ffffff;
+      font-weight: 500;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+    td {
+      color: #334155;
+    }
+    .font-medium {
+      font-weight: 500;
+      color: #0f172a;
+    }
+    .cms-table__empty {
+      text-align: center;
+      padding: 4rem;
+      color: #64748b;
+    }
+    tbody tr {
+      transition: background-color 0.2s ease;
+      &:hover {
+        background-color: #f8fafc;
+      }
+    }
+  }
+
+  .team-table__thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #f1f5f9;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: block;
+  }
+
+  .team-table__badge-type {
+    display: inline-flex;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    &--general {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+  }
+
+  .role-code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #db2777;
+    font-size: 0.8rem;
+  }
+
+  .text-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    color: #0f172a;
+    &::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    &--active::before {
+      background-color: #10b981;
+      box-shadow: 0 0 4px rgba(16, 185, 129, 0.4);
+    }
+    &--inactive {
+      color: #64748b;
+      &::before {
+        background-color: #94a3b8;
+      }
+    }
+  }
+
+  .row--inactive {
+    background-color: #fafafa;
+    td {
+      color: #94a3b8;
+    }
+    .font-medium {
+      color: #64748b;
+    }
+    &:hover {
+      background-color: #f1f5f9 !important;
+    }
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s;
+    &.btn--icon-only {
+      padding: 0.4rem;
+    }
+    &.btn--edit {
+      color: #475569;
+      &:hover {
+        background-color: #f1f5f9;
+        color: #0f172a;
+      }
+    }
+    &.btn--deactivate {
+      color: #ef4444;
+      &:hover {
+        background-color: #fef2f2;
+        color: #dc2626;
+      }
+    }
+    &.btn--activate {
+      color: #10b981;
+      &:hover {
+        background-color: #ecfdf5;
+        color: #059669;
+      }
+    }
+  }
+
+  .cms-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #e2e8f0;
+    background: #ffffff;
+    button {
+      background: transparent;
+      border: 1px solid #e2e8f0;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #0f172a;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      &:hover:not(:disabled) {
+        background: #f8fafc;
+      }
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+    span {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+  }
+}

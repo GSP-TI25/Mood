@@ -1,57 +1,45 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
-import { useTranslation } from 'react-i18next'; // <-- IMPORTAMOS EL HOOK
+import { useTranslation } from 'react-i18next';
 import Linkedin from '../Icons/Linkedin';
 import FadeContent from '../FadeContent/FadeContent';
 import './AdnTeam.scss';
 
-// --- LÍDERES ---
-// Agregamos una propiedad 'roleKey' para saber qué texto buscar en el JSON
-const TEAM_MEMBERS = [
-  {
-    name: 'Matthias Stimman',
-    roleKey: 'matthias',
-    image:
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
-    linkedin: '#',
-  },
-  {
-    name: 'Vasco Romero',
-    roleKey: 'vasco',
-    image:
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
-    linkedin: '#',
-  },
-  {
-    name: 'Carolina Mendoza',
-    roleKey: 'carolina',
-    image:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
-    linkedin: '#',
-  },
-  {
-    name: 'Alejandro Torres',
-    roleKey: 'alejandro',
-    image:
-      'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80',
-    linkedin: '#',
-  },
-];
-
-// --- MIEMBROS DEL EQUIPO ---
-const GENERAL_TEAM = [
-  { name: 'Sofía Reyes', roleKey: 'sofia', linkedin: '#' },
-  { name: 'Diego Arango', roleKey: 'diego', linkedin: '#' },
-  { name: 'Valeria Costa', roleKey: 'valeria', linkedin: '#' },
-  { name: 'Martín Soler', roleKey: 'martin', linkedin: '#' },
-  { name: 'Lucía Vallejo', roleKey: 'lucia', linkedin: '#' },
-  { name: 'Andrés Silva', roleKey: 'andres', linkedin: '#' },
-];
-
 const AdnTeam = () => {
-  const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
+  const { t } = useTranslation();
   const sliderRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // 🌟 ESTADOS DINÁMICOS
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [generalTeam, setGeneralTeam] = useState([]);
+
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/team');
+        const data = await response.json();
+
+        // Filtramos solo los activos
+        const activeMembers = data.filter((member) => member.is_active);
+
+        // 🌟 DIVIDIMOS POR LÓGICA DE IMAGEN
+        setTeamMembers(
+          activeMembers.filter(
+            (m) => m.image_url !== null && m.image_url !== '',
+          ),
+        );
+        setGeneralTeam(
+          activeMembers.filter(
+            (m) => m.image_url === null || m.image_url === '',
+          ),
+        );
+      } catch (error) {
+        console.error('Error al cargar equipo:', error);
+      }
+    };
+    fetchTeam();
+  }, []);
 
   const handleScroll = () => {
     if (!sliderRef.current) return;
@@ -65,8 +53,6 @@ const AdnTeam = () => {
     if (!sliderRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth, children } =
       sliderRef.current;
-
-    // Calcula el tamaño exacto de la tarjeta actual + el gap (24px = 1.5rem)
     const cardWidth = children[0] ? children[0].offsetWidth + 24 : 300;
     const maxScroll = scrollWidth - clientWidth;
 
@@ -119,25 +105,28 @@ const AdnTeam = () => {
             </div>
 
             <div className='adn-team__grid'>
-              {TEAM_MEMBERS.map((member, index) => (
+              {/* 🌟 RENDERIZAMOS LÍDERES DINÁMICAMENTE */}
+              {teamMembers.map((member, index) => (
                 <FadeContent
-                  key={index}
+                  key={member.id || index}
                   duration={0.6}
                   delay={0.3 + index * 0.1}
                 >
                   <div className='team-card'>
                     <div className='team-card__image-wrapper'>
                       <img
-                        src={member.image}
+                        src={member.image_url}
                         alt={member.name}
                         className='team-card__image'
                         crossOrigin='anonymous'
                         referrerPolicy='no-referrer'
                       />
                       <a
-                        href={member.linkedin}
+                        href={member.linkedin || '#'}
                         className='team-card__linkedin'
                         aria-label={`LinkedIn de ${member.name}`}
+                        target='_blank'
+                        rel='noreferrer'
                       >
                         <Linkedin size={18} />
                       </a>
@@ -145,9 +134,10 @@ const AdnTeam = () => {
                     <div className='team-card__info-wrapper'>
                       <div className='team-card__info'>
                         <h3 className='team-card__name'>{member.name}</h3>
+                        {/* Como role_key en DB debe coincidir con tus claves de i18n ej: "vasco", "carolina" */}
                         <p className='team-card__role'>
-                          {t(`adnTeam.roles.${member.roleKey}`)}{' '}
-                          {/* <-- Traducción dinámica */}
+                          {t(`adnTeam.roles.${member.role_key}`) ||
+                            member.role_key}
                         </p>
                       </div>
                       <button
@@ -178,7 +168,6 @@ const AdnTeam = () => {
                     {t('adnTeam.badgeTeam')}
                   </div>
                 </div>
-
                 <h3 className='team-slider__title'>{t('adnTeam.descTeam')}</h3>
               </div>
             </FadeContent>
@@ -192,29 +181,34 @@ const AdnTeam = () => {
                 ref={sliderRef}
                 onScroll={handleScroll}
               >
-                {GENERAL_TEAM.map((member, index) => (
+                {/* 🌟 RENDERIZAMOS EL RESTO DEL EQUIPO DINÁMICAMENTE */}
+                {generalTeam.map((member, index) => (
                   <div
                     className='member-card'
-                    key={index}
+                    key={member.id || index}
                   >
                     <div className='member-card__info'>
                       <h4 className='member-card__name'>{member.name}</h4>
                       <p className='member-card__role'>
-                        {t(`adnTeam.roles.${member.roleKey}`)}{' '}
-                        {/* <-- Traducción dinámica */}
+                        {t(`adnTeam.roles.${member.role_key}`) ||
+                          member.role_key}
                       </p>
                     </div>
                     <div className='member-card__footer'>
                       <a
-                        href={member.linkedin}
+                        href={member.linkedin || '#'}
                         className='member-card__link'
+                        target='_blank'
+                        rel='noreferrer'
                       >
                         LINKEDIN
                       </a>
                       <a
-                        href={member.linkedin}
+                        href={member.linkedin || '#'}
                         className='member-card__btn'
                         aria-label={`LinkedIn de ${member.name}`}
+                        target='_blank'
+                        rel='noreferrer'
                       >
                         <ChevronRight
                           size={18}

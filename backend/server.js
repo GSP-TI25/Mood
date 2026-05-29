@@ -12,6 +12,7 @@ import jobsRoutes from './routes/jobs.routes.js';
 import applicationsRoutes from './routes/applications.routes.js';
 import usersRoutes from './routes/users.routes.js';
 import projectsRoutes from './routes/projects.routes.js'; // 🌟 NUEVA RUTA IMPORTADA
+import teamRoutes from './routes/team.routes.js'; // 🌟 NUEVA RUTA IMPORTADA
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/api/jobs', jobsRoutes);
 app.use('/api/applications', applicationsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/projects', projectsRoutes); // 🌟 NUEVA RUTA MONTADA
+app.use('/api/team', teamRoutes); // 🌟 NUEVA RUTA MONTADA
 
 // Iniciamos el servidor
 app.listen(PORT, () => {
