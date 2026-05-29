@@ -15,7 +15,7 @@
     background: linear-gradient(
       100deg,
       rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 255, 255, 0.4) 50%,
       rgba(255, 255, 255, 0) 80%
     );
     transform: skewX(-25deg);
@@ -37,7 +37,7 @@
   height: 100%;
   padding: 0 2rem;
   box-sizing: border-box;
-  background-color: transparent !important; /* Vital para que se vea el video */
+  background-color: transparent !important;
 
   @media (max-width: 768px) {
     padding: 0 1rem;
@@ -95,17 +95,12 @@
   &__paragraph {
     font-size: 1.25rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.95); /* Aumentamos la opacidad */
+    color: rgba(255, 255, 255, 0.95);
     text-align: center;
     line-height: 1.6;
     max-width: 700px;
     margin: 0;
     justify-content: center;
-
-    /* 🌟 SOLUCIÓN PROFESIONAL: Sombra de texto ultra fuerte
-       Combinamos dos sombras: una densa (primera) y una difusa (segunda)
-       para aislar las letras de cualquier texto del video o relámpago.
-    */
     text-shadow:
       0px 2px 8px rgba(0, 0, 0, 0.95),
       0px 0px 25px rgba(0, 0, 0, 0.7);
@@ -127,44 +122,47 @@
     }
   }
 
+  /* 🌟 PASTILLAS DE HABILIDADES OSCURAS Y LIMPIAS */
   &__skill-item {
+    @extend %shiny-animation; /* 🌟 Agregamos el reflejo de luz a las habilidades */
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    /* 🌟 Minimalista: Fondo semi-transparente para integrarlo mejor con el fondo oscuro */
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #1c1c1e;
     padding: 0.75rem 1.25rem;
     border-radius: 14px;
-    border: 1px solid rgba($negro, 0.05); /* Ligeramente más nítida */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     cursor: default;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Sombra extra */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 
     @media (max-width: 768px) {
       padding: 0.5rem 0.8rem;
     }
 
     &:hover {
-      border-color: $primary;
-      background-color: #ffffff; /* Sólido en hover */
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-
-      .hero__skill-icon {
-        color: $primary;
+      /* Quitamos el cambio de borde y el salto (translateY) */
+      .hero__skill-icon,
+      .hero__skill-text {
+        color: $primary; /* Solo el texto y el ícono cambian de color */
       }
     }
   }
 
   &__skill-icon {
-    color: rgba($negro, 0.6);
+    position: relative;
+    z-index: 2; /* Para que quede por encima del reflejo de luz */
+    color: rgba(255, 255, 255, 0.8);
     transition: color 0.3s ease;
   }
 
   &__skill-text {
+    position: relative;
+    z-index: 2; /* Para que quede por encima del reflejo de luz */
     font-size: 0.9rem;
     font-weight: 600;
-    color: $negro;
+    color: #ffffff;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 0.8rem;
@@ -200,6 +198,7 @@
     border: none;
     transition:
       background-color 0.3s ease,
+      border-color 0.3s ease,
       color 0.3s ease,
       opacity 0.3s ease;
 
@@ -223,11 +222,12 @@
     }
 
     &--secondary {
-      background-color: $blanco;
-      color: $negro;
-      border: 1px solid rgba($negro, 0.1);
+      background-color: #1c1c1e;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       &:hover {
-        background-color: color.scale($blanco, $lightness: -6%);
+        border-color: $primary;
+        color: $primary;
       }
     }
   }
@@ -252,6 +252,7 @@
     }
   }
 
+  /* 🌟 BOTONES SOCIALES OSCUROS Y LIMPIOS */
   &__social-link {
     @extend %shiny-animation;
     display: flex;
@@ -259,25 +260,23 @@
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: $blanco;
-    color: $negro;
+    background-color: #1c1c1e;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 14px;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra extra */
-    transition: color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: color 0.3s ease; /* Quitamos transiciones extra de bordes/fondos */
 
     &:hover {
-      color: $primary;
+      color: $primary; /* Solo cambia el color del ícono al hacer hover */
     }
   }
 
   &__social-icon {
     position: relative;
     z-index: 2;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    .hero__social-link:hover & {
-      transform: scale(1.2);
-    }
+    transition: color 0.3s ease;
+    /* 🌟 Eliminamos el "transform: scale(1.2)" para que no crezca el ícono */
   }
 }
