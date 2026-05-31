@@ -24,6 +24,9 @@ export const AuthProvider = ({ children }) => {
 		localStorage.setItem("cms_token", token);
 		localStorage.setItem("cms_user", JSON.stringify(userData)); // Guardamos el usuario en local
 
+		// 🌟 MAGIA AQUÍ: Forzamos la pestaña "inicio" cada vez que alguien entra
+		localStorage.setItem("cms_active_tab", "inicio");
+
 		setIsAuthenticated(true);
 		setUser(userData); // Guardamos el usuario en el estado
 
@@ -33,6 +36,9 @@ export const AuthProvider = ({ children }) => {
 	const logout = () => {
 		localStorage.removeItem("cms_token");
 		localStorage.removeItem("cms_user"); // Limpiamos el usuario
+
+		// 🌟 Limpiamos también la memoria de la pestaña al salir
+		localStorage.removeItem("cms_active_tab");
 
 		setIsAuthenticated(false);
 		setUser(null); // Limpiamos el estado
