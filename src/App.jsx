@@ -7,12 +7,13 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Home from './pages/Home/Home';
 import AdnMood from './pages/AdnMood/AdnMood';
 import MoodPrint from './pages/MoodPrint/MoodPrint';
+import MoodMind from './pages/MoodMind/MoodMind'; // 🌟 Importamos la nueva página
 import Contact from './pages/Contact/Contact';
 import Careers from './pages/Careers/Careers';
 import JobDetail from './pages/Careers/JobDetail';
 import JobApplication from './pages/Careers/JobApplication';
 
-// --- Archivos del CMS (Asegúrate de crearlos antes de guardar) ---
+// --- Archivos del CMS ---
 import CmsLogin from './pages/Cms/CmsLogin';
 import CmsDashboard from './pages/Cms/CmsDashboard';
 import { AuthProvider } from './context/AuthContext';
@@ -41,7 +42,6 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
-      {/* ⚠️ Envolveremos las rutas dentro de AuthProvider cuando termines de crear el archivo */}
       <AuthProvider>
         <Routes>
           {/* =========================================
@@ -59,6 +59,13 @@ const App = () => {
             path='/mood-print'
             element={<MoodPrint />}
           />
+
+          {/* 🌟 NUEVA RUTA PARA MOOD MIND */}
+          <Route
+            path='/mood-mind'
+            element={<MoodMind />}
+          />
+
           <Route
             path='/contacto'
             element={<Contact />}
@@ -77,7 +84,7 @@ const App = () => {
           />
 
           {/* =========================================
-              RUTAS DEL CMS (ÁREA DE RECURSOS HUMANOS)
+              RUTAS DEL CMS (ÁREA DE ADMINISTRACIÓN)
               ========================================= */}
           <Route
             path='/cms/login'

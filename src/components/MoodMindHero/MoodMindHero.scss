@@ -1,0 +1,206 @@
+@use '../../styles/variables' as *;
+
+.mood-mind-hero {
+  position: relative;
+  margin: 1rem;
+  min-height: calc(100vh - 2rem);
+  border-radius: 16px;
+  background-color: #1c1c1e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  /* LOGO DE FONDO (MARCA DE AGUA) */
+  &__bg-graphic {
+    position: absolute;
+    bottom: -15%;
+    right: -10%;
+    width: 900px;
+    height: auto;
+    filter: invert(1) brightness(2);
+    opacity: 0.05;
+    pointer-events: none;
+    user-select: none;
+    transform: rotate(-10deg);
+    z-index: 1;
+
+    @media (max-width: 1024px) {
+      width: 600px;
+      right: -20%;
+      bottom: -10%;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+
+    @media (max-width: 768px) {
+      gap: 5rem;
+    }
+  }
+
+  /* ROW: TÍTULO IZQ - DESC DER */
+  &__top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  /* LA CAJA VERDE ESTILO MOODPRINT */
+  &__highlight {
+    background-color: $primary;
+    color: #111111 !important;
+    padding: 0 0.3em;
+    border-radius: 12px;
+    margin-top: 0.2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba($primary, 0.2);
+    transform: rotate(-3deg);
+    overflow: hidden;
+    transition: font-family 0.3s ease;
+
+    * {
+      color: #111111 !important;
+    }
+
+    .mood-mind-hero__rotating-word {
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+    }
+  }
+
+  /* CLASES DINÁMICAS PARA CAMBIAR TIPOGRAFÍA */
+  .font-style-0 {
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 900;
+  }
+  .font-style-1 {
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 700;
+  }
+  .font-style-2 {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: -2px;
+  }
+  .font-style-3 {
+    font-family: 'Impact', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+
+  &__desc-col {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 160px;
+
+    @media (max-width: 1024px) {
+      justify-content: flex-start;
+      min-height: auto;
+    }
+  }
+
+  &__description {
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-weight: 300;
+    max-width: 480px;
+    font-family: 'Roboto Mono', monospace;
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+  }
+
+  &__fade-in-text {
+    animation: textBlurIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+
+  /* 🌟 ESTILOS PARA EL CONTENEDOR LOGOLOOP */
+  &__bottom {
+    width: 100%;
+    padding-top: 2rem;
+  }
+
+  &__carousel-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    /* Difuminado de bordes para que los logos no se corten de golpe */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+
+    /* Forzamos a los logos del Loop a ser blancos y transparentes por el fondo oscuro */
+    .logoloop__item img {
+      filter: brightness(0) invert(1);
+      opacity: 0.6;
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@keyframes textBlurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}

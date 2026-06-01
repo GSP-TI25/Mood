@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.mood-mind {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #ecf0ec; /* 🌟 Igualamos el fondo exterior al de MoodPrint */
+
+  &__footer-area {
+    width: 100%;
+    flex-grow: 1;
+    background-color: #1c1c1e;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 999;
+  }
+}
