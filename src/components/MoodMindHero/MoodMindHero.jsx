@@ -1,71 +1,35 @@
-import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import FadeContent from '../FadeContent/FadeContent';
 import RotatingText from '../RotatingText/RotatingText';
-import LogoLoop from '../LogoLoop/LogoLoop'; // 🌟 Importamos el componente LogoLoop
-import logoMoodBg from '../../assets/Logo_Mood_Vectorizado.svg';
+import LightRays from '../LightRays/LightRays'; // 🌟 Importamos el nuevo fondo
 import './MoodMindHero.scss';
 
-// 🌟 DATA DINÁMICA SINCRONIZADA
-const CONTENT_STEPS = [
-  {
-    word: 'RÁPIDA',
-    description:
-      'La IA reduce tiempos en edición, retoque, mockups, renders y adaptaciones. Mood convierte esa velocidad en piezas listas para campaña.',
-  },
-  {
-    word: 'PRECISA',
-    description:
-      'La IA detecta formatos, tendencias y performance. Mood adapta cada pieza al canal correcto (RRSS, pauta, B2B, retail, eventos).',
-  },
-  {
-    word: 'EFICIENTE',
-    description:
-      'Menos reprocesos. Menos pruebas innecesarias. Más claridad desde el brief hasta la entrega final.',
-  },
-  {
-    word: 'CREATIVA',
-    description:
-      'La IA genera múltiples rutas visuales en minutos. Mood selecciona, dirige y eleva la mejor idea con criterio estratégico.',
-  },
-];
-
-// 🌟 LOGOS CON FORMATO PARA LOGOLOOP
-const AI_LOGOS = [
-  { src: '/Logos/ChatGPT.webp', alt: 'ChatGPT' },
-  { src: '/Logos/Deepl.webp', alt: 'DeepL' },
-  { src: '/Logos/ElevenLabs.webp', alt: 'ElevenLabs' },
-  { src: '/Logos/Envato.webp', alt: 'Envato' },
-  { src: '/Logos/KlingAI.webp', alt: 'KlingAI' },
-  { src: '/Logos/Krea.webp', alt: 'Krea' },
-  { src: '/Logos/Magnific.webp', alt: 'Magnific' },
-  { src: '/Logos/Midjourney.webp', alt: 'Midjourney' },
-];
-
+const ROTATING_WORDS = ['RÁPIDA', 'PRECISA', 'EFICIENTE', 'CREATIVA'];
 const ROTATION_INTERVAL_MS = 4000;
 
 const MoodMindHero = () => {
   const { t } = useTranslation();
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const rotatingWords = CONTENT_STEPS.map((step) => step.word);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % CONTENT_STEPS.length);
-    }, ROTATION_INTERVAL_MS);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section className='mood-mind-hero'>
-      <img
-        src={logoMoodBg}
-        alt=''
-        className='mood-mind-hero__bg-graphic'
-        aria-hidden='true'
-      />
+      {/* 🌟 FONDO INTERACTIVO LIGHT RAYS */}
+      <div className='mood-mind-hero__bg'>
+        <LightRays
+          raysOrigin='top-center'
+          raysColor='#4ade80' // Usamos el verde neón para que haga match con la caja
+          raysSpeed={1}
+          lightSpread={0.5}
+          rayLength={3}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0}
+          distortion={0}
+          className='custom-rays'
+          pulsating={false}
+          fadeDistance={1}
+          saturation={1}
+        />
+      </div>
 
       <div className='mood-mind-hero__container'>
         <div className='mood-mind-hero__top'>
@@ -77,11 +41,9 @@ const MoodMindHero = () => {
             >
               <h1 className='mood-mind-hero__title'>
                 PRODUCCIÓN <br /> MÁS <br />
-                <div
-                  className={`mood-mind-hero__highlight font-style-${activeIndex}`}
-                >
+                <div className='mood-mind-hero__highlight'>
                   <RotatingText
-                    texts={rotatingWords}
+                    texts={ROTATING_WORDS}
                     mainClassName='mood-mind-hero__rotating-word'
                     staggerFrom='last'
                     initial={{ y: '100%' }}
@@ -99,35 +61,22 @@ const MoodMindHero = () => {
 
           <div className='mood-mind-hero__desc-col'>
             <div className='mood-mind-hero__description-wrapper'>
-              <p
-                key={activeIndex}
-                className='mood-mind-hero__description mood-mind-hero__fade-in-text'
+              <FadeContent
+                duration={0.8}
+                delay={0.3}
+                direction='bottom'
               >
-                {CONTENT_STEPS[activeIndex].description}
-              </p>
+                <p className='mood-mind-hero__description'>
+                  Fusionamos el <strong>ingenio humano</strong> con el poder
+                  ilimitado de la <strong>Inteligencia Artificial</strong>. En
+                  Mood, no solo optimizamos tiempos y recursos; elevamos la
+                  dirección de arte y las estrategias digitales para crear
+                  marcas, campañas y experiencias que rompen el molde. El futuro
+                  de tu marca empieza aquí.
+                </p>
+              </FadeContent>
             </div>
           </div>
-        </div>
-
-        {/* 🌟 CARRUSEL USANDO EL COMPONENTE LOGOLOOP */}
-        <div className='mood-mind-hero__bottom'>
-          <FadeContent
-            duration={1}
-            delay={0.6}
-          >
-            <div className='mood-mind-hero__carousel-wrapper'>
-              <LogoLoop
-                logos={AI_LOGOS}
-                speed={30}
-                direction='left'
-                logoHeight={45}
-                gap={80}
-                hoverSpeed={10}
-                scaleOnHover={true}
-                fadeOut={false} // Desactivamos el fade interno porque le pondremos un mask de difuminado por CSS
-              />
-            </div>
-          </FadeContent>
         </div>
       </div>
     </section>
