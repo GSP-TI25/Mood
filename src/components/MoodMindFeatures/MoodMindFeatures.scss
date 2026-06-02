@@ -154,8 +154,8 @@
     display: flex;
     /* NORMAL: Pega a la derecha y crece hacia la izquierda */
     justify-content: flex-end;
-    width: 100%;
-    height: 400px;
+    width: 80%;
+    height: 300px;
 
     @media (max-width: 1024px) {
       grid-column: span 2;
