@@ -1,0 +1,184 @@
+@use '../../styles/variables' as *;
+
+.mood-mind-features {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  padding: 6rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* ==========================================
+     🌟 ESTILOS DEL HEADER PRINCIPAL
+     ========================================== */
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  &__header-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: $negro;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  &__highlight {
+    background-color: $primary;
+    color: $negro;
+    padding: 0 0.25em;
+    border-radius: 12px;
+    display: inline-block;
+    transform: rotate(-2deg);
+  }
+
+  &__header-desc {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba($negro, 0.7);
+    max-width: 650px;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================
+     🌟 LISTA DE FILAS ZIG-ZAG
+     ========================================== */
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: grid;
+    /* NORMAL: Número | Texto | Imagen */
+    grid-template-columns: 80px 1fr 1.3fr;
+    gap: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    /* 🌟 REVERSE: Número | Imagen | Texto */
+    &--reverse {
+      grid-template-columns: 80px 1.3fr 1fr;
+
+      .mood-mind-features__col-text {
+        order: 3; /* Envía el texto a la derecha */
+        padding-right: 0;
+        padding-left: 2rem; /* El espaciado cambia de lado */
+      }
+
+      .mood-mind-features__col-media {
+        order: 2; /* Envía la imagen al centro */
+        justify-content: flex-start; /* 🌟 MAGIA: La máscara se pega a la izquierda y crece hacia la derecha */
+      }
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 50px 1fr;
+      gap: 2rem;
+
+      /* En tablets anulamos el zig-zag para que no se rompa el layout */
+      &--reverse {
+        grid-template-columns: 50px 1fr;
+
+        .mood-mind-features__col-text {
+          order: unset;
+          padding-left: 0;
+        }
+        .mood-mind-features__col-media {
+          order: unset;
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      padding: 3rem 0;
+    }
+  }
+
+  /* 1. NÚMERO */
+  &__col-number {
+    span {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: rgba($negro, 0.3);
+    }
+  }
+
+  /* 2. TEXTOS */
+  &__col-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 2rem;
+
+    @media (max-width: 1024px) {
+      padding-right: 0;
+    }
+  }
+
+  &__title {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 600;
+    color: $negro;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  &__desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba($negro, 0.7);
+    margin: 0;
+    max-width: 500px;
+  }
+
+  /* 3. IMÁGENES ANIMADAS */
+  &__col-media {
+    display: flex;
+    /* NORMAL: Pega a la derecha y crece hacia la izquierda */
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+
+    @media (max-width: 1024px) {
+      grid-column: span 2;
+      height: 350px;
+      justify-content: flex-start !important; /* En móviles siempre crece de izq a der */
+    }
+
+    @media (max-width: 600px) {
+      grid-column: span 1;
+      height: 280px;
+    }
+  }
+
+  &__image-mask {
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -4,6 +4,7 @@ import MoodMindHero from '../../components/MoodMindHero/MoodMindHero';
 // import Footer from '../../components/Footer/Footer';
 import './MoodMind.scss';
 import Footer from '../../components/Footer/Footer';
+import MoodMindFeatures from '../../components/MoodMindFeatures/MoodMindFeatures';
 
 const MoodMind = () => {
   return (
@@ -11,6 +12,7 @@ const MoodMind = () => {
       <Navbar />
 
       <MoodMindHero />
+      <MoodMindFeatures />
 
       {/* 🌟 AQUÍ DEBAJO PUEDES AGREGAR EL RESTO DE SECCIONES DE LA PÁGINA EN EL FUTURO */}
 

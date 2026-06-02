@@ -3,7 +3,7 @@
 .mood-mind-hero {
   position: relative;
   width: calc(100% - 2rem);
-  min-height: calc(90vh - 2rem);
+  min-height: calc(100vh - 2rem);
   margin: 1rem auto;
   border-radius: 16px;
   background-color: #1c1c1e;
@@ -28,9 +28,9 @@
 
   &__bg-logo {
     position: absolute;
-    bottom: -15%;
+    bottom: -10%;
     right: -5%;
-    width: 800px;
+    width: 700px;
     height: auto;
     filter: invert(1) brightness(2);
     opacity: 0.03;
@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem; /* Separación vertical entre la primera y segunda línea */
+    gap: 0.5rem;
 
     /* LÍNEA 1: "Potenciamos [marcas]" */
     &-top {
