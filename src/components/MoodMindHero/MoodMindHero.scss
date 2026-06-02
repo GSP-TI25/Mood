@@ -2,22 +2,20 @@
 
 .mood-mind-hero {
   position: relative;
-  margin: 1rem;
-  min-height: calc(100vh - 2rem);
-
-  /* 🌟 BORDES: Superior 16px, Inferior en punta (0px) */
-  border-radius: 16px 16px 0 0;
-
+  width: calc(100% - 2rem);
+  min-height: calc(90vh - 2rem);
+  margin: 1rem auto;
+  border-radius: 16px;
   background-color: #1c1c1e;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* 🌟 Centramos horizontalmente todo el bloque */
+  align-items: center;
   padding: 6rem 2rem;
   box-sizing: border-box;
   overflow: hidden;
+  z-index: 2;
 
-  /* FONDO LIGHT RAYS */
   &__bg {
     position: absolute;
     top: 0;
@@ -28,7 +26,6 @@
     pointer-events: none;
   }
 
-  /* LOGO DE FONDO (MARCA DE AGUA) */
   &__bg-logo {
     position: absolute;
     bottom: -15%;
@@ -53,68 +50,91 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1300px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 🌟 Centrado interno de los elementos */
-    text-align: center; /* 🌟 El texto también va centrado */
-    gap: 4rem; /* Separación entre el título y los logos */
-    max-width: 900px;
-    margin: 0 auto; /* Asegura que el contenedor esté al medio */
-  }
-
-  &__title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: $blanco;
-    margin: 0;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-
-    &-white {
-      color: $primary;
-    }
-  }
-
-  /* 🌟 CONTENEDOR DE LOGOS ESTÁTICOS (2 LÍNEAS) */
-  &__ai-logos {
-    display: grid;
-    /* Al pedir 4 columnas iguales, los 8 logos se dividen en exactamente 2 filas */
-    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    justify-items: center;
-    gap: 2.5rem 4rem; /* Gap vertical y horizontal */
-    width: 100%;
-    max-width: 800px; /* Limita el ancho para que no se estiren demasiado */
+    text-align: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-    @media (max-width: 768px) {
-      /* En móviles lo pasamos a 2 columnas (4 filas) para que no se vea miniatura */
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
+  /* 🌟 NUEVA ESTRUCTURA DEL TÍTULO */
+  &__title {
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.04em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem; /* Separación vertical entre la primera y segunda línea */
 
-    img {
-      height: 30px;
-      width: auto;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
-      opacity: 0.5;
-      transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+    /* LÍNEA 1: "Potenciamos [marcas]" */
+    &-top {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 0.3em;
 
       @media (max-width: 768px) {
-        height: 28px;
-      }
-
-      &:hover {
-        opacity: 1; /* Brillo al hover */
+        flex-wrap: wrap; /* En móviles muy pequeños permite que baje */
       }
     }
+
+    /* LÍNEA 2: "extraordinarias con IA." */
+    &-bottom {
+      color: #ffffff;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+
+      @media (max-width: 900px) {
+        flex-wrap: wrap;
+        white-space: normal;
+      }
+    }
+  }
+
+  /* 🌟 EL TEXTO GRIS (Potenciamos) */
+  &__muted-text {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    font-size: 0.85em; /* Un poco más sutil que el resto del texto */
+  }
+
+  /* 🌟 LA CAJA VERDE (marcas) */
+  &__highlight {
+    background-color: $primary;
+    color: #111111 !important;
+    padding: 0.1em 0.35em;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1em; /* Mantiene el tamaño base del h1 */
+    transform: rotate(-4deg);
+    box-shadow: 0 4px 40px rgba($primary, 0.3);
+    line-height: 1;
+    margin-left: 0.1em;
+  }
+
+  &__description {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 400;
   }
 }
