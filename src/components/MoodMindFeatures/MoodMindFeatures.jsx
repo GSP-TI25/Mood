@@ -4,7 +4,10 @@ import './MoodMindFeatures.scss';
 
 const MoodMindFeatures = () => {
   return (
-    <section className='mood-mind-features'>
+    <section
+      className='mood-mind-features'
+      id='moodmind-features'
+    >
       <div className='mood-mind-features__container'>
         <FadeContent
           duration={0.8}

@@ -8,7 +8,7 @@ const MoodMindHero = () => {
   const { t } = useTranslation(); // <-- INICIALIZAMOS EL HOOK
 
   const handleScroll = () => {
-    const element = document.getElementById('adn-content');
+    const element = document.getElementById('moodmind-features');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
