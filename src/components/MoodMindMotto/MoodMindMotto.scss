@@ -12,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 100vh;
 
   /* 🌟 BORDES REDONDEADOS INFERIORES CALCADOS DE TESTIMONIALS */
   border-bottom-left-radius: 48px;
@@ -28,10 +28,10 @@
 
   &__text {
     /* Tamaño dinámico: Base 3rem, escala con 8vw, máximo 8rem */
-    font-size: clamp(3rem, 8vw, 8rem);
-    font-weight: 800; /* Letra pesada/gruesa */
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700; /* Letra pesada/gruesa */
     line-height: 1.1;
-    color: $primary; /* El verde de tu marca */
+    color: $negro; /* El verde de tu marca */
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -46,7 +46,7 @@
 
   /* 🌟 MAGIA: El resalte en blanco para la "IA" */
   &__highlight {
-    color: #ffffff; /* Blanco puro */
+    color: $primary; /* Blanco puro */
     /* Sombra opcional para darle un leve resplandor a la IA */
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
   }
