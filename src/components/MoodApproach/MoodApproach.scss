@@ -1,25 +1,25 @@
 @use '../../styles/variables' as *;
 
-/* 🌟 ANIMACIÓN DE REFLEJO DE LUZ CORREGIDA */
+/* 🌟 ANIMACIÓN DE REFLEJO DE LUZ BASE */
 %shiny-animation {
   position: relative;
-  overflow: hidden; /* Evita que la luz se salga de la tarjeta */
+  overflow: hidden;
 
   &::after {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%; /* Empieza fuera de la tarjeta por la izquierda */
+    left: -100%;
     width: 50%;
     height: 100%;
     transform: skewX(-25deg);
-    transition: left 0.7s ease; /* Transición limpia usando left */
+    transition: left 0.7s ease;
     z-index: 1;
     pointer-events: none;
   }
 
   &:hover::after {
-    left: 200%; /* Atraviesa toda la tarjeta hacia la derecha */
+    left: 200%;
   }
 }
 
@@ -29,8 +29,6 @@
   background-color: #ffffff;
   padding: 6rem 2rem;
   box-sizing: border-box;
-
-  /* 🌟 Ocupar el 100% del alto de la pantalla en desktop */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -47,7 +45,7 @@
     max-width: 1300px;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 6rem;
   }
 
   /* ==========================================
@@ -70,13 +68,13 @@
 
   &__badge {
     background-color: rgba(0, 0, 0, 0.04);
-    color: #111111;
+    color: #2c1c1c;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -99,14 +97,13 @@
 
   &__title {
     font-size: clamp(2.5rem, 4vw, 3.8rem);
-    font-weight: 500;
+    font-weight: 400;
     color: #111111;
     margin: 0;
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
 
-  /* Fuerza que cada bloque ocupe una línea completa */
   &__title-line {
     display: block;
   }
@@ -121,7 +118,7 @@
   }
 
   /* ==========================================
-     🌟 GRILLA DE TARJETAS
+     🌟 GRILLA DE TARJETAS Y LÓGICA DE COLORES
      ========================================== */
   &__grid {
     display: grid;
@@ -135,21 +132,80 @@
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
+
+    /* 🌟 MAGIA AQUÍ: Seleccionamos el 2do hijo de la grilla (FadeContent) 
+       y le aplicamos estilos a la tarjeta que tiene dentro */
+    > :nth-child(3) .mood-approach__card {
+      background-color: #1a1c1d; /* Oscuro */
+      color: #ffffff;
+
+      .mood-approach__card-icon {
+        color: #fff;
+      }
+      .mood-approach__card-overline {
+        color: #fff;
+      }
+      .mood-approach__card-title {
+        color: #ffffff;
+      }
+      .mood-approach__card-desc {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Reflejo de luz blanca adaptada al fondo oscuro */
+      &::after {
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+    }
   }
 
-  /* 🌟 TARJETA BASE */
+  /* ==========================================
+     🌟 ESTILOS BASE DE LAS TARJETAS (ESTÁTICAS)
+     ========================================== */
   &__card {
     @extend %shiny-animation;
     border-radius: 16px;
     padding: 3.5rem 2.5rem;
     display: flex;
     flex-direction: column;
-    min-height: 360px;
+    min-height: 340px;
     box-sizing: border-box;
-    /* ELIMINADO EL TRANSFORM, SOLO TRANSCIÓN DE SOMBRA */
+    /* CERO MOVIMIENTO: Solo transiciona la sombra */
     transition: box-shadow 0.4s ease;
 
-    /* Sombra sutil estática al hacer hover, SIN MOVERSE */
+    /* 🌟 ESTILOS POR DEFECTO PARA TODAS (CLARAS 1 Y 3) */
+    background-color: #f5f6f6;
+    color: #111111;
+
+    .mood-approach__card-icon {
+      color: #111111;
+    }
+    .mood-approach__card-overline {
+      color: rgba(17, 17, 17, 0.5);
+    }
+    .mood-approach__card-title {
+      color: #111111;
+    }
+    .mood-approach__card-desc {
+      color: rgba(17, 17, 17, 0.7);
+    }
+
+    /* Reflejo blanco que se note sobre el gris claro */
+    &::after {
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    /* Sombra estática sin movimiento */
     &:hover {
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
     }
@@ -160,6 +216,7 @@
     }
   }
 
+  /* ESTRUCTURA INTERNA */
   &__card-icon {
     margin-bottom: auto;
     position: relative;
@@ -176,86 +233,24 @@
   }
 
   &__card-overline {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 
   &__card-title {
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 400;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   &__card-desc {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
     font-weight: 400;
-  }
-
-  /* ==========================================
-     🌟 VARIANTES DE TARJETAS
-     ========================================== */
-
-  /* 🌟 Variante Oscura (La del medio) */
-  &--dark {
-    background-color: #212526;
-    color: #ffffff;
-
-    /* Reflejo BLANCO brillante para fondo oscuro */
-    &::after {
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.25) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
-
-    .mood-approach__card-icon {
-      color: $primary;
-    }
-    .mood-approach__card-overline {
-      color: $primary;
-    }
-    .mood-approach__card-title {
-      color: #ffffff;
-    }
-    .mood-approach__card-desc {
-      color: rgba(255, 255, 255, 0.8);
-    }
-  }
-
-  /* 🌟 Variante Clara (Los extremos) */
-  &--light {
-    background-color: #f4f5f6; /* Gris muy claro, sin borde como en la captura */
-    color: #111111;
-
-    /* Reflejo OSCURO sutil para que se vea sobre el fondo gris claro */
-    &::after {
-      background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.05) 50%,
-        rgba(0, 0, 0, 0) 100%
-      );
-    }
-
-    .mood-approach__card-icon {
-      color: #111111;
-    }
-    .mood-approach__card-overline {
-      color: rgba(17, 17, 17, 0.5);
-    }
-    .mood-approach__card-title {
-      color: #111111;
-    }
-    .mood-approach__card-desc {
-      color: rgba(17, 17, 17, 0.7);
-    }
   }
 }

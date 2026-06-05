@@ -11,7 +11,6 @@ const APPROACH_DATA = [
     description:
       'Procesamos datos masivos en segundos. Nuestro equipo extrae los insights estratégicos.',
     icon: Search,
-    isDark: false, // 🌟 Tarjeta Clara
   },
   {
     id: 'acelera',
@@ -20,7 +19,6 @@ const APPROACH_DATA = [
     description:
       'Automatizamos la creación visual. Nuestros directores seleccionan y refinan la idea ganadora.',
     icon: Zap,
-    isDark: true, // 🌟 Tarjeta Oscura (La del medio)
   },
   {
     id: 'optimiza',
@@ -29,7 +27,6 @@ const APPROACH_DATA = [
     description:
       'El algoritmo escala el performance comercial. Nosotros cuidamos la esencia de tu marca.',
     icon: Sparkles,
-    isDark: false, // 🌟 Tarjeta Clara
   },
 ];
 
@@ -55,7 +52,7 @@ const MoodApproach = () => {
 
           {/* Lado Derecho */}
           <div className='mood-approach__header-right'>
-            {/* 🌟 TÍTULO EN 2 LÍNEAS EXACTAS */}
+            {/* 🌟 TÍTULO REESCRITO Y FORZADO A 2 LÍNEAS EXACTAS */}
             <h2 className='mood-approach__title'>
               <span className='mood-approach__title-line'>
                 <BlurText
@@ -104,9 +101,8 @@ const MoodApproach = () => {
                 delay={0.2 * (index + 1)}
                 direction='bottom'
               >
-                <div
-                  className={`mood-approach__card ${card.isDark ? 'mood-approach__card--dark' : 'mood-approach__card--light'}`}
-                >
+                {/* 🌟 UNA SOLA CLASE BASE. EL SCSS HARÁ LA MAGIA */}
+                <div className='mood-approach__card'>
                   <div className='mood-approach__card-icon'>
                     <IconComponent
                       size={32}
