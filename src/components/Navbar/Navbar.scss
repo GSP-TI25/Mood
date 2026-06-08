@@ -1,511 +1,514 @@
-@use "sass:color";
-@use "../../styles/variables" as *;
+@use 'sass:color';
+@use '../../styles/variables' as *;
 
 $gris-card: #1c1c1e;
 
 @mixin glass-pill {
-	background: rgba($blanco, 0.7);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border-radius: 14px;
-	box-shadow: 0 4px 15px rgba($negro, 0.05);
-	border: 1px solid rgba($negro, 0.03);
+  background: rgba($blanco, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba($negro, 0.05);
+  border: 1px solid rgba($negro, 0.03);
 }
 
 .header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding: 1.5rem 2rem;
-	z-index: 1000;
-	transition: padding 0.4s ease;
-	box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  z-index: 1000;
+  transition: padding 0.4s ease;
+  box-sizing: border-box;
 
-	@media (max-width: 968px) {
-		padding: 1rem;
-	}
+  @media (max-width: 968px) {
+    padding: 1.1rem 1.2rem;
+  }
 
-	&--scrolled {
-		padding: 1rem 2rem;
+  &--scrolled {
+    padding: 1rem 2rem;
 
-		@media (max-width: 968px) {
-			padding: 0.5rem;
-		}
+    @media (max-width: 968px) {
+      padding: 0.5rem 1rem;
+    }
 
-		.navbar {
-			@include glass-pill;
-			padding: 0.2rem 1rem;
-			max-width: 800px;
-		}
+    .navbar {
+      @include glass-pill;
+      padding: 0.2rem 1rem;
+      max-width: 800px;
+      @media (max-width: 968px) {
+        padding: 0.6rem 1rem;
+      }
+    }
 
-		.navbar__nav,
-		.navbar__actions {
-			@media (min-width: 969px) {
-				background: transparent;
-				backdrop-filter: none;
-				-webkit-backdrop-filter: none;
-				box-shadow: none;
-				border-color: transparent;
-			}
-		}
+    .navbar__nav,
+    .navbar__actions {
+      @media (min-width: 969px) {
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        border-color: transparent;
+      }
+    }
 
-		.navbar__actions {
-			padding: 0;
-		}
-	}
+    .navbar__actions {
+      padding: 0;
+    }
+  }
 
-	&--menu-open {
-		.navbar {
-			background-color: rgba(255, 255, 255, 0.04) !important;
-			border-color: rgba(255, 255, 255, 0.1) !important;
-			box-shadow: none !important;
-			backdrop-filter: blur(12px) !important;
-			-webkit-backdrop-filter: none !important;
-		}
-	}
+  &--menu-open {
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.04) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  }
 }
 
 .navbar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0.5rem 0;
-	border-radius: 14px;
-	border: 1px solid transparent;
-	transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-	box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
 
-	position: relative;
-	z-index: 1001;
+  position: relative;
+  z-index: 1001;
 
-	@media (max-width: 968px) {
-		@include glass-pill;
-		padding: 0.6rem 1.2rem;
-		width: 100%;
-	}
+  @media (max-width: 968px) {
+    @include glass-pill;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+  }
 
-	&__brand {
-		display: flex;
-		align-items: center;
-		transition: opacity 0.3s ease;
-		z-index: 1001;
+  &__brand {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
 
-		&:hover {
-			opacity: 0.8;
-		}
-	}
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 
-	&__logo {
-		height: 40px;
-		width: auto;
-		display: block;
-		transition: filter 0.3s ease;
+  &__logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    transition: filter 0.3s ease;
 
-		@media (max-width: 768px) {
-			height: 32px;
-		}
-	}
+    @media (max-width: 768px) {
+      height: 32px;
+    }
+  }
 
-	&__nav {
-		@include glass-pill;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		list-style: none;
-		margin: 0;
-		padding: 0.4rem;
-		transition: all 0.4s ease;
-	}
+  &__nav {
+    @include glass-pill;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem;
+    transition: all 0.4s ease;
+  }
 
-	&__item {
-		margin: 0;
-		padding: 0;
-	}
+  &__item {
+    margin: 0;
+    padding: 0;
+  }
 
-	&__link {
-		text-decoration: none;
-		color: $negro;
-		font-weight: 500;
-		font-size: 0.9rem;
-		padding: 0.5rem 1.2rem;
-		border-radius: 8px;
-		transition: all 0.3s ease;
-		display: block;
-		position: relative;
+  &__link {
+    text-decoration: none;
+    color: $negro;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
 
-		/* CORRECCIÓN: Estado activo idéntico al hover */
-		&--active {
-			background-color: rgba($primary, 0.8);
-			color: $negro;
-			font-weight: 700;
-		}
+    /* CORRECCIÓN: Estado activo idéntico al hover */
+    &--active {
+      background-color: rgba($primary, 0.8);
+      color: $negro;
+      font-weight: 700;
+    }
 
-		&:hover {
-			background-color: rgba($primary, 0.8);
-			color: $negro;
-		}
-	}
+    &:hover {
+      background-color: rgba($primary, 0.8);
+      color: $negro;
+    }
+  }
 
-	&__actions {
-		@include glass-pill;
-		display: flex;
-		align-items: center;
-		gap: 1.5rem;
-		padding: 0.35rem;
-		padding-left: 1.2rem;
-		transition: all 0.4s ease;
-	}
+  &__actions {
+    @include glass-pill;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.35rem;
+    padding-left: 1.2rem;
+    transition: all 0.4s ease;
+  }
 
-	&__lang-selector {
-		display: flex;
-		gap: 0.5rem;
-	}
+  &__lang-selector {
+    display: flex;
+    gap: 0.5rem;
+  }
 
-	&__lang-btn {
-		background: none;
-		border: none;
-		color: rgba($negro, 0.7);
-		font-weight: 700;
-		font-size: 0.85rem;
-		cursor: pointer;
-		transition: color 0.3s ease;
-		padding: 0.2rem 0.4rem;
+  &__lang-btn {
+    background: none;
+    border: none;
+    color: rgba($negro, 0.7);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.2rem 0.4rem;
 
-		&--active {
-			color: $negro;
-			position: relative;
+    &--active {
+      color: $negro;
+      position: relative;
 
-			&::after {
-				content: "";
-				position: absolute;
-				bottom: 0;
-				left: 50%;
-				transform: translateX(-50%);
-				width: 4px;
-				height: 4px;
-				background-color: $primary;
-				border-radius: 50%;
-			}
-		}
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background-color: $primary;
+        border-radius: 50%;
+      }
+    }
 
-		&:hover:not(&--active) {
-			color: rgba($negro, 0.8);
-		}
-	}
+    &:hover:not(&--active) {
+      color: rgba($negro, 0.8);
+    }
+  }
 
-	&__desktop-only {
-		@media (max-width: 968px) {
-			display: none !important;
-		}
-	}
+  &__desktop-only {
+    @media (max-width: 968px) {
+      display: none !important;
+    }
+  }
 
-	&__toggle {
-		display: none;
-		background-color: $primary;
-		border-radius: 10px;
-		border: 1px solid transparent;
-		cursor: pointer;
-		z-index: 1001;
-		width: 44px;
-		height: 44px;
-		position: relative;
-		transition: all 0.3s ease;
+  &__toggle {
+    display: none;
+    background-color: $primary;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    z-index: 1001;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    transition: all 0.3s ease;
 
-		@media (max-width: 968px) {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+    @media (max-width: 968px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-		&-line {
-			position: absolute;
-			width: 22px;
-			height: 2px;
-			background-color: $negro;
-			border-radius: 4px;
-			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    &-line {
+      position: absolute;
+      width: 22px;
+      height: 2px;
+      background-color: $negro;
+      border-radius: 4px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-			&:nth-child(1) {
-				transform: translateY(-4px);
-			}
-			&:nth-child(2) {
-				transform: translateY(4px);
-			}
-		}
+      &:nth-child(1) {
+        transform: translateY(-4px);
+      }
+      &:nth-child(2) {
+        transform: translateY(4px);
+      }
+    }
 
-		&--open {
-			background-color: transparent;
-			border-color: rgba($primary, 0.8);
+    &--open {
+      background-color: transparent;
+      border-color: rgba($primary, 0.8);
 
-			.navbar__toggle-line {
-				background-color: $blanco;
+      .navbar__toggle-line {
+        background-color: $blanco;
 
-				&:nth-child(1) {
-					transform: translateY(0) rotate(45deg);
-				}
-				&:nth-child(2) {
-					transform: translateY(0) rotate(-45deg);
-				}
-			}
-		}
-	}
+        &:nth-child(1) {
+          transform: translateY(0) rotate(45deg);
+        }
+        &:nth-child(2) {
+          transform: translateY(0) rotate(-45deg);
+        }
+      }
+    }
+  }
 }
 
 .btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	padding: 0.6rem 1.25rem;
-	border-radius: 10px;
-	text-decoration: none;
-	font-weight: 600;
-	font-size: 0.9rem;
-	border: none;
-	transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  transition: all 0.3s ease;
 
-	/* CORRECCIÓN: Preparación para el efecto Shiny */
-	position: relative;
-	overflow: hidden;
+  /* CORRECCIÓN: Preparación para el efecto Shiny */
+  position: relative;
+  overflow: hidden;
 
-	/* Elevamos el texto y el icono por encima del brillo */
-	span,
-	svg {
-		position: relative;
-		z-index: 2;
-	}
+  /* Elevamos el texto y el icono por encima del brillo */
+  span,
+  svg {
+    position: relative;
+    z-index: 2;
+  }
 
-	&--contact {
-		background-color: $primary;
-		color: $negro;
-		cursor: pointer;
+  &--contact {
+    background-color: $primary;
+    color: $negro;
+    cursor: pointer;
 
-		/* CORRECCIÓN: Elemento brillante oculto a la izquierda */
-		&::after {
-			content: "";
-			position: absolute;
-			top: -50%;
-			left: -120%;
-			width: 60%;
-			height: 200%;
-			background: linear-gradient(
-				100deg,
-				rgba(255, 255, 255, 0) 20%,
-				rgba(255, 255, 255, 0.7) 50%,
-				rgba(255, 255, 255, 0) 80%
-			);
-			transform: skewX(-25deg);
-			transition: transform 0.6s ease-in-out;
-			z-index: 1;
-		}
+    /* CORRECCIÓN: Elemento brillante oculto a la izquierda */
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -120%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.7) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: skewX(-25deg);
+      transition: transform 0.6s ease-in-out;
+      z-index: 1;
+    }
 
-		&:hover {
-			background-color: color.scale($primary, $lightness: -10%);
+    &:hover {
+      background-color: color.scale($primary, $lightness: -10%);
 
-			/* CORRECCIÓN: Al hacer hover, el brillo atraviesa el botón */
-			&::after {
-				transform: translateX(400%) skewX(-25deg);
-			}
-		}
-	}
+      /* CORRECCIÓN: Al hacer hover, el brillo atraviesa el botón */
+      &::after {
+        transform: translateX(400%) skewX(-25deg);
+      }
+    }
+  }
 
-	&__icon {
-		display: flex;
-		align-items: center;
-	}
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
 }
 
 /* ===================================================
    3. PANEL MÓVIL: LA TARJETA OSCURA FLOTANTE
    =================================================== */
 .mobile-panel {
-	display: none;
-	position: relative;
+  display: none;
+  position: relative;
 
-	@media (max-width: 968px) {
-		display: flex;
-		position: fixed;
-		top: 0.5rem;
-		bottom: 0.5rem;
-		left: 0.5rem;
-		right: 0.5rem;
+  @media (max-width: 968px) {
+    display: flex;
+    position: fixed;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
 
-		background-image: url("/src/assets/Fondo_nav.png");
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-color: $gris-card;
-		border-radius: 16px;
-		z-index: 990;
-		overflow-y: auto;
-		overflow-x: hidden;
+    background-image: url('/src/assets/Fondo_nav.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: $gris-card;
+    border-radius: 16px;
+    z-index: 990;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 6rem 2rem 2rem;
-		gap: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 2rem 2rem;
+    gap: 3rem;
 
-		opacity: 0;
-		transform: translateY(-100%);
-		pointer-events: none;
-		transition:
-			transform 0.5s cubic-bezier(0.65, 0, 0.35, 1),
-			opacity 0.5s ease;
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition:
+      transform 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+      opacity 0.5s ease;
 
-		&--open {
-			opacity: 1;
-			transform: translateY(0);
-			pointer-events: auto;
-		}
+    &--open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
 
-		&__nav {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			display: flex;
-			flex-direction: column;
-			gap: 1.5rem;
-			width: 100%;
-			align-items: center;
-		}
+    &__nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      align-items: center;
+    }
 
-		&__link {
-			text-decoration: none;
-			color: $blanco;
-			font-weight: 400;
-			font-size: 2.5rem;
-			letter-spacing: -0.02em;
-			padding: 0.5rem;
-			transition: color 0.3s ease;
-			position: relative;
-			display: inline-block;
+    &__link {
+      text-decoration: none;
+      color: $blanco;
+      font-weight: 400;
+      font-size: 2.5rem;
+      letter-spacing: -0.02em;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+      position: relative;
+      display: inline-block;
 
-			/* CORRECCIÓN: En móvil el activo toma el mismo color verde que el hover, sin subrayado */
-			&--active {
-				color: $primary;
-			}
+      /* CORRECCIÓN: En móvil el activo toma el mismo color verde que el hover, sin subrayado */
+      &--active {
+        color: $primary;
+      }
 
-			&:hover {
-				color: $primary;
-			}
-		}
+      &:hover {
+        color: $primary;
+      }
+    }
 
-		&__actions {
-			display: flex;
-			flex-direction: column;
-			gap: 2rem;
-			width: 100%;
-			align-items: center;
-			margin-top: 2rem;
-		}
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      align-items: center;
+      margin-top: 2rem;
+    }
 
-		.navbar__lang-selector {
-			.navbar__lang-btn {
-				color: rgba($blanco, 0.5);
-				font-size: 1.1rem;
+    .navbar__lang-selector {
+      .navbar__lang-btn {
+        color: rgba($blanco, 0.5);
+        font-size: 1.1rem;
 
-				&--active {
-					color: $blanco;
-				}
-				&:hover:not(&--active) {
-					color: $blanco;
-				}
-			}
-		}
+        &--active {
+          color: $blanco;
+        }
+        &:hover:not(&--active) {
+          color: $blanco;
+        }
+      }
+    }
 
-		&__btn {
-			width: 100%;
-			max-width: 300px;
-			padding: 1rem;
-		}
-	}
+    &__btn {
+      width: 100%;
+      max-width: 300px;
+      padding: 1rem;
+    }
+  }
 }
 
 /* ===================================================
    MODO OSCURO PARA MOOD PRINT (CORREGIDO)
    =================================================== */
 .header--dark-mode {
-	/* 1. LOGO INTACTO (Sin ningún tipo de filtro) */
-	.navbar__logo {
-		filter: none !important;
-	}
+  /* 1. LOGO INTACTO (Sin ningún tipo de filtro) */
+  .navbar__logo {
+    filter: none !important;
+  }
 
-	/* 2. ENLACES Y HOVER (Respetando tu verde original) */
-	.navbar__link {
-		color: $blanco !important;
+  /* 2. ENLACES Y HOVER (Respetando tu verde original) */
+  .navbar__link {
+    color: $blanco !important;
 
-		&--active,
-		&:hover {
-			color: $negro !important;
-			background-color: rgba($primary, 0.8) !important; /* Tu verde original */
-		}
-	}
+    &--active,
+    &:hover {
+      color: $negro !important;
+      background-color: rgba($primary, 0.8) !important; /* Tu verde original */
+    }
+  }
 
-	/* 3. SELECTOR DE IDIOMAS */
-	.navbar__lang-selector .navbar__lang-btn {
-		color: rgba($blanco, 0.6) !important;
+  /* 3. SELECTOR DE IDIOMAS */
+  .navbar__lang-selector .navbar__lang-btn {
+    color: rgba($blanco, 0.6) !important;
 
-		&--active,
-		&:hover {
-			color: $blanco !important;
-		}
-	}
+    &--active,
+    &:hover {
+      color: $blanco !important;
+    }
+  }
 
-	/* 4. BOTÓN HAMBURGUESA (MÓVIL) */
-	.navbar__toggle {
-		border-color: rgba($blanco, 0.2) !important;
+  /* 4. BOTÓN HAMBURGUESA (MÓVIL) */
+  .navbar__toggle {
+    border-color: rgba($blanco, 0.2) !important;
 
-		&-line {
-			background-color: $blanco !important;
-		}
+    &-line {
+      background-color: $blanco !important;
+    }
 
-		&--open {
-			border-color: rgba($primary, 0.8) !important;
-		}
-	}
+    &--open {
+      border-color: rgba($primary, 0.8) !important;
+    }
+  }
 
-	/* 5. ESTADO INICIAL (NO SCROLLED) - Solo las píldoras son oscuras */
-	&:not(.header--scrolled) {
-		.navbar {
-			background: transparent !important;
-			border: none !important;
-			box-shadow: none !important;
-			backdrop-filter: none !important;
-			-webkit-backdrop-filter: none !important;
-		}
+  /* 5. ESTADO INICIAL (NO SCROLLED) - Solo las píldoras son oscuras */
+  &:not(.header--scrolled) {
+    .navbar {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
 
-		/* Aplicamos el fondo oscuro SÓLO a las píldoras */
-		.navbar__nav,
-		.navbar__actions {
-			background: rgba($gris-card, 0.8) !important;
-			backdrop-filter: blur(12px) !important;
-			-webkit-backdrop-filter: blur(12px) !important;
-			border: 1px solid rgba($blanco, 0.05) !important;
-		}
-	}
+    /* Aplicamos el fondo oscuro SÓLO a las píldoras */
+    .navbar__nav,
+    .navbar__actions {
+      background: rgba($gris-card, 0.8) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba($blanco, 0.05) !important;
+    }
+  }
 
-	/* 6. ESTADO SCROLLED - Todo el navbar oscuro */
-	&.header--scrolled {
-		.navbar {
-			background: rgba($gris-card, 0.85) !important;
-			backdrop-filter: blur(12px) !important;
-			-webkit-backdrop-filter: blur(12px) !important;
-			border: 1px solid rgba($blanco, 0.05) !important;
-		}
+  /* 6. ESTADO SCROLLED - Todo el navbar oscuro */
+  &.header--scrolled {
+    .navbar {
+      background: rgba($gris-card, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba($blanco, 0.05) !important;
+    }
 
-		/* Las píldoras interiores se vuelven transparentes para no hacer doble fondo */
-		.navbar__nav,
-		.navbar__actions {
-			@media (min-width: 969px) {
-				background: transparent !important;
-				border: none !important;
-				backdrop-filter: none !important;
-				-webkit-backdrop-filter: none !important;
-			}
-		}
-	}
+    /* Las píldoras interiores se vuelven transparentes para no hacer doble fondo */
+    .navbar__nav,
+    .navbar__actions {
+      @media (min-width: 969px) {
+        background: transparent !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+    }
+  }
 }
