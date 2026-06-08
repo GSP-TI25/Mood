@@ -1,39 +1,199 @@
 @use '../../styles/variables' as *;
 
+%shiny-animation {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+  }
+  &:hover::after {
+    transform: translateX(400%) skewX(-25deg);
+  }
+}
+
 .cms-login {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1c1c1e; // Fondo oscuro inmersivo
+  background-color: #f1f5f9; // Gris ultra claro de fondo (slate-100)
   padding: 2rem;
 
-  &__card {
+  /* 🌟 LA TARJETA CONTENEDORA PRINCIPAL BLANCA */
+  &__wrapper {
     background-color: $blanco;
-    padding: 3rem;
-    border-radius: 20px;
+    border-radius: 24px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    max-width: 1200px;
+    min-height: 800px;
+    display: grid;
+    grid-template-columns: 1fr;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); // Sombra premium muy suave
+    padding: 2rem; // EL PADDING QUE SEPARA LA IMAGEN DEL BORDE
+
+    @media (min-width: 900px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  // ==========================================
+  // LADO IZQUIERDO: Slider Contenido
+  // ==========================================
+  &__slider-section {
+    display: none; // Oculto en móvil
+
+    @media (min-width: 900px) {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px 0 0 18px; // Esquinas redondeadas internas para la imagen
+    overflow: hidden;
+    background-color: #f8fafc; // Fallback
+  }
+
+  &__slider-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; // Transición suave entre imágenes
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__slider-overlay {
+    position: absolute;
+    inset: 0;
+    // Gradiente sutil solo abajo para que la caja de texto y los puntos destaquen
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0) 40%
+    );
+    z-index: 1;
+  }
+
+  &__slider-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* 🌟 LA CAJA BLANCA FLOTANTE DENTRO DE LA IMAGEN */
+  &__floating-box {
+    border-radius: 20px;
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 500px;
+    background: rgba($blanco, 0.15);
+    border: 1px solid rgba($blanco, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    p {
+      margin: 0;
+      color: #fff; // slate-700
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+  }
+
+  &__slider-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &--active {
+      background-color: $blanco;
+      width: 16px;
+      border-radius: 4px;
+    }
+  }
+
+  // ==========================================
+  // LADO DERECHO: Formulario Shadcn
+  // ==========================================
+  &__form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  &__form-inner {
+    width: 100%;
+    max-width: 340px; // Mantiene el formulario estrecho
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   &__header {
-    text-align: center;
-    margin-bottom: 2.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 
     h2 {
-      font-size: 2rem;
-      font-weight: 900;
-      color: $negro;
-      margin: 0 0 0.5rem 0;
-
-      span {
-        color: $primary;
-      }
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #0f172a; // slate-900
+      margin: 0;
+      letter-spacing: -0.04em;
     }
 
     p {
-      color: rgba($negro, 0.6);
+      color: #64748b; // slate-500
       font-size: 0.9rem;
       margin: 0;
     }
@@ -42,7 +202,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   &__group {
@@ -51,41 +211,69 @@
     gap: 0.5rem;
 
     label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: $negro;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #0f172a;
     }
 
     input {
-      padding: 12px 16px;
-      border: 1px solid rgba($negro, 0.2);
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: inherit;
+      width: 100%;
+      height: 2.5rem; // h-10
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #e2e8f0; // slate-200
+      border-radius: 8px; // radius-md
+      font-size: 0.875rem;
+      color: #0f172a;
       outline: none;
-      transition: border-color 0.3s;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
 
+      &::placeholder {
+        color: #94a3b8;
+      }
+
+      /* 🌟 SHADCN FOCUS RING */
       &:focus {
-        border-color: $primary;
+        border-color: #0f172a;
+        box-shadow: 0 0 0 1px #0f172a;
       }
     }
   }
 
+  &__label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__forgot {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      color: #0f172a;
+      text-decoration: underline;
+    }
+  }
+
   &__btn {
-    margin-top: 1rem;
-    padding: 14px;
-    background-color: $negro;
+    margin-top: 0.5rem;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #0f172a; // slate-900
     color: $blanco;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 
     &:hover {
-      background-color: $primary;
-      color: $negro;
+      background-color: rgba(15, 23, 42, 0.9);
     }
   }
 }

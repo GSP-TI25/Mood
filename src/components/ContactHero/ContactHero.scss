@@ -70,7 +70,7 @@
   }
 
   &__title {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
     font-weight: 900;
     text-align: center;
     color: $negro;
@@ -82,10 +82,13 @@
       color: rgba($negro, 0.5);
       font-weight: 500;
     }
+    @media (max-width: 968px) {
+      margin: auto;
+    }
   }
 
   &__highlight {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
     font-weight: 900;
     color: $negro !important;
     background-color: $primary;
