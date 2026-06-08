@@ -1,13 +1,11 @@
 import Navbar from '../../components/Navbar/Navbar';
 import MoodMindHero from '../../components/MoodMindHero/MoodMindHero';
-// Importa el Footer si deseas que esta página también lo tenga
-// import Footer from '../../components/Footer/Footer';
-import './MoodMind.scss';
-import Footer from '../../components/Footer/Footer';
 import MoodMindFeatures from '../../components/MoodMindFeatures/MoodMindFeatures';
 import MoodMindWorkflow from '../../components/MoodMindWorkflow/MoodMindWorkflow';
 import MoodApproach from '../../components/MoodApproach/MoodApproach';
 import MoodMindMotto from '../../components/MoodMindMotto/MoodMindMotto';
+import Footer from '../../components/Footer/Footer';
+import './MoodMind.scss';
 
 const MoodMind = () => {
   return (
@@ -19,6 +17,7 @@ const MoodMind = () => {
       <MoodMindWorkflow />
       <MoodApproach />
       <MoodMindMotto />
+
       {/* 🌟 AQUÍ DEBAJO PUEDES AGREGAR EL RESTO DE SECCIONES DE LA PÁGINA EN EL FUTURO */}
 
       <div className='mood-mind__footer-area'>

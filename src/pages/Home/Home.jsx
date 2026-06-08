@@ -4,7 +4,6 @@ import Brands from '../../components/Brands/Brands';
 import Services from '../../components/Services/Services';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import Footer from '../../components/Footer/Footer';
-import GradualBlur from '../../components/GradualBlur/GradualBlur';
 import bgVideo from '../../assets/VideoFondoMood.webm';
 import './Home.scss';
 
@@ -41,19 +40,6 @@ const Home = () => {
         <Testimonials />
         <Footer />
       </div>
-
-      {/* <div className='home__desktop-blur'>
-        <GradualBlur
-          target='page'
-          position='bottom'
-          height='8rem'
-          strength={3}
-          divCount={6}
-          curve='ease-out'
-          exponential
-          opacity={1}
-        />
-      </div> */}
     </main>
   );
 };
