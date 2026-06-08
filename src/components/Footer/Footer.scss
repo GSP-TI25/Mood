@@ -273,10 +273,9 @@ $gris-card: #1c1c1e;
 
   /* --- LEGALES (Bottom) --- */
   &__bottom {
-    border-top: 1px solid rgba($blanco, 0.1);
     padding-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     p {

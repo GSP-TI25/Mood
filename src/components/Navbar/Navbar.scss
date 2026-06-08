@@ -421,9 +421,12 @@ $gris-card: #1c1c1e;
     }
 
     &__btn {
+      display: flex;
+      align-items: center;
       width: 100%;
       max-width: 300px;
       padding: 1rem;
+      font-size: 1.25rem;
     }
   }
 }

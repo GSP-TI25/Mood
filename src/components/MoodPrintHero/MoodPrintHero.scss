@@ -93,7 +93,7 @@
 
   &__title {
     /* CORRECCIÓN: Bajamos el tamaño mínimo de 2.5rem a 2rem para que quepa la palabra larga */
-    font-size: clamp(2rem, 8vw, 5.5rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 900;
     color: $blanco;
     line-height: 1.1;
@@ -118,7 +118,7 @@
 
   &__highlight {
     /* CORRECCIÓN: Mismo ajuste de tamaño que el título */
-    font-size: clamp(2rem, 8vw, 5.5rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 900;
     color: $negro !important;
     background-color: $primary;
