@@ -39,7 +39,7 @@
     background: linear-gradient(
       135deg,
       $negro,
-      color.adjust(#1c1c1e, $lightness: -10%)
+      color.adjust($primary, $lightness: -25%)
     );
     border-radius: 16px;
     padding: 50px;
@@ -63,9 +63,9 @@
         background-color: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         padding: 6px 14px;
-        border-radius: 50px;
+        border-radius: 10px;
         font-size: 0.75rem;
-        font-weight: 600;
+        font-weight: 400;
         letter-spacing: 1px;
         text-transform: uppercase;
         margin-bottom: 25px;
@@ -99,8 +99,8 @@
       border-radius: 50%;
       background: linear-gradient(
         to bottom right,
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0)
+        rgba(86, 202, 18, 0.05),
+        rgba(30, 129, 47, 0)
       );
     }
     .circle-1 {
