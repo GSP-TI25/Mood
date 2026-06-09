@@ -1,7 +1,7 @@
 //src/components/Cms/CmsSidebar.scss
 @use '../../styles/variables' as *;
 
-$sidebar-width-open: 260px;
+$sidebar-width-open: 240px;
 $sidebar-width-collapsed: 80px;
 $smooth-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -149,7 +149,7 @@ $slate-900: #0f172a;
     width: 24px;
     height: 24px;
     background-color: $blanco;
-    border: 1px solid $slate-200;
+    border: 1px solid $slate-100;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -165,9 +165,8 @@ $slate-900: #0f172a;
     }
 
     &:hover {
-      background-color: $slate-50;
-      color: $slate-900;
-      border-color: $slate-900;
+      background-color: #6cebb6;
+      color: $slate-700;
     }
   }
 
@@ -226,8 +225,8 @@ $slate-900: #0f172a;
       }
 
       &.active {
-        background: $slate-800; // Oscuro elegante
-        color: $blanco;
+        background: #6cebb6; // Oscuro elegante
+        color: $slate-700;
         font-weight: 600;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
