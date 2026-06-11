@@ -342,7 +342,7 @@ const CmsDashboard = () => {
                     onClick={() => setActiveTab('vacantes')}
                   >
                     <div className='cms-home-card__icon bg-blue'>
-                      <Briefcase size={28} />
+                      <Briefcase size={25} />
                     </div>
                     <div className='cms-home-card__info'>
                       <h3>Gestión de Vacantes</h3>
@@ -357,7 +357,7 @@ const CmsDashboard = () => {
                     onClick={() => setActiveTab('postulantes')}
                   >
                     <div className='cms-home-card__icon bg-purple'>
-                      <Users size={28} />
+                      <Users size={25} />
                     </div>
                     <div className='cms-home-card__info'>
                       <h3>Base de Postulantes</h3>
@@ -372,7 +372,7 @@ const CmsDashboard = () => {
                     onClick={() => setActiveTab('proyectos')}
                   >
                     <div className='cms-home-card__icon bg-pink'>
-                      <FolderGit2 size={28} />
+                      <FolderGit2 size={25} />
                     </div>
                     <div className='cms-home-card__info'>
                       <h3>Proyectos (MoodPrint)</h3>
@@ -387,7 +387,7 @@ const CmsDashboard = () => {
                     onClick={() => setActiveTab('equipo')}
                   >
                     <div className='cms-home-card__icon bg-emerald'>
-                      <IdCard size={28} />
+                      <IdCard size={25} />
                     </div>
                     <div className='cms-home-card__info'>
                       <h3>Equipo Mood</h3>
@@ -402,7 +402,7 @@ const CmsDashboard = () => {
                     onClick={() => setActiveTab('perfil')}
                   >
                     <div className='cms-home-card__icon bg-orange'>
-                      <User size={28} />
+                      <User size={25} />
                     </div>
                     <div className='cms-home-card__info'>
                       <h3>Mi Perfil</h3>
@@ -418,7 +418,7 @@ const CmsDashboard = () => {
                       onClick={() => setActiveTab('configuracion')}
                     >
                       <div className='cms-home-card__icon bg-slate'>
-                        <Settings size={28} />
+                        <Settings size={25} />
                       </div>
                       <div className='cms-home-card__info'>
                         <h3>Configuración</h3>
