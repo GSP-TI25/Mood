@@ -150,7 +150,7 @@ const ApplicationsTable = ({ applications }) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 6;
 
   const [cvModalApp, setCvModalApp] = useState(null);
   const [answersModalApp, setAnswersModalApp] = useState(null);
