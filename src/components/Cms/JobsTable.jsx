@@ -1,6 +1,6 @@
 //src/components/Cms/JobsTable.jsx
 import { useState } from 'react';
-import { Power, PowerOff, Edit } from 'lucide-react';
+import { BanIcon, Edit, Undo2 } from 'lucide-react';
 import './JobsTable.scss';
 
 const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
@@ -76,9 +76,9 @@ const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
                       }
                     >
                       {job.is_active ? (
-                        <PowerOff size={16} />
+                        <BanIcon size={16} />
                       ) : (
-                        <Power size={16} />
+                        <Undo2 size={16} />
                       )}
                     </button>
                   </div>
