@@ -1,4 +1,3 @@
-//src/pages/Careers/JobDetail.jsx
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Briefcase, Calendar, ArrowLeft, Send, MapPin } from 'lucide-react';
@@ -65,8 +64,59 @@ const JobDetail = () => {
     );
   }
 
+  // 🌟 CONSTRUCCIÓN DEL SCHEMA MARKUP (JSON-LD) PARA GOOGLE JOBS
+  const jobSchema = {
+    '@context': 'https://schema.org/',
+    '@type': 'JobPosting',
+    title: job.title,
+    // Limpiamos un poco la descripción y responsabilidades para que quede bien en el schema
+    description: `
+      <p>${job.description || ''}</p>
+      ${job.responsibilities?.length ? `<h3>Responsabilidades:</h3><ul>${job.responsibilities.map((r) => `<li>${r}</li>`).join('')}</ul>` : ''}
+      ${job.requirements?.length ? `<h3>Requisitos:</h3><ul>${job.requirements.map((r) => `<li>${r}</li>`).join('')}</ul>` : ''}
+    `,
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'Mood',
+      value: job.id,
+    },
+    // Trata de usar una fecha ISO real si viene de la DB. Si no, usamos la de hoy como fallback.
+    datePosted: job.created_at || new Date().toISOString(),
+    validThrough: '2026-12-31T00:00', // Puedes ajustar esto si la vacante expira
+    // Mapeo básico de modalidad a los formatos que Google espera
+    employmentType:
+      job.type === 'Full-time'
+        ? 'FULL_TIME'
+        : job.type === 'Part-time'
+          ? 'PART_TIME'
+          : job.type === 'Freelance'
+            ? 'CONTRACTOR'
+            : 'OTHER',
+    hiringOrganization: {
+      '@type': 'Organization',
+      name: 'Mood',
+      sameAs: 'https://www.mood.pe/',
+      logo: 'https://www.mood.pe/Logo_Mood.svg', // Ajustar si el path de tu logo es distinto en prod
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        // Mapeo básico del país
+        addressCountry:
+          job.country === 'Peru' || job.country === 'Perú' ? 'PE' : 'CO',
+      },
+    },
+  };
+
   return (
     <main className='job-detail-layout'>
+      {/* 🌟 INYECTAMOS EL SCHEMA EN EL DOM DE FORMA INVISIBLE */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobSchema) }}
+      />
+
       <div className='job-detail-wrapper'>
         {/* Botón Volver (Estilo Ghost Button Shadcn) */}
         <Link
@@ -142,7 +192,6 @@ const JobDetail = () => {
                 <h3>¿Listo para unirte al equipo?</h3>
                 <p>Completa el formulario y cuéntanos sobre ti.</p>
               </div>
-              {/* 🌟 CAMBIO: Redirigimos a la nueva página de postulación */}
               <Link
                 to={`/trabaja_con_nosotros/${job.id}/postular`}
                 className='btn-apply'
