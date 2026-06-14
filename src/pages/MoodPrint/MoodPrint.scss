@@ -1,25 +1,36 @@
-//src/pages/MoodPrint/MoodPrint.scss
-@use '../../styles/variables' as *;
+// src/pages/MoodPrint/MoodPrint.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Estilos principales para la vista del Portafolio (MoodPrint).
+ */
 .mood-print {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: #ecf0ec;
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background-color: $bg-light;
 
-  &__footer-area {
-    width: 100%;
-    flex-grow: 1;
-    background-color: #1c1c1e;
-
-    display: flex;
-    flex-direction: column;
-
-    position: relative;
-    z-index: 999;
-  }
+	/**
+   * Contenedor inferior oscuro que envuelve la grilla de proyectos y el pie de página.
+   */
+	&__footer-area {
+		width: 100%;
+		flex-grow: 1;
+		background-color: $gris-card;
+		background-image:
+			linear-gradient(rgba($gris-card, 0.75), rgba($gris-card, 0.75)),
+			url("../../assets/Fondo_nav.png");
+		background-blend-mode: overlay;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		z-index: 999;
+	}
 }

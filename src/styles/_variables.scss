@@ -10,6 +10,7 @@ $secondary: #eeee7a;
 $blanco: #fff;
 $negro: #373235;
 $gris-card: #1c1c1e;
+$bg-light: #ecf0ec;
 
 /**
  * ==========================================
@@ -17,9 +18,10 @@ $gris-card: #1c1c1e;
  * ==========================================
  */
 $bp-small-mobile: 475px;
+$bp-medium-mobile: 576px;
 $bp-mobile: 768px;
 $bp-tablet: 968px;
-$bp-large: 1024px; // Añadido para transiciones fluidas de imágenes/layouts grandes
+$bp-large: 1024px;
 $bp-desktop: 1200px;
 
 /**
