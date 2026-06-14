@@ -5,6 +5,7 @@ import Brands from "../../components/Brands/Brands";
 import Services from "../../components/Services/Services";
 import Testimonials from "../../components/Testimonials/Testimonials";
 import Footer from "../../components/Footer/Footer";
+import SocialFloating from "../../components/SocialFloating/SocialFloating";
 import bgVideo from "../../assets/VideoFondoMood.webm";
 import "./Home.scss";
 
@@ -15,12 +16,13 @@ import "./Home.scss";
 const Home = () => {
 	return (
 		<main className='home'>
+			<SocialFloating />
+
 			<div className='home__hero-frame'>
 				<video className='home__hero-video' autoPlay loop muted playsInline>
 					<source src={bgVideo} type='video/webm' />
 				</video>
 
-				{/* Overlay degradado para asegurar la legibilidad del texto sobre el video */}
 				<div className='home__hero-overlay'></div>
 
 				<div className='home__hero-content'>

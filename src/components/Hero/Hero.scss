@@ -50,7 +50,7 @@
 	}
 
 	&__title-text {
-		color: #ffffff;
+		color: $blanco;
 	}
 
 	&__rotating-text {
@@ -61,19 +61,20 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-		text-shadow: none;
+		box-shadow: 0 4px 20px rgba($negro, 0.5);
 	}
 
 	&__paragraph {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		font-size: 1.25rem;
 		font-weight: 400;
-		color: rgba(255, 255, 255, 0.95);
+		color: rgba($blanco, 0.95);
 		text-align: center;
 		line-height: 1.6;
 		max-width: 700px;
 		margin: 0;
-		justify-content: center;
 
 		@media (max-width: 768px) {
 			font-size: 1rem;
@@ -92,21 +93,18 @@
 		}
 	}
 
-	/**
-   * Píldoras de Habilidades (Skills)
-   */
 	&__skill-item {
 		@include shiny-effect;
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		background-color: #1c1c1e;
+		background-color: $gris-card;
 		padding: 0.75rem 1.25rem;
 		border-radius: 14px;
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba($blanco, 0.1);
 		transition: all 0.3s ease;
 		cursor: default;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+		box-shadow: 0 4px 15px rgba($negro, 0.4);
 
 		@media (max-width: 768px) {
 			padding: 0.5rem 0.8rem;
@@ -123,16 +121,16 @@
 	&__skill-icon {
 		position: relative;
 		z-index: 2;
-		color: rgba(255, 255, 255, 0.8);
+		color: rgba($blanco, 0.8);
 		transition: color 0.3s ease;
 	}
 
 	&__skill-text {
 		position: relative;
 		z-index: 2;
-		font-size: 0.9rem;
+		font-size: 0.85rem;
 		font-weight: 600;
-		color: #ffffff;
+		color: $blanco;
 		transition: color 0.3s ease;
 
 		@media (max-width: 768px) {
@@ -154,9 +152,6 @@
 		}
 	}
 
-	/**
-   * Botones de Acción (CTAs)
-   */
 	.btn-hero {
 		@include shiny-effect;
 		display: flex;
@@ -173,8 +168,7 @@
 		transition:
 			background-color 0.3s ease,
 			border-color 0.3s ease,
-			color 0.3s ease,
-			opacity 0.3s ease;
+			color 0.3s ease;
 
 		@media (max-width: 480px) {
 			width: 100%;
@@ -197,63 +191,14 @@
 		}
 
 		&--secondary {
-			background-color: #1c1c1e;
-			color: #ffffff;
-			border: 1px solid rgba(255, 255, 255, 0.1);
+			background-color: $gris-card;
+			color: $blanco;
+			border: 1px solid rgba($blanco, 0.1);
 
 			&:hover {
 				border-color: $primary;
 				color: $primary;
 			}
 		}
-	}
-
-	/**
-   * Menú Flotante de Redes Sociales
-   */
-	&__socials-float {
-		position: absolute;
-		right: 2.5rem;
-		top: 50%;
-		transform: translateY(-50%);
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		z-index: 10;
-
-		@media (max-width: 1024px) {
-			position: relative;
-			right: auto;
-			top: auto;
-			transform: none;
-			flex-direction: row;
-			margin-top: 2.5rem;
-		}
-	}
-
-	&__social-link {
-		@include shiny-effect;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 50px;
-		height: 50px;
-		background-color: #1c1c1e;
-		color: #ffffff;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 14px;
-		text-decoration: none;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-		transition: color 0.3s ease;
-
-		&:hover {
-			color: $primary;
-		}
-	}
-
-	&__social-icon {
-		position: relative;
-		z-index: 2;
-		transition: color 0.3s ease;
 	}
 }

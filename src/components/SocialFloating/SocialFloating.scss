@@ -1,0 +1,77 @@
+// src/components/SocialFloating/SocialFloating.scss
+@use "../../styles/variables" as *;
+
+/**
+ * Mixin para el diseño contraído tipo "pestaña".
+ * Centraliza los estilos para reutilizarlos en scroll (Desktop) o por defecto (Móvil).
+ */
+@mixin compact-edge-style {
+	right: 0;
+	gap: 0.3rem;
+
+	.social-floating__link {
+		width: 44px;
+		height: 44px;
+		border-radius: 12px 0 0 12px;
+		border-right: none;
+		background-color: rgba($gris-card, 0.9);
+		backdrop-filter: blur(8px);
+	}
+
+	.social-floating__icon {
+		transform: scale(0.9);
+	}
+}
+
+/**
+ * Estilos principales del panel flotante.
+ */
+.social-floating {
+	position: fixed;
+	right: 2.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	z-index: 900;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+	&__link {
+		@include shiny-effect;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 50px;
+		height: 50px;
+		background-color: $gris-card;
+		color: $blanco;
+		border: 1px solid rgba($blanco, 0.1);
+		border-radius: 14px;
+		text-decoration: none;
+		// box-shadow: 0 4px 15px rgba($negro, 0.4);
+		transition: all 0.3s ease;
+
+		&:hover {
+			color: $primary;
+		}
+	}
+
+	&__icon {
+		position: relative;
+		z-index: 2;
+		transition: all 0.3s ease;
+	}
+
+	// 1. Estado para Escritorio: Se aplica el modo contraído SÓLO cuando hay scroll
+	&--scrolled {
+		@media (min-width: 1025px) {
+			@include compact-edge-style;
+		}
+	}
+
+	// 2. Estado para Tablet y Móvil: El modo contraído es permanente desde la carga
+	@media (max-width: 1024px) {
+		@include compact-edge-style;
+	}
+}

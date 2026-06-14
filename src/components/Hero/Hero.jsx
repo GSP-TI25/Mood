@@ -11,15 +11,11 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import BlurText from "../BlurText/BlurText";
-import Facebook from "../Icons/Facebook";
-import Instagram from "../Icons/Instagram";
-import Linkedin from "../Icons/Linkedin";
 import "./Hero.scss";
 
 /**
  * Componente Hero.
  * Representa la sección principal (above the fold) de la página de inicio.
- * Renderiza el título animado, habilidades destacadas, y llamadas a la acción.
  */
 const Hero = () => {
 	const { t } = useTranslation();
@@ -80,37 +76,6 @@ const Hero = () => {
 					</Link>
 				</div>
 			</div>
-
-			{/* Menú flotante de redes sociales */}
-			<aside className='hero__socials-float'>
-				<a
-					href='https://www.facebook.com/moodper'
-					target='_blank'
-					rel='noreferrer'
-					className='hero__social-link'
-					aria-label='Facebook'
-				>
-					<Facebook size={22} className='hero__social-icon' />
-				</a>
-				<a
-					href='https://www.instagram.com/mood.advertising/'
-					target='_blank'
-					rel='noreferrer'
-					className='hero__social-link'
-					aria-label='Instagram'
-				>
-					<Instagram size={22} className='hero__social-icon' />
-				</a>
-				<a
-					href='https://www.linkedin.com/company/moodagenciacreativa/'
-					target='_blank'
-					rel='noreferrer'
-					className='hero__social-link'
-					aria-label='LinkedIn'
-				>
-					<Linkedin size={22} className='hero__social-icon' />
-				</a>
-			</aside>
 		</section>
 	);
 };

@@ -9,7 +9,6 @@
 	min-height: 100vh;
 	box-sizing: border-box;
 
-	// Contenedor principal del Hero que enmarca el video
 	&__hero-frame {
 		margin: 1rem;
 		width: calc(100% - 2rem);
@@ -27,7 +26,6 @@
 		}
 	}
 
-	// Video de fondo a pantalla completa dentro del frame
 	&__hero-video {
 		position: absolute;
 		top: 0;
@@ -38,7 +36,6 @@
 		z-index: 0;
 	}
 
-	// Filtro oscuro radial para aislar el texto del fondo dinámico del video
 	&__hero-overlay {
 		position: absolute;
 		top: 0;
@@ -48,13 +45,12 @@
 		z-index: 1;
 		background: radial-gradient(
 			circle,
-			rgba(0, 0, 0, 0.85) 0%,
-			rgba(0, 0, 0, 0.55) 60%,
-			rgba(0, 0, 0, 0.3) 100%
+			rgba($negro, 0.85) 0%,
+			rgba($negro, 0.55) 60%,
+			rgba($negro, 0.3) 100%
 		);
 	}
 
-	// Contenedor del Navbar y texto principal (Hero)
 	&__hero-content {
 		position: relative;
 		z-index: 2;
@@ -62,17 +58,15 @@
 		height: 100%;
 	}
 
-	// Sección inferior oscura (Testimonios + Footer)
 	&__footer-area {
 		width: 100%;
-		background-color: #1c1c1e;
+		background-color: $gris-card;
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		z-index: 1;
 	}
 
-	// Utilidad para ocultar elementos de diseño específicos en escritorio
 	&__desktop-blur {
 		@media (max-width: 968px) {
 			display: none !important;
