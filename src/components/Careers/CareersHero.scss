@@ -2,7 +2,7 @@
 @use "../../styles/variables" as *;
 
 /**
- * Animaciones principales
+ * Animación base de entrada para los bloques del Hero.
  */
 @keyframes heroFadeIn {
 	to {
@@ -11,15 +11,9 @@
 	}
 }
 
-@keyframes infiniteScroll {
-	0% {
-		transform: translateX(0);
-	}
-	100% {
-		transform: translateX(-50%);
-	}
-}
-
+/**
+ * Contenedor principal
+ */
 .careers-hero {
 	background-color: $blanco;
 	padding: 1rem;
@@ -152,7 +146,7 @@
 			align-items: center;
 			padding: 0;
 			width: 100vw;
-			margin-left: -2rem; // Extiende el carrusel a los bordes de la pantalla
+			margin-left: -2rem;
 		}
 
 		@media (max-width: $bp-mobile) {
@@ -170,90 +164,76 @@
 		@media (max-width: $bp-tablet) {
 			text-align: center;
 			font-size: 1.5rem;
-			margin: 0 0 20px 0;
+			margin: 0 0 15px 0;
 		}
 	}
 
 	/**
-   * Máscara y Pista del Slide (Marquee)
+   * Grid / Pista del Slide
    */
 	&__culture-grid {
 		position: relative;
 		width: 100%;
-
-		@media (max-width: $bp-tablet) {
-			overflow: hidden;
-			// Máscara de degradado para que las tarjetas se desvanezcan en los bordes
-			mask-image: linear-gradient(
-				to right,
-				transparent 0%,
-				black 5%,
-				black 95%,
-				transparent 100%
-			);
-			-webkit-mask-image: linear-gradient(
-				to right,
-				transparent 0%,
-				black 5%,
-				black 95%,
-				transparent 100%
-			);
-			padding: 10px 0; // Previene que se corte la sombra
-		}
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
 	&__culture-track {
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
-
-		@media (max-width: $bp-tablet) {
-			flex-direction: row;
-			width: max-content; // Permite que el contenedor crezca según las tarjetas
-			gap: 0; // El gap se maneja en los grupos para el cálculo matemático
-			animation: infiniteScroll 15s linear infinite;
-
-			&:hover {
-				animation-play-state: paused; // Detiene el slide si el usuario lo toca
-			}
-		}
-	}
-
-	&__culture-group {
-		display: flex;
-		flex-direction: column;
-		gap: 24px;
-
-		// Escalado asimétrico exclusivo de Escritorio
-		.culture-card {
-			&:nth-child(1) {
-				transform: translateX(0);
-			}
-			&:nth-child(2) {
-				transform: translateX(25px);
-			}
-			&:nth-child(3) {
-				transform: translateX(50px);
-			}
-		}
+		width: 100%;
 
 		@media (max-width: $bp-tablet) {
 			flex-direction: row;
 			gap: 16px;
-			padding-right: 16px; // Offset matemático para que el loop -50% sea perfecto
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scroll-behavior: smooth;
+			padding: 0.5rem 2rem;
 
-			.culture-card {
-				transform: none !important; // Reseteamos la asimetría de escritorio
+			// Ocultar scrollbar
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
 			}
 		}
 
-		// El grupo duplicado permanece oculto en escritorio
-		&--duplicate {
-			display: none;
+		@media (max-width: $bp-mobile) {
+			padding: 0.5rem 1.25rem;
+		}
+	}
 
-			@media (max-width: $bp-tablet) {
-				display: flex;
-			}
+	/**
+   * Indicadores de Paginación (Dots)
+   */
+	&__pagination {
+		display: none;
+
+		@media (max-width: $bp-tablet) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
+			width: 100%;
+			margin-top: 0.5rem;
+		}
+	}
+
+	&__dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 4px;
+		background-color: rgba($blanco, 0.3);
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+		&--active {
+			width: 24px;
+			background-color: $primary;
 		}
 	}
 
@@ -268,6 +248,7 @@
 		&--delay-1 {
 			animation-delay: 0.4s;
 		}
+
 		&--delay-2 {
 			animation-delay: 0.5s;
 		}
@@ -293,14 +274,28 @@
 	transition: all 0.3s ease;
 	text-align: left;
 
+	// Escalado asimétrico exclusivo de Escritorio
+	&:nth-child(1) {
+		transform: translateX(0);
+	}
+	&:nth-child(2) {
+		transform: translateX(25px);
+	}
+	&:nth-child(3) {
+		transform: translateX(50px);
+	}
+
 	&:hover {
 		box-shadow: 0 10px 30px rgba($negro, 0.2);
 		background: rgba($blanco, 0.15);
 	}
 
 	@media (max-width: $bp-tablet) {
-		width: 320px; // Ancho fijo estricto en Tablet/Móvil para el slide horizontal
-		flex-shrink: 0; // Evita que se aplasten
+		transform: none !important; // Reseteamos asimetría en mobile
+		width: 85vw; // Ocupa el 85% de la pantalla para dejar asomar el siguiente slide
+		max-width: 380px;
+		flex-shrink: 0;
+		scroll-snap-align: center;
 		padding: 1.5rem;
 		gap: 16px;
 		border-radius: 16px;
