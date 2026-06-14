@@ -1,50 +1,56 @@
-//src/components/Brands/Brands.scss
-@use '../../styles/variables' as *;
+// src/components/Brands/Brands.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de la sección de marcas.
+ */
 .brands {
-  width: 100%;
-  background-color: $blanco; // Fondo claro original
-  display: flex;
-  justify-content: center;
-  padding: 4rem 2rem 2rem;
-  box-sizing: border-box;
-  overflow: hidden;
+	width: 100%;
+	background-color: $blanco;
+	display: flex;
+	justify-content: center;
+	padding: 4rem 2rem 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
 
-  &__container {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3.5rem;
-  }
+	&__container {
+		width: 100%;
+		max-width: 1000px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3.5rem;
+	}
 
-  &__subtitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: rgba($negro, 0.75); // Texto oscuro sutil
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 0;
-    text-align: center;
-  }
+	&__subtitle {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: rgba($negro, 0.75);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin: 0;
+		text-align: center;
+	}
 
-  &__carousel-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    position: relative;
-    overflow: hidden;
+	/**
+   * Envoltorio del carrusel.
+   * Aplica filtros globales a los elementos del LogoLoop para homogeneizar el diseño.
+   */
+	&__carousel-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+		position: relative;
+		overflow: hidden;
 
-    // Filtro Gris: Hace que todos los logos se vean uniformes
-    .logoloop__item img {
-      filter: grayscale(100%) opacity(0.6);
-      transition: all 0.4s ease;
+		.logoloop__item img {
+			filter: grayscale(100%) opacity(0.6);
+			transition: all 0.4s ease;
 
-      &:hover {
-        filter: grayscale(0%) opacity(1); // Revelan su color natural al hover
-      }
-    }
-  }
+			&:hover {
+				filter: grayscale(0%) opacity(1);
+			}
+		}
+	}
 }

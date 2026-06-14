@@ -1,288 +1,222 @@
-//src/components/Footer/Footer.scss
-@use '../../styles/variables' as *;
-
-$gris-card: #1c1c1e;
-
-/* --- EL MISMO EFECTO DE REFLEJO DEL HERO --- */
-%shiny-animation {
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -120%;
-    width: 60%;
-    height: 200%;
-    background: linear-gradient(
-      100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: skewX(-25deg);
-    transition: transform 0.6s ease-in-out;
-    z-index: 1;
-  }
-
-  &:hover::after {
-    transform: translateX(400%) skewX(-25deg);
-  }
-}
+// src/components/Footer/Footer.scss
+@use "../../styles/variables" as *;
 
 .footer {
-  width: 100%;
-  background-color: transparent;
-  color: $blanco;
-  display: flex;
-  justify-content: center;
-  padding: 6rem 2rem 2rem;
-  box-sizing: border-box;
-  margin-top: auto;
+	width: 100%;
+	background-color: transparent;
+	color: $blanco;
+	display: flex;
+	justify-content: center;
+	padding: 6rem 2rem 2rem;
+	box-sizing: border-box;
+	margin-top: auto;
 
-  &__container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-  }
+	&__container {
+		width: 100%;
+		max-width: $bp-desktop;
+		display: flex;
+		flex-direction: column;
+		gap: 6rem;
 
-  &__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 4rem;
+		@media (max-width: $bp-tablet) {
+			gap: 4rem;
+		}
+	}
 
-    @media (max-width: 968px) {
-      flex-direction: column;
-      gap: 3rem;
-    }
-  }
+	&__top {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 4rem;
 
-  /* --- SECCIÓN IZQUIERDA (Marca) --- */
-  &__brand-section {
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
+		@media (max-width: $bp-tablet) {
+			flex-direction: column;
+			gap: 3.5rem;
+		}
+	}
 
-  &__logo {
-    height: 45px;
-    width: auto;
-    object-fit: contain;
-    align-self: flex-start;
-  }
+	&__brand-section {
+		flex: 1;
+		max-width: 500px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
+	}
 
-  &__slogan {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 500;
-    line-height: 1.2;
-    color: rgba($blanco, 0.9);
-    margin: 0;
-    letter-spacing: -0.01em;
-    text-align: left;
-  }
+	&__slogan {
+		font-size: clamp(1.8rem, 4vw, 2.2rem);
+		font-weight: 500;
+		line-height: 1.4;
+		color: $blanco;
+		margin: 0;
+		letter-spacing: -0.04em;
+	}
 
-  &__jobs {
-    margin-top: 1rem;
-  }
+	&__jobs {
+		display: flex;
+		align-items: flex-start;
+	}
 
-  /* --- SECCIÓN DERECHA (Navegación) --- */
-  &__nav-section {
-    display: flex;
-    gap: 3rem;
-    align-items: flex-start;
+	&__menus-wrapper {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 4rem;
 
-    @media (max-width: 768px) {
-      flex-wrap: wrap;
-      gap: 2rem;
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
+		@media (max-width: $bp-tablet) {
+			width: 100%;
+			position: relative;
+		}
+	}
 
-  &__nav-group {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    border-left: 1px solid rgba($blanco, 0.1);
-    padding-left: 1.5rem;
-  }
+	&__menus {
+		display: flex;
+		flex-direction: row;
+		gap: 6rem;
 
-  &__nav-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: rgba($blanco, 0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-  }
+		@media (max-width: $bp-tablet) {
+			flex-direction: column;
+			gap: 3.5rem;
+		}
+	}
 
-  &__nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+	&__nav-group {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
 
-    &--social {
-      flex-direction: row;
-      gap: 1.25rem;
-    }
-  }
+	&__nav-title {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: rgba($blanco, 0.5);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin: 0;
+	}
 
-  &__nav-link {
-    color: $blanco;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: opacity 0.3s ease;
+	&__nav-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
 
-    &:hover {
-      opacity: 0.6;
-    }
-  }
+	&__nav-link {
+		color: $blanco;
+		text-decoration: none;
+		font-size: clamp(1rem, 2vw, 1.2rem);
+		font-weight: 500;
+		letter-spacing: -0.02em;
+		transition:
+			opacity 0.3s ease,
+			color 0.3s ease;
 
-  /* --- ICONOS DE REDES SOCIALES --- */
-  &__social-link {
-    @extend %shiny-animation;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    background-color: rgba($blanco, 0.05);
-    border: 1px solid rgba($blanco, 0.1);
-    border-radius: 12px;
-    color: $blanco;
-    transition: all 0.3s ease;
-    text-decoration: none;
+		&:hover {
+			color: $primary;
+		}
+	}
 
-    svg {
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s ease;
-    }
+	.btn-jobs {
+		display: inline-flex;
+		align-items: stretch;
+		gap: 0.5rem;
+		text-decoration: none;
+		transition: all 0.3s ease;
 
-    &:hover {
-      background-color: $primary;
-      color: $negro;
-      border-color: $primary;
+		&__text {
+			@include shiny-effect(rgba(255, 255, 255, 0.2));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba($negro, 0.8);
+			color: $blanco;
+			padding: 0 1.5rem;
+			height: 48px;
+			border-radius: 12px;
+			font-weight: 600;
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			border: 1px solid rgba($blanco, 0.1);
+			transition: all 0.3s ease;
+		}
 
-      svg {
-        transform: scale(1.1);
-      }
-    }
-  }
+		&__icon {
+			@include shiny-effect(rgba(255, 255, 255, 0.4));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: $primary;
+			color: $negro;
+			width: 48px;
+			height: 48px;
+			border-radius: 12px;
+			transition: all 0.3s ease;
+		}
 
-  &__social-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
+		&:hover {
+			.btn-jobs__text {
+				background-color: $primary;
+				color: $negro;
+				border-color: $primary;
+			}
+			.btn-jobs__icon {
+				background-color: $blanco;
+				color: $negro;
+			}
+		}
+	}
 
-  /* --- BOTÓN EMPLEOS --- */
-  .btn-jobs {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
+	&__scroll-top {
+		@include shiny-effect(rgba(255, 255, 255, 0.4));
+		background: transparent;
+		border: 1px solid rgba($blanco, 0.2);
+		color: $blanco;
+		width: 45px;
+		height: 45px;
+		border-radius: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		margin-top: -0.5rem;
 
-    & > span {
-      @extend %shiny-animation;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      height: 48px;
-      border-radius: 12px;
-      transition: all 0.4s ease;
+		svg {
+			position: relative;
+			z-index: 2;
+		}
 
-      span,
-      svg {
-        position: relative;
-        z-index: 2;
-      }
-    }
+		&:hover {
+			background-color: $blanco;
+			color: $negro;
+		}
 
-    &__text {
-      background-color: rgba($blanco, 0.1);
-      color: $blanco;
-      padding: 0 1.5rem;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+		@media (max-width: $bp-tablet) {
+			position: absolute;
+			top: -0.5rem;
+			right: 0;
+			margin-top: 0;
+		}
+	}
 
-    &__icon {
-      background-color: $primary;
-      color: $negro;
-      width: 48px;
-    }
+	&__bottom {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-    /* CORRECCIÓN: Eliminado el transform: scale(1.02) */
-    &:hover {
-      .btn-jobs__text {
-        background-color: $primary;
-        color: $negro;
-      }
-
-      .btn-jobs__icon {
-        background-color: rgba($blanco, 0.1);
-        color: $blanco;
-      }
-    }
-  }
-
-  /* --- BOTÓN SCROLL TOP --- */
-  &__scroll-top {
-    @extend %shiny-animation;
-    background: rgba($blanco, 0.05);
-    border: 1px solid rgba($blanco, 0.2);
-    color: $blanco;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 2rem;
-
-    svg {
-      position: relative;
-      z-index: 2;
-    }
-
-    &:hover {
-      background-color: $blanco;
-      color: $negro;
-    }
-
-    @media (max-width: 768px) {
-      margin-left: 0;
-    }
-  }
-
-  /* --- LEGALES (Bottom) --- */
-  &__bottom {
-    padding-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: rgba($blanco, 0.5);
-    }
-  }
+		p {
+			margin: 0;
+			font-size: 0.7rem;
+			font-weight: 500;
+			color: rgba($blanco, 0.5);
+			text-transform: uppercase;
+			letter-spacing: 0.04em;
+		}
+	}
 }

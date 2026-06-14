@@ -1,225 +1,229 @@
-//src/components/Testimonials/Testimonials.scss
-@use 'sass:color';
-@use '../../styles/variables' as *;
+// src/components/Testimonials/Testimonials.scss
+@use "sass:color";
+@use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de Testimonios
+ */
 .testimonials {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6rem 2rem;
-  box-sizing: border-box;
-  background-color: $blanco;
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 6rem 2rem;
+	box-sizing: border-box;
+	background-color: $blanco;
+	border-bottom-left-radius: 48px;
+	border-bottom-right-radius: 48px;
 
-  border-bottom-left-radius: 48px;
-  border-bottom-right-radius: 48px;
+	@media (max-width: $bp-tablet) {
+		padding: 4rem 1.5rem;
+	}
 
-  @media (max-width: 768px) {
-    padding: 4rem 1.5rem;
-  }
+	@media (max-width: $bp-small-mobile) {
+		padding: 3rem 1rem;
+		min-height: auto;
+	}
 
-  // --- CORRECCIÓN MÓVIL 475PX ---
-  @media (max-width: 475px) {
-    padding: 3rem 1rem;
-    min-height: auto;
-  }
+	&__container {
+		width: 100%;
+		max-width: $bp-desktop;
+		display: grid;
+		grid-template-columns: 1fr 1.1fr;
+		gap: 4rem;
+		align-items: center;
 
-  &__container {
-    width: 100%;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 4rem;
-    align-items: center;
+		@media (max-width: $bp-tablet) {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			text-align: center;
+		}
 
-    @media (max-width: 968px) {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      text-align: center;
-    }
+		@media (max-width: $bp-small-mobile) {
+			gap: 2rem;
+		}
+	}
 
-    @media (max-width: 475px) {
-      gap: 2rem;
-    }
-  }
+	&__seo-column {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
 
-  &__seo-column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+		@media (max-width: $bp-tablet) {
+			align-items: center;
+		}
+	}
 
-    @media (max-width: 968px) {
-      align-items: center;
-    }
-  }
+	&__title {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-weight: 900;
+		color: $negro;
+		line-height: 1.1;
+		margin: 0;
+		letter-spacing: -0.02em;
 
-  &__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    color: $negro;
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: -0.02em;
+		span {
+			// Modificador de contraste (65% por accesibilidad)
+			color: color.scale($primary, $lightness: -35%);
+		}
 
-    span {
-      //Colocar en 65% para mejorar en Accesibility
-      color: color.scale($primary, $lightness: -35%);
-    }
+		@media (max-width: $bp-small-mobile) {
+			font-size: 2.2rem;
+		}
+	}
 
-    @media (max-width: 475px) {
-      font-size: 2.2rem;
-    }
-  }
+	&__paragraph {
+		font-size: 1.15rem;
+		line-height: 1.7;
+		color: rgba($negro, 0.7);
+		margin: 0;
 
-  &__paragraph {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba($negro, 0.7);
-    margin: 0;
+		@media (max-width: $bp-small-mobile) {
+			font-size: 1rem;
+		}
+	}
 
-    @media (max-width: 475px) {
-      font-size: 1rem;
-    }
-  }
+	&__carousel-column {
+		width: 100%;
+		height: 550px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-  &__carousel-column {
-    width: 100%;
-    height: 550px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+		@media (max-width: $bp-small-mobile) {
+			height: 480px;
+		}
+	}
 
-    @media (max-width: 475px) {
-      height: 480px; // Reducimos altura para que no quede tanto aire
-    }
-  }
+	&__carousel {
+		position: relative;
+		width: 100%;
+		max-width: 300px;
+		height: 400px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		pointer-events: auto;
 
-  &__carousel {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: auto; // Cambiado a auto para que los clics funcionen
-
-    @media (max-width: 475px) {
-      max-width: 250px; // Achicamos la tarjeta central
-      height: 350px;
-    }
-  }
+		@media (max-width: $bp-small-mobile) {
+			max-width: 250px;
+			height: 350px;
+		}
+	}
 }
 
+/**
+ * Tarjeta individual del carrusel 3D
+ */
 .review-card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  border-radius: 18px;
-  box-shadow: 0 25px 60px rgba($negro, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow: hidden;
-  cursor: pointer;
-  will-change: transform, opacity, filter;
-  border: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	border-radius: 18px;
+	box-shadow: 0 25px 60px rgba($negro, 0.2);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	overflow: hidden;
+	cursor: pointer;
+	will-change: transform, opacity, filter;
+	border: none;
 
-  &__background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
+	&__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 1;
+	}
 
-  &__content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 4rem 1.5rem 1.5rem; // Reducido un poco para móvil
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+	&__content {
+		position: relative;
+		z-index: 2;
+		width: 100%;
+		padding: 4rem 1.5rem 1.5rem;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
 
-    @media (max-width: 475px) {
-      padding: 3rem 1.2rem 1.2rem;
-      gap: 0.4rem;
-    }
+		@media (max-width: $bp-small-mobile) {
+			padding: 3rem 1.2rem 1.2rem;
+			gap: 0.4rem;
+		}
 
-    & > * {
-      position: relative;
-      z-index: 2;
-    }
+		& > * {
+			position: relative;
+			z-index: 2;
+		}
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      background: linear-gradient(
-        to top,
-        rgba(#000, 0.95) 0%,
-        rgba(#000, 0.7) 50%,
-        rgba(#000, 0) 100%
-      );
-      backdrop-filter: blur(8px); // Reducido un poco para performance móvil
-      -webkit-backdrop-filter: blur(8px);
-      -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
-      mask-image: linear-gradient(to top, black 60%, transparent 100%);
-    }
-  }
+		// Degradado oscuro para aislar el texto de la imagen de fondo
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			background: linear-gradient(
+				to top,
+				rgba(#000, 0.95) 0%,
+				rgba(#000, 0.7) 50%,
+				rgba(#000, 0) 100%
+			);
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+			-webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
+			mask-image: linear-gradient(to top, black 60%, transparent 100%);
+		}
+	}
 
-  &__text {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: rgba($blanco, 0.8);
-    font-style: italic;
-    font-weight: 400;
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+	&__text {
+		font-size: 0.8rem;
+		line-height: 1.5;
+		color: rgba($blanco, 0.8);
+		font-style: italic;
+		font-weight: 400;
+		margin: 0;
 
-    @media (max-width: 475px) {
-      font-size: 0.75rem;
-      -webkit-line-clamp: 3; // Menos líneas para que no rompa el diseño
-    }
-  }
+		// Inyección del mixin de truncado de texto
+		@include truncate-lines(4);
 
-  &__meta {
-    display: flex;
-    flex-direction: column;
-  }
+		@media (max-width: $bp-small-mobile) {
+			font-size: 0.75rem;
+			@include truncate-lines(3);
+		}
+	}
 
-  &__name {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: $blanco;
+	&__meta {
+		display: flex;
+		flex-direction: column;
+	}
 
-    @media (max-width: 475px) {
-      font-size: 1.1rem;
-    }
-  }
+	&__name {
+		margin: 0;
+		font-size: 1.2rem;
+		font-weight: 700;
+		color: $blanco;
 
-  &__company {
-    font-size: 0.85rem;
-    color: $primary;
-    font-weight: 600;
+		@media (max-width: $bp-small-mobile) {
+			font-size: 1.1rem;
+		}
+	}
 
-    @media (max-width: 475px) {
-      font-size: 0.75rem;
-    }
-  }
+	&__company {
+		font-size: 0.85rem;
+		color: $primary;
+		font-weight: 600;
+
+		@media (max-width: $bp-small-mobile) {
+			font-size: 0.75rem;
+		}
+	}
 }
