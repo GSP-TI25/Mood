@@ -1,246 +1,235 @@
-//src/components/ProjectModal/ProjectModal.scss
-@use '../../styles/variables' as *;
+// src/components/ProjectModal/ProjectModal.scss
+@use "../../styles/variables" as *;
 
-/* --- ANIMACIÓN DE REFLEJO DE LUZ --- */
-%shiny-animation {
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -120%;
-    width: 60%;
-    height: 200%;
-    background: linear-gradient(
-      100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: skewX(-25deg);
-    transition: transform 0.5s ease-in-out;
-    z-index: 1;
-  }
-
-  &:hover::after {
-    transform: translateX(400%) skewX(-25deg);
-  }
-}
-
+/**
+ * Contenedor raíz del Modal.
+ * Fijo a pantalla completa y con altísima prioridad de apilamiento.
+ */
 .project-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 99999; /* Aseguramos un z-index altísimo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 99999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+	box-sizing: border-box;
 
-  @media (max-width: 768px) {
-    padding: 1rem; /* Menos espacio en los bordes para móviles */
-  }
+	@media (max-width: $bp-mobile) {
+		padding: 1rem;
+	}
 
-  &__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba($negro, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    cursor: pointer;
-  }
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba($negro, 0.85);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		cursor: pointer;
+	}
 
-  &__content {
-    position: relative;
-    z-index: 2;
-    background-color: $blanco;
-    width: 100%;
-    max-width: 1100px;
-    max-height: 90vh;
-    border-radius: 24px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    box-shadow: 0 30px 60px rgba($negro, 0.4);
-    animation: modalPop 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+	&__content {
+		position: relative;
+		z-index: 2;
+		background-color: $blanco;
+		width: 100%;
+		max-width: 1100px;
+		max-height: 90vh;
+		border-radius: 24px;
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		box-shadow: 0 30px 60px rgba($negro, 0.4);
+		animation: modalPop 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 
-    @media (max-width: 968px) {
-      grid-template-columns: 1fr;
-      overflow-y: auto; // Activa el scroll interno si el contenido es muy alto
-      border-radius: 16px; // Borde más suave en móvil
-    }
-  }
+		@media (max-width: $bp-tablet) {
+			grid-template-columns: 1fr;
+			overflow-y: auto;
+			border-radius: 16px;
+		}
+	}
 
-  &__close {
-    @extend %shiny-animation;
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 36px;
-    height: 36px;
-    border-radius: 20%;
-    background-color: $blanco;
-    border: 1px solid rgba($negro, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
-    color: $negro;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba($negro, 0.15); /* Sombra para que destaque sobre la imagen en móvil */
+	/**
+   * Botón de Cierre (X)
+   */
+	&__close {
+		@include shiny-effect;
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		width: 36px;
+		height: 36px;
+		border-radius: 20%;
+		background-color: $blanco;
+		border: 1px solid rgba($negro, 0.1);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		z-index: 10;
+		color: $negro;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 10px rgba($negro, 0.15);
 
-    @media (max-width: 768px) {
-      top: 1rem;
-      right: 1rem;
-    }
+		@media (max-width: $bp-mobile) {
+			top: 1rem;
+			right: 1rem;
+		}
 
-    svg {
-      position: relative;
-      z-index: 2;
-      width: 18px;
-      height: 18px;
-    }
+		svg {
+			position: relative;
+			z-index: 2;
+			width: 18px;
+			height: 18px;
+		}
 
-    &:hover {
-      background-color: $negro;
-      color: $blanco;
-    }
-  }
+		&:hover {
+			background-color: $negro;
+			color: $blanco;
+		}
+	}
 
-  &__image-wrapper {
-    width: 100%;
-    height: 100%;
-    min-height: 350px;
-    overflow: hidden;
+	/**
+   * Columna del Asset (Imagen/Video)
+   */
+	&__image-wrapper {
+		width: 100%;
+		height: 100%;
+		min-height: 350px;
+		overflow: hidden;
+		background-color: $negro; // Contenedor oscuro por si el video no llena el espacio
 
-    @media (max-width: 968px) {
-      min-height: 250px; /* Reducimos la altura mínima en móvil */
-      max-height: 300px; /* Evitamos que ocupe toda la pantalla */
-    }
+		@media (max-width: $bp-tablet) {
+			min-height: 250px;
+			max-height: 300px;
+		}
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 
-  &__info {
-    padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    background-color: $blanco;
+	/**
+   * Columna de Información
+   */
+	&__info {
+		padding: 4rem 3rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: $blanco;
 
-    @media (max-width: 968px) {
-      padding: 2rem 1.5rem; /* Menos padding en móviles para ganar espacio */
-      gap: 1rem;
-    }
-  }
+		@media (max-width: $bp-tablet) {
+			padding: 2rem 1.5rem;
+			gap: 1rem;
+		}
+	}
 
-  &__badge {
-    display: inline-block;
-    align-self: flex-start;
-    padding: 0.5rem 1.2rem;
-    background-color: $primary;
-    color: $negro;
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: 50px;
-  }
+	&__badge {
+		display: inline-block;
+		align-self: flex-start;
+		padding: 0.5rem 1.2rem;
+		background-color: $primary;
+		color: $negro;
+		font-weight: 700;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		border-radius: 50px;
+	}
 
-  &__title {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 900;
-    color: $negro;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin: 0;
-  }
+	&__title {
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		font-weight: 900;
+		color: $negro;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		margin: 0;
+	}
 
-  &__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    padding-top: 0.5rem;
+	&__meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		padding-top: 0.5rem;
 
-    p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: rgba($negro, 0.7);
+		p {
+			margin: 0;
+			font-size: 0.95rem;
+			color: rgba($negro, 0.7);
 
-      @media (max-width: 768px) {
-        font-size: 0.85rem;
-      }
+			@media (max-width: $bp-mobile) {
+				font-size: 0.85rem;
+			}
 
-      strong {
-        color: $negro;
-        font-weight: 700;
-        margin-right: 0.4rem;
-      }
-    }
-  }
+			strong {
+				color: $negro;
+				font-weight: 700;
+				margin-right: 0.4rem;
+			}
+		}
+	}
 
-  &__desc {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: rgba($negro, 0.8);
-    margin: 0;
+	&__desc {
+		font-size: 1.1rem;
+		line-height: 1.6;
+		color: rgba($negro, 0.8);
+		margin: 0;
 
-    @media (max-width: 768px) {
-      font-size: 0.95rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			font-size: 0.95rem;
+		}
+	}
 
-  &__btn {
-    @extend %shiny-animation;
-    align-self: flex-start;
-    margin-top: 0.5rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.4rem;
-    background-color: $negro;
-    color: $blanco;
-    font-weight: 600;
-    font-size: 0.85rem;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.3s ease;
+	&__btn {
+		@include shiny-effect;
+		align-self: flex-start;
+		margin-top: 0.5rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.6rem 1.4rem;
+		background-color: $negro;
+		color: $blanco;
+		font-weight: 600;
+		font-size: 0.85rem;
+		border-radius: 10px;
+		text-decoration: none;
+		transition: all 0.3s ease;
 
-    span,
-    svg {
-      position: relative;
-      z-index: 2;
-    }
+		span,
+		svg {
+			position: relative;
+			z-index: 2;
+		}
 
-    &:hover {
-      background-color: $primary;
-      color: $negro;
-      box-shadow: 0 5px 15px rgba($primary, 0.2);
-    }
-  }
+		&:hover {
+			background-color: $primary;
+			color: $negro;
+			box-shadow: 0 5px 15px rgba($primary, 0.2);
+		}
+	}
 }
 
+/**
+ * Animación de entrada
+ */
 @keyframes modalPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.95) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0.95) translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
 }

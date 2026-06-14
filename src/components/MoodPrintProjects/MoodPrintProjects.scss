@@ -1,64 +1,66 @@
-//src/components/MoodPrintProjects/MoodPrintProjects.scss
-@use '../../styles/variables' as *;
+// src/components/MoodPrintProjects/MoodPrintProjects.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de los proyectos del portafolio.
+ */
 .mood-projects {
-  width: 100%;
-  padding: 6rem 2rem 8rem;
-  background-color: #ecf0ec;
+	width: 100%;
+	padding: 6rem 2rem 8rem;
+	background-color: $bg-light;
+	border-bottom-left-radius: 48px;
+	border-bottom-right-radius: 48px;
 
-  border-bottom-left-radius: 48px;
-  border-bottom-right-radius: 48px;
+	@media (max-width: $bp-mobile) {
+		padding: 4rem 1.5rem 6rem;
+		border-bottom-left-radius: 24px;
+		border-bottom-right-radius: 24px;
+	}
 
-  @media (max-width: 768px) {
-    padding: 4rem 1.5rem 6rem;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
-  }
+	&__container {
+		max-width: 1400px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
 
-  &__container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-  }
+	&__header {
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
 
-  &__header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+	&__title {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-weight: 900;
+		color: $negro;
+		margin: 0;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+	}
 
-  &__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    color: $negro;
-    margin: 0;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
+	&__description {
+		font-size: 1.15rem;
+		color: rgba($negro, 0.7);
+		line-height: 1.6;
+		margin: 0;
 
-  &__description {
-    font-size: 1.15rem;
-    color: rgba($negro, 0.7);
-    line-height: 1.6;
-    margin: 0;
+		@media (max-width: $bp-mobile) {
+			font-size: 1rem;
+		}
+	}
 
-    @media (max-width: 768px) {
-      font-size: 1rem;
-    }
-  }
-
-  &__grid {
-    width: 100%;
-    position: relative;
-    z-index: 2;
-    /* 🌟 ELIMINADO EL min-height: 800px;
-       Ahora la grilla mide exactamente lo que miden las fotos.
-       Si no hay fotos, mide 0, y el Footer sube limpiamente.
-    */
-  }
+	/**
+   * Contenedor de la cuadrícula Masonry.
+   * La altura es administrada dinámicamente por el componente interno y GSAP.
+   */
+	&__grid {
+		width: 100%;
+		position: relative;
+		z-index: 2;
+	}
 }

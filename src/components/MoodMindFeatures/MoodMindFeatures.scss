@@ -1,132 +1,152 @@
-//src/components/MoodMindFeatures/MoodMindFeatures.scss
-@use '../../styles/variables' as *;
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&display=swap');
+// src/components/MoodMindFeatures/MoodMindFeatures.scss
+@use "../../styles/variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&display=swap");
 
+/**
+ * Contenedor principal de la sección de características.
+ */
 .mood-mind-features {
-  position: relative;
-  width: 100%;
-  padding: 2rem;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  background-color: #fff; /* Fondo súper claro para destacar el contenido */
+	position: relative;
+	width: 100%;
+	padding: 2rem;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	background-color: $blanco;
 
-  &__container {
-    width: 100%;
-    max-width: 1600px;
-  }
+	&__container {
+		width: 100%;
+		max-width: 1600px;
+	}
 
-  /* 🌟 GRAN CONTENEDOR INMERSIVO */
-  &__main-card {
-    position: relative;
-    background-color: #0a0a0b; /* Fondo casi negro para que el DotGrid y los cristales resalten */
-    border-radius: 20px; /* Bordes bien redondeados */
-    overflow: hidden;
-    min-height: 60vh; /* Altura generosa para disfrutar del fondo interactivo */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Brillo sutil en el borde externo */
-  }
+	/**
+   * Tarjeta inmersiva principal.
+   * Utiliza el fondo oscuro ultra-profundo para destacar los elementos de cristal y puntos.
+   */
+	&__main-card {
+		position: relative;
+		background-color: $bg-dark;
+		border-radius: 20px;
+		overflow: hidden;
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border: 1px solid rgba($blanco, 0.05);
+	}
 
-  /* 🌟 FONDO DOT GRID */
-  &__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    /* Viñeta radial para oscurecer los bordes y centrar la luz */
-    background: radial-gradient(circle at center, transparent 0%, #0a0a0b 100%);
-  }
+	/**
+   * Viñeta radial para el fondo interactivo (DotGrid).
+   * Oscurece los bordes para centrar la luz en el medio del componente.
+   */
+	&__bg {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(
+			circle at center,
+			transparent 0%,
+			$bg-dark 100%
+		);
+	}
 
-  /* 🌟 CONTENIDO (GRILLA DE 2 COLUMNAS) */
-  &__content {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-    padding: 6rem 8rem;
-    width: 100%;
-    box-sizing: border-box;
+	/**
+   * Malla de contenido superpuesto (2 columnas en escritorio).
+   */
+	&__content {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 4rem;
+		padding: 6rem 8rem;
+		width: 100%;
+		box-sizing: border-box;
 
-    @media (max-width: 1024px) {
-      grid-template-columns: 1fr;
-      padding: 5rem 3rem;
-      gap: 5rem;
-    }
+		@media (max-width: $bp-large) {
+			grid-template-columns: 1fr;
+			padding: 5rem 3rem;
+			gap: 5rem;
+		}
 
-    @media (max-width: 768px) {
-      padding: 4rem 2rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 4rem 2rem;
+		}
+	}
 
-  &__section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
 
-  /* 🌟 ETIQUETA (BADGE) */
-  &__badge {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #2c1c1c;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    align-self: flex-start; /* Evita que ocupe todo el ancho */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
+	/**
+   * Etiqueta indicadora (Badge).
+   */
+	&__badge {
+		background-color: rgba($blanco, 0.9);
+		color: $negro;
+		padding: 0.4rem 0.8rem;
+		border-radius: 6px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.01em;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		align-self: flex-start;
+		box-shadow: 0 10px 20px rgba($negro, 0.5);
+	}
 
-  &__badge-dot {
-    width: 8px;
-    height: 8px;
-    background-color: $primary; /* Verde Mood */
-    border-radius: 2px;
-  }
+	&__badge-dot {
+		width: 8px;
+		height: 8px;
+		background-color: $primary;
+		border-radius: 2px;
+	}
 
-  /* 🌟 TARJETAS GLASSMORPHISM */
-  &__glass-card {
-    background: rgba(255, 255, 255, 0.03); /* Blanco súper transparente */
-    backdrop-filter: blur(3px); /* Desenfoque del fondo (Cristal) */
-    -webkit-backdrop-filter: blur(3px);
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde de cristal */
-    border-radius: 10px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    box-sizing: border-box;
+	/**
+   * Tarjetas con efecto Glassmorphism.
+   */
+	&__glass-card {
+		background: rgba($blanco, 0.03);
+		backdrop-filter: blur(3px);
+		-webkit-backdrop-filter: blur(3px);
+		border: 1px solid rgba($blanco, 0.08);
+		border-radius: 10px;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+		box-sizing: border-box;
 
-    @media (max-width: 768px) {
-      padding: 2rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 2rem;
+		}
+	}
 
-  &__text {
-    font-size: clamp(0.8rem, 1.5vw, 1rem);
-    color: rgba(255, 255, 255, 0.8); /* Blanco ligeramente atenuado */
-    font-weight: 400;
-    line-height: 1.7;
-    margin: 0;
-  }
+	&__text {
+		font-size: clamp(0.8rem, 1.5vw, 1rem);
+		color: rgba($blanco, 0.8);
+		font-weight: 400;
+		line-height: 1.7;
+		margin: 0;
+	}
 
-  /* 🌟 PROTAGONISTA: IA DRIVEN AGENCY */
-  &__hero-text {
-    font-size: clamp(1.2rem, 3vw, 1.4rem); /* Texto gigantesco */
-    font-family: 'Playwrite GB J', cursive;
-    font-weight: 400;
-    color: $primary; /* Verde Neón */
-    margin: 0 0 1rem 0;
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
+	/**
+   * Texto protagonista "IA Driven Agency".
+   */
+	&__hero-text {
+		font-size: clamp(1.2rem, 3vw, 1.4rem);
+		font-family: "Playwrite GB J", cursive;
+		font-weight: 400;
+		color: $primary;
+		margin: 0 0 1rem 0;
+		line-height: 1;
+		letter-spacing: -0.04em;
+	}
 }

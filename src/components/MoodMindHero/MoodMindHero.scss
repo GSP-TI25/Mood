@@ -1,145 +1,129 @@
-//src/components/MoodMindHero/MoodMindHero.scss
-@use '../../styles/variables' as *;
+// src/components/MoodMindHero/MoodMindHero.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de MoodMindHero.
+ */
 .moodmind-hero {
-  flex: 1;
-  height: 100%; // Asegura que intente llenar el frame padre
-  min-height: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 8rem;
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: #fff; /* Fondo súper claro para destacar el contenido */
+	flex: 1;
+	height: 100%;
+	min-height: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 8rem;
+	box-sizing: border-box;
+	overflow: hidden;
+	background-color: $blanco;
 
-  &__container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    margin-bottom: 3rem;
-    box-sizing: border-box;
-    flex-shrink: 0;
+	&__container {
+		width: 100%;
+		max-width: $bp-desktop;
+		padding: 0 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		margin-bottom: 3rem;
+		box-sizing: border-box;
+		flex-shrink: 0;
 
-    @media (max-width: 1024px) {
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
+		@media (max-width: $bp-large) {
+			gap: 2rem;
+			margin-bottom: 2rem;
+		}
+	}
 
-  // --- 1. ZONA DEL TÍTULO ---
-  &__header {
-    text-align: left;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
+	/**
+   * Bloque Superior: Títulos
+   */
+	&__header {
+		text-align: left;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
 
-  &__title {
-    font-size: clamp(2.5rem, 8vw, 5.5rem);
-    font-weight: 700;
-    color: $negro;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    margin: 0;
+	&__title {
+		font-size: clamp(2.5rem, 8vw, 5.5rem);
+		font-weight: 700;
+		color: $negro;
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		margin: 0;
 
-    &.moodmind-hero__title-light {
-      color: rgba($negro, 0.55);
-      font-weight: 500;
-    }
-  }
+		&.moodmind-hero__title-light {
+			color: rgba($negro, 0.55);
+			font-weight: 500;
+		}
+	}
 
-  // --- 2. ZONA MEDIA (Botón y Párrafo) ---
-  &__middle {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-top: 1rem;
-    width: 100%;
+	/**
+   * Bloque Central: Botón CTA y Párrafo
+   */
+	&__middle {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding-top: 1rem;
+		width: 100%;
 
-    @media (max-width: 1024px) {
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-  }
+		@media (max-width: $bp-large) {
+			flex-direction: column;
+			justify-content: flex-start;
+		}
+	}
 
-  &__scroll-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background-color: $negro;
-    color: $blanco;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
+	&__scroll-btn {
+		@include shiny-effect(rgba(255, 255, 255, 0.5));
+		width: 48px;
+		height: 48px;
+		border-radius: 12px;
+		background-color: $negro;
+		color: $blanco;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		flex-shrink: 0;
 
-    @media (max-width: 1024px) {
-      display: none; // Oculto en tablets y móviles
-    }
+		@media (max-width: $bp-large) {
+			display: none;
+		}
 
-    svg {
-      position: relative;
-      z-index: 2;
-    }
+		svg {
+			position: relative;
+			z-index: 2;
+		}
 
-    &::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -120%;
-      width: 60%;
-      height: 200%;
-      background: linear-gradient(
-        100deg,
-        rgba(255, 255, 255, 0) 20%,
-        rgba(255, 255, 255, 0.5) 50%,
-        rgba(255, 255, 255, 0) 80%
-      );
-      transform: skewX(-25deg);
-      transition: transform 0.6s ease-in-out;
-      z-index: 1;
-    }
+		&:hover {
+			background-color: $primary;
+			color: $negro;
+		}
+	}
 
-    &:hover {
-      background-color: $primary;
-      color: $negro;
+	&__paragraph-wrapper {
+		max-width: 500px;
+		text-align: right;
 
-      &::after {
-        transform: translateX(350%) skewX(-25deg);
-      }
-    }
-  }
+		@media (max-width: $bp-large) {
+			text-align: left;
+			max-width: 100%;
+		}
+	}
 
-  &__paragraph-wrapper {
-    max-width: 500px;
-    text-align: right;
+	&__paragraph {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: $negro;
+		font-weight: 400;
+		margin: 0;
 
-    @media (max-width: 1024px) {
-      text-align: left;
-      max-width: 100%;
-    }
-  }
-
-  &__paragraph {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: $negro;
-    font-weight: 400;
-    margin: 0;
-
-    @media (max-width: 768px) {
-      font-size: 1.05rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			font-size: 1.05rem;
+		}
+	}
 }

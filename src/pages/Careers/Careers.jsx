@@ -1,21 +1,25 @@
-//src/pages/Careers/Careers.jsx
-import Navbar from "../../components/Navbar/Navbar"; // <-- Ajusta la ruta según dónde guardas tu Navbar
+// src/pages/Careers/Careers.jsx
+import Navbar from "../../components/Navbar/Navbar";
 import CareersHero from "../../components/Careers/CareersHero";
 import CareersJobs from "../../components/Careers/CareersJobs";
-import Footer from "../../components/Footer/Footer"; // <-- Opcional por si deseas asegurar el Footer aquí también
+import Footer from "../../components/Footer/Footer";
 import "./Careers.scss";
 
+/**
+ * Componente principal de la página Careers (Bolsa de Trabajo).
+ * Orquesta la vista integrando la navegación, el banner principal (Hero),
+ * la lista dinámica de empleos y el pie de página.
+ */
 const Careers = () => {
 	return (
 		<>
-			<Navbar /> {/* <-- El Navbar ya está integrado en la parte superior */}
+			<Navbar />
+
 			<main className='careers-page'>
 				<CareersHero />
 				<CareersJobs />
 			</main>
-			<div className='mood-print__footer-area'>
-				<Footer />
-			</div>
+			<Footer />
 		</>
 	);
 };

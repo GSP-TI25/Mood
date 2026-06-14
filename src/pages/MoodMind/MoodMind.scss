@@ -1,23 +1,37 @@
-//src/pages/MoodMind/MoodMind.scss
-@use '../../styles/variables' as *;
+// src/pages/MoodMind/MoodMind.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Estilos principales para la vista MoodMind.
+ * Utiliza un fondo oscuro para mantener la coherencia visual con las otras vistas del portafolio.
+ */
 .mood-mind {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: #1c1c1e; /* 🌟 Igualamos el fondo exterior al de MoodPrint */
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	background-color: $gris-card;
+	background-image:
+		linear-gradient(rgba($gris-card, 0.7), rgba($gris-card, 0.7)),
+		url("../../assets/Fondo_nav.png");
+	background-blend-mode: overlay;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 
-  &__footer-area {
-    width: 100%;
-    flex-grow: 1;
-    background-color: #1c1c1e;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 999;
-  }
+	/**
+   * Contenedor inferior oscuro que envuelve el pie de página.
+   */
+	&__footer-area {
+		width: 100%;
+		flex-grow: 1;
+		background-color: $gris-card;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		z-index: 999;
+	}
 }

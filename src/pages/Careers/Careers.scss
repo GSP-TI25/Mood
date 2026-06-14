@@ -1,8 +1,11 @@
-//src/pages/Careers/Careers.scss
+// src/pages/Careers/Careers.scss
 @use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de la vista de bolsa de trabajo.
+ */
 .careers-page {
 	width: 100%;
-	background-color: #1c1c1c;
+	background-color: $gris-card;
 	box-sizing: border-box;
 }

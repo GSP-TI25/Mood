@@ -1,0 +1,14 @@
+[
+	{
+		"id": "analiza",
+		"iconName": "Search"
+	},
+	{
+		"id": "acelera",
+		"iconName": "Zap"
+	},
+	{
+		"id": "optimiza",
+		"iconName": "Sparkles"
+	}
+]

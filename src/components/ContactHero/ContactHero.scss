@@ -1,227 +1,250 @@
-//src/components/ContactHero/ContactHero.scss
-@use '../../styles/variables' as *;
+// src/components/ContactHero/ContactHero.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Animación base de Fade-in Ascendente
+ */
 @keyframes fadeUpOnce {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
+/**
+ * Estilos principales del contenedor de Contacto
+ */
 .contact-hero {
-  position: relative;
-  margin: 1rem;
-  min-height: calc(100vh - 2rem);
-  border-radius: 16px;
-  background-color: #ecf0ec;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8rem 2rem 4rem;
-  box-sizing: border-box;
+	position: relative;
+	margin: 1rem;
+	min-height: calc(100vh - 2rem);
+	border-radius: 16px;
+	background-color: $bg-light;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8rem 2rem 4rem;
+	box-sizing: border-box;
 
-  @media (max-width: 768px) {
-    margin: 0.5rem;
-    padding: 7rem 1rem 3rem;
-  }
+	@media (max-width: $bp-mobile) {
+		margin: 0.5rem;
+		padding: 7rem 1rem 3rem;
+	}
 
-  &__container {
-    width: 100%;
-    max-width: 1300px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    z-index: 1;
+	&__container {
+		width: 100%;
+		max-width: 1300px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
+		z-index: 1;
 
-    @media (max-width: 968px) {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-  }
+		@media (max-width: $bp-tablet) {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+	}
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    @media (max-width: 968px) {
-      align-items: center;
-      text-align: center;
-    }
-  }
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 
-  &__title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+		@media (max-width: $bp-tablet) {
+			align-items: center;
+			text-align: center;
+		}
+	}
 
-  &__line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.3em;
-    @media (max-width: 968px) {
-      justify-content: center;
-    }
-  }
+	&__title-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
 
-  &__title {
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
-    font-weight: 900;
-    text-align: center;
-    color: $negro;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    margin: 0;
+	&__line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.3em;
 
-    &--light {
-      color: rgba($negro, 0.5);
-      font-weight: 500;
-    }
-    @media (max-width: 968px) {
-      margin: auto;
-    }
-  }
+		@media (max-width: $bp-tablet) {
+			justify-content: center;
+		}
+	}
 
-  &__highlight {
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
-    font-weight: 900;
-    color: $negro !important;
-    background-color: $primary;
-    padding: 0 0.3em;
-    border-radius: 12px;
-    margin: 0 0.1em;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba($primary, 0.2);
-    transform: rotate(-2deg);
-    * {
-      color: $negro !important;
-    }
-  }
+	&__title {
+		font-size: clamp(2.8rem, 6vw, 4.5rem);
+		font-weight: 900;
+		text-align: center;
+		color: $negro;
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		margin: 0;
 
-  &__subtitle {
-    font-size: 1.15rem;
-    color: rgba($negro, 0.7);
-    max-width: 500px;
-    line-height: 1.6;
-    margin: 0;
-    @media (max-width: 968px) {
-      font-size: 1rem;
-      max-width: 600px;
-    }
-  }
+		&--light {
+			color: rgba($negro, 0.5);
+			font-weight: 500;
+		}
 
-  &__fade-in {
-    animation: fadeUpOnce 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
-  }
+		@media (max-width: $bp-tablet) {
+			margin: auto;
+		}
+	}
+
+	&__highlight {
+		font-size: clamp(2.8rem, 6vw, 4.5rem);
+		font-weight: 900;
+		color: $negro !important;
+		background-color: $primary;
+		padding: 0 0.3em;
+		border-radius: 12px;
+		margin: 0 0.1em;
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 20px rgba($primary, 0.2);
+		transform: rotate(-2deg);
+
+		* {
+			color: $negro !important;
+		}
+	}
+
+	&__subtitle {
+		font-size: 1.15rem;
+		color: rgba($negro, 0.7);
+		max-width: 500px;
+		line-height: 1.6;
+		margin: 0;
+
+		@media (max-width: $bp-tablet) {
+			font-size: 1rem;
+			max-width: 600px;
+		}
+	}
+
+	&__fade-in {
+		animation: fadeUpOnce 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+
+		&--delay-1 {
+			animation-delay: 0.4s;
+		}
+
+		&--delay-2 {
+			animation-delay: 0.6s;
+		}
+	}
 }
 
-/* =========================================
-   ESTILOS DE LA GOTA (CENTRADOS EN EL MAESTRO)
-   ========================================= */
+/**
+ * =========================================
+ * ESTILOS DEL OVERLAY DE ÉXITO ("Gota de Agua")
+ * =========================================
+ */
 .water-drop-overlay {
-  position: fixed; /* <--- Se clava al navegador completo, por encima de todo */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 99999; /* Un z-index masivo para tapar Navbar, Footer y todo a su paso */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: all; /* Bloquea clics accidentales mientras leen el lema */
-  background-color: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 99999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: all;
+	background-color: transparent;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vmax; /* Toma la dimensión máxima de la pantalla como radio base */
-    height: 100vmax;
-    background-color: $primary;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: dropExpandGlobal 1.4s cubic-bezier(0.6, 0, 0.1, 1) forwards;
-  }
+	&::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100vmax;
+		height: 100vmax;
+		background-color: $primary;
+		border-radius: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		animation: dropExpandGlobal 1.4s cubic-bezier(0.6, 0, 0.1, 1) forwards;
+	}
 }
+
 .water-drop-content {
-  position: relative;
-  z-index: 100000;
-  width: 90%;
-  max-width: 850px;
-  text-align: center;
-  padding: 0 2rem;
-  box-sizing: border-box;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUpTextGlobal 0.9s cubic-bezier(0.25, 1, 0.5, 1) 0.7s forwards;
+	position: relative;
+	z-index: 100000;
+	width: 90%;
+	max-width: 850px;
+	text-align: center;
+	padding: 0 2rem;
+	box-sizing: border-box;
+	opacity: 0;
+	transform: translateY(30px);
+	animation: fadeUpTextGlobal 0.9s cubic-bezier(0.25, 1, 0.5, 1) 0.7s forwards;
 
-  @media (max-width: 768px) {
-    width: 95%;
-    padding: 0 1rem;
-  }
-  h2 {
-    font-size: clamp(
-      2rem,
-      5vw,
-      3.8rem
-    ); /* Un tamaño imponente para pantalla completa */
-    font-weight: 700;
-    color: $negro;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    margin: 0;
-    @media (max-width: 768px) {
-      font-size: 1.9rem; /* Forzamos un tamaño exacto y equilibrado para móviles estándar */
-      line-height: 1.35; /* Damos más aire entre líneas para que los emojis y letras respiren */
-      letter-spacing: -0.02em; /* Suavizamos un poco el ajuste de letra para mejor lectura */
-    }
+	@media (max-width: $bp-mobile) {
+		width: 95%;
+		padding: 0 1rem;
+	}
 
-    @media (max-width: 414px) {
-      font-size: 1.65rem; /* Ajuste milimétrico ultra-seguro para teléfonos compactos (ej. iPhone SE) */
-    }
-  }
+	h2 {
+		font-size: clamp(2rem, 5vw, 3.8rem);
+		font-weight: 700;
+		color: $negro;
+		line-height: 1.25;
+		letter-spacing: -0.02em;
+		margin: 0;
+
+		@media (max-width: $bp-mobile) {
+			font-size: 1.9rem;
+			line-height: 1.35;
+		}
+
+		@media (max-width: $bp-small-mobile) {
+			font-size: 1.65rem;
+		}
+	}
 }
 
-/* --- CLASE DE SALIDA CINEMÁTICA --- */
+/**
+ * Animación de cierre del Overlay
+ */
 .fade-out-sequence {
-  opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+	opacity: 0;
+	transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 
-  .water-drop-content {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.7s ease-in;
-  }
+	.water-drop-content {
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: all 0.7s ease-in;
+	}
 }
 
-/* --- KEYFRAMES DE EXPANSIÓN GLOBAL --- */
+/**
+ * Keyframes para expansión y desvanecimiento
+ */
 @keyframes dropExpandGlobal {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    border-radius: 50%; /* Conserva la forma de gota líquida a mitad de camino */
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(2.2); /* Inunda completamente los extremos */
-    border-radius: 0; /* Convierte el final en un bloque sólido para evitar fugas visuales */
-  }
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+	}
+	50% {
+		border-radius: 50%;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(2.2);
+		border-radius: 0;
+	}
 }
 
 @keyframes fadeUpTextGlobal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

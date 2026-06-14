@@ -1,260 +1,211 @@
-//src/components/MoodApproach/MoodApproach.scss
-@use '../../styles/variables' as *;
+// src/components/MoodApproach/MoodApproach.scss
+@use "../../styles/variables" as *;
 
-/* 🌟 ANIMACIÓN DE REFLEJO DE LUZ BASE */
-%shiny-animation {
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    transform: skewX(-25deg);
-    transition: left 0.7s ease;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  &:hover::after {
-    left: 200%;
-  }
-}
-
+/**
+ * Contenedor principal de MoodApproach.
+ */
 .mood-approach {
-  position: relative;
-  width: 100%;
-  background-color: #ffffff;
-  padding: 6rem 2rem;
-  box-sizing: border-box;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	position: relative;
+	width: 100%;
+	background-color: $blanco;
+	padding: 6rem 2rem;
+	box-sizing: border-box;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-bottom-left-radius: 48px;
+	border-bottom-right-radius: 48px;
 
-  border-bottom-left-radius: 48px;
-  border-bottom-right-radius: 48px;
+	@media (max-width: $bp-tablet) {
+		min-height: auto;
+		padding: 6rem 1.5rem;
+	}
 
-  @media (max-width: 900px) {
-    min-height: auto;
-    padding: 6rem 1.5rem;
-  }
+	&__container {
+		width: 100%;
+		max-width: 1300px;
+		display: flex;
+		flex-direction: column;
+		gap: 6rem;
+	}
 
-  &__container {
-    width: 100%;
-    max-width: 1300px;
-    display: flex;
-    flex-direction: column;
-    gap: 6rem;
-  }
+	/**
+   * Layout de cabecera superior
+   */
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		gap: 4rem;
 
-  /* ==========================================
-     🌟 CABECERA
-     ========================================== */
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    gap: 4rem;
+		@media (max-width: $bp-tablet) {
+			flex-direction: column;
+			gap: 2rem;
+		}
+	}
 
-    @media (max-width: 900px) {
-      flex-direction: column;
-      gap: 2rem;
-    }
-  }
+	&__badge {
+		background-color: rgba($negro, 0.04);
+		color: $negro;
+		padding: 0.4rem 0.8rem;
+		border-radius: 6px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
 
-  // &__header-left {
-  //   flex: 0 0 200px;
-  // }
+	&__badge-dot {
+		width: 8px;
+		height: 8px;
+		background-color: $primary;
+		border-radius: 2px;
+	}
 
-  &__badge {
-    background-color: rgba(0, 0, 0, 0.04);
-    color: #2c1c1c;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+	&__header-right {
+		flex: 1;
+		max-width: 950px;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
 
-  &__badge-dot {
-    width: 8px;
-    height: 8px;
-    background-color: $primary;
-    border-radius: 2px;
-  }
+	&__title {
+		font-size: clamp(2.5rem, 4vw, 3.8rem);
+		font-weight: 400;
+		color: $negro;
+		margin: 0;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+	}
 
-  &__header-right {
-    flex: 1;
-    max-width: 950px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+	&__title-line {
+		display: block;
+	}
 
-  &__title {
-    font-size: clamp(2.5rem, 4vw, 3.8rem);
-    font-weight: 400;
-    color: #111111;
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-  }
+	&__description {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: rgba($negro, 0.7);
+		margin: 0;
+		max-width: 800px;
+		font-weight: 400;
+	}
 
-  &__title-line {
-    display: block;
-  }
+	/**
+   * Grilla de tarjetas.
+   * Aplica un esquema oscuro automáticamente al tercer elemento.
+   */
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
 
-  &__description {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: rgba(17, 17, 17, 0.7);
-    margin: 0;
-    max-width: 800px;
-    font-weight: 400;
-  }
+		@media (max-width: $bp-large) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
-  /* ==========================================
-     🌟 GRILLA DE TARJETAS Y LÓGICA DE COLORES
-     ========================================== */
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+		@media (max-width: $bp-mobile) {
+			grid-template-columns: 1fr;
+		}
 
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+		// Variación para la tercera tarjeta (Destacada Oscura)
+		> :nth-child(3) .mood-approach__card {
+			background-color: $gris-card;
+			color: $blanco;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+			.mood-approach__card-icon,
+			.mood-approach__card-overline,
+			.mood-approach__card-title {
+				color: $blanco;
+			}
 
-    /* 🌟 MAGIA AQUÍ: Seleccionamos el 2do hijo de la grilla (FadeContent) 
-       y le aplicamos estilos a la tarjeta que tiene dentro */
-    > :nth-child(3) .mood-approach__card {
-      background-color: #1a1c1d; /* Oscuro */
-      color: #ffffff;
+			.mood-approach__card-desc {
+				color: rgba($blanco, 0.8);
+			}
 
-      .mood-approach__card-icon {
-        color: #fff;
-      }
-      .mood-approach__card-overline {
-        color: #fff;
-      }
-      .mood-approach__card-title {
-        color: #ffffff;
-      }
-      .mood-approach__card-desc {
-        color: rgba(255, 255, 255, 0.8);
-      }
+			// Sobrescribe el gradiente del mixin para que resalte en fondos oscuros
+			&::after {
+				background: linear-gradient(
+					100deg,
+					rgba(255, 255, 255, 0) 20%,
+					rgba(255, 255, 255, 0.2) 50%,
+					rgba(255, 255, 255, 0) 80%
+				);
+			}
+		}
+	}
 
-      /* Reflejo de luz blanca adaptada al fondo oscuro */
-      &::after {
-        background: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(255, 255, 255, 0.2) 50%,
-          rgba(255, 255, 255, 0) 100%
-        );
-      }
-    }
-  }
+	/**
+   * Estructura interna de cada Tarjeta
+   */
+	&__card {
+		@include shiny-effect(
+			rgba(255, 255, 255, 0.8)
+		); // Brillo intenso para fondos claros
+		border-radius: 16px;
+		padding: 3.5rem 2.5rem;
+		display: flex;
+		flex-direction: column;
+		min-height: 340px;
+		box-sizing: border-box;
+		transition: box-shadow 0.4s ease;
 
-  /* ==========================================
-     🌟 ESTILOS BASE DE LAS TARJETAS (ESTÁTICAS)
-     ========================================== */
-  &__card {
-    @extend %shiny-animation;
-    border-radius: 16px;
-    padding: 3.5rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 340px;
-    box-sizing: border-box;
-    /* CERO MOVIMIENTO: Solo transiciona la sombra */
-    transition: box-shadow 0.4s ease;
+		background-color: $bg-gray;
+		color: $negro;
 
-    /* 🌟 ESTILOS POR DEFECTO PARA TODAS (CLARAS 1 Y 3) */
-    background-color: #f5f6f6;
-    color: #111111;
+		&:hover {
+			box-shadow: 0 15px 40px rgba($negro, 0.08);
+		}
 
-    .mood-approach__card-icon {
-      color: #111111;
-    }
-    .mood-approach__card-overline {
-      color: rgba(17, 17, 17, 0.5);
-    }
-    .mood-approach__card-title {
-      color: #111111;
-    }
-    .mood-approach__card-desc {
-      color: rgba(17, 17, 17, 0.7);
-    }
+		@media (max-width: $bp-mobile) {
+			min-height: 320px;
+			padding: 2.5rem 2rem;
+		}
+	}
 
-    /* Reflejo blanco que se note sobre el gris claro */
-    &::after {
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
+	&__card-icon {
+		color: $negro;
+		margin-bottom: auto;
+		position: relative;
+		z-index: 2;
+	}
 
-    /* Sombra estática sin movimiento */
-    &:hover {
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-    }
+	&__card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+		margin-top: 2rem;
+		position: relative;
+		z-index: 2;
+	}
 
-    @media (max-width: 768px) {
-      min-height: 320px;
-      padding: 2.5rem 2rem;
-    }
-  }
+	&__card-overline {
+		color: rgba($negro, 0.5);
+		font-size: 0.7rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
 
-  /* ESTRUCTURA INTERNA */
-  &__card-icon {
-    margin-bottom: auto;
-    position: relative;
-    z-index: 2;
-  }
+	&__card-title {
+		color: $negro;
+		font-size: 1.8rem;
+		font-weight: 400;
+		margin: 0;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+	}
 
-  &__card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-top: 2rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  &__card-overline {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  &__card-title {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  &__card-desc {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
-    font-weight: 400;
-  }
+	&__card-desc {
+		color: rgba($negro, 0.7);
+		font-size: 0.9rem;
+		line-height: 1.6;
+		margin: 0;
+		font-weight: 400;
+	}
 }

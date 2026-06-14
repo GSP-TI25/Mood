@@ -11,6 +11,9 @@ $blanco: #fff;
 $negro: #373235;
 $gris-card: #1c1c1e;
 $bg-light: #ecf0ec;
+$bg-dark: #0a0a0b;
+$bg-cream: #fdfaf1;
+$bg-gray: #f5f6f6;
 
 /**
  * ==========================================
@@ -32,7 +35,6 @@ $bp-desktop: 1200px;
 
 /**
  * Truncado de texto dinámico.
- * Limita el texto a un número específico de líneas y añade puntos suspensivos.
  */
 @mixin truncate-lines($lines: 3) {
 	display: -webkit-box;

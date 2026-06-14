@@ -1,231 +1,230 @@
-//src/components/ContactHero/ContactForm.scss
-@use '../../styles/variables' as *;
-
-%shiny-animation {
-  position: relative;
-  overflow: hidden;
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -120%;
-    width: 60%;
-    height: 200%;
-    background: linear-gradient(
-      100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: skewX(-25deg);
-    transition: transform 0.5s ease-in-out;
-    z-index: 1;
-  }
-  &:hover::after {
-    transform: translateX(400%) skewX(-25deg);
-  }
-}
+// src/components/ContactHero/ContactForm.scss
+@use "../../styles/variables" as *;
 
 .contact-form {
-  background-color: $blanco;
-  padding: 3rem;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+	background-color: $blanco;
+	padding: 3rem;
+	border-radius: 24px;
+	box-shadow: 0 20px 50px rgba($negro, 0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
 
-  @media (max-width: 768px) {
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
-  }
+	@media (max-width: $bp-mobile) {
+		padding: 2rem 1.5rem;
+		border-radius: 20px;
+	}
 
-  &__header {
-    h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: $negro;
-      margin: 0 0 0.5rem 0;
-      letter-spacing: -0.02em;
-    }
-  }
+	&__header {
+		h3 {
+			font-size: 1.8rem;
+			font-weight: 700;
+			color: $negro;
+			margin: 0 0 0.5rem 0;
+			letter-spacing: -0.02em;
+		}
+	}
 
-  &__row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+	/**
+   * Trampa Anti-Spam oculta visualmente
+   */
+	&__honeypot {
+		position: absolute;
+		left: -9999px;
+	}
 
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-    }
-  }
+	&__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
 
-  &__group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+		@media (max-width: $bp-medium-mobile) {
+			grid-template-columns: 1fr;
+		}
+	}
 
-    label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: rgba($negro, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+	&__group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 
-    input[type='text'],
-    input[type='email'],
-    input[type='tel'],
-    textarea {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      font-size: 1rem;
-      font-family: inherit;
-      color: $negro;
-      background-color: rgba($negro, 0.04);
-      border: 1px solid transparent;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      box-sizing: border-box;
+		label {
+			font-size: 0.8rem;
+			font-weight: 700;
+			color: rgba($negro, 0.7);
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
 
-      &::placeholder {
-        color: rgba($negro, 0.3);
-      }
+		input[type="text"],
+		input[type="email"],
+		input[type="tel"],
+		textarea {
+			width: 100%;
+			padding: 0.9rem 1.2rem;
+			font-size: 1rem;
+			font-family: inherit;
+			color: $negro;
+			background-color: rgba($negro, 0.04);
+			border: 1px solid transparent;
+			border-radius: 12px;
+			transition: all 0.3s ease;
+			box-sizing: border-box;
 
-      &:focus {
-        outline: none;
-        background-color: $blanco;
-        border-color: $primary;
-        box-shadow: 0 0 0 4px rgba($primary, 0.15);
-      }
-    }
+			&::placeholder {
+				color: rgba($negro, 0.3);
+			}
 
-    textarea {
-      resize: none;
-      min-height: 100px;
-    }
+			&:focus {
+				outline: none;
+				background-color: $blanco;
+				border-color: $primary;
+				box-shadow: 0 0 0 4px rgba($primary, 0.15);
+			}
+		}
 
-    .custom-select__control {
-      background-color: rgba($negro, 0.04);
-      border: 1px solid transparent;
-      border-radius: 12px;
-      min-height: 52px;
-      box-shadow: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
+		textarea {
+			resize: none;
+			min-height: 100px;
+		}
 
-      &:hover {
-        border-color: transparent;
-      }
+		/**
+     * Estilos de la librería React-Select sobreescritos
+     */
+		.custom-select__control {
+			background-color: rgba($negro, 0.04);
+			border: 1px solid transparent;
+			border-radius: 12px;
+			min-height: 52px;
+			box-shadow: none;
+			cursor: pointer;
+			transition: all 0.3s ease;
 
-      &--is-focused {
-        background-color: $blanco;
-        border-color: $primary;
-        box-shadow: 0 0 0 4px rgba($primary, 0.15);
-        &:hover {
-          border-color: $primary;
-        }
-      }
-    }
+			&:hover {
+				border-color: transparent;
+			}
 
-    .custom-select__value-container {
-      padding: 0 1.2rem;
-    }
-    .custom-select__single-value {
-      color: $negro;
-      font-size: 1rem;
-    }
-    .custom-select__placeholder {
-      color: rgba($negro, 0.3);
-      font-size: 1rem;
-    }
-    .custom-select__indicator-separator {
-      display: none;
-    }
+			&--is-focused {
+				background-color: $blanco;
+				border-color: $primary;
+				box-shadow: 0 0 0 4px rgba($primary, 0.15);
 
-    .custom-select__dropdown-indicator {
-      color: rgba($negro, 0.4);
-      padding-right: 1rem;
-      &:hover {
-        color: $negro;
-      }
-    }
+				&:hover {
+					border-color: $primary;
+				}
+			}
+		}
 
-    .custom-select__menu {
-      background-color: $blanco;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba($negro, 0.05);
-      overflow: hidden;
-      z-index: 100;
-      margin-top: 0.5rem;
-    }
+		.custom-select__value-container {
+			padding: 0 1.2rem;
+		}
 
-    .custom-select__option {
-      padding: 0.8rem 1.2rem;
-      cursor: pointer;
-      color: rgba($negro, 0.8);
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
+		.custom-select__single-value {
+			color: $negro;
+			font-size: 1rem;
+		}
 
-      &--is-focused {
-        background-color: rgba($primary, 0.1);
-        color: $negro;
-      }
-      &--is-selected {
-        background-color: $primary;
-        color: $negro;
-        font-weight: 700;
-      }
-    }
-  }
+		.custom-select__placeholder {
+			color: rgba($negro, 0.3);
+			font-size: 1rem;
+		}
 
-  &__submit {
-    @extend %shiny-animation;
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.8rem;
-    width: 100%;
-    padding: 1.2rem;
-    background-color: $negro;
-    color: $blanco;
-    font-weight: 700;
-    font-size: 1.05rem;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+		.custom-select__indicator-separator {
+			display: none;
+		}
 
-    span,
-    svg {
-      position: relative;
-      z-index: 2;
-    }
-    &:hover {
-      background-color: $primary;
-      color: $negro;
-      box-shadow: 0 10px 25px rgba($primary, 0.25);
-    }
-  }
+		.custom-select__dropdown-indicator {
+			color: rgba($negro, 0.4);
+			padding-right: 1rem;
+
+			&:hover {
+				color: $negro;
+			}
+		}
+
+		.custom-select__menu {
+			background-color: $blanco;
+			border-radius: 12px;
+			box-shadow: 0 10px 30px rgba($negro, 0.15);
+			border: 1px solid rgba($negro, 0.05);
+			overflow: hidden;
+			z-index: 100;
+			margin-top: 0.5rem;
+		}
+
+		.custom-select__option {
+			padding: 0.8rem 1.2rem;
+			cursor: pointer;
+			color: rgba($negro, 0.8);
+			font-size: 0.95rem;
+			transition: all 0.2s ease;
+
+			&--is-focused {
+				background-color: rgba($primary, 0.1);
+				color: $negro;
+			}
+
+			&--is-selected {
+				background-color: $primary;
+				color: $negro;
+				font-weight: 700;
+			}
+		}
+	}
+
+	&__submit {
+		@include shiny-effect;
+		margin-top: 0.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.8rem;
+		width: 100%;
+		padding: 1.2rem;
+		background-color: $negro;
+		color: $blanco;
+		font-weight: 700;
+		font-size: 1.05rem;
+		border: none;
+		border-radius: 12px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		span,
+		svg {
+			position: relative;
+			z-index: 2;
+		}
+
+		&:hover {
+			background-color: $primary;
+			color: $negro;
+			box-shadow: 0 10px 25px rgba($primary, 0.25);
+		}
+	}
+
+	&__feedback {
+		&--error {
+			color: #b91c1c;
+			background-color: #fee2e2;
+			font-size: 0.9rem;
+			font-weight: 700;
+			text-align: center;
+			padding: 0.8rem;
+			border-radius: 8px;
+		}
+	}
 }
 
-.contact-form__feedback--error {
-  color: #b91c1c;
-  background-color: #fee2e2;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-align: center;
-  padding: 0.8rem;
-  border-radius: 8px;
-}
-
+/**
+ * Animación de spinner para botón cargando
+ */
 .spin-animation {
-  animation: spin 1s linear infinite;
+	animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }
