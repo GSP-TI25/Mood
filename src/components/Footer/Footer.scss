@@ -1,229 +1,229 @@
 // src/components/Footer/Footer.scss
-@use "../../styles/variables" as *;
+@use '../../styles/variables' as *;
 
 .footer {
-	width: 100%;
-	background-color: $gris-card;
-	background-image:
-		linear-gradient(rgba($gris-card, 0.7), rgba($gris-card, 0.7)),
-		url("../../assets/Fondo_nav.png");
-	background-blend-mode: overlay;
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-	color: $blanco;
-	display: flex;
-	justify-content: center;
-	padding: 6rem 2rem 2rem;
-	box-sizing: border-box;
-	margin-top: auto;
+  width: 100%;
+  background-color: $gris-card;
+  background-image:
+    linear-gradient(rgba($gris-card, 0.7), rgba($gris-card, 0.7)),
+    url('../../assets/Fondo_nav.png');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: $blanco;
+  display: flex;
+  justify-content: center;
+  padding: 6rem 2rem 2rem;
+  box-sizing: border-box;
+  margin-top: auto;
 
-	&__container {
-		width: 100%;
-		max-width: $bp-desktop;
-		display: flex;
-		flex-direction: column;
-		gap: 6rem;
+  &__container {
+    width: 100%;
+    max-width: $bp-desktop;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
 
-		@media (max-width: $bp-tablet) {
-			gap: 4rem;
-		}
-	}
+    @media (max-width: $bp-tablet) {
+      gap: 4rem;
+    }
+  }
 
-	&__top {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 4rem;
+  &__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
 
-		@media (max-width: $bp-tablet) {
-			flex-direction: column;
-			gap: 3.5rem;
-		}
-	}
+    @media (max-width: $bp-tablet) {
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+  }
 
-	&__brand-section {
-		flex: 1;
-		max-width: 500px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 2rem;
-	}
+  &__brand-section {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
 
-	&__slogan {
-		font-size: clamp(1.8rem, 4vw, 2.2rem);
-		font-weight: 500;
-		line-height: 1.4;
-		color: $blanco;
-		margin: 0;
-		letter-spacing: -0.04em;
-	}
+  &__slogan {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: $blanco;
+    margin: 0;
+    letter-spacing: -0.04em;
+  }
 
-	&__jobs {
-		display: flex;
-		align-items: flex-start;
-	}
+  &__jobs {
+    display: flex;
+    align-items: flex-start;
+  }
 
-	&__menus-wrapper {
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		gap: 4rem;
+  &__menus-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
 
-		@media (max-width: $bp-tablet) {
-			width: 100%;
-			position: relative;
-		}
-	}
+    @media (max-width: $bp-tablet) {
+      width: 100%;
+      position: relative;
+    }
+  }
 
-	&__menus {
-		display: flex;
-		flex-direction: row;
-		gap: 6rem;
+  &__menus {
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
 
-		@media (max-width: $bp-tablet) {
-			flex-direction: column;
-			gap: 3.5rem;
-		}
-	}
+    @media (max-width: $bp-tablet) {
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+  }
 
-	&__nav-group {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
+  &__nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 
-	&__nav-title {
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: rgba($blanco, 0.5);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-	}
+  &__nav-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba($blanco, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
 
-	&__nav-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.8rem;
-	}
+  &__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
 
-	&__nav-link {
-		color: $blanco;
-		text-decoration: none;
-		font-size: clamp(1rem, 2vw, 1.2rem);
-		font-weight: 500;
-		letter-spacing: -0.02em;
-		transition:
-			opacity 0.3s ease,
-			color 0.3s ease;
+  &__nav-link {
+    color: $blanco;
+    text-decoration: none;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    transition:
+      opacity 0.3s ease,
+      color 0.3s ease;
 
-		&:hover {
-			color: $primary;
-		}
-	}
+    &:hover {
+      color: $primary;
+    }
+  }
 
-	.btn-jobs {
-		display: inline-flex;
-		align-items: stretch;
-		gap: 0.5rem;
-		text-decoration: none;
-		transition: all 0.3s ease;
+  .btn-jobs {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-		&__text {
-			@include shiny-effect(rgba(255, 255, 255, 0.2));
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background-color: rgba($negro, 0.8);
-			color: $blanco;
-			padding: 0 1.5rem;
-			height: 48px;
-			border-radius: 12px;
-			font-weight: 600;
-			font-size: 0.8rem;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			border: 1px solid rgba($blanco, 0.1);
-			transition: all 0.3s ease;
-		}
+    &__text {
+      @include shiny-effect(rgba(255, 255, 255, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba($negro, 0.8);
+      color: $blanco;
+      padding: 0 1.5rem;
+      height: 48px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba($blanco, 0.1);
+      transition: all 0.3s ease;
+    }
 
-		&__icon {
-			@include shiny-effect(rgba(255, 255, 255, 0.4));
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background-color: $primary;
-			color: $negro;
-			width: 48px;
-			height: 48px;
-			border-radius: 12px;
-			transition: all 0.3s ease;
-		}
+    &__icon {
+      @include shiny-effect(rgba(255, 255, 255, 0.4));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $primary;
+      color: $negro;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
 
-		&:hover {
-			.btn-jobs__text {
-				background-color: $primary;
-				color: $negro;
-				border-color: $primary;
-			}
-			.btn-jobs__icon {
-				background-color: $blanco;
-				color: $negro;
-			}
-		}
-	}
+    &:hover {
+      .btn-jobs__text {
+        background-color: $primary;
+        color: $negro;
+        border-color: $primary;
+      }
+      .btn-jobs__icon {
+        background-color: $blanco;
+        color: $negro;
+      }
+    }
+  }
 
-	&__scroll-top {
-		@include shiny-effect(rgba(255, 255, 255, 0.4));
-		background: transparent;
-		border: 1px solid rgba($blanco, 0.2);
-		color: $blanco;
-		width: 45px;
-		height: 45px;
-		border-radius: 30%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		margin-top: -0.5rem;
+  &__scroll-top {
+    @include shiny-effect(rgba(255, 255, 255, 0.4));
+    background: transparent;
+    border: 1px solid rgba($blanco, 0.2);
+    color: $blanco;
+    width: 45px;
+    height: 45px;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: -0.5rem;
 
-		svg {
-			position: relative;
-			z-index: 2;
-		}
+    svg {
+      position: relative;
+      z-index: 2;
+    }
 
-		&:hover {
-			background-color: $blanco;
-			color: $negro;
-		}
+    &:hover {
+      background-color: $blanco;
+      color: $negro;
+    }
 
-		@media (max-width: $bp-tablet) {
-			position: absolute;
-			top: -0.5rem;
-			right: 0;
-			margin-top: 0;
-		}
-	}
+    @media (max-width: $bp-tablet) {
+      position: absolute;
+      top: -0.5rem;
+      right: 0;
+      margin-top: 0;
+    }
+  }
 
-	&__bottom {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+  &__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-		p {
-			margin: 0;
-			font-size: 0.7rem;
-			font-weight: 500;
-			color: rgba($blanco, 0.5);
-			text-transform: uppercase;
-			letter-spacing: 0.04em;
-		}
-	}
+    p {
+      margin: 0;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba($blanco, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+  }
 }
