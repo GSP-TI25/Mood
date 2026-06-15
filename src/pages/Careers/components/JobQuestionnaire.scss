@@ -1,0 +1,57 @@
+// src/pages/Careers/components/JobQuestionnaire.scss
+@use "../../../styles/variables" as *;
+
+.app-questions {
+	display: flex;
+	flex-direction: column;
+	gap: 1.75rem;
+}
+
+.checkbox-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
+}
+
+.checkbox-label {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	cursor: pointer;
+	font-weight: 400 !important;
+	color: $slate-600 !important;
+
+	input[type="checkbox"] {
+		appearance: none;
+		width: 1.15rem;
+		height: 1.15rem;
+		border: 1px solid $slate-300;
+		border-radius: 4px;
+		background-color: $blanco;
+		cursor: pointer;
+		position: relative;
+		transition: all 0.2s;
+
+		&:checked {
+			background-color: $slate-900;
+			border-color: $slate-900;
+
+			&::after {
+				content: "";
+				position: absolute;
+				left: 5px;
+				top: 2px;
+				width: 4px;
+				height: 8px;
+				border: solid $blanco;
+				border-width: 0 2px 2px 0;
+				transform: rotate(45deg);
+			}
+		}
+	}
+
+	&:hover input[type="checkbox"]:not(:checked) {
+		border-color: $slate-400;
+	}
+}

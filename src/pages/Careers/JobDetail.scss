@@ -1,278 +1,294 @@
-//src/pages/Careers/JobDetail.scss
-@use '../../styles/variables' as *;
+// src/pages/Careers/JobDetail.scss
+@use "../../styles/variables" as *;
 
-/* Layout base (Fondo gris extra claro) */
+/**
+ * Layout base de la vista de detalle
+ */
 .job-detail-layout {
-  min-height: 100vh;
-  background-color: #f8fafc;
-  padding: 3rem 1.5rem;
-  font-family: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+	min-height: 100vh;
+	background-color: $slate-50;
+	padding: 3rem 1.5rem;
+	font-family: inherit;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 .job-detail-wrapper {
-  width: 100%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+	width: 100%;
+	max-width: 800px;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
 }
 
-/* Enlace de retroceso (Estilo Ghost Button) */
+/**
+ * Enlace de retroceso (Estilo Ghost Button)
+ */
 .job-detail__back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #64748b; /* Gris texto apagado */
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  width: fit-content;
-  transition: all 0.2s;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: $slate-500;
+	text-decoration: none;
+	font-size: 0.875rem;
+	font-weight: 500;
+	padding: 0.5rem 0.75rem;
+	border-radius: 6px;
+	width: fit-content;
+	transition: all 0.2s;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: #0f172a; /* Texto oscuro al hover */
-  }
+	&:hover {
+		background-color: rgba($negro, 0.05);
+		color: $slate-900;
+	}
 }
 
-/* =========================================
-   TARJETA PRINCIPAL DE LA VACANTE
-   ========================================= */
+/**
+ * Tarjeta principal de contenido
+ */
 .job-detail-card {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow:
-    0 1px 3px 0 rgba(0, 0, 0, 0.05),
-    0 1px 2px -1px rgba(0, 0, 0, 0.05); /* Sombra sm shadcn */
-  overflow: hidden;
+	background-color: $blanco;
+	border: 1px solid $slate-200;
+	border-radius: 12px;
+	box-shadow:
+		0 1px 3px 0 rgba($negro, 0.05),
+		0 1px 2px -1px rgba($negro, 0.05);
+	overflow: hidden;
 
-  &__header {
-    padding: 2.5rem 3rem 2rem 3rem;
-    border-bottom: 1px solid #f1f5f9;
+	&__header {
+		padding: 2.5rem 3rem 2rem 3rem;
+		border-bottom: 1px solid $slate-100;
 
-    @media (max-width: 640px) {
-      padding: 2rem 1.5rem 1.5rem 1.5rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 2rem 1.5rem 1.5rem 1.5rem;
+		}
+	}
 
-  &__title {
-    margin: 0 0 1.25rem 0;
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #0f172a;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
+	&__title {
+		margin: 0 0 1.25rem 0;
+		font-size: 2.25rem;
+		font-weight: 700;
+		color: $slate-900;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+	}
 
-  &__badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
+	&__badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
 
-  &__content {
-    padding: 2.5rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+	&__content {
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
 
-    @media (max-width: 640px) {
-      padding: 1.5rem;
-      gap: 2rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 1.5rem;
+			gap: 2rem;
+		}
+	}
 
-  &__footer {
-    background-color: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    padding: 2rem 3rem;
+	&__footer {
+		background-color: $slate-50;
+		border-top: 1px solid $slate-200;
+		padding: 2rem 3rem;
 
-    @media (max-width: 640px) {
-      padding: 1.5rem;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 1.5rem;
+		}
+	}
 }
 
-/* Badges (Etiquetas) */
+/**
+ * Etiquetas de metadatos (Badges)
+ */
 .job-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background-color: #f1f5f9;
-  color: #334155;
-  border: 1px solid #e2e8f0;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px; /* Totalmente redondeado */
-  font-size: 0.8rem;
-  font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	background-color: $slate-100;
+	color: $slate-700;
+	border: 1px solid $slate-200;
+	padding: 0.35rem 0.85rem;
+	border-radius: 9999px;
+	font-size: 0.8rem;
+	font-weight: 500;
 
-  &--secondary {
-    background-color: transparent;
-    border-color: #cbd5e1;
-    color: #64748b;
-  }
+	&--secondary {
+		background-color: transparent;
+		border-color: $slate-300;
+		color: $slate-500;
+	}
 }
 
-/* Secciones de contenido interno */
+/**
+ * Bloques de contenido interno (Acerca de, Requisitos, etc.)
+ */
 .content-section {
-  h2 {
-    margin: 0 0 1rem 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #0f172a;
-    letter-spacing: -0.01em;
-  }
+	h2 {
+		margin: 0 0 1rem 0;
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: $slate-900;
+		letter-spacing: -0.01em;
+	}
 
-  p {
-    margin: 0;
-    color: #475569;
-    font-size: 1rem;
-    line-height: 1.7;
-  }
+	p {
+		margin: 0;
+		color: $slate-600;
+		font-size: 1rem;
+		line-height: 1.7;
+	}
 }
 
-/* Listas personalizadas para Requisitos/Funciones */
+/**
+ * Listas personalizadas
+ */
 .custom-list {
-  margin: 0;
-  padding-left: 1.2rem;
-  list-style-type: none; /* Quitamos la viñeta por defecto */
+	margin: 0;
+	padding-left: 1.2rem;
+	list-style-type: none;
 
-  li {
-    position: relative;
-    color: #475569;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 0.5rem;
+	li {
+		position: relative;
+		color: $slate-600;
+		font-size: 1rem;
+		line-height: 1.7;
+		margin-bottom: 0.5rem;
 
-    /* Viñeta personalizada estilo shadcn (Un guion suave o punto sólido) */
-    &::before {
-      content: '•';
-      position: absolute;
-      left: -1.2rem;
-      color: #94a3b8; /* Gris claro para el punto */
-      font-weight: bold;
-    }
+		&::before {
+			content: "•";
+			position: absolute;
+			left: -1.2rem;
+			color: $slate-400;
+			font-weight: bold;
+		}
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }
 
-/* Footer (Llamado a la acción) */
+/**
+ * Pie de página / Llamado a la acción
+ */
 .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
 
-  @media (max-width: 640px) {
-    flex-direction: column;
-    text-align: center;
-    align-items: stretch;
-  }
+	@media (max-width: $bp-mobile) {
+		flex-direction: column;
+		text-align: center;
+		align-items: stretch;
+	}
 
-  h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #0f172a;
-  }
+	h3 {
+		margin: 0 0 0.25rem 0;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: $slate-900;
+	}
 
-  p {
-    margin: 0;
-    font-size: 0.875rem;
-    color: #64748b;
-  }
+	p {
+		margin: 0;
+		font-size: 0.875rem;
+		color: $slate-500;
+	}
 }
 
 .btn-apply {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: $primary; /* Verde Mood */
-  color: #000000;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    opacity 0.2s,
-    transform 0.1s;
-  white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	background-color: $primary;
+	color: $negro; // Forzado a negro profundo para alto contraste
+	padding: 0.75rem 1.5rem;
+	border-radius: 6px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition:
+		opacity 0.2s,
+		transform 0.1s;
+	white-space: nowrap;
 
-  &:hover {
-    opacity: 0.9;
-  }
-  &:active {
-    transform: scale(0.98);
-  }
+	&:hover {
+		opacity: 0.9;
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
 }
 
-/* =========================================
-   ESTADOS DE CARGA Y ERROR
-   ========================================= */
+/**
+ * Estados visuales de Carga y Error
+ */
 .job-detail-loading,
 .job-detail-error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 4rem 2rem;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 600px;
+	background-color: $blanco;
+	border: 1px solid $slate-200;
+	border-radius: 12px;
+	padding: 4rem 2rem;
+	text-align: center;
 
-  h2 {
-    margin: 0 0 0.5rem 0;
-    color: #0f172a;
-    font-size: 1.5rem;
-  }
-  p {
-    margin: 0 0 2rem 0;
-    color: #64748b;
-    font-size: 1rem;
-  }
+	h2 {
+		margin: 0 0 0.5rem 0;
+		color: $slate-900;
+		font-size: 1.5rem;
+	}
+
+	p {
+		margin: 0 0 2rem 0;
+		color: $slate-500;
+		font-size: 1rem;
+	}
 }
 
 .job-detail-error__btn {
-  display: inline-flex;
-  background-color: #0f172a;
-  color: #ffffff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 0.95rem;
-  &:hover {
-    opacity: 0.9;
-  }
+	display: inline-flex;
+	background-color: $slate-900;
+	color: $blanco;
+	padding: 0.75rem 1.5rem;
+	border-radius: 6px;
+	font-weight: 500;
+	text-decoration: none;
+	font-size: 0.95rem;
+
+	&:hover {
+		opacity: 0.9;
+	}
 }
 
-/* Spinner de carga minimalista */
+/**
+ * Spinner genérico
+ */
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid #e2e8f0;
-  border-top-color: #0f172a;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1.5rem;
+	width: 32px;
+	height: 32px;
+	border: 3px solid $slate-200;
+	border-top-color: $slate-900;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-bottom: 1.5rem;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }

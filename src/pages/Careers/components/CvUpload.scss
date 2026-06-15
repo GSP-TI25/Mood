@@ -1,0 +1,92 @@
+// src/pages/Careers/components/CvUpload.scss
+@use "../../../styles/variables" as *;
+
+.cv-upload-area {
+	position: relative;
+	width: 100%;
+	margin-top: 0.25rem;
+}
+
+.cv-upload-input {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+	z-index: -1;
+}
+
+.cv-upload-label {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem 1.5rem;
+	background-color: $slate-50;
+	border: 2px dashed $slate-300;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	text-align: center;
+	gap: 0.5rem;
+
+	&:hover {
+		background-color: $slate-100;
+		border-color: $slate-400;
+	}
+
+	.icon-upload {
+		color: $slate-500;
+		margin-bottom: 0.5rem;
+	}
+
+	.upload-text {
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: $slate-900;
+	}
+
+	.upload-hint {
+		font-size: 0.8rem;
+		color: $slate-500;
+	}
+
+	&.has-file {
+		background-color: rgba($success-dark, 0.05);
+		border-color: rgba($success-dark, 0.3);
+		border-style: solid;
+
+		.icon-success {
+			color: $success-dark;
+		}
+
+		.file-info {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.25rem;
+		}
+
+		.file-name {
+			font-size: 0.95rem;
+			font-weight: 600;
+			color: $slate-900;
+		}
+
+		.file-size {
+			font-size: 0.8rem;
+			color: $slate-500;
+		}
+
+		.file-change-text {
+			margin-top: 0.5rem;
+			font-size: 0.8rem;
+			color: $info-blue;
+			font-weight: 500;
+		}
+
+		&:hover {
+			background-color: rgba($success-dark, 0.1);
+		}
+	}
+}

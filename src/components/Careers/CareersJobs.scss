@@ -1,205 +1,187 @@
-//src/components/Careers/CareersJobs.scss
-@use '../../styles/variables' as *;
-@use 'sass:color';
+// src/components/Careers/CareersJobs.scss
+@use "../../styles/variables" as *;
+@use "sass:color";
 
-/* --- ANIMACIÓN DE REFLEJO DE LUZ --- */
-%shiny-animation {
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -120%;
-    width: 60%;
-    height: 200%;
-    background: linear-gradient(
-      100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: skewX(-25deg);
-    transition: transform 0.5s ease-in-out;
-    z-index: 1;
-  }
-
-  &:hover::after {
-    transform: translateX(400%) skewX(-25deg);
-  }
-}
-
+/**
+ * Contenedor maestro de la cuadrícula de empleos.
+ */
 .careers-jobs {
-  padding: 40px 5% 100px;
-  background-color: $blanco;
-  border-bottom-left-radius: 48px;
-  border-bottom-right-radius: 48px;
+	padding: 40px 5% 100px;
+	background-color: $blanco;
+	border-bottom-left-radius: 48px;
+	border-bottom-right-radius: 48px;
 
-  &__container {
-    max-width: 1300px;
-    margin: 0 auto;
-  }
+	&__container {
+		max-width: 1300px;
+		margin: 0 auto;
+	}
 
-  &__title {
-    font-size: 2.2rem;
-    font-weight: 850;
-    margin-bottom: 35px;
-    text-align: left;
-    color: $negro;
-    letter-spacing: -0.03em;
-  }
+	&__title {
+		font-size: 2.2rem;
+		font-weight: 850;
+		margin-bottom: 35px;
+		text-align: left;
+		color: $negro;
+		letter-spacing: -0.03em;
+	}
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
 
-  &__empty-state {
-    @extend %glass-pill-style;
-    border-radius: 16px;
-    border: 1px dashed rgba($negro, 0.15);
-    padding: 60px 30px;
-    text-align: center;
-    grid-column: 1 / -1;
+	/**
+   * Estado de carga o sin resultados
+   */
+	&__empty-state {
+		@extend %glass-pill-style;
+		border-radius: 16px;
+		border: 1px dashed rgba($negro, 0.15);
+		padding: 60px 30px;
+		text-align: center;
+		grid-column: 1 / -1;
 
-    p {
-      color: rgba($negro, 0.6);
-      margin: 0;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-  }
+		p {
+			color: rgba($negro, 0.6);
+			margin: 0;
+			font-size: 1.1rem;
+			line-height: 1.6;
+		}
+	}
 }
 
-/* ==========================================
-   ESTILOS DE LA CARTA CON RECORTE (NOTCH)
-   ========================================== */
+/**
+ * Tarjeta individual de oferta laboral.
+ * Soporta drop-shadow en lugar de box-shadow para respetar el path SVG dinámico.
+ */
 .job-card {
-  position: relative;
-  height: 210px;
-  display: flex;
-  flex-direction: column;
-  /* 🌟 Usamos drop-shadow para que respete el recorte y no rellene el hueco */
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.02));
-  transition: filter 0.4s ease;
+	position: relative;
+	height: 210px;
+	display: flex;
+	flex-direction: column;
+	filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.02));
+	transition: filter 0.4s ease;
 
-  @media (max-width: 768px) {
-    height: 190px;
-  }
+	@media (max-width: $bp-mobile) {
+		height: 190px;
+	}
 
-  /* 🌟 ESTADOS HOVER AL CONTENEDOR PADRE */
-  &:hover {
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.15));
+	&:hover {
+		filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.15));
 
-    .job-card__clipped-bg {
-      background-color: #1c1c1e; // Oscuro profundo
-    }
+		.job-card__clipped-bg {
+			background-color: $gris-card;
+		}
 
-    .job-card__name {
-      color: $blanco;
-    }
+		.job-card__name {
+			color: $blanco;
+		}
 
-    .job-card__role {
-      color: rgba($blanco, 0.6);
-    }
+		.job-card__role {
+			color: rgba($blanco, 0.6);
+		}
 
-    .job-card__btn {
-      background-color: $primary;
-      color: $negro;
+		.job-card__btn {
+			background-color: $primary;
+			color: $negro;
 
-      &::after {
-        transform: translateX(400%) skewX(-25deg);
-      }
-    }
-  }
+			&::after {
+				transform: translateX(400%) skewX(-25deg);
+			}
+		}
+	}
 
-  /* 🌟 CAPA QUE LLEVA EL FONDO Y SE RECORTA */
-  &__clipped-bg {
-    background-color: #f6f5f0;
-    width: 100%;
-    height: 100%;
-    padding: 1.5rem;
-    padding-right: 70px; /* Previene que el texto se monte encima del recorte del botón */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    transition: background-color 0.4s ease;
+	/**
+   * Capa base que recibe la máscara de recorte (clip-path).
+   */
+	&__clipped-bg {
+		background-color: $bg-offwhite;
+		width: 100%;
+		height: 100%;
+		padding: 1.5rem;
+		padding-right: 70px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		transition: background-color 0.4s ease;
 
-    @media (max-width: 768px) {
-      padding: 1.25rem;
-      padding-right: 60px;
-    }
-  }
+		@media (max-width: $bp-mobile) {
+			padding: 1.25rem;
+			padding-right: 60px;
+		}
+	}
 
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
 
-  &__name {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: $negro;
-    margin: 0;
-    letter-spacing: -0.02em;
-    transition: color 0.4s ease;
-    line-height: 1.2;
-  }
+	&__name {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: $negro;
+		margin: 0;
+		letter-spacing: -0.02em;
+		transition: color 0.4s ease;
+		line-height: 1.2;
+	}
 
-  &__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+	&__meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
 
-  &__role {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba($negro, 0.65);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0;
-    font-family: monospace;
-    transition: color 0.4s ease;
+	&__role {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: rgba($negro, 0.65);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin: 0;
+		font-family: monospace;
+		transition: color 0.4s ease;
 
-    svg {
-      color: inherit;
-    }
-    &--country-tag {
-      display: none;
-      color: $primary;
-    }
-  }
+		svg {
+			color: inherit;
+		}
 
-  /* 🌟 BOTÓN FLOTANTE EN EL RECORTE */
-  &__btn {
-    @extend %shiny-animation;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px; /* Un poco más redondo para fluir con el notch */
-    background-color: rgba($negro, 0.05); // Fondo neutro antes del hover
-    color: $negro;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    z-index: 5;
-    transition:
-      background-color 0.4s ease,
-      color 0.4s ease;
+		&--country-tag {
+			display: none;
+			color: $primary;
+		}
+	}
 
-    svg {
-      position: relative;
-      z-index: 2;
-    }
-  }
+	/**
+   * Botón de acción flotante (situado visualmente dentro del recorte).
+   */
+	&__btn {
+		@include shiny-effect(rgba(255, 255, 255, 0.4));
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		width: 48px;
+		height: 48px;
+		border-radius: 14px;
+		background-color: rgba($negro, 0.05);
+		color: $negro;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+		z-index: 5;
+		transition:
+			background-color 0.4s ease,
+			color 0.4s ease;
+
+		svg {
+			position: relative;
+			z-index: 2;
+		}
+	}
 }

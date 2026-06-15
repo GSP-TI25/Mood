@@ -7,5 +7,12 @@
 .careers-page {
 	width: 100%;
 	background-color: $gris-card;
+	background-image:
+		linear-gradient(rgba($gris-card, 0.75), rgba($gris-card, 0.75)),
+		url("../../assets/Fondo_nav.png");
+	background-blend-mode: overlay;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 	box-sizing: border-box;
 }

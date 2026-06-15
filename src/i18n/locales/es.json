@@ -1,422 +1,422 @@
 {
-  "navbar": {
-    "adn": "ADN Mood",
-    "print": "Mood Print",
-    "contact": "Contacto"
-  },
-  "adnContent": {
-    "badge": "HISTORIA",
-    "textMain": "Somos una red de espacios creativos en LATAM. Llevamos una década de éxito gestionando proyectos de comunicación y transformación digital, impulsando marcas con ideas disruptivas en ",
-    "textLight": "un mundo hiperconectado y complejo.",
-    "tags": {
-      "content": "#Contenido",
-      "web": "#DesarrolloWeb"
-    }
-  },
-  "adnHero": {
-    "title1": "Más que una agencia,",
-    "title2": "tu partner creativo.",
-    "paragraph": "Creamos estrategias basadas en datos y diseño con propósito para hacer destacar tu marca.",
-    "ariaScroll": "Ir a la siguiente sección",
-    "altDesktop": "Equipo Mood trabajando en Desktop",
-    "altMobile": "Equipo Mood trabajando en Móvil"
-  },
-  "moodmindHero": {
-    "title1": "Creatividad sin",
-    "title2": "limites fisicos.",
-    "paragraph": "Escenarios imposibles sin mover un equipo. Versiones múltiples de una misma campaña",
-    "ariaScroll": "Ir a la siguiente sección",
-    "altDesktop": "Equipo Mood trabajando en Desktop",
-    "altMobile": "Equipo Mood trabajando en Móvil"
-  },
-  "moodMindFeatures": {
-    "badgeToday": "Quiénes somos Hoy",
-    "descToday": "Mood es una unidad de negocio creativa y estratégica de crecimiento impulsada por inteligencia Artificial. Combinamos talento creativo, expertise digital en contenido, data y tecnología para transformar el marketing en un sistema inteligente, eficiente y orientado a resultados de negocio.",
-    "badgeFuture": "Quiénes queremos ser",
-    "heroText": "IA DRIVEN AGENCY.",
-    "descFuture": "Nos encontramos en una transición sana hacia un nuevo modelo de negocio donde la IA será el centro de todo con la validación y curación de talento humano."
-  },
-  "moodMindWorkflow": {
-    "badge": "MOOD WORKFLOW",
-    "title": "Producción impulsada por IA",
-    "slides": {
-      "rapida": {
-        "title": "Producción más rápida",
-        "bullets": [
-          "La IA reduce tiempos en edición, retoque, mockups, renders y adaptaciones.",
-          "Mockups, renders y key visuals en horas, no semanas.",
-          "Mood convierte esa velocidad en piezas listas para campaña."
-        ]
-      },
-      "precisa": {
-        "title": "Producción precisa y eficiente",
-        "bullets": [
-          "La IA detecta formatos, tendencias y performance.",
-          "Menos reprocesos y menos pruebas innecesarias.",
-          "Mood adapta cada pieza al canal correcto (RRSS, pauta, B2B, retail, eventos)."
-        ]
-      },
-      "ahorro": {
-        "title": "Ahorro estructural real",
-        "bullets": [
-          "Menos inversión en modelos, casting, honorarios y viáticos.",
-          "Disminución de alquiler de equipos, sets físicos y locaciones.",
-          "Se invierte más en pauta y performance, no en costos operativos."
-        ]
-      },
-      "creativa": {
-        "title": "Creatividad sin límites físicos",
-        "bullets": [
-          "Escenarios imposibles sin mover un equipo de producción.",
-          "Versiones múltiples de una misma campaña y testing visual previo.",
-          "La IA genera rutas visuales; Mood selecciona y eleva la idea estratégicamente."
-        ]
-      }
-    }
-  },
-  "moodApproach": {
-    "badge": "NUESTRO ENFOQUE",
-    "title1": "Sinergia perfecta entre Inteligencia",
-    "title2": "Artificial y talento humano.",
-    "description": "La tecnología aporta velocidad y precisión milimétrica. Sin embargo, es nuestra visión estratégica la que guía estas herramientas para crear conexiones reales y resultados de negocio tangibles.",
-    "cards": {
-      "analiza": {
-        "overline": "IA Analiza",
-        "title": "Mood Interpreta",
-        "description": "Procesamos datos masivos en segundos. Nuestro equipo extrae los insights estratégicos."
-      },
-      "acelera": {
-        "overline": "IA Acelera",
-        "title": "Mood Decide",
-        "description": "Automatizamos la creación visual. Nuestros directores seleccionan y refinan la idea ganadora."
-      },
-      "optimiza": {
-        "overline": "IA Optimiza",
-        "title": "Mood Construye Marca",
-        "description": "El algoritmo escala el performance comercial. Nosotros cuidamos la esencia de tu marca."
-      }
-    }
-  },
-  "adnTeam": {
-    "title1": "Conoce al ",
-    "title2": "Equipo",
-    "badgeLeadership": "LIDERAZGO",
-    "descLeadership": "Nuestro equipo de liderazgo encarna la misión de Mood, combinando experiencia en innovación, estrategia digital y creatividad para transformar el futuro y crecimiento de tu marca.",
-    "badgeTeam": "EQUIPO",
-    "descTeam": "Desafiamos lo convencional con estrategias audaces para transformar el futuro de tu marca.",
-    "roles": {
-      "matthias": "Director General & Socio",
-      "vasco": "Director General & Socio",
-      "carolina": "Directora General",
-      "alejandro": "Gerente General",
-      "sofia": "Head of Content",
-      "diego": "Performance Lead",
-      "valeria": "Senior UX/UI Designer",
-      "martin": "Creative Director",
-      "lucia": "Data Analyst",
-      "andres": "Frontend Developer"
-    }
-  },
-  "adnWork": {
-    "altImage": "Equipo de Mood",
-    "p1": "Construimos un ecosistema de estrategias digitales decodificando la complejidad del mercado. Inspirados por la disrupción y los datos, la metodología de nuestro equipo ha logrado conectar marcas tradicionales con el consumidor moderno de manera escalable.",
-    "p2": "Hoy, nos enfocamos en combatir la irrelevancia, con el objetivo a largo plazo de transformar la forma fundamental en que las empresas interactúan y crecen en su entorno.",
-    "btn": "Trabaja con nosotros"
-  },
-  "brands": {
-    "subtitle": "Marcas que confían en nosotros"
-  },
-  "contactHero": {
-    "title1": "Hagamos algo",
-    "title2": "increíble",
-    "title3": "juntos.",
-    "subtitle": "¿Tienes un proyecto en mente o necesitas escalar tu marca? Déjanos tus datos y un estratega de nuestro equipo se pondrá en contacto contigo en menos de 24 horas.",
-    "form": {
-      "header": "Empieza tu transformación",
-      "labels": {
-        "name": "Nombre completo",
-        "email": "Correo de empresa",
-        "phone": "Celular / WhatsApp",
-        "country": "País",
-        "message": "Cuéntanos sobre tu proyecto"
-      },
-      "placeholders": {
-        "name": "Ej. Carlos Mendoza",
-        "email": "carlos@tuempresa.com",
-        "phone": "+51 987 654 321",
-        "select": "Selecciona...",
-        "message": "¿Qué objetivos quieres alcanzar?"
-      },
-      "countries": {
-        "peru": "Perú",
-        "mexico": "México",
-        "colombia": "Colombia",
-        "chile": "Chile",
-        "argentina": "Argentina",
-        "spain": "España",
-        "other": "Otro"
-      },
-      "buttons": {
-        "sending": "Enviando...",
-        "send": "Enviar mensaje"
-      },
-      "feedback": {
-        "success": "Ideas en movimiento. ⚡ Tu mensaje ha aterrizado con éxito, prepárate para transformar las reglas del juego.",
-        "error": "Hubo un error al enviar tu mensaje. Inténtalo de nuevo."
-      }
-    }
-  },
-  "footer": {
-    "slogan": "Impulsando marcas con lógica cinética y creatividad pura.",
-    "btnJoin": "Únete al equipo",
-    "navTitle": "NAVEGAR",
-    "connectTitle": "CONECTAR",
-    "copyright": "Mood. Todos los derechos reservados."
-  },
-  "hero": {
-    "title": "Diseñamos experiencias con proposito",
-    "highlight": "experiencias",
-    "paragraph": "La agencia de comunicación que revoluciona el marketing. Especialistas en ATL, Digital, PR y BTL, ofrecemos soluciones para potenciar tu marca.",
-    "skills": {
-      "branding": "Branding",
-      "web": "Diseño Web",
-      "marketing": "Marketing Digital",
-      "social": "Social Media",
-      "av": "Contenido AudioVisual"
-    },
-    "buttons": {
-      "talk": "Hablemos",
-      "projects": "Ver Proyectos"
-    }
-  },
-  "moodPrintHero": {
-    "title1": "Creamos",
-    "title2": "marcas",
-    "title3": "extraordinarias.",
-    "subtitle": "Explora nuestro portafolio. Selecciona una categoría para descubrir los proyectos que han transformado el futuro de grandes marcas.",
-    "categories": {
-      "Todos": "Todos",
-      "Branding": "Branding",
-      "Diseño Web": "Diseño Web",
-      "Marketing Digital": "Marketing Digital",
-      "Social Media": "Social Media",
-      "Contenido Audiovisual": "Contenido Audiovisual"
-    }
-  },
-  "moodPrintProjects": {
-    "emptyState": "Aún no hay proyectos en esta categoría.",
-    "categoryInfo": {
-      "Todos": {
-        "title": "Proyectos Destacados",
-        "desc": "Casos de éxito donde la creatividad y la estrategia se unen para lograr resultados que desafían lo convencional."
-      },
-      "Branding": {
-        "title": "Branding & Identidad",
-        "desc": "Construimos marcas con alma. Diseñamos identidades visuales que conectan profundamente con tu audiencia."
-      },
-      "Diseño Web": {
-        "title": "Desarrollo & UX/UI",
-        "desc": "Plataformas digitales rápidas, intuitivas y diseñadas meticulosamente para convertir visitantes en clientes."
-      },
-      "Marketing Digital": {
-        "title": "Marketing de Resultados",
-        "desc": "Campañas estratégicas impulsadas por datos para maximizar tu retorno de inversión y escalar tu negocio."
-      },
-      "Social Media": {
-        "title": "Gestión de Comunidades",
-        "desc": "No solo publicamos, creamos conversaciones. Estrategias de contenido que generan engagement real."
-      },
-      "Contenido Audiovisual": {
-        "title": "Producción Audiovisual",
-        "desc": "Contamos tu historia a través del lente. Fotografía y video de alta calidad que capturan la esencia de tu marca."
-      }
-    },
-    "projects": {
-      "1": {
-        "title": "Rebranding Integral",
-        "description": "Desarrollamos una nueva identidad visual que transmite innovación y confianza. El proyecto incluyó desde el rediseño del logotipo hasta la implementación del manual de marca en todos los puntos de contacto digitales."
-      },
-      "2": {
-        "title": "E-commerce Deportivo",
-        "description": "Diseño y desarrollo de una plataforma e-commerce ultra rápida y optimizada para conversión, reduciendo la tasa de abandono en un 40% durante el primer mes."
-      },
-      "3": {
-        "title": "Campaña \"El Nuevo Horizonte\"",
-        "description": "Estrategia integral de pauta digital que combinó Google Ads y Meta Ads, logrando un alcance de más de 2 millones de impresiones y un ROI superior al 300%."
-      },
-      "4": {
-        "title": "Lanzamiento Colección Verano",
-        "description": "Generación de contenido dinámico y gestión de comunidades durante 3 meses, incrementando el engagement rate orgánico en un asombroso 125%."
-      },
-      "5": {
-        "title": "Comercial TV Nacional",
-        "description": "Producción, dirección y edición de una pieza audiovisual publicitaria de 45 segundos transmitida en televisión abierta y medios digitales."
-      },
-      "6": {
-        "title": "Packaging Premium",
-        "description": "Diseño estructural y gráfico de empaques para una línea exclusiva de café de exportación, destacando las texturas y la elegancia minimalista."
-      },
-      "7": {
-        "title": "Portal Corporativo",
-        "description": "Arquitectura de la información, diseño UX/UI y desarrollo en React para la nueva web corporativa de una startup líder en soluciones financieras."
-      }
-    }
-  },
-  "projectModal": {
-    "closeAria": "Cerrar modal",
-    "client": "Cliente:",
-    "date": "Fecha:",
-    "btnView": "Ver Proyecto"
-  },
-  "services": {
-    "title1": "Potenciamos tu ",
-    "titleHighlight": "marca",
-    "headerDesc": "Soluciones creativas estructuradas con lógica cinética para impulsar tu marca en el entorno digital.",
-    "btnProjects": "Ver proyectos",
-    "aria": {
-      "prev": "Servicio anterior",
-      "next": "Siguiente servicio",
-      "goTo": "Ir al servicio ",
-      "viewDetails": "Ver detalles de "
-    },
-    "items": {
-      "branding": {
-        "title": "Branding",
-        "description": "Construimos identidades memorables que conectan profundamente con tu audiencia. No solo creamos logos, diseñamos la esencia y el alma de tu marca para que destaque con autoridad en un mercado saturado."
-      },
-      "web": {
-        "title": "Diseño Web",
-        "description": "Desarrollamos plataformas digitales ultrarrápidas, intuitivas y centradas en la conversión. Tu sitio web no será solo un escaparate bonito, será tu mejor y más rentable herramienta de ventas 24/7."
-      },
-      "marketing": {
-        "title": "Marketing Digital",
-        "description": "Estrategias basadas en datos que multiplican tu ROI. Dominamos el ecosistema digital para posicionar tu mensaje y tus ofertas exactamente donde y cuando están tus clientes potenciales."
-      },
-      "social": {
-        "title": "Social Media",
-        "description": "Transformamos simples seguidores en embajadores de marca. Creamos comunidades activas mediante contenido auténtico y estrategias de interacción que generan impacto real y lealtad."
-      },
-      "audiovisual": {
-        "title": "Contenido AudioVisual",
-        "description": "Contamos la historia de tu marca a través de narrativas visuales de alto impacto. Producción de video y fotografía cinematográfica que capturan la atención desde el primer segundo."
-      }
-    }
-  },
-  "testimonials": {
-    "title1": "Resultados que hablan por ",
-    "title2": "sí solos.",
-    "desc1": "El éxito de tu marca es nuestra mejor carta de presentación. Como ",
-    "descStrong": "agencia de comunicación y marketing digital",
-    "desc2": ", nos enfocamos en generar crecimiento real, escalable y medible.",
-    "reviews": {
-      "1": {
-        "name": "Carlos Mendoza",
-        "company": "Director General, AutoStar",
-        "text": "\"El equipo de Mood transformó por completo nuestra estrategia de captación. No solo rediseñaron nuestra identidad, sino que las ventas online crecieron un 45% en el primer trimestre. Son verdaderos estrategas.\""
-      },
-      "2": {
-        "name": "Lucía Santamarina",
-        "company": "CMO, Grupo Bahía",
-        "text": "\"Buscábamos una agencia que entendiera nuestra visión y la superara. El contenido audiovisual y el diseño web que entregaron están en otro nivel. Entienden perfectamente el lenguaje digital actual.\""
-      },
-      "3": {
-        "name": "Roberto Vilela",
-        "company": "CEO, Marcan",
-        "text": "\"La comunicación y la agilidad de esta agencia son destacables. Estructuraron nuestras campañas de pauta publicitaria bajando nuestro costo de adquisición en tiempo récord. Altamente recomendados.\""
-      },
-      "4": {
-        "name": "Andrea Ruiz",
-        "company": "Founder, Santa Ana",
-        "text": "\"El rebranding que hicieron para nuestra marca superó cualquier expectativa. Desde el logotipo hasta la estrategia en redes sociales, todo respira profesionalismo y creatividad.\""
-      },
-      "5": {
-        "name": "Martín Torres",
-        "company": "Gerente de Marketing, iShop",
-        "text": "\"Una agencia que realmente se compromete con tus resultados. Las métricas de interacción en nuestros canales digitales se multiplicaron gracias a su gestión de comunidades.\""
-      }
-    }
-  },
-  "tab": {
-    "hidden": "¡Vuelve! Las buenas ideas te esperan 💡",
-    "visible": "Mood | Agencia Creativa"
-  },
-  "careers": {
-    "hero": {
-      "title1": "Únete a nuestro ",
-      "title2": "equipo.",
-      "subtitle": "Buscamos mentes creativas, estrategas digitales y apasionados por transformar marcas. Si tienes el ADN Mood, este es tu lugar."
-    },
-    "culture": {
-      "title": "Por qué Mood",
-      "items": {
-        "1": {
-          "title": "Creatividad sin límites",
-          "desc": "Fomentamos un espacio donde las ideas locas son escuchadas y ejecutadas."
-        },
-        "2": {
-          "title": "Crecimiento continuo",
-          "desc": "Apostamos por tu desarrollo profesional con retos constantes."
-        },
-        "3": {
-          "title": "Cultura flexible",
-          "desc": "Trabajamos por objetivos, valorando tu tiempo y bienestar."
-        }
-      }
-    },
-    "jobs": {
-      "title": "Posiciones Abiertas",
-      "empty": "Actualmente no tenemos posiciones abiertas...",
-      "cta": "Ver detalles",
-      "list": [
-        {
-          "id": "ui-ux-designer-senior",
-          "title": "UI/UX Designer Senior",
-          "type": "Full-time",
-          "date": "Publicado: 20 May 2026",
-          "description": "Buscamos un diseñador excepcional para crear experiencias digitales impactantes y liderar el diseño visual de los proyectos de nuestros clientes clave.",
-          "responsibilities": [
-            "Liderar el diseño de interfaces web y móviles desde la conceptualización hasta la entrega final.",
-            "Crear wireframes, prototipos interactivos y flujos de usuario.",
-            "Colaborar estrechamente con el equipo de desarrollo para asegurar la fidelidad del diseño."
-          ],
-          "requirements": [
-            "5+ años de experiencia comprobable como Diseñador UI/UX.",
-            "Dominio absoluto de Figma y herramientas de prototipado.",
-            "Portafolio sólido con proyectos de nivel empresarial.",
-            "Conocimientos básicos de HTML/CSS (Deseable)."
-          ],
-          "benefits": [
-            "Trabajo 100% remoto.",
-            "Seguro de salud EPS cubierto al 100%.",
-            "Presupuesto anual para cursos y capacitaciones.",
-            "Bono por cumplimiento de objetivos trimestrales."
-          ]
-        },
-        {
-          "id": "frontend-developer-react",
-          "title": "Frontend Developer (React)",
-          "type": "Full-time",
-          "date": "Publicado: 18 May 2026",
-          "description": "Únete a nuestro equipo técnico para construir aplicaciones web ultrarrápidas, escalables y con un nivel de animaciones top en el mercado.",
-          "responsibilities": [
-            "Desarrollo de interfaces utilizando React y Vite.",
-            "Integración de APIs y manejo de estado global.",
-            "Implementación de animaciones complejas (Framer Motion, GSAP)."
-          ],
-          "requirements": [
-            "3+ años de experiencia trabajando con React.",
-            "Conocimiento profundo de JavaScript moderno (ES6+) y SCSS.",
-            "Experiencia consumiendo APIs REST y GraphQL.",
-            "Fuerte atención al detalle visual y UX."
-          ],
-          "benefits": [
-            "Horario flexible orientado a objetivos.",
-            "Equipo de cómputo de última generación (MacBook Pro).",
-            "Días libres adicionales por cumpleaños.",
-            "Cultura horizontal y sin micromanagement."
-          ]
-        }
-      ]
-    }
-  }
+	"adnContent": {
+		"badge": "HISTORIA",
+		"tags": {
+			"content": "#Contenido",
+			"web": "#DesarrolloWeb"
+		},
+		"textLight": "un mundo hiperconectado y complejo.",
+		"textMain": "Somos una red de espacios creativos en LATAM. Llevamos una década de éxito gestionando proyectos de comunicación y transformación digital, impulsando marcas con ideas disruptivas en "
+	},
+	"adnHero": {
+		"altDesktop": "Equipo Mood trabajando en Desktop",
+		"altMobile": "Equipo Mood trabajando en Móvil",
+		"ariaScroll": "Ir a la siguiente sección",
+		"paragraph": "Creamos estrategias basadas en datos y diseño con propósito para hacer destacar tu marca.",
+		"title1": "Más que una agencia,",
+		"title2": "tu partner creativo."
+	},
+	"adnTeam": {
+		"badgeLeadership": "LIDERAZGO",
+		"badgeTeam": "EQUIPO",
+		"descLeadership": "Nuestro equipo de liderazgo encarna la misión de Mood, combinando experiencia en innovación, estrategia digital y creatividad para transformar el futuro y crecimiento de tu marca.",
+		"descTeam": "Desafiamos lo convencional con estrategias audaces para transformar el futuro de tu marca.",
+		"roles": {
+			"alejandro": "Gerente General",
+			"andres": "Frontend Developer",
+			"carolina": "Directora General",
+			"diego": "Performance Lead",
+			"lucia": "Data Analyst",
+			"martin": "Creative Director",
+			"matthias": "Director General & Socio",
+			"sofia": "Head of Content",
+			"valeria": "Senior UX/UI Designer",
+			"vasco": "Director General & Socio"
+		},
+		"title1": "Conoce al ",
+		"title2": "Equipo"
+	},
+	"adnWork": {
+		"altImage": "Equipo de Mood",
+		"btn": "Trabaja con nosotros",
+		"p1": "Construimos un ecosistema de estrategias digitales decodificando la complejidad del mercado. Inspirados por la disrupción y los datos, la metodología de nuestro equipo ha logrado conectar marcas tradicionales con el consumidor moderno de manera escalable.",
+		"p2": "Hoy, nos enfocamos en combatir la irrelevancia, con el objetivo a largo plazo de transformar la forma fundamental en que las empresas interactúan y crecen en su entorno."
+	},
+	"brands": {
+		"subtitle": "Marcas que confían en nosotros"
+	},
+	"careers": {
+		"culture": {
+			"items": {
+				"1": {
+					"desc": "Fomentamos un espacio donde las ideas locas son escuchadas y ejecutadas.",
+					"title": "Creatividad sin límites"
+				},
+				"2": {
+					"desc": "Apostamos por tu desarrollo profesional con retos constantes.",
+					"title": "Crecimiento continuo"
+				},
+				"3": {
+					"desc": "Trabajamos por objetivos, valorando tu tiempo y bienestar.",
+					"title": "Cultura flexible"
+				}
+			},
+			"title": "Por qué Mood"
+		},
+		"hero": {
+			"subtitle": "Buscamos mentes creativas, estrategas digitales y apasionados por transformar marcas. Si tienes el ADN Mood, este es tu lugar.",
+			"title1": "Únete a nuestro ",
+			"title2": "equipo."
+		},
+		"jobs": {
+			"cta": "Ver detalles",
+			"empty": "Actualmente no tenemos posiciones abiertas...",
+			"list": [
+				{
+					"benefits": [
+						"Trabajo 100% remoto.",
+						"Seguro de salud EPS cubierto al 100%.",
+						"Presupuesto anual para cursos y capacitaciones.",
+						"Bono por cumplimiento de objetivos trimestrales."
+					],
+					"date": "Publicado: 20 May 2026",
+					"description": "Buscamos un diseñador excepcional para crear experiencias digitales impactantes y liderar el diseño visual de los proyectos de nuestros clientes clave.",
+					"id": "ui-ux-designer-senior",
+					"requirements": [
+						"5+ años de experiencia comprobable como Diseñador UI/UX.",
+						"Dominio absoluto de Figma y herramientas de prototipado.",
+						"Portafolio sólido con proyectos de nivel empresarial.",
+						"Conocimientos básicos de HTML/CSS (Deseable)."
+					],
+					"responsibilities": [
+						"Liderar el diseño de interfaces web y móviles desde la conceptualización hasta la entrega final.",
+						"Crear wireframes, prototipos interactivos y flujos de usuario.",
+						"Colaborar estrechamente con el equipo de desarrollo para asegurar la fidelidad del diseño."
+					],
+					"title": "UI/UX Designer Senior",
+					"type": "Full-time"
+				},
+				{
+					"benefits": [
+						"Horario flexible orientado a objetivos.",
+						"Equipo de cómputo de última generación (MacBook Pro).",
+						"Días libres adicionales por cumpleaños.",
+						"Cultura horizontal y sin micromanagement."
+					],
+					"date": "Publicado: 18 May 2026",
+					"description": "Únete a nuestro equipo técnico para construir aplicaciones web ultrarrápidas, escalables y con un nivel de animaciones top en el mercado.",
+					"id": "frontend-developer-react",
+					"requirements": [
+						"3+ años de experiencia trabajando con React.",
+						"Conocimiento profundo de JavaScript moderno (ES6+) y SCSS.",
+						"Experiencia consumiendo APIs REST y GraphQL.",
+						"Fuerte atención al detalle visual y UX."
+					],
+					"responsibilities": [
+						"Desarrollo de interfaces utilizando React y Vite.",
+						"Integración de APIs y manejo de estado global.",
+						"Implementación de animaciones complejas (Framer Motion, GSAP)."
+					],
+					"title": "Frontend Developer (React)",
+					"type": "Full-time"
+				}
+			],
+			"title": "Posiciones Abiertas"
+		}
+	},
+	"contactHero": {
+		"form": {
+			"buttons": {
+				"send": "Enviar mensaje",
+				"sending": "Enviando..."
+			},
+			"countries": {
+				"argentina": "Argentina",
+				"chile": "Chile",
+				"colombia": "Colombia",
+				"mexico": "México",
+				"other": "Otro",
+				"peru": "Perú",
+				"spain": "España"
+			},
+			"feedback": {
+				"error": "Hubo un error al enviar tu mensaje. Inténtalo de nuevo.",
+				"success": "Ideas en movimiento. ⚡ Tu mensaje ha aterrizado con éxito, prepárate para transformar las reglas del juego."
+			},
+			"header": "Empieza tu transformación",
+			"labels": {
+				"country": "País",
+				"email": "Correo de empresa",
+				"message": "Cuéntanos sobre tu proyecto",
+				"name": "Nombre completo",
+				"phone": "Celular / WhatsApp"
+			},
+			"placeholders": {
+				"email": "carlos@tuempresa.com",
+				"message": "¿Qué objetivos quieres alcanzar?",
+				"name": "Ej. Carlos Mendoza",
+				"phone": "+51 987 654 321",
+				"select": "Selecciona..."
+			}
+		},
+		"subtitle": "¿Tienes un proyecto en mente o necesitas escalar tu marca? Déjanos tus datos y un estratega de nuestro equipo se pondrá en contacto contigo en menos de 24 horas.",
+		"title1": "Hagamos algo",
+		"title2": "increíble",
+		"title3": "juntos."
+	},
+	"footer": {
+		"btnJoin": "Únete al equipo",
+		"connectTitle": "CONECTAR",
+		"copyright": "Mood. Todos los derechos reservados.",
+		"navTitle": "NAVEGAR",
+		"slogan": "Impulsando marcas con lógica cinética y creatividad pura."
+	},
+	"hero": {
+		"buttons": {
+			"projects": "Ver Proyectos",
+			"talk": "Hablemos"
+		},
+		"highlight": "experiencias",
+		"paragraph": "La agencia de comunicación que revoluciona el marketing. Especialistas en ATL, Digital, PR y BTL, ofrecemos soluciones para potenciar tu marca.",
+		"skills": {
+			"av": "Contenido AudioVisual",
+			"branding": "Branding",
+			"marketing": "Marketing Digital",
+			"social": "Social Media",
+			"web": "Diseño Web"
+		},
+		"title": "Diseñamos experiencias con proposito"
+	},
+	"moodApproach": {
+		"badge": "NUESTRO ENFOQUE",
+		"cards": {
+			"acelera": {
+				"description": "Automatizamos la creación visual. Nuestros directores seleccionan y refinan la idea ganadora.",
+				"overline": "IA Acelera",
+				"title": "Mood Decide"
+			},
+			"analiza": {
+				"description": "Procesamos datos masivos en segundos. Nuestro equipo extrae los insights estratégicos.",
+				"overline": "IA Analiza",
+				"title": "Mood Interpreta"
+			},
+			"optimiza": {
+				"description": "El algoritmo escala el performance comercial. Nosotros cuidamos la esencia de tu marca.",
+				"overline": "IA Optimiza",
+				"title": "Mood Construye Marca"
+			}
+		},
+		"description": "La tecnología aporta velocidad y precisión milimétrica. Sin embargo, es nuestra visión estratégica la que guía estas herramientas para crear conexiones reales y resultados de negocio tangibles.",
+		"title1": "Sinergia perfecta entre Inteligencia",
+		"title2": "Artificial y talento humano."
+	},
+	"moodMindFeatures": {
+		"badgeFuture": "Quiénes queremos ser",
+		"badgeToday": "Quiénes somos Hoy",
+		"descFuture": "Nos encontramos en una transición sana hacia un nuevo modelo de negocio donde la IA será el centro de todo con la validación y curación de talento humano.",
+		"descToday": "Mood es una unidad de negocio creativa y estratégica de crecimiento impulsada por inteligencia Artificial. Combinamos talento creativo, expertise digital en contenido, data y tecnología para transformar el marketing en un sistema inteligente, eficiente y orientado a resultados de negocio.",
+		"heroText": "IA DRIVEN AGENCY."
+	},
+	"moodMindWorkflow": {
+		"badge": "MOOD WORKFLOW",
+		"slides": {
+			"ahorro": {
+				"bullets": [
+					"Menos inversión en modelos, casting, honorarios y viáticos.",
+					"Disminución de alquiler de equipos, sets físicos y locaciones.",
+					"Se invierte más en pauta y performance, no en costos operativos."
+				],
+				"title": "Ahorro estructural real"
+			},
+			"creativa": {
+				"bullets": [
+					"Escenarios imposibles sin mover un equipo de producción.",
+					"Versiones múltiples de una misma campaña y testing visual previo.",
+					"La IA genera rutas visuales; Mood selecciona y eleva la idea estratégicamente."
+				],
+				"title": "Creatividad sin límites físicos"
+			},
+			"precisa": {
+				"bullets": [
+					"La IA detecta formatos, tendencias y performance.",
+					"Menos reprocesos y menos pruebas innecesarias.",
+					"Mood adapta cada pieza al canal correcto (RRSS, pauta, B2B, retail, eventos)."
+				],
+				"title": "Producción precisa y eficiente"
+			},
+			"rapida": {
+				"bullets": [
+					"La IA reduce tiempos en edición, retoque, mockups, renders y adaptaciones.",
+					"Mockups, renders y key visuals en horas, no semanas.",
+					"Mood convierte esa velocidad en piezas listas para campaña."
+				],
+				"title": "Producción más rápida"
+			}
+		},
+		"title": "Producción impulsada por IA"
+	},
+	"moodPrintHero": {
+		"categories": {
+			"Branding": "Branding",
+			"Contenido Audiovisual": "Contenido Audiovisual",
+			"Diseño Web": "Diseño Web",
+			"Marketing Digital": "Marketing Digital",
+			"Social Media": "Social Media",
+			"Todos": "Todos"
+		},
+		"subtitle": "Explora nuestro portafolio. Selecciona una categoría para descubrir los proyectos que han transformado el futuro de grandes marcas.",
+		"title1": "Creamos",
+		"title2": "marcas",
+		"title3": "extraordinarias."
+	},
+	"moodPrintProjects": {
+		"categoryInfo": {
+			"Branding": {
+				"desc": "Construimos marcas con alma. Diseñamos identidades visuales que conectan profundamente con tu audiencia.",
+				"title": "Branding & Identidad"
+			},
+			"Contenido Audiovisual": {
+				"desc": "Contamos tu historia a través del lente. Fotografía y video de alta calidad que capturan la esencia de tu marca.",
+				"title": "Producción Audiovisual"
+			},
+			"Diseño Web": {
+				"desc": "Plataformas digitales rápidas, intuitivas y diseñadas meticulosamente para convertir visitantes en clientes.",
+				"title": "Desarrollo & UX/UI"
+			},
+			"Marketing Digital": {
+				"desc": "Campañas estratégicas impulsadas por datos para maximizar tu retorno de inversión y escalar tu negocio.",
+				"title": "Marketing de Resultados"
+			},
+			"Social Media": {
+				"desc": "No solo publicamos, creamos conversaciones. Estrategias de contenido que generan engagement real.",
+				"title": "Gestión de Comunidades"
+			},
+			"Todos": {
+				"desc": "Casos de éxito donde la creatividad y la estrategia se unen para lograr resultados que desafían lo convencional.",
+				"title": "Proyectos Destacados"
+			}
+		},
+		"emptyState": "Aún no hay proyectos en esta categoría.",
+		"projects": {
+			"1": {
+				"description": "Desarrollamos una nueva identidad visual que transmite innovación y confianza. El proyecto incluyó desde el rediseño del logotipo hasta la implementación del manual de marca en todos los puntos de contacto digitales.",
+				"title": "Rebranding Integral"
+			},
+			"2": {
+				"description": "Diseño y desarrollo de una plataforma e-commerce ultra rápida y optimizada para conversión, reduciendo la tasa de abandono en un 40% durante el primer mes.",
+				"title": "E-commerce Deportivo"
+			},
+			"3": {
+				"description": "Estrategia integral de pauta digital que combinó Google Ads y Meta Ads, logrando un alcance de más de 2 millones de impresiones y un ROI superior al 300%.",
+				"title": "Campaña \"El Nuevo Horizonte\""
+			},
+			"4": {
+				"description": "Generación de contenido dinámico y gestión de comunidades durante 3 meses, incrementando el engagement rate orgánico en un asombroso 125%.",
+				"title": "Lanzamiento Colección Verano"
+			},
+			"5": {
+				"description": "Producción, dirección y edición de una pieza audiovisual publicitaria de 45 segundos transmitida en televisión abierta y medios digitales.",
+				"title": "Comercial TV Nacional"
+			},
+			"6": {
+				"description": "Diseño estructural y gráfico de empaques para una línea exclusiva de café de exportación, destacando las texturas y la elegancia minimalista.",
+				"title": "Packaging Premium"
+			},
+			"7": {
+				"description": "Arquitectura de la información, diseño UX/UI y desarrollo en React para la nueva web corporativa de una startup líder en soluciones financieras.",
+				"title": "Portal Corporativo"
+			}
+		}
+	},
+	"moodmindHero": {
+		"altDesktop": "Equipo Mood trabajando en Desktop",
+		"altMobile": "Equipo Mood trabajando en Móvil",
+		"ariaScroll": "Ir a la siguiente sección",
+		"paragraph": "Escenarios imposibles sin mover un equipo. Versiones múltiples de una misma campaña",
+		"title1": "Creatividad sin",
+		"title2": "limites fisicos."
+	},
+	"navbar": {
+		"adn": "ADN Mood",
+		"contact": "Contacto",
+		"print": "Mood Print"
+	},
+	"projectModal": {
+		"btnView": "Ver Proyecto",
+		"client": "Cliente:",
+		"closeAria": "Cerrar modal",
+		"date": "Fecha:"
+	},
+	"services": {
+		"aria": {
+			"goTo": "Ir al servicio ",
+			"next": "Siguiente servicio",
+			"prev": "Servicio anterior",
+			"viewDetails": "Ver detalles de "
+		},
+		"btnProjects": "Ver proyectos",
+		"headerDesc": "Soluciones creativas estructuradas con lógica cinética para impulsar tu marca en el entorno digital.",
+		"items": {
+			"audiovisual": {
+				"description": "Contamos la historia de tu marca a través de narrativas visuales de alto impacto. Producción de video y fotografía cinematográfica que capturan la atención desde el primer segundo.",
+				"title": "Contenido AudioVisual"
+			},
+			"branding": {
+				"description": "Construimos identidades memorables que conectan profundamente con tu audiencia. No solo creamos logos, diseñamos la esencia y el alma de tu marca para que destaque con autoridad en un mercado saturado.",
+				"title": "Branding"
+			},
+			"marketing": {
+				"description": "Estrategias basadas en datos que multiplican tu ROI. Dominamos el ecosistema digital para posicionar tu mensaje y tus ofertas exactamente donde y cuando están tus clientes potenciales.",
+				"title": "Marketing Digital"
+			},
+			"social": {
+				"description": "Transformamos simples seguidores en embajadores de marca. Creamos comunidades activas mediante contenido auténtico y estrategias de interacción que generan impacto real y lealtad.",
+				"title": "Social Media"
+			},
+			"web": {
+				"description": "Desarrollamos plataformas digitales ultrarrápidas, intuitivas y centradas en la conversión. Tu sitio web no será solo un escaparate bonito, será tu mejor y más rentable herramienta de ventas 24/7.",
+				"title": "Diseño Web"
+			}
+		},
+		"title1": "Potenciamos tu ",
+		"titleHighlight": "marca"
+	},
+	"tab": {
+		"hidden": "¡Vuelve! Las buenas ideas te esperan 💡",
+		"visible": "Mood | Agencia Creativa"
+	},
+	"testimonials": {
+		"desc1": "El éxito de tu marca es nuestra mejor carta de presentación. Como ",
+		"desc2": ", nos enfocamos en generar crecimiento real, escalable y medible.",
+		"descStrong": "agencia de comunicación y marketing digital",
+		"reviews": {
+			"1": {
+				"company": "Director General, AutoStar",
+				"name": "Carlos Mendoza",
+				"text": "\"El equipo de Mood transformó por completo nuestra estrategia de captación. No solo rediseñaron nuestra identidad, sino que las ventas online crecieron un 45% en el primer trimestre. Son verdaderos estrategas.\""
+			},
+			"2": {
+				"company": "CMO, Grupo Bahía",
+				"name": "Lucía Santamarina",
+				"text": "\"Buscábamos una agencia que entendiera nuestra visión y la superara. El contenido audiovisual y el diseño web que entregaron están en otro nivel. Entienden perfectamente el lenguaje digital actual.\""
+			},
+			"3": {
+				"company": "CEO, Marcan",
+				"name": "Roberto Vilela",
+				"text": "\"La comunicación y la agilidad de esta agencia son destacables. Estructuraron nuestras campañas de pauta publicitaria bajando nuestro costo de adquisición en tiempo récord. Altamente recomendados.\""
+			},
+			"4": {
+				"company": "Founder, Santa Ana",
+				"name": "Andrea Ruiz",
+				"text": "\"El rebranding que hicieron para nuestra marca superó cualquier expectativa. Desde el logotipo hasta la estrategia en redes sociales, todo respira profesionalismo y creatividad.\""
+			},
+			"5": {
+				"company": "Gerente de Marketing, iShop",
+				"name": "Martín Torres",
+				"text": "\"Una agencia que realmente se compromete con tus resultados. Las métricas de interacción en nuestros canales digitales se multiplicaron gracias a su gestión de comunidades.\""
+			}
+		},
+		"title1": "Resultados que hablan por ",
+		"title2": "sí solos."
+	}
 }

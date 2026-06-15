@@ -1,9 +1,9 @@
-//src/pages/Careers/JobApplication.scss
+// src/pages/Careers/JobApplication.scss
 @use "../../styles/variables" as *;
 
 .job-app-layout {
 	min-height: 100vh;
-	background-color: #f8fafc;
+	background-color: $slate-50;
 	padding: 3rem 1.5rem;
 	font-family: inherit;
 	display: flex;
@@ -23,7 +23,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5rem;
-	color: #64748b;
+	color: $slate-500;
 	text-decoration: none;
 	font-size: 0.875rem;
 	font-weight: 500;
@@ -33,38 +33,39 @@
 	transition: all 0.2s;
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.05);
-		color: #0f172a;
+		background-color: rgba($negro, 0.05);
+		color: $slate-900;
 	}
 }
 
 .job-app-card {
-	background-color: #ffffff;
-	border: 1px solid #e2e8f0;
+	background-color: $blanco;
+	border: 1px solid $slate-200;
 	border-radius: 12px;
 	box-shadow:
-		0 1px 3px 0 rgba(0, 0, 0, 0.05),
-		0 1px 2px -1px rgba(0, 0, 0, 0.05);
+		0 1px 3px 0 rgba($negro, 0.05),
+		0 1px 2px -1px rgba($negro, 0.05);
 	overflow: hidden;
 
 	&__header {
 		padding: 2.5rem 3rem 2rem 3rem;
-		border-bottom: 1px solid #f1f5f9;
+		border-bottom: 1px solid $slate-100;
 
 		h1 {
 			margin: 0 0 0.5rem 0;
 			font-size: 1.75rem;
 			font-weight: 700;
-			color: #0f172a;
+			color: $slate-900;
 			letter-spacing: -0.02em;
 		}
+
 		p {
 			margin: 0;
-			color: #64748b;
+			color: $slate-500;
 			font-size: 0.95rem;
 		}
 
-		@media (max-width: 640px) {
+		@media (max-width: $bp-mobile) {
 			padding: 2rem 1.5rem 1.5rem 1.5rem;
 		}
 	}
@@ -75,20 +76,20 @@
 		flex-direction: column;
 		gap: 2.5rem;
 
-		@media (max-width: 640px) {
+		@media (max-width: $bp-mobile) {
 			padding: 1.5rem;
 			gap: 2rem;
 		}
 	}
 
 	&__footer {
-		background-color: #f8fafc;
-		border-top: 1px solid #e2e8f0;
+		background-color: $slate-50;
+		border-top: 1px solid $slate-200;
 		padding: 1.5rem 3rem;
 		display: flex;
 		justify-content: flex-end;
 
-		@media (max-width: 640px) {
+		@media (max-width: $bp-mobile) {
 			padding: 1.5rem;
 		}
 	}
@@ -99,14 +100,14 @@
 		margin: 0 0 1.5rem 0;
 		font-size: 1.15rem;
 		font-weight: 600;
-		color: #0f172a;
+		color: $slate-900;
 	}
 }
 
 .app-divider {
 	border: 0;
 	height: 1px;
-	background-color: #e2e8f0;
+	background-color: $slate-200;
 	margin: 0;
 }
 
@@ -115,18 +116,13 @@
 	grid-template-columns: 1fr 1fr;
 	gap: 1.25rem;
 
-	@media (max-width: 600px) {
+	@media (max-width: $bp-medium-mobile) {
 		grid-template-columns: 1fr;
 	}
+
 	.full-width {
 		grid-column: 1 / -1;
 	}
-}
-
-.app-questions {
-	display: flex;
-	flex-direction: column;
-	gap: 1.75rem;
 }
 
 .app-group {
@@ -137,7 +133,7 @@
 	label {
 		font-size: 0.9rem;
 		font-weight: 500;
-		color: #334155;
+		color: $slate-700;
 	}
 
 	input[type="text"],
@@ -146,74 +142,25 @@
 	input[type="url"],
 	textarea {
 		padding: 0.75rem 1rem;
-		border: 1px solid #cbd5e1;
+		border: 1px solid $slate-300;
 		border-radius: 6px;
 		font-size: 0.95rem;
 		font-family: inherit;
-		background-color: #ffffff;
-		color: #0f172a;
+		background-color: $blanco;
+		color: $slate-900;
 		outline: none;
 		transition:
 			border-color 0.2s,
 			box-shadow 0.2s;
 
 		&:focus {
-			border-color: #0f172a;
-			box-shadow: 0 0 0 1px #0f172a;
+			border-color: $slate-900;
+			box-shadow: 0 0 0 1px $slate-900;
 		}
 	}
 
 	textarea {
-		resize: vertical;
-	}
-}
-
-.checkbox-grid {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	margin-top: 0.5rem;
-}
-
-.checkbox-label {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	cursor: pointer;
-	font-weight: 400 !important;
-	color: #475569 !important;
-
-	input[type="checkbox"] {
-		appearance: none;
-		width: 1.15rem;
-		height: 1.15rem;
-		border: 1px solid #cbd5e1;
-		border-radius: 4px;
-		background-color: #ffffff;
-		cursor: pointer;
-		position: relative;
-		transition: all 0.2s;
-
-		&:checked {
-			background-color: #0f172a;
-			border-color: #0f172a;
-
-			&::after {
-				content: "";
-				position: absolute;
-				left: 5px;
-				top: 2px;
-				width: 4px;
-				height: 8px;
-				border: solid white;
-				border-width: 0 2px 2px 0;
-				transform: rotate(45deg);
-			}
-		}
-	}
-
-	&:hover input[type="checkbox"]:not(:checked) {
-		border-color: #94a3b8;
+		resize: none;
 	}
 }
 
@@ -223,7 +170,7 @@
 	justify-content: center;
 	gap: 0.75rem;
 	background-color: $primary;
-	color: #000000;
+	color: $negro;
 	padding: 0.85rem 2rem;
 	border: none;
 	border-radius: 6px;
@@ -235,6 +182,7 @@
 	&:hover:not(:disabled) {
 		opacity: 0.9;
 	}
+
 	&:disabled {
 		opacity: 0.7;
 		cursor: not-allowed;
@@ -244,8 +192,8 @@
 .spinner {
 	width: 40px;
 	height: 40px;
-	border: 3px solid #e2e8f0;
-	border-top-color: #0f172a;
+	border: 3px solid $slate-200;
+	border-top-color: $slate-900;
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
 }
@@ -261,199 +209,6 @@
 }
 
 .required-asterisk {
-	color: #dc2626;
+	color: $error-red;
 	margin-left: 2px;
-}
-
-.cv-upload-area {
-	position: relative;
-	width: 100%;
-	margin-top: 0.25rem;
-}
-
-.cv-upload-input {
-	position: absolute;
-	width: 0;
-	height: 0;
-	opacity: 0;
-	overflow: hidden;
-	z-index: -1;
-}
-
-.cv-upload-label {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 2rem 1.5rem;
-	background-color: #f8fafc;
-	border: 2px dashed #cbd5e1;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: all 0.2s ease-in-out;
-	text-align: center;
-	gap: 0.5rem;
-
-	&:hover {
-		background-color: #f1f5f9;
-		border-color: #94a3b8;
-	}
-
-	.icon-upload {
-		color: #64748b;
-		margin-bottom: 0.5rem;
-	}
-	.upload-text {
-		font-size: 0.95rem;
-		font-weight: 500;
-		color: #0f172a;
-	}
-	.upload-hint {
-		font-size: 0.8rem;
-		color: #64748b;
-	}
-
-	&.has-file {
-		background-color: rgba(22, 101, 52, 0.05);
-		border-color: rgba(22, 101, 52, 0.3);
-		border-style: solid;
-
-		.icon-success {
-			color: #166534;
-		}
-		.file-info {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 0.25rem;
-		}
-		.file-name {
-			font-size: 0.95rem;
-			font-weight: 600;
-			color: #0f172a;
-		}
-		.file-size {
-			font-size: 0.8rem;
-			color: #64748b;
-		}
-		.file-change-text {
-			margin-top: 0.5rem;
-			font-size: 0.8rem;
-			color: #3b82f6;
-			font-weight: 500;
-		}
-
-		&:hover {
-			background-color: rgba(22, 101, 52, 0.1);
-		}
-	}
-}
-
-// ==================================================
-// 🌟 MODAL DE ÉXITO CENTRADO MINIMALISTA (SHADCN STYLE)
-// ==================================================
-.job-app-success-overlay {
-	position: fixed;
-	inset: 0;
-	background-color: rgba(
-		0,
-		0,
-		0,
-		0.5
-	); // Overlay oscuro opaco estándar de Radix Dialog
-	backdrop-filter: blur(4px);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 9999;
-	animation: fadeInModal 0.15s ease-out forwards;
-}
-
-.job-app-success-modal {
-	background-color: #ffffff;
-	width: 100%;
-	max-width: 400px; // Tamaño contenido estándar de Dialog shadcn
-	border: 1px solid #e2e8f0; // Borde sutil slate-200
-	border-radius: 8px; // Radius-lg clásico de shadcn
-	padding: 1.5rem; // Padding uniforme de 24px (p-6)
-	box-shadow:
-		0 10px 25px -5px rgba(0, 0, 0, 0.1),
-		0 8px 10px -6px rgba(0, 0, 0, 0.1);
-	display: flex;
-	flex-direction: column;
-	gap: 1.25rem;
-	box-sizing: border-box;
-	animation: scaleInModal 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-	&__header {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		gap: 0.5rem;
-	}
-
-	&__icon {
-		color: #4ce3b6; // Tu color verde personalizado limpio, sin burbujas de fondo
-		margin-bottom: 0.25rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	h3 {
-		font-size: 1.125rem; // text-lg
-		font-weight: 600; // font-semibold
-		color: #0f172a; // slate-900
-		margin: 0;
-		letter-spacing: -0.025em;
-	}
-
-	p {
-		font-size: 0.875rem; // text-sm
-		color: #64748b; // slate-500 mutado
-		line-height: 1.5;
-		margin: 0;
-	}
-
-	.btn-return-home {
-		width: 100%;
-		height: 40px; // h-10 standard shadcn button
-		background-color: #0f172a; // slate-900 button primario
-		color: #ffffff;
-		border: none;
-		border-radius: 6px; // radius-md
-		font-size: 0.875rem;
-		font-weight: 500; // font-medium
-		cursor: pointer;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		transition: background-color 0.15s ease;
-		margin-top: 0.25rem;
-
-		&:hover {
-			background-color: rgba(15, 23, 42, 0.9);
-		}
-	}
-}
-
-@keyframes fadeInModal {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-@keyframes scaleInModal {
-	from {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
 }

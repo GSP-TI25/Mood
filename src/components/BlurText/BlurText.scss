@@ -1,26 +1,32 @@
-//src/components/BlurText/BlurText.scss
-@use '../../styles/variables' as *;
+// src/components/BlurText/BlurText.scss
+@use "../../styles/variables" as *;
 
+/**
+ * Contenedor principal de BlurText.
+ * Utiliza flexbox para permitir el salto de línea adecuado en animaciones por palabra.
+ */
 .blur-text {
-  &__segment {
-    display: inline-block;
-    will-change: transform, filter, opacity;
+	display: flex;
+	flex-wrap: wrap;
 
-    &--highlight {
-      background-color: $primary;
-      color: $negro !important; /* Aseguramos que la letra sea negra */
-      padding: 0 0.4rem;
-      border-radius: 8px;
-      margin: 0 -0.1rem;
+	&__segment {
+		display: inline-block;
+		will-change: transform, filter, opacity;
 
-      /* 🌟 MATAMOS LA SOMBRA SUCIA HEREDADA */
-      text-shadow: none !important;
+		&--highlight {
+			background-color: $primary;
+			color: $negro !important;
+			padding: 0 0.4rem;
+			border-radius: 8px;
+			margin: 0 -0.1rem;
 
-      /* 🌟 Le damos una sombra exterior limpia a la pastilla verde */
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+			// Se elimina la sombra de texto heredada del contenedor general para mantener legibilidad
+			text-shadow: none !important;
 
-      /* Suavizado extra para que la letra negra se vea ultra nítida */
-      -webkit-font-smoothing: antialiased;
-    }
-  }
+			// Sombra exterior para profundidad en fondos oscuros
+			box-shadow: 0 6px 20px rgba($negro, 0.4);
+
+			-webkit-font-smoothing: antialiased;
+		}
+	}
 }

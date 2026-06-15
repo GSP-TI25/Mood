@@ -1,24 +1,24 @@
+// src/pages/Careers/JobApplication.jsx
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-	ArrowLeft,
-	Send,
-	UploadCloud,
-	FileText,
-	Loader2,
-	CheckCircle2,
-} from "lucide-react";
+import { ArrowLeft, Send, Loader2 } from "lucide-react";
+import CvUpload from "./components/CvUpload";
+import JobQuestionnaire from "./components/JobQuestionnaire";
+import SuccessModal from "./components/SuccessModal";
 import "./JobApplication.scss";
 
+/**
+ * Componente Contenedor JobApplication.
+ * Gestiona el estado global del formulario y la llamada a la API.
+ */
 const JobApplication = () => {
 	const { jobId } = useParams();
 	const navigate = useNavigate();
+
 	const [job, setJob] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-
-	// 🌟 ESTADO PARA EL MODAL DE ÉXITO CENTRADO TIPO SHADCN
 	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
 	const [personalData, setPersonalData] = useState({
@@ -107,7 +107,6 @@ const JobApplication = () => {
 			});
 
 			if (response.ok) {
-				// Abrimos el modal personalizado shadcn
 				setIsSuccessModalOpen(true);
 			} else {
 				toast.error(
@@ -151,7 +150,6 @@ const JobApplication = () => {
 					</header>
 
 					<div className='job-app-card__content'>
-						{/* --- DATOS PERSONALES --- */}
 						<section className='app-section'>
 							<h2>Datos Personales</h2>
 							<div className='app-grid'>
@@ -199,7 +197,6 @@ const JobApplication = () => {
 
 						<hr className='app-divider' />
 
-						{/* --- ENLACES Y CV --- */}
 						<section className='app-section'>
 							<h2>Perfil Profesional</h2>
 							<div className='app-grid'>
@@ -239,110 +236,22 @@ const JobApplication = () => {
 										Curriculum Vitae (CV){" "}
 										<span className='required-asterisk'>*</span>
 									</label>
-									<div className='cv-upload-area'>
-										<input
-											type='file'
-											id='cv-upload'
-											accept='.pdf,application/pdf'
-											onChange={handleFileChange}
-											required
-											className='cv-upload-input'
-										/>
-										<label
-											htmlFor='cv-upload'
-											className={`cv-upload-label ${personalData.cv ? "has-file" : ""}`}
-										>
-											{personalData.cv ? (
-												<>
-													<FileText size={28} className='icon-success' />
-													<div className='file-info'>
-														<span className='file-name'>
-															{personalData.cv.name}
-														</span>
-														<span className='file-size'>
-															{(personalData.cv.size / 1024 / 1024).toFixed(2)}{" "}
-															MB
-														</span>
-													</div>
-													<span className='file-change-text'>
-														Haz clic para cambiar
-													</span>
-												</>
-											) : (
-												<>
-													<UploadCloud size={32} className='icon-upload' />
-													<span className='upload-text'>
-														Haz clic para subir tu CV o arrástralo aquí
-													</span>
-													<span className='upload-hint'>
-														Formatos soportados: PDF (Máx. 5MB)
-													</span>
-												</>
-											)}
-										</label>
-									</div>
+									<CvUpload
+										file={personalData.cv}
+										onChange={handleFileChange}
+									/>
 								</div>
 							</div>
 						</section>
 
 						{filterQuestions.length > 0 && <hr className='app-divider' />}
 
-						{/* --- PREGUNTAS FILTRO DINÁMICAS --- */}
-						{filterQuestions.length > 0 && (
-							<section className='app-section'>
-								<h2>Cuestionario</h2>
-								<div className='app-questions'>
-									{filterQuestions.map((q, index) => (
-										<div key={q.id} className='app-group'>
-											<label>
-												{index + 1}. {q.label}{" "}
-												{q.isRequired && (
-													<span className='required-asterisk'>*</span>
-												)}
-											</label>
-
-											{(q.type === "text" || q.type === "number") && (
-												<textarea
-													rows={q.type === "number" ? "1" : "3"}
-													required={q.isRequired}
-													value={answers[q.id] || ""}
-													onChange={(e) =>
-														handleTextAnswer(q.id, e.target.value)
-													}
-													placeholder={
-														q.type === "number"
-															? "Ingresa un número..."
-															: "Tu respuesta..."
-													}
-												/>
-											)}
-
-											{q.type === "multiple" && (
-												<div className='checkbox-grid'>
-													{q.options.map((opt, i) => (
-														<label key={i} className='checkbox-label'>
-															<input
-																type='checkbox'
-																value={opt}
-																checked={(answers[q.id] || []).includes(opt)}
-																onChange={(e) =>
-																	handleCheckboxAnswer(
-																		q.id,
-																		opt,
-																		e.target.checked,
-																	)
-																}
-															/>
-															<span>{opt}</span>
-														</label>
-													))}
-												</div>
-											)}
-										</div>
-									))}
-								</div>
-							</section>
-						)}
+						<JobQuestionnaire
+							questions={filterQuestions}
+							answers={answers}
+							onTextAnswer={handleTextAnswer}
+							onCheckboxAnswer={handleCheckboxAnswer}
+						/>
 					</div>
 
 					<footer className='job-app-card__footer'>
@@ -365,31 +274,10 @@ const JobApplication = () => {
 				</form>
 			</div>
 
-			{/* 🌟 MODAL DE ÉXITO CENTRADO Y ULTRA MINIMALISTA (SHADCN STYLE) */}
-			{isSuccessModalOpen && (
-				<div className='job-app-success-overlay'>
-					<div className='job-app-success-modal'>
-						<div className='job-app-success-modal__header'>
-							<div className='job-app-success-modal__icon'>
-								<CheckCircle2 size={26} />
-							</div>
-							<h3>¡Tu talento está en camino! 🚀</h3>
-							<p>
-								Hemos recibido tu postulación correctamente en el ecosistema
-								Mood. Gestión de Talento revisará tu perfil y se pondrá en
-								contacto contigo muy pronto.
-							</p>
-						</div>
-						<button
-							type='button'
-							className='btn-return-home'
-							onClick={() => navigate("/trabaja_con_nosotros")}
-						>
-							Volver al inicio
-						</button>
-					</div>
-				</div>
-			)}
+			<SuccessModal
+				isOpen={isSuccessModalOpen}
+				onClose={() => navigate("/trabaja_con_nosotros")}
+			/>
 		</main>
 	);
 };
