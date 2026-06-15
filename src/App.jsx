@@ -62,13 +62,10 @@ const App = () => {
             path='/mood-print'
             element={<MoodPrint />}
           />
-
-          {/* NUEVA RUTA PARA MOOD MIND */}
           <Route
             path='/mood-mind'
             element={<MoodMind />}
           />
-
           <Route
             path='/contacto'
             element={<Contact />}
@@ -103,7 +100,7 @@ const App = () => {
           />
         </Routes>
         <ToastContainer
-          position='top-right' // O bottom-right, donde prefieras
+          position='top-right'
           autoClose={4000}
           hideProgressBar={false}
           newestOnTop={true}
@@ -111,7 +108,7 @@ const App = () => {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme='dark' // 🌟 ESTO ES CLAVE PARA QUE TOME LOS ESTILOS OSCUROS
+          theme='light'
         />
       </AuthProvider>
     </>
