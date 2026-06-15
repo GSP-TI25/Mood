@@ -1,21 +1,37 @@
-//backend/routes/projects.routes.js
+// backend/routes/projects.routes.js
 import { Router } from 'express';
 import multer from 'multer';
+import { verifyToken } from '../middlewares/auth.middleware.js'; // 🌟 SEGURIDAD
 import {
   getProjects,
   createProject,
   toggleProjectStatus,
-  updateProject, // 🌟 NUEVA IMPORTACIÓN
+  updateProject,
 } from '../controllers/projects.controller.js';
 
 const router = Router();
-const upload = multer({ storage: multer.memoryStorage() });
 
+/**
+ * 🌟 SEGURIDAD MULTER: Límite de 5MB y filtro exclusivo de imágenes.
+ */
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB Limit
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.match(/^image\/(jpeg|jpg|png|webp)$/)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Formato de imagen no soportado.'), false);
+    }
+  },
+});
+
+// GET: La obtención de proyectos puede ser pública (para que se vean en la web)
 router.get('/', getProjects);
-router.post('/', upload.single('img_url'), createProject);
-router.patch('/:id/status', toggleProjectStatus);
 
-// 🌟 NUEVA RUTA PARA EDITAR (Usamos upload.single para interceptar si suben nueva imagen)
-router.put('/:id', upload.single('img_url'), updateProject);
+// POST, PATCH, PUT: Todo esto es edición del CMS, DEBE estar protegido
+router.post('/', verifyToken, upload.single('img_url'), createProject);
+router.patch('/:id/status', verifyToken, toggleProjectStatus);
+router.put('/:id', verifyToken, upload.single('img_url'), updateProject);
 
 export default router;

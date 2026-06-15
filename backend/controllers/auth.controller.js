@@ -1,51 +1,65 @@
-//backend/controllers/auth.controller.js
+// backend/controllers/auth.controller.js
 import { pool } from '../config/db.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import process from 'process';
 
-// --- INICIO DE SESIÓN ---
+/**
+ * Inicia la sesión de un usuario en el CMS.
+ * Verifica la existencia del email, valida el hash de la contraseña y
+ * genera un JSON Web Token (JWT) firmado.
+ */
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
+  // Validación básica temprana para evitar consultas innecesarias a la BD
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email y contraseña requeridos' });
+  }
+
   try {
-    // 1. Buscamos si el usuario existe
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [
-      email,
+      email.toLowerCase().trim(), // Normalización para evitar bypass
     ]);
 
     if (result.rows.length === 0) {
+      // Mensaje genérico de seguridad (no revela si falló el correo o la contraseña)
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
     const user = result.rows[0];
 
-    // 2. Comparamos la contraseña enviada con el hash de la base de datos
     const isValidPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
-    // 3. Si todo es correcto, generamos el Token (incluyendo el rol)
+    // Seguridad: Si no hay secreto JWT en producción, lanzamos error crítico
+    if (!process.env.JWT_SECRET) {
+      console.error('CRÍTICO: JWT_SECRET no definido en el archivo .env');
+      return res
+        .status(500)
+        .json({ message: 'Error de configuración del servidor' });
+    }
+
     const token = jwt.sign(
       { id: user.id, email: user.email, role_id: user.role_id },
-      process.env.JWT_SECRET || 'mood_secreto_super_seguro_2026',
+      process.env.JWT_SECRET,
       { expiresIn: '8h' },
     );
 
     res.json({
       message: 'Autenticación exitosa',
       token,
-      // 🌟 AHORA SÍ ENVIAMOS TODOS LOS DATOS AL FRONTEND
       user: {
         id: user.id,
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
         role_id: user.role_id,
-        country: user.country, // Soluciona el borrado del país
-        avatar_url: user.avatar_url, // Permite que la foto cargue desde el inicio
+        country: user.country,
+        avatar_url: user.avatar_url,
       },
     });
   } catch (error) {
@@ -53,29 +67,3 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
-
-// --- RUTA TEMPORAL PARA CREAR AL PRIMER ADMIN ---
-// ⚠️ Nota: Deberás borrar esta función después de crear tu usuario por seguridad.
-// export const createFirstAdmin = async (req, res) => {
-// 	const { email, password } = req.body;
-
-// 	try {
-// 		// Encriptamos la contraseña con 10 rondas de sal
-// 		const salt = await bcrypt.genSalt(10);
-// 		const hashedPassword = await bcrypt.hash(password, salt);
-
-// 		await pool.query(
-// 			"INSERT INTO users (email, password_hash) VALUES ($1, $2)",
-// 			[email, hashedPassword],
-// 		);
-
-// 		res.status(201).json({
-// 			message: "Administrador creado con éxito. ¡Ya puedes borrar esta ruta!",
-// 		});
-// 	} catch (error) {
-// 		console.error("Error al crear admin:", error);
-// 		res.status(500).json({
-// 			message: "Error al crear el usuario. ¿Quizás el email ya existe?",
-// 		});
-// 	}
-// };

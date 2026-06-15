@@ -1,4 +1,4 @@
-//src/components/Cms/ProjectForm.jsx
+// src/components/Cms/ProjectForm.jsx
 import { useState, useRef } from 'react';
 import Select from 'react-select';
 import {
@@ -9,6 +9,9 @@ import {
 } from 'lucide-react';
 import './ProjectForm.scss';
 
+/**
+ * Opciones estáticas para las categorías del proyecto.
+ */
 const categoryOptions = [
   { value: 'Branding', label: 'Branding' },
   { value: 'Diseño Web', label: 'Diseño Web' },
@@ -17,6 +20,10 @@ const categoryOptions = [
   { value: 'Contenido Audiovisual', label: 'Contenido Audiovisual' },
 ];
 
+/**
+ * Estilos personalizados para el componente React-Select.
+ * Mantiene la coherencia visual con el resto del panel administrativo (Shadcn style).
+ */
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -46,6 +53,26 @@ const customSelectStyles = {
   menu: (provided) => ({ ...provided, zIndex: 5 }),
 };
 
+/**
+ * Utilidad para sanitizar las entradas de texto del usuario.
+ * Elimina etiquetas HTML básicas para prevenir ataques XSS (Cross-Site Scripting).
+ * @param {string} str - Cadena de texto a sanitizar.
+ * @returns {string} Cadena sanitizada.
+ */
+const sanitizeInput = (str) => {
+  if (!str) return '';
+  return str.replace(/<\/?[^>]+(>|$)/g, '').trim();
+};
+
+/**
+ * Componente ProjectForm.
+ * Formulario para crear o editar proyectos del portafolio.
+ *
+ * @param {Object} props
+ * @param {Function} props.onSubmitSuccess - Callback ejecutado tras guardar correctamente.
+ * @param {Function} props.onCancel - Callback para cerrar o cancelar el formulario.
+ * @param {Object} [props.projectToEdit] - Datos del proyecto si se está en modo edición.
+ */
 const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
   const imageInputRef = useRef(null);
   const videoInputRef = useRef(null);
@@ -67,23 +94,43 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
 
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const handleSelectChange = (selectedOption) =>
     setFormData({ ...formData, category: selectedOption.value });
 
+  /**
+   * Maneja la selección de archivos, validando el tipo MIME y el peso máximo.
+   */
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const sizeInMB = file.size / (1024 * 1024);
-    if (type === 'image' && sizeInMB > 2) {
-      alert('⚠️ La imagen no debe superar los 2MB.');
-      e.target.value = '';
-      return;
+
+    if (type === 'image') {
+      if (!file.type.match(/^image\/(jpeg|jpg|png|webp)$/)) {
+        alert('Formato no soportado. Sólo JPG, PNG y WEBP.');
+        e.target.value = '';
+        return;
+      }
+      if (sizeInMB > 2) {
+        alert('La imagen no debe superar los 2MB.');
+        e.target.value = '';
+        return;
+      }
     }
-    if (type === 'video' && sizeInMB > 15) {
-      alert('⚠️ El video no debe superar los 15MB.');
-      e.target.value = '';
-      return;
+
+    if (type === 'video') {
+      if (!file.type.match(/^video\/(mp4|webm)$/)) {
+        alert('Formato de video no soportado. Sólo MP4 y WEBM.');
+        e.target.value = '';
+        return;
+      }
+      if (sizeInMB > 15) {
+        alert('El video no debe superar los 15MB.');
+        e.target.value = '';
+        return;
+      }
     }
 
     setImageFile(file);
@@ -97,11 +144,14 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
     if (videoInputRef.current) videoInputRef.current.value = '';
   };
 
+  /**
+   * Prepara y envía los datos del formulario al backend.
+   */
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
 
     if (!imageFile && !imagePreview) {
-      alert('⚠️ El archivo del proyecto (Imagen o Video) es obligatorio.');
+      alert('El archivo del proyecto (Imagen o Video) es obligatorio.');
       return;
     }
 
@@ -113,21 +163,28 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
     if (!confirmPublish) return;
 
     setIsSubmitting(true);
+
     const token = localStorage.getItem('cms_token');
+    if (!token) {
+      alert('Sesión expirada. Por favor, vuelve a iniciar sesión.');
+      setIsSubmitting(false);
+      return;
+    }
 
     const dataToSend = new FormData();
-    dataToSend.append('title', formData.title);
-    dataToSend.append('category', formData.category);
-    dataToSend.append('client', formData.client);
-    dataToSend.append('date', formData.date);
-    dataToSend.append('description', formData.description);
-    dataToSend.append('project_url', formData.project_url);
+    dataToSend.append('title', sanitizeInput(formData.title));
+    dataToSend.append('category', sanitizeInput(formData.category));
+    dataToSend.append('client', sanitizeInput(formData.client));
+    dataToSend.append('date', sanitizeInput(formData.date));
+    dataToSend.append('description', sanitizeInput(formData.description));
+    dataToSend.append('project_url', sanitizeInput(formData.project_url));
     if (imageFile) dataToSend.append('img_url', imageFile);
 
     try {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const url = projectToEdit
-        ? `http://localhost:5000/api/projects/${projectToEdit.id}`
-        : 'http://localhost:5000/api/projects';
+        ? `${baseUrl}/api/projects/${projectToEdit.id}`
+        : `${baseUrl}/api/projects`;
       const method = projectToEdit ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -137,13 +194,17 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
       });
 
       if (response.ok) {
-        alert('✅ ¡Proyecto guardado con éxito!');
+        alert('¡Proyecto guardado con éxito!');
         onSubmitSuccess();
       } else {
-        alert('❌ Error al guardar el proyecto.');
+        const errorData = await response.json();
+        alert(
+          `Error al guardar el proyecto: ${errorData.message || 'Error desconocido'}`,
+        );
       }
     } catch (error) {
       console.error(error);
+      alert('Error de conexión al intentar guardar.');
     } finally {
       setIsSubmitting(false);
     }
@@ -164,14 +225,12 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
         onSubmit={handleFinalSubmit}
       >
         <div className='cms-project-form__scroll-area'>
-          {/* 🌟 ÁREA DE MEDIA SHADCN STYLE */}
           <div className='cms-project-form__section'>
             <label style={{ fontWeight: 500, fontSize: '0.875rem' }}>
               Media del Proyecto
             </label>
 
             {imagePreview ? (
-              // VISTA DE PREVIEW (Con botón de borrar flotante)
               <div
                 style={{
                   position: 'relative',
@@ -229,7 +288,6 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
                 </button>
               </div>
             ) : (
-              // VISTA DE 2 BOTONES GRANDES INICIALES
               <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
                 <button
                   type='button'
@@ -307,17 +365,16 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
               </div>
             )}
 
-            {/* Inputs Ocultos */}
             <input
               type='file'
-              accept='image/*'
+              accept='image/jpeg, image/png, image/webp'
               ref={imageInputRef}
               onChange={(e) => handleFileChange(e, 'image')}
               style={{ display: 'none' }}
             />
             <input
               type='file'
-              accept='video/mp4,video/webm'
+              accept='video/mp4, video/webm'
               ref={videoInputRef}
               onChange={(e) => handleFileChange(e, 'video')}
               style={{ display: 'none' }}
@@ -391,6 +448,7 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
                 value={formData.description}
                 onChange={handleInputChange}
                 className='textarea-small'
+                style={{ resize: 'none' }}
               ></textarea>
             </div>
           </div>

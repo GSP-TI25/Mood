@@ -63,7 +63,7 @@ const App = () => {
             element={<MoodPrint />}
           />
 
-          {/* 🌟 NUEVA RUTA PARA MOOD MIND */}
+          {/* NUEVA RUTA PARA MOOD MIND */}
           <Route
             path='/mood-mind'
             element={<MoodMind />}

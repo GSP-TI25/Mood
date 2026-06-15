@@ -1,4 +1,4 @@
-//backend/controllers/applications.controller.js
+// backend/controllers/applications.controller.js
 /*global process*/
 import { pool } from '../config/db.js';
 import nodemailer from 'nodemailer';
@@ -7,14 +7,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Configuración de Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configuración de Nodemailer usando tus variables exactas
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -23,7 +21,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// FUNCIÓN AUXILIAR PARA SUBIR EL CV DESDE LA MEMORIA A CLOUDINARY
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
@@ -40,7 +37,9 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
-// --- ENVIAR UNA NUEVA POSTULACIÓN ---
+/**
+ * Recibe, procesa y almacena una nueva postulación de trabajo enviada desde el Frontend Público.
+ */
 export const submitApplication = async (req, res) => {
   try {
     const { jobId, name, email, phone, linkedin, github, behance, answers } =
@@ -50,6 +49,14 @@ export const submitApplication = async (req, res) => {
       return res
         .status(400)
         .json({ message: 'El archivo del CV es requerido.' });
+    }
+
+    // 🌟 SEGURIDAD: Validación estricta para asegurar que es un PDF antes de procesar
+    if (req.file.mimetype !== 'application/pdf') {
+      return res.status(400).json({
+        message:
+          'Alerta de Seguridad: Sólo se permiten archivos en formato PDF.',
+      });
     }
 
     const cloudinaryResult = await uploadToCloudinary(req.file.buffer);
@@ -120,7 +127,9 @@ export const submitApplication = async (req, res) => {
   }
 };
 
-// --- OBTENER TODAS LAS POSTULACIONES (Para el CMS) ---
+/**
+ * Obtiene todas las postulaciones. Uso exclusivo del CMS.
+ */
 export const getApplications = async (req, res) => {
   try {
     const query = `
@@ -139,7 +148,9 @@ export const getApplications = async (req, res) => {
   }
 };
 
-// 🌟 NUEVO: ACTUALIZAR ESTADO DEL CANDIDATO (Nuevo, Seguimiento, Descartado)
+/**
+ * Actualiza el estado visual de seguimiento del candidato en el CMS.
+ */
 export const updateApplicationStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;

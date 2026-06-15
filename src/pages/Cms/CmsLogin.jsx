@@ -1,12 +1,18 @@
-//src/pages/Cms/CmsLogin.jsx
+// src/pages/Cms/CmsLogin.jsx
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Mail, Lock, ArrowRight, LoaderCircle } from 'lucide-react';
-import { toast } from 'react-toastify'; // 🌟 IMPORTAMOS TOASTIFY
+import { toast } from 'react-toastify';
 import './CmsLogin.scss';
 
 import logo from '../../assets/Logo_Mood.svg';
 
+/**
+ * Componente CmsLogin.
+ * Interfaz de inicio de sesión para los administradores.
+ * Envía las credenciales al backend y maneja las respuestas de seguridad (bloqueos por Rate Limit,
+ * credenciales inválidas o éxito).
+ */
 const CmsLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,30 +24,37 @@ const CmsLogin = () => {
     setIsLoading(true);
 
     if (!email || !password) {
-      toast.warning('Por favor, ingresa tus credenciales.'); // 🌟 ALERTA PERSONALIZADA
+      toast.warning('Por favor, ingresa tus credenciales.');
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email.trim(), password }),
+        },
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Bienvenido al panel de control'); // 🌟 MENSAJE DE ÉXITO
+        toast.success('Bienvenido al panel de control');
         login(data.token, data.user);
+      } else if (response.status === 429) {
+        // Manejo específico del error de Rate Limit configurado en el servidor
+        toast.error('Cuenta bloqueada temporalmente por demasiados intentos.');
+        setIsLoading(false);
       } else {
-        toast.error(data.message || 'Credenciales inválidas'); // 🌟 ERROR DE CREDENCIALES
+        toast.error(data.message || 'Credenciales inválidas');
         setIsLoading(false);
       }
     } catch (error) {
       console.error('Error de conexión:', error);
-      toast.error('Error al conectar con el servidor.'); // 🌟 ERROR DE RED
+      toast.error('Error al conectar con el servidor.');
       setIsLoading(false);
     }
   };
@@ -49,7 +62,6 @@ const CmsLogin = () => {
   return (
     <div className='cms-login-container'>
       <div className='login-box'>
-        {/* --- PANEL IZQUIERDO (Branding) --- */}
         <div className='login-brand-panel'>
           <div className='brand-content'>
             <span className='brand-badge'>Plataforma Centralizada</span>
@@ -64,15 +76,12 @@ const CmsLogin = () => {
             </p>
           </div>
 
-          {/* Elementos decorativos de fondo para el panel */}
           <div className='circle-decoration circle-1'></div>
           <div className='circle-decoration circle-2'></div>
         </div>
 
-        {/* --- PANEL DERECHO (Formulario de Acceso) --- */}
         <div className='login-form-panel'>
           <div className='form-wrapper'>
-            {/* Cabecera del formulario */}
             <div className='form-header'>
               <div className='logo-container'>
                 <img
@@ -85,7 +94,6 @@ const CmsLogin = () => {
             </div>
 
             <form onSubmit={handleSubmit}>
-              {/* Input: Correo Electrónico */}
               <div className={`modern-input-group ${email ? 'has-value' : ''}`}>
                 <div className='input-content'>
                   <label>Correo Electrónico</label>
@@ -96,6 +104,7 @@ const CmsLogin = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={isLoading}
+                    autoComplete='email'
                   />
                 </div>
                 <div className='icon-container'>
@@ -103,7 +112,6 @@ const CmsLogin = () => {
                 </div>
               </div>
 
-              {/* Input: Contraseña */}
               <div
                 className={`modern-input-group ${password ? 'has-value' : ''}`}
               >
@@ -116,6 +124,7 @@ const CmsLogin = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     disabled={isLoading}
+                    autoComplete='current-password'
                   />
                 </div>
                 <div className='icon-container'>
@@ -123,7 +132,6 @@ const CmsLogin = () => {
                 </div>
               </div>
 
-              {/* Botón de Ingreso */}
               <div className='form-actions'>
                 <button
                   type='submit'

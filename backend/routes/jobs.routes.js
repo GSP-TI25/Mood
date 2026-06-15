@@ -1,28 +1,23 @@
-//backend/routes/jobs.routes.js
+// backend/routes/jobs.routes.js
 import { Router } from 'express';
+import { verifyToken } from '../middlewares/auth.middleware.js'; // 🌟 SEGURIDAD
 import {
   getJobs,
   getJobById,
   createJob,
-  toggleJobStatus, // <--- NUEVA IMPORTACIÓN
-  updateJob, // <--- NUEVA IMPORTACIÓN
+  toggleJobStatus,
+  updateJob,
 } from '../controllers/jobs.controller.js';
 
 const router = Router();
 
-// GET: /api/jobs -> Devuelve todas las vacantes para la tabla principal
+// GET: Obtención de vacantes pública para que los candidatos las vean en la web
 router.get('/', getJobs);
-
-// GET: /api/jobs/:id -> Devuelve una vacante específica con todos sus detalles (JobDetail)
 router.get('/:id', getJobById);
 
-// POST: /api/jobs -> Crea una nueva vacante completa con detalles (CMS)
-router.post('/', createJob);
-
-// PATCH: /api/jobs/:id/status -> Cambia el estado (Activa / Inactiva) de una vacante
-router.patch('/:id/status', toggleJobStatus); // <--- NUEVA RUTA
-
-// PUT: /api/jobs/:id -> Actualiza una vacante existente (CMS)
-router.put('/:id', updateJob);
+// POST, PATCH, PUT: Edición desde el CMS, protegidas
+router.post('/', verifyToken, createJob);
+router.patch('/:id/status', verifyToken, toggleJobStatus);
+router.put('/:id', verifyToken, updateJob);
 
 export default router;

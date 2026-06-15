@@ -1,4 +1,4 @@
-//backend/controllers/contact.controller.js
+// backend/controllers/contact.controller.js
 import { pool } from '../config/db.js';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
@@ -14,6 +14,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+/**
+ * SEGURIDAD: Función para "escapar" etiquetas HTML y evitar inyecciones XSS en el correo.
+ */
+const escapeHTML = (str) => {
+  return str.replace(
+    /[&<>'"]/g,
+    (tag) =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;',
+      })[tag],
+  );
+};
+
 export const submitContact = async (req, res) => {
   const { nombre, correo, celular, pais, mensaje, idioma } = req.body;
 
@@ -21,6 +38,8 @@ export const submitContact = async (req, res) => {
     return res.status(400).json({ error: 'Todos los campos son requeridos.' });
   }
 
+  // Sanitizamos el mensaje por si intentan inyectar scripts en el texto libre
+  const mensajeSeguro = escapeHTML(mensaje);
   const idiomaGuardado = idioma || 'ES';
 
   try {
@@ -28,11 +47,17 @@ export const submitContact = async (req, res) => {
       INSERT INTO mensajes_contacto (nombre, correo, celular, pais, mensaje, idioma)
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id
     `;
-    const values = [nombre, correo, celular, pais, mensaje, idiomaGuardado];
+    const values = [
+      nombre,
+      correo,
+      celular,
+      pais,
+      mensajeSeguro,
+      idiomaGuardado,
+    ];
     const result = await pool.query(sqlQuery, values);
     const nuevoId = result.rows[0].id;
 
-    // --- DISEÑO HTML INSPIRADO EN SHADCN/UI ---
     const mailOptions = {
       from: `"Mood Web" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_DESTINATION,
@@ -46,23 +71,19 @@ export const submitContact = async (req, res) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #fafafa; color: #09090b; padding: 20px 0; margin: 0; line-height: 1.5;">
-          
           <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e4e4e7; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
-            
             <div style="padding: 24px; border-bottom: 1px solid #e4e4e7; background-color: #ffffff;">
               <h2 style="margin: 0; font-size: 20px; font-weight: 600; color: #09090b; display: flex; align-items: center;">
-                ¡Nuevo Lead desde la Web (Mood)! 😏
+                ¡Nuevo Lead desde la Web (Mood)! 👍
               </h2>
               <p style="margin: 4px 0 0 0; font-size: 14px; color: #71717a;">
                 Un usuario acaba de enviar un mensaje a través del formulario de contacto.
               </p>
             </div>
-
             <div style="padding: 24px;">
               <h3 style="margin: 0 0 16px 0; font-size: 14px; font-weight: 500; color: #71717a; text-transform: uppercase; letter-spacing: 0.05em;">
                 Detalles del Contacto
               </h3>
-              
               <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                 <tbody>
                   <tr style="border-bottom: 1px solid #f4f4f5;">
@@ -94,18 +115,15 @@ export const submitContact = async (req, res) => {
                 </tbody>
               </table>
             </div>
-
             <div style="padding: 0 24px 24px 24px;">
               <h3 style="margin: 0 0 16px 0; font-size: 14px; font-weight: 500; color: #71717a; text-transform: uppercase; letter-spacing: 0.05em;">
                 Mensaje
               </h3>
-              <div style="background-color: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 6px; padding: 16px; font-size: 14px; color: #27272a; white-space: pre-wrap;">${mensaje}</div>
+              <div style="background-color: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 6px; padding: 16px; font-size: 14px; color: #27272a; white-space: pre-wrap;">${mensajeSeguro}</div>
             </div>
-
             <div style="padding: 16px 24px; background-color: #f8fafc; border-top: 1px solid #e4e4e7; font-size: 12px; color: #a1a1aa; text-align: center;">
               Este es un correo automático generado por el servidor. | Registro DB ID: #${nuevoId}
             </div>
-
           </div>
         </body>
         </html>
