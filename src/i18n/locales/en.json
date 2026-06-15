@@ -1,422 +1,422 @@
 {
-	"adnContent": {
-		"badge": "HISTORY",
-		"tags": {
-			"content": "#Content",
-			"web": "#WebDevelopment"
-		},
-		"textLight": "a hyperconnected and complex world.",
-		"textMain": "We are a network of creative spaces in LATAM. We have a decade of success managing communication and digital transformation projects, boosting brands with disruptive ideas in "
-	},
-	"adnHero": {
-		"altDesktop": "Mood team working on Desktop",
-		"altMobile": "Mood team working on Mobile",
-		"ariaScroll": "Go to the next section",
-		"paragraph": "We create data-driven strategies and purpose-led design to make your brand stand out.",
-		"title1": "More than an agency,",
-		"title2": "your creative partner."
-	},
-	"adnTeam": {
-		"badgeLeadership": "LEADERSHIP",
-		"badgeTeam": "TEAM",
-		"descLeadership": "Our leadership team embodies Mood's mission, combining expertise in innovation, digital strategy, and creativity to transform the future and growth of your brand.",
-		"descTeam": "We challenge the conventional with bold strategies to transform the future of your brand.",
-		"roles": {
-			"alejandro": "General Manager",
-			"andres": "Frontend Developer",
-			"carolina": "General Director",
-			"diego": "Performance Lead",
-			"lucia": "Data Analyst",
-			"martin": "Creative Director",
-			"matthias": "CEO & Partner",
-			"sofia": "Head of Content",
-			"valeria": "Senior UX/UI Designer",
-			"vasco": "CEO & Partner"
-		},
-		"title1": "Meet the ",
-		"title2": "Team"
-	},
-	"adnWork": {
-		"altImage": "Mood Team",
-		"btn": "Work with us",
-		"p1": "We build an ecosystem of digital strategies by decoding market complexity. Inspired by disruption and data, our team's methodology has successfully connected traditional brands with the modern consumer in a scalable way.",
-		"p2": "Today, we focus on fighting irrelevance, with the long-term goal of transforming the fundamental way businesses interact and grow in their environment."
-	},
-	"brands": {
-		"subtitle": "Brands that trust us"
-	},
-	"careers": {
-		"culture": {
-			"items": {
-				"1": {
-					"desc": "We foster a space where crazy ideas are heard and executed.",
-					"title": "Limitless Creativity"
-				},
-				"2": {
-					"desc": "We are committed to your professional development with constant challenges.",
-					"title": "Continuous Growth"
-				},
-				"3": {
-					"desc": "We work by objectives, valuing your time and well-being.",
-					"title": "Flexible Culture"
-				}
-			},
-			"title": "Why Mood"
-		},
-		"hero": {
-			"subtitle": "We are looking for creative minds, digital strategists, and people passionate about transforming brands. If you have the Mood DNA, this is your place.",
-			"title1": "Join our ",
-			"title2": "team."
-		},
-		"jobs": {
-			"cta": "View details",
-			"empty": "We don't have open positions right now...",
-			"list": [
-				{
-					"benefits": [
-						"100% remote work.",
-						"Health insurance fully covered.",
-						"Annual budget for courses and training.",
-						"Quarterly performance bonuses."
-					],
-					"date": "Posted: May 20, 2026",
-					"description": "We are looking for an exceptional designer to create impactful digital experiences and lead the visual design of our key clients' projects.",
-					"id": "ui-ux-designer-senior",
-					"requirements": [
-						"5+ years of proven experience as a UI/UX Designer.",
-						"Absolute mastery of Figma and prototyping tools.",
-						"Solid portfolio with enterprise-level projects.",
-						"Basic knowledge of HTML/CSS (Desirable)."
-					],
-					"responsibilities": [
-						"Lead web and mobile interface design from conceptualization to final delivery.",
-						"Create wireframes, interactive prototypes, and user flows.",
-						"Collaborate closely with the development team to ensure design fidelity."
-					],
-					"title": "Senior UI/UX Designer",
-					"type": "Full-time"
-				},
-				{
-					"benefits": [
-						"Flexible schedule oriented to objectives.",
-						"Latest generation computer equipment (MacBook Pro).",
-						"Additional days off for birthdays.",
-						"Horizontal culture with no micromanagement."
-					],
-					"date": "Posted: May 18, 2026",
-					"description": "Join our technical team to build ultra-fast, scalable web applications with top-tier market animations.",
-					"id": "frontend-developer-react",
-					"requirements": [
-						"3+ years of experience working with React.",
-						"Deep knowledge of modern JavaScript (ES6+) and SCSS.",
-						"Experience consuming REST APIs and GraphQL.",
-						"Strong attention to visual detail and UX."
-					],
-					"responsibilities": [
-						"Interface development using React and Vite.",
-						"API integration and global state management.",
-						"Implementation of complex animations (Framer Motion, GSAP)."
-					],
-					"title": "Frontend Developer (React)",
-					"type": "Full-time"
-				}
-			],
-			"title": "Open Positions"
-		}
-	},
-	"contactHero": {
-		"form": {
-			"buttons": {
-				"send": "Send message",
-				"sending": "Sending..."
-			},
-			"countries": {
-				"argentina": "Argentina",
-				"chile": "Chile",
-				"colombia": "Colombia",
-				"mexico": "Mexico",
-				"other": "Other",
-				"peru": "Peru",
-				"spain": "Spain"
-			},
-			"feedback": {
-				"error": "There was an error sending your message. Please try again.",
-				"success": "Ideas in motion. ⚡ Your message has successfully landed, get ready to rewrite the rules of the game."
-			},
-			"header": "Start your transformation",
-			"labels": {
-				"country": "Country",
-				"email": "Business Email",
-				"message": "Tell us about your project",
-				"name": "Full Name",
-				"phone": "Phone / WhatsApp"
-			},
-			"placeholders": {
-				"email": "john@yourcompany.com",
-				"message": "What goals do you want to achieve?",
-				"name": "E.g. John Doe",
-				"phone": "+1 234 567 8900",
-				"select": "Select..."
-			}
-		},
-		"subtitle": "Have a project in mind or need to scale your brand? Leave us your details and a strategist from our team will contact you in less than 24 hours.",
-		"title1": "Let's build",
-		"title2": "something",
-		"title3": "incredible."
-	},
-	"footer": {
-		"btnJoin": "Join the team",
-		"connectTitle": "CONNECT",
-		"copyright": "Mood. All rights reserved.",
-		"navTitle": "NAVIGATE",
-		"slogan": "Boosting brands with kinetic logic and pure creativity."
-	},
-	"hero": {
-		"buttons": {
-			"projects": "View Projects",
-			"talk": "Let's talk"
-		},
-		"highlight": "experiences",
-		"paragraph": "The communication agency that revolutionizes marketing. Specialists in ATL, Digital, PR, and BTL, we offer solutions to boost your brand.",
-		"skills": {
-			"av": "AudioVisual Content",
-			"branding": "Branding",
-			"marketing": "Digital Marketing",
-			"social": "Social Media",
-			"web": "Web Design"
-		},
-		"title": "We design experiences with purpose"
-	},
-	"moodApproach": {
-		"badge": "OUR APPROACH",
-		"cards": {
-			"acelera": {
-				"description": "We automate visual creation. Our directors select and refine the winning idea.",
-				"overline": "AI Accelerates",
-				"title": "Mood Decides"
-			},
-			"analiza": {
-				"description": "We process massive data in seconds. Our team extracts the strategic insights.",
-				"overline": "AI Analyzes",
-				"title": "Mood Interprets"
-			},
-			"optimiza": {
-				"description": "The algorithm scales commercial performance. We preserve the essence of your brand.",
-				"overline": "AI Optimizes",
-				"title": "Mood Builds Brand"
-			}
-		},
-		"description": "Technology provides speed and pinpoint accuracy. However, it is our strategic vision that guides these tools to create real connections and tangible business results.",
-		"title1": "Perfect synergy between Artificial",
-		"title2": "Intelligence and human talent."
-	},
-	"moodMindFeatures": {
-		"badgeFuture": "Who we want to be",
-		"badgeToday": "Who we are Today",
-		"descFuture": "We are in a healthy transition towards a new business model where AI will be at the center of everything, with human talent validation and curation.",
-		"descToday": "Mood is a creative and strategic growth business unit driven by Artificial Intelligence. We combine creative talent, digital expertise in content, data, and technology to transform marketing into an intelligent, efficient system oriented towards business results.",
-		"heroText": "AI DRIVEN AGENCY."
-	},
-	"moodMindWorkflow": {
-		"badge": "MOOD WORKFLOW",
-		"slides": {
-			"ahorro": {
-				"bullets": [
-					"Less investment in models, casting, fees, and travel expenses.",
-					"Reduction in equipment rentals, physical sets, and locations.",
-					"More investment in paid media and performance, not operational costs."
-				],
-				"title": "Real Structural Savings"
-			},
-			"creativa": {
-				"bullets": [
-					"Impossible scenarios without moving a production team.",
-					"Multiple versions of the same campaign and pre-launch visual testing.",
-					"AI generates visual routes; Mood strategically selects and elevates the idea."
-				],
-				"title": "Creativity Without Physical Limits"
-			},
-			"precisa": {
-				"bullets": [
-					"AI detects formats, trends, and performance.",
-					"Fewer reworks and unnecessary tests.",
-					"Mood adapts each asset to the right channel (Social, Paid, B2B, Retail, Events)."
-				],
-				"title": "Precise and Efficient Production"
-			},
-			"rapida": {
-				"bullets": [
-					"AI reduces time in editing, retouching, mockups, renders, and adaptations.",
-					"Mockups, renders, and key visuals in hours, not weeks.",
-					"Mood converts that speed into campaign-ready assets."
-				],
-				"title": "Faster Production"
-			}
-		},
-		"title": "AI-Driven Production"
-	},
-	"moodPrintHero": {
-		"categories": {
-			"Branding": "Branding",
-			"Contenido Audiovisual": "Audiovisual Content",
-			"Diseño Web": "Web Design",
-			"Marketing Digital": "Digital Marketing",
-			"Social Media": "Social Media",
-			"Todos": "All"
-		},
-		"subtitle": "Explore our portfolio. Select a category to discover the projects that have transformed the future of great brands.",
-		"title1": "We create",
-		"title2": "extraordinary",
-		"title3": "brands."
-	},
-	"moodPrintProjects": {
-		"categoryInfo": {
-			"Branding": {
-				"desc": "We build brands with soul. We design visual identities that connect deeply with your audience.",
-				"title": "Branding & Identity"
-			},
-			"Contenido Audiovisual": {
-				"desc": "We tell your story through the lens. High-quality photography and video that capture your brand's essence.",
-				"title": "Audiovisual Production"
-			},
-			"Diseño Web": {
-				"desc": "Fast, intuitive digital platforms meticulously designed to convert visitors into clients.",
-				"title": "Development & UX/UI"
-			},
-			"Marketing Digital": {
-				"desc": "Data-driven strategic campaigns to maximize your ROI and scale your business.",
-				"title": "Performance Marketing"
-			},
-			"Social Media": {
-				"desc": "We don't just post, we create conversations. Content strategies that generate real engagement.",
-				"title": "Community Management"
-			},
-			"Todos": {
-				"desc": "Success stories where creativity and strategy meet to achieve results that defy the conventional.",
-				"title": "Featured Projects"
-			}
-		},
-		"emptyState": "There are no projects in this category yet.",
-		"projects": {
-			"1": {
-				"description": "We developed a new visual identity that conveys innovation and trust. The project included everything from logo redesign to the implementation of the brand manual across all digital touchpoints.",
-				"title": "Complete Rebranding"
-			},
-			"2": {
-				"description": "Design and development of an ultra-fast e-commerce platform optimized for conversion, reducing the abandonment rate by 40% during the first month.",
-				"title": "Sports E-commerce"
-			},
-			"3": {
-				"description": "Comprehensive digital ad strategy combining Google Ads and Meta Ads, achieving a reach of over 2 million impressions and an ROI exceeding 300%.",
-				"title": "\"The New Horizon\" Campaign"
-			},
-			"4": {
-				"description": "Dynamic content generation and community management for 3 months, increasing the organic engagement rate by an astonishing 125%.",
-				"title": "Summer Collection Launch"
-			},
-			"5": {
-				"description": "Production, direction, and editing of a 45-second advertising audiovisual piece broadcast on network television and digital media.",
-				"title": "National TV Commercial"
-			},
-			"6": {
-				"description": "Structural and graphic packaging design for an exclusive line of export coffee, highlighting textures and minimalist elegance.",
-				"title": "Premium Packaging"
-			},
-			"7": {
-				"description": "Information architecture, UX/UI design, and React development for the new corporate website of a leading fintech startup.",
-				"title": "Corporate Portal"
-			}
-		}
-	},
-	"moodmindHero": {
-		"altDesktop": "Mood team working on Desktop",
-		"altMobile": "Mood team working on Mobile",
-		"ariaScroll": "Go to the next section",
-		"paragraph": "Scenarios that would be impossible without moving a team. Multiple versions of the same campaign",
-		"title1": "Creativity without",
-		"title2": "physical limits."
-	},
-	"navbar": {
-		"adn": "ADN Mood",
-		"contact": "Contact",
-		"print": "Mood Print"
-	},
-	"projectModal": {
-		"btnView": "View Project",
-		"client": "Client:",
-		"closeAria": "Close modal",
-		"date": "Date:"
-	},
-	"services": {
-		"aria": {
-			"goTo": "Go to service ",
-			"next": "Next service",
-			"prev": "Previous service",
-			"viewDetails": "View details of "
-		},
-		"btnProjects": "View projects",
-		"headerDesc": "Creative solutions structured with kinetic logic to boost your brand in the digital environment.",
-		"items": {
-			"audiovisual": {
-				"description": "We tell your brand's story through high-impact visual narratives. Video production and cinematic photography that capture attention from the first second.",
-				"title": "Audiovisual Content"
-			},
-			"branding": {
-				"description": "We build memorable identities that connect deeply with your audience. We don't just create logos, we design the essence and soul of your brand to stand out with authority in a saturated market.",
-				"title": "Branding"
-			},
-			"marketing": {
-				"description": "Data-driven strategies that multiply your ROI. We dominate the digital ecosystem to position your message and offers exactly where and when your potential customers are.",
-				"title": "Digital Marketing"
-			},
-			"social": {
-				"description": "We transform simple followers into brand ambassadors. We create active communities through authentic content and interaction strategies that generate real impact and loyalty.",
-				"title": "Social Media"
-			},
-			"web": {
-				"description": "We develop ultra-fast, intuitive, conversion-centric digital platforms. Your website won't just be a pretty storefront, it will be your best and most profitable 24/7 sales tool.",
-				"title": "Web Design"
-			}
-		},
-		"title1": "We empower your ",
-		"titleHighlight": "brand"
-	},
-	"tab": {
-		"hidden": "Come back! Good ideas await 💡",
-		"visible": "Mood | Creative Agency"
-	},
-	"testimonials": {
-		"desc1": "Your brand's success is our best introduction. As a ",
-		"desc2": ", we focus on generating real, scalable, and measurable growth.",
-		"descStrong": "communication and digital marketing agency",
-		"reviews": {
-			"1": {
-				"company": "General Director, AutoStar",
-				"name": "Carlos Mendoza",
-				"text": "\"The Mood team completely transformed our acquisition strategy. Not only did they redesign our identity, but online sales grew by 45% in the first quarter. They are true strategists.\""
-			},
-			"2": {
-				"company": "CMO, Grupo Bahía",
-				"name": "Lucía Santamarina",
-				"text": "\"We were looking for an agency that understood our vision and exceeded it. The audiovisual content and web design they delivered are on another level. They perfectly understand the current digital language.\""
-			},
-			"3": {
-				"company": "CEO, Marcan",
-				"name": "Roberto Vilela",
-				"text": "\"The communication and agility of this agency are remarkable. They structured our advertising campaigns, lowering our acquisition cost in record time. Highly recommended.\""
-			},
-			"4": {
-				"company": "Founder, Santa Ana",
-				"name": "Andrea Ruiz",
-				"text": "\"The rebranding they did for our brand exceeded all expectations. From the logo to the social media strategy, everything breathes professionalism and creativity.\""
-			},
-			"5": {
-				"company": "Marketing Manager, iShop",
-				"name": "Martín Torres",
-				"text": "\"An agency that truly commits to your results. Interaction metrics on our digital channels multiplied thanks to their community management.\""
-			}
-		},
-		"title1": "Results that speak for ",
-		"title2": "themselves."
-	}
+  "adnContent": {
+    "badge": "HISTORY",
+    "tags": {
+      "content": "#Content",
+      "web": "#WebDevelopment"
+    },
+    "textLight": "a hyperconnected and complex world.",
+    "textMain": "We are a network of creative spaces in LATAM. We have a decade of success managing communication and digital transformation projects, boosting brands with disruptive ideas in "
+  },
+  "adnHero": {
+    "altDesktop": "Mood team working on Desktop",
+    "altMobile": "Mood team working on Mobile",
+    "ariaScroll": "Go to the next section",
+    "paragraph": "We create data-driven strategies and purpose-led design to make your brand stand out.",
+    "title1": "More than an agency,",
+    "title2": "your creative partner."
+  },
+  "adnTeam": {
+    "badgeLeadership": "LEADERSHIP",
+    "badgeTeam": "TEAM",
+    "descLeadership": "Our leadership team embodies Mood's mission, combining expertise in innovation, digital strategy, and creativity to transform the future and growth of your brand.",
+    "descTeam": "We challenge the conventional with bold strategies to transform the future of your brand.",
+    "roles": {
+      "alejandro": "General Manager",
+      "andres": "Frontend Developer",
+      "carolina": "General Director",
+      "diego": "Performance Lead",
+      "lucia": "Data Analyst",
+      "martin": "Creative Director",
+      "matthias": "CEO & Partner",
+      "sofia": "Head of Content",
+      "valeria": "Senior UX/UI Designer",
+      "vasco": "CEO & Partner"
+    },
+    "title1": "Meet the ",
+    "title2": "Team"
+  },
+  "adnWork": {
+    "altImage": "Mood Team",
+    "btn": "Work with us",
+    "p1": "We build an ecosystem of digital strategies by decoding market complexity. Inspired by disruption and data, our team's methodology has successfully connected traditional brands with the modern consumer in a scalable way.",
+    "p2": "Today, we focus on fighting irrelevance, with the long-term goal of transforming the fundamental way businesses interact and grow in their environment."
+  },
+  "brands": {
+    "subtitle": "Brands that trust us"
+  },
+  "careers": {
+    "culture": {
+      "items": {
+        "1": {
+          "desc": "We foster a space where crazy ideas are heard and executed.",
+          "title": "Limitless Creativity"
+        },
+        "2": {
+          "desc": "We are committed to your professional development with constant challenges.",
+          "title": "Continuous Growth"
+        },
+        "3": {
+          "desc": "We work by objectives, valuing your time and well-being.",
+          "title": "Flexible Culture"
+        }
+      },
+      "title": "Why Mood"
+    },
+    "hero": {
+      "subtitle": "We are looking for creative minds, digital strategists, and people passionate about transforming brands. If you have the Mood DNA, this is your place.",
+      "title1": "Join our ",
+      "title2": "team."
+    },
+    "jobs": {
+      "cta": "View details",
+      "empty": "We don't have open positions right now...",
+      "list": [
+        {
+          "benefits": [
+            "100% remote work.",
+            "Health insurance fully covered.",
+            "Annual budget for courses and training.",
+            "Quarterly performance bonuses."
+          ],
+          "date": "Posted: May 20, 2026",
+          "description": "We are looking for an exceptional designer to create impactful digital experiences and lead the visual design of our key clients' projects.",
+          "id": "ui-ux-designer-senior",
+          "requirements": [
+            "5+ years of proven experience as a UI/UX Designer.",
+            "Absolute mastery of Figma and prototyping tools.",
+            "Solid portfolio with enterprise-level projects.",
+            "Basic knowledge of HTML/CSS (Desirable)."
+          ],
+          "responsibilities": [
+            "Lead web and mobile interface design from conceptualization to final delivery.",
+            "Create wireframes, interactive prototypes, and user flows.",
+            "Collaborate closely with the development team to ensure design fidelity."
+          ],
+          "title": "Senior UI/UX Designer",
+          "type": "Full-time"
+        },
+        {
+          "benefits": [
+            "Flexible schedule oriented to objectives.",
+            "Latest generation computer equipment (MacBook Pro).",
+            "Additional days off for birthdays.",
+            "Horizontal culture with no micromanagement."
+          ],
+          "date": "Posted: May 18, 2026",
+          "description": "Join our technical team to build ultra-fast, scalable web applications with top-tier market animations.",
+          "id": "frontend-developer-react",
+          "requirements": [
+            "3+ years of experience working with React.",
+            "Deep knowledge of modern JavaScript (ES6+) and SCSS.",
+            "Experience consuming REST APIs and GraphQL.",
+            "Strong attention to visual detail and UX."
+          ],
+          "responsibilities": [
+            "Interface development using React and Vite.",
+            "API integration and global state management.",
+            "Implementation of complex animations (Framer Motion, GSAP)."
+          ],
+          "title": "Frontend Developer (React)",
+          "type": "Full-time"
+        }
+      ],
+      "title": "Open Positions"
+    }
+  },
+  "contactHero": {
+    "form": {
+      "buttons": {
+        "send": "Send message",
+        "sending": "Sending..."
+      },
+      "countries": {
+        "argentina": "Argentina",
+        "chile": "Chile",
+        "colombia": "Colombia",
+        "mexico": "Mexico",
+        "other": "Other",
+        "peru": "Peru",
+        "spain": "Spain"
+      },
+      "feedback": {
+        "error": "There was an error sending your message. Please try again.",
+        "success": "Ideas in motion. ⚡ Your message has successfully landed, get ready to rewrite the rules of the game."
+      },
+      "header": "Start your transformation",
+      "labels": {
+        "country": "Country",
+        "email": "Business Email",
+        "message": "Tell us about your project",
+        "name": "Full Name",
+        "phone": "Phone / WhatsApp"
+      },
+      "placeholders": {
+        "email": "john@yourcompany.com",
+        "message": "What goals do you want to achieve?",
+        "name": "E.g. John Doe",
+        "phone": "+1 234 567 8900",
+        "select": "Select..."
+      }
+    },
+    "subtitle": "Have a project in mind or need to scale your brand? Leave us your details and a strategist from our team will contact you in less than 24 hours.",
+    "title1": "Let's build",
+    "title2": "something",
+    "title3": "incredible."
+  },
+  "footer": {
+    "btnJoin": "Join the team",
+    "connectTitle": "CONNECT",
+    "copyright": "Mood. All rights reserved.",
+    "navTitle": "NAVIGATE",
+    "slogan": "Make things happen. No matter what."
+  },
+  "hero": {
+    "buttons": {
+      "projects": "View Projects",
+      "talk": "Let's talk"
+    },
+    "highlight": "experiences",
+    "paragraph": "The communication agency that revolutionizes marketing. Specialists in ATL, Digital, PR, and BTL, we offer solutions to boost your brand.",
+    "skills": {
+      "av": "AudioVisual Content",
+      "branding": "Branding",
+      "marketing": "Digital Marketing",
+      "social": "Social Media",
+      "web": "Web Design"
+    },
+    "title": "We design experiences with purpose"
+  },
+  "moodApproach": {
+    "badge": "OUR APPROACH",
+    "cards": {
+      "acelera": {
+        "description": "We automate visual creation. Our directors select and refine the winning idea.",
+        "overline": "AI Accelerates",
+        "title": "Mood Decides"
+      },
+      "analiza": {
+        "description": "We process massive data in seconds. Our team extracts the strategic insights.",
+        "overline": "AI Analyzes",
+        "title": "Mood Interprets"
+      },
+      "optimiza": {
+        "description": "The algorithm scales commercial performance. We preserve the essence of your brand.",
+        "overline": "AI Optimizes",
+        "title": "Mood Builds Brand"
+      }
+    },
+    "description": "Technology provides speed and pinpoint accuracy. However, it is our strategic vision that guides these tools to create real connections and tangible business results.",
+    "title1": "Perfect synergy between Artificial",
+    "title2": "Intelligence and human talent."
+  },
+  "moodMindFeatures": {
+    "badgeFuture": "Who we want to be",
+    "badgeToday": "Who we are Today",
+    "descFuture": "We are in a healthy transition towards a new business model where AI will be at the center of everything, with human talent validation and curation.",
+    "descToday": "Mood is a creative and strategic growth business unit driven by Artificial Intelligence. We combine creative talent, digital expertise in content, data, and technology to transform marketing into an intelligent, efficient system oriented towards business results.",
+    "heroText": "AI DRIVEN AGENCY."
+  },
+  "moodMindWorkflow": {
+    "badge": "MOOD WORKFLOW",
+    "slides": {
+      "ahorro": {
+        "bullets": [
+          "Less investment in models, casting, fees, and travel expenses.",
+          "Reduction in equipment rentals, physical sets, and locations.",
+          "More investment in paid media and performance, not operational costs."
+        ],
+        "title": "Real Structural Savings"
+      },
+      "creativa": {
+        "bullets": [
+          "Impossible scenarios without moving a production team.",
+          "Multiple versions of the same campaign and pre-launch visual testing.",
+          "AI generates visual routes; Mood strategically selects and elevates the idea."
+        ],
+        "title": "Creativity Without Physical Limits"
+      },
+      "precisa": {
+        "bullets": [
+          "AI detects formats, trends, and performance.",
+          "Fewer reworks and unnecessary tests.",
+          "Mood adapts each asset to the right channel (Social, Paid, B2B, Retail, Events)."
+        ],
+        "title": "Precise and Efficient Production"
+      },
+      "rapida": {
+        "bullets": [
+          "AI reduces time in editing, retouching, mockups, renders, and adaptations.",
+          "Mockups, renders, and key visuals in hours, not weeks.",
+          "Mood converts that speed into campaign-ready assets."
+        ],
+        "title": "Faster Production"
+      }
+    },
+    "title": "AI-Driven Production"
+  },
+  "moodPrintHero": {
+    "categories": {
+      "Branding": "Branding",
+      "Contenido Audiovisual": "Audiovisual Content",
+      "Diseño Web": "Web Design",
+      "Marketing Digital": "Digital Marketing",
+      "Social Media": "Social Media",
+      "Todos": "All"
+    },
+    "subtitle": "Explore our portfolio. Select a category to discover the projects that have transformed the future of great brands.",
+    "title1": "We create",
+    "title2": "extraordinary",
+    "title3": "brands."
+  },
+  "moodPrintProjects": {
+    "categoryInfo": {
+      "Branding": {
+        "desc": "We build brands with soul. We design visual identities that connect deeply with your audience.",
+        "title": "Branding & Identity"
+      },
+      "Contenido Audiovisual": {
+        "desc": "We tell your story through the lens. High-quality photography and video that capture your brand's essence.",
+        "title": "Audiovisual Production"
+      },
+      "Diseño Web": {
+        "desc": "Fast, intuitive digital platforms meticulously designed to convert visitors into clients.",
+        "title": "Development & UX/UI"
+      },
+      "Marketing Digital": {
+        "desc": "Data-driven strategic campaigns to maximize your ROI and scale your business.",
+        "title": "Performance Marketing"
+      },
+      "Social Media": {
+        "desc": "We don't just post, we create conversations. Content strategies that generate real engagement.",
+        "title": "Community Management"
+      },
+      "Todos": {
+        "desc": "Success stories where creativity and strategy meet to achieve results that defy the conventional.",
+        "title": "Featured Projects"
+      }
+    },
+    "emptyState": "There are no projects in this category yet.",
+    "projects": {
+      "1": {
+        "description": "We developed a new visual identity that conveys innovation and trust. The project included everything from logo redesign to the implementation of the brand manual across all digital touchpoints.",
+        "title": "Complete Rebranding"
+      },
+      "2": {
+        "description": "Design and development of an ultra-fast e-commerce platform optimized for conversion, reducing the abandonment rate by 40% during the first month.",
+        "title": "Sports E-commerce"
+      },
+      "3": {
+        "description": "Comprehensive digital ad strategy combining Google Ads and Meta Ads, achieving a reach of over 2 million impressions and an ROI exceeding 300%.",
+        "title": "\"The New Horizon\" Campaign"
+      },
+      "4": {
+        "description": "Dynamic content generation and community management for 3 months, increasing the organic engagement rate by an astonishing 125%.",
+        "title": "Summer Collection Launch"
+      },
+      "5": {
+        "description": "Production, direction, and editing of a 45-second advertising audiovisual piece broadcast on network television and digital media.",
+        "title": "National TV Commercial"
+      },
+      "6": {
+        "description": "Structural and graphic packaging design for an exclusive line of export coffee, highlighting textures and minimalist elegance.",
+        "title": "Premium Packaging"
+      },
+      "7": {
+        "description": "Information architecture, UX/UI design, and React development for the new corporate website of a leading fintech startup.",
+        "title": "Corporate Portal"
+      }
+    }
+  },
+  "moodmindHero": {
+    "altDesktop": "Mood team working on Desktop",
+    "altMobile": "Mood team working on Mobile",
+    "ariaScroll": "Go to the next section",
+    "paragraph": "Scenarios that would be impossible without moving a team. Multiple versions of the same campaign",
+    "title1": "Creativity without",
+    "title2": "physical limits."
+  },
+  "navbar": {
+    "adn": "ADN Mood",
+    "contact": "Contact",
+    "print": "Mood Print"
+  },
+  "projectModal": {
+    "btnView": "View Project",
+    "client": "Client:",
+    "closeAria": "Close modal",
+    "date": "Date:"
+  },
+  "services": {
+    "aria": {
+      "goTo": "Go to service ",
+      "next": "Next service",
+      "prev": "Previous service",
+      "viewDetails": "View details of "
+    },
+    "btnProjects": "View projects",
+    "headerDesc": "Creative solutions structured with kinetic logic to boost your brand in the digital environment.",
+    "items": {
+      "audiovisual": {
+        "description": "We tell your brand's story through high-impact visual narratives. Video production and cinematic photography that capture attention from the first second.",
+        "title": "Audiovisual Content"
+      },
+      "branding": {
+        "description": "We build memorable identities that connect deeply with your audience. We don't just create logos, we design the essence and soul of your brand to stand out with authority in a saturated market.",
+        "title": "Branding"
+      },
+      "marketing": {
+        "description": "Data-driven strategies that multiply your ROI. We dominate the digital ecosystem to position your message and offers exactly where and when your potential customers are.",
+        "title": "Digital Marketing"
+      },
+      "social": {
+        "description": "We transform simple followers into brand ambassadors. We create active communities through authentic content and interaction strategies that generate real impact and loyalty.",
+        "title": "Social Media"
+      },
+      "web": {
+        "description": "We develop ultra-fast, intuitive, conversion-centric digital platforms. Your website won't just be a pretty storefront, it will be your best and most profitable 24/7 sales tool.",
+        "title": "Web Design"
+      }
+    },
+    "title1": "We empower your ",
+    "titleHighlight": "brand"
+  },
+  "tab": {
+    "hidden": "Come back! Good ideas await 💡",
+    "visible": "Mood | Creative Agency"
+  },
+  "testimonials": {
+    "desc1": "Your brand's success is our best introduction. As a ",
+    "desc2": ", we focus on generating real, scalable, and measurable growth.",
+    "descStrong": "communication and digital marketing agency",
+    "reviews": {
+      "1": {
+        "company": "General Director, AutoStar",
+        "name": "Carlos Mendoza",
+        "text": "\"The Mood team completely transformed our acquisition strategy. Not only did they redesign our identity, but online sales grew by 45% in the first quarter. They are true strategists.\""
+      },
+      "2": {
+        "company": "CMO, Grupo Bahía",
+        "name": "Lucía Santamarina",
+        "text": "\"We were looking for an agency that understood our vision and exceeded it. The audiovisual content and web design they delivered are on another level. They perfectly understand the current digital language.\""
+      },
+      "3": {
+        "company": "CEO, Marcan",
+        "name": "Roberto Vilela",
+        "text": "\"The communication and agility of this agency are remarkable. They structured our advertising campaigns, lowering our acquisition cost in record time. Highly recommended.\""
+      },
+      "4": {
+        "company": "Founder, Santa Ana",
+        "name": "Andrea Ruiz",
+        "text": "\"The rebranding they did for our brand exceeded all expectations. From the logo to the social media strategy, everything breathes professionalism and creativity.\""
+      },
+      "5": {
+        "company": "Marketing Manager, iShop",
+        "name": "Martín Torres",
+        "text": "\"An agency that truly commits to your results. Interaction metrics on our digital channels multiplied thanks to their community management.\""
+      }
+    },
+    "title1": "Results that speak for ",
+    "title2": "themselves."
+  }
 }
