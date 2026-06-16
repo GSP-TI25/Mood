@@ -1,0 +1,141 @@
+// src/pages/Cms/Views/CmsHome/CmsHome.scss
+@use "../../../../styles/variables" as *;
+
+.cms-home-view {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	padding: 1rem 0 3rem;
+	animation: fadeIn 0.4s ease-out;
+}
+
+.cms-home-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+
+	h1 {
+		font-size: 2.25rem;
+		font-weight: 600;
+		color: $slate-900;
+		margin: 0 0 0.5rem 0;
+		letter-spacing: -0.03em;
+	}
+	p {
+		font-size: 1.1rem;
+		color: $slate-500;
+		margin: 0;
+		max-width: 600px;
+		line-height: 1.5;
+	}
+}
+
+.cms-home-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: 1.5rem;
+}
+
+.cms-home-card {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	background-color: $blanco;
+	border: 1px solid $slate-200;
+	border-radius: 12px;
+	padding: 1.5rem;
+	cursor: pointer;
+	transition: all 0.4s ease;
+	box-shadow:
+		0 4px 6px -1px rgba($negro, 0.05),
+		0 2px 4px -1px rgba($negro, 0.03);
+	position: relative;
+	overflow: hidden;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: -50%;
+		left: -120%;
+		width: 60%;
+		height: 200%;
+		background: linear-gradient(
+			100deg,
+			rgba($blanco, 0) 20%,
+			rgba($blanco, 0.4) 50%,
+			rgba($blanco, 0) 80%
+		);
+		transform: skewX(-25deg);
+		transition: transform 0.6s ease-in-out;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	&:hover {
+		box-shadow:
+			0 10px 15px -3px rgba($negro, 0.1),
+			0 4px 6px -2px rgba($negro, 0.05);
+		border-color: $slate-300;
+
+		&::after {
+			transform: translateX(400%) skewX(-25deg);
+		}
+	}
+
+	&__icon,
+	&__info {
+		position: relative;
+		z-index: 2;
+	}
+
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 10px;
+		flex-shrink: 0;
+
+		&.bg-blue {
+			background-color: #eff6ff;
+			color: #3b82f6;
+		}
+		&.bg-purple {
+			background-color: #f5f3ff;
+			color: #8b5cf6;
+		}
+		&.bg-pink {
+			background-color: #fdf2f8;
+			color: #db2777;
+		}
+		&.bg-emerald {
+			background-color: #ecfdf5;
+			color: #10b981;
+		}
+		&.bg-orange {
+			background-color: #fff7ed;
+			color: #f97316;
+		}
+		&.bg-slate {
+			background-color: $slate-100;
+			color: $slate-600;
+		}
+	}
+
+	&__info {
+		h3 {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: $slate-900;
+			margin: 0 0 0.4rem 0;
+		}
+		p {
+			font-size: 0.85rem;
+			color: $slate-500;
+			margin: 0;
+			line-height: 1.5;
+		}
+	}
+}

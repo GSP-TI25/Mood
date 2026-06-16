@@ -1,427 +1,142 @@
-//src/pages/Cms/CmsDashboard.scss
-@use '../../styles/variables' as *;
+// src/pages/Cms/CmsDashboard.scss
+@use "../../styles/variables" as *;
 
 .cms-layout {
-  display: flex;
-  min-height: 100vh;
-  background-color: #f8fafc;
-  font-family: inherit;
+	display: flex;
+	min-height: 100vh;
+	background-color: $slate-50;
+	font-family: inherit;
 }
 
 .cms-main-content {
-  flex: 1;
-  padding: 3rem;
-  /* 🌟 MAGIA DEL CENTRADO */
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+	flex: 1;
+	padding: 3rem;
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 2rem;
+// Estilos globales de cabecera compartidos por todas las vistas
+.cms-main-content__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 2rem;
 
-    h1 {
-      margin: 0 0 0.25rem 0;
-      font-size: 1.8rem;
-      color: $negro;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+	h1 {
+		margin: 0 0 0.25rem 0;
+		font-size: 1.8rem;
+		color: $negro;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
 
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: rgba($negro, 0.5);
-    }
-  }
+	p {
+		margin: 0;
+		font-size: 0.9rem;
+		color: rgba($negro, 0.5);
+	}
 }
 
 .cms-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: $negro;
-  color: $blanco;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	background-color: $negro;
+	color: $blanco;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity 0.2s;
 
-  &:hover {
-    opacity: 0.9;
-  }
+	&:hover {
+		opacity: 0.9;
+	}
 }
 
-/* Modal Overlay & Sheet (JobForm Container) */
+/* Modales Laterales (Compartido por todas las vistas) */
 .cms-sheet-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  z-index: 1000;
-  display: flex;
-  justify-content: flex-end;
-
-  animation: fadeIn 0.2s ease-out forwards;
+	position: fixed;
+	inset: 0;
+	background-color: rgba($negro, 0.4);
+	backdrop-filter: blur(2px);
+	z-index: 1000;
+	display: flex;
+	justify-content: flex-end;
+	animation: fadeIn 0.2s ease-out forwards;
 }
 
 .cms-sheet-content {
-  width: 100%;
-  max-width: 600px;
-  height: 100vh;
-  background-color: $blanco;
-  border-left: 1px solid rgba($negro, 0.1);
-  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
+	width: 100%;
+	max-width: 600px;
+	height: 100vh;
+	background-color: $blanco;
+	border-left: 1px solid rgba($negro, 0.1);
+	box-shadow: -10px 0 30px rgba($negro, 0.05);
+	overflow-y: auto;
+	transform: translateX(100%);
+	animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
-  transform: translateX(100%);
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	&::-webkit-scrollbar {
+		width: 6px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba($negro, 0.15);
+		border-radius: 10px;
+	}
+}
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba($negro, 0.15);
-    border-radius: 10px;
-  }
+// Loader de pestañas
+.cms-tab-loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	flex: 1;
+	gap: 1.5rem;
+	animation: fadeIn 0.3s ease-out;
+
+	&__spinner {
+		width: 40px;
+		height: 40px;
+		border: 3px solid rgba($slate-900, 0.1);
+		border-top-color: $slate-900;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	&__phrase {
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: $slate-600;
+		letter-spacing: -0.01em;
+		animation: pulseText 2s ease-in-out infinite;
+		text-align: center;
+	}
 }
 
 @keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* =========================================
-   PANTALLA DE CARGA (LOADER) ENTRE PESTAÑAS
-   ========================================= */
-.cms-tab-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex: 1;
-  gap: 1.5rem;
-  animation: fadeIn 0.3s ease-out;
-
-  &__spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(15, 23, 42, 0.1);
-    border-top-color: #0f172a;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  &__phrase {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: #475569;
-    letter-spacing: -0.01em;
-    animation: pulseText 2s ease-in-out infinite;
-    text-align: center;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
 }
 
 @keyframes pulseText {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* =========================================
-   VISTA DE INICIO (HOME GRID)
-   ========================================= */
-.cms-home-view {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem; /* Un poco más de aire */
-  padding: 1rem 0 3rem;
-  animation: fadeIn 0.4s ease-out;
-}
-
-.cms-home-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  h1 {
-    font-size: 2.25rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.03em;
-  }
-  p {
-    font-size: 1.1rem;
-    color: #64748b;
-    margin: 0;
-    max-width: 600px;
-    line-height: 1.5;
-  }
-}
-
-.cms-home-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 1.5rem;
-}
-
-.cms-home-card {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.4s ease; /* Transición más suave */
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -1px rgba(0, 0, 0, 0.03);
-
-  /* 🌟 MAGIA: Animación de Reflejo de Luz */
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -120%;
-    width: 60%;
-    height: 200%;
-    background: linear-gradient(
-      100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-    transform: skewX(-25deg);
-    transition: transform 0.6s ease-in-out;
-    z-index: 1;
-    pointer-events: none; /* Evita que el reflejo bloquee clics */
-  }
-
-  &:hover {
-    /* 🌟 Eliminamos el translateY y solo oscurecemos la sombra y el borde */
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border-color: #cbd5e1;
-
-    &::after {
-      transform: translateX(400%) skewX(-25deg);
-    }
-  }
-
-  /* 🌟 Aseguramos que el contenido esté por encima de la luz */
-  &__icon,
-  &__info {
-    position: relative;
-    z-index: 2;
-  }
-
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
-    flex-shrink: 0;
-
-    &.bg-blue {
-      background-color: #eff6ff;
-      color: #3b82f6;
-    }
-    &.bg-purple {
-      background-color: #f5f3ff;
-      color: #8b5cf6;
-    }
-    &.bg-pink {
-      background-color: #fdf2f8;
-      color: #db2777;
-    }
-    &.bg-emerald {
-      background-color: #ecfdf5;
-      color: #10b981;
-    }
-    &.bg-orange {
-      background-color: #fff7ed;
-      color: #f97316;
-    }
-    &.bg-slate {
-      background-color: #f1f5f9;
-      color: #475569;
-    }
-  }
-
-  &__info {
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #0f172a;
-      margin: 0 0 0.4rem 0;
-    }
-    p {
-      font-size: 0.85rem;
-      color: #64748b;
-      margin: 0;
-      line-height: 1.5;
-    }
-  }
-}
-
-/* ==========================================
-   🌟 MODAL DE CONFIRMACIÓN PERSONALIZADO
-   ========================================== */
-.cms-confirm-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: fadeIn 0.2s ease-out forwards;
-}
-
-.cms-confirm-modal {
-  background-color: #ffffff;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-  &__icon {
-    width: 60px;
-    height: 60px;
-    background-color: #fef9c3; // Fondo amarillo muy suave
-    color: #ca8a04; // Color mostaza/warning
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.25rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.02em;
-  }
-
-  p {
-    font-size: 0.95rem;
-    color: #64748b;
-    line-height: 1.5;
-    margin: 0 0 2rem 0;
-  }
-
-  &__actions {
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-
-    button {
-      flex: 1;
-      height: 44px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .btn-cancel {
-      background-color: #ffffff;
-      color: #0f172a;
-      border: 1px solid #e2e8f0;
-
-      &:hover {
-        background-color: #f8fafc;
-        border-color: #cbd5e1;
-      }
-    }
-
-    .btn-confirm {
-      background-color: #0f172a; // Botón oscuro estilo shadcn
-      color: #ffffff;
-      border: none;
-
-      &:hover {
-        background-color: rgba(15, 23, 42, 0.9);
-      }
-    }
-  }
-}
-
-// Animaciones para el Modal
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+	0%,
+	100% {
+		opacity: 0.6;
+	}
+	50% {
+		opacity: 1;
+	}
 }

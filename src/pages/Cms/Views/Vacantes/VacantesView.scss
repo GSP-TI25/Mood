@@ -1,0 +1,21 @@
+// src/pages/Cms/Views/Vacantes/VacantesView.scss
+@use "../../../../styles/variables" as *;
+
+.view-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+	animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

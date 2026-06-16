@@ -1,0 +1,38 @@
+[
+	{
+		"id": "inicio",
+		"name": "Inicio",
+		"icon": "LayoutDashboard",
+		"adminOnly": false
+	},
+	{
+		"id": "vacantes",
+		"name": "Vacantes",
+		"icon": "Briefcase",
+		"adminOnly": false
+	},
+	{
+		"id": "postulantes",
+		"name": "Postulantes",
+		"icon": "Users",
+		"adminOnly": false
+	},
+	{
+		"id": "proyectos",
+		"name": "Proyectos",
+		"icon": "FolderGit2",
+		"adminOnly": false
+	},
+	{
+		"id": "equipo",
+		"name": "Equipo Mood",
+		"icon": "IdCard",
+		"adminOnly": false
+	},
+	{
+		"id": "configuracion",
+		"name": "Configuración",
+		"icon": "Settings",
+		"adminOnly": true
+	}
+]

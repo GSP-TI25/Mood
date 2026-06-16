@@ -1,0 +1,10 @@
+// src/pages/Cms/Views/Proyectos/ProyectosView.scss
+@use "../../../../styles/variables" as *;
+
+.view-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+	animation: fadeIn 0.4s ease-out;
+}
