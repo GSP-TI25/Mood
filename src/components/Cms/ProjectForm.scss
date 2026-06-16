@@ -1,17 +1,17 @@
-//src/components/Cms/ProjectForm.scss
+// src/components/Cms/ProjectForm.scss
 @use '../../styles/variables' as *;
 
 .cms-project-form {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #ffffff;
+  background-color: $blanco;
   font-family: inherit;
 
   &__header-fixed {
     padding: 1.5rem 2rem;
     border-bottom: 1px solid rgba($negro, 0.08);
-    background: #ffffff;
+    background: $blanco;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,18 +72,18 @@
     label {
       font-size: 0.875rem;
       font-weight: 500;
-      color: $negro;
+      color: $slate-900;
     }
 
     input,
     textarea {
       padding: 0.6rem 0.8rem;
-      border: 1px solid rgba($negro, 0.15);
+      border: 1px solid $slate-300;
       border-radius: 6px;
       font-size: 0.875rem;
       font-family: inherit;
-      background-color: #ffffff;
-      color: $negro;
+      background-color: $blanco;
+      color: $slate-900;
       outline: none;
       transition:
         border-color 0.2s,
@@ -92,13 +92,14 @@
       box-sizing: border-box;
 
       &::placeholder {
-        color: rgba($negro, 0.4);
+        color: $slate-400;
       }
       &:focus {
-        border-color: $negro;
-        box-shadow: 0 0 0 1px $negro;
+        border-color: $slate-900;
+        box-shadow: 0 0 0 1px $slate-900;
       }
     }
+
     textarea {
       resize: none;
     }
@@ -118,7 +119,7 @@
   &__actions-fixed {
     padding: 1.25rem 2rem;
     border-top: 1px solid rgba($negro, 0.08);
-    background: #ffffff;
+    background: $blanco;
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
@@ -140,10 +141,10 @@
 
     .btn-cancel {
       background: transparent;
-      border: 1px solid rgba($negro, 0.15);
-      color: $negro;
+      border: 1px solid $slate-300;
+      color: $slate-900;
       &:hover {
-        background: #f1f5f9;
+        background: $slate-50;
       }
     }
 

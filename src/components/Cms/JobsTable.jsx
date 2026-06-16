@@ -1,19 +1,31 @@
-//src/components/Cms/JobsTable.jsx
+// src/components/Cms/JobsTable.jsx
 import { useState } from 'react';
 import { BanIcon, Edit, Undo2 } from 'lucide-react';
 import './JobsTable.scss';
 
+/**
+ * Componente JobsTable.
+ * Tabla de datos paginada para la gestión de vacantes laborales.
+ *
+ * @param {Object} props
+ * @param {Array} props.jobs - Lista de vacantes a renderizar.
+ * @param {Function} props.onToggleStatus - Callback ejecutado para activar/desactivar una vacante.
+ * @param {Function} props.onEdit - Callback ejecutado al hacer clic en editar una vacante.
+ */
 const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
-  // Paginación
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Lógica de cálculo de páginas
   const indexOfLastJob = currentPage * itemsPerPage;
   const indexOfFirstJob = indexOfLastJob - itemsPerPage;
   const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
   const totalPages = Math.ceil(jobs.length / itemsPerPage);
 
+  /**
+   * Formatea una cadena de fecha a un formato exacto DD/MM/YY HH:MM.
+   * * @param {string} dateString - Cadena de texto con la fecha original.
+   * @returns {string} Fecha formateada.
+   */
   const formatExactDate = (dateString) => {
     if (!dateString) return '---';
     const date = new Date(dateString);
@@ -51,7 +63,9 @@ const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
                 <td>{formatExactDate(job.created_at)}</td>
                 <td>
                   <span
-                    className={`badge ${job.is_active ? 'badge--active' : 'badge--inactive'}`}
+                    className={`badge ${
+                      job.is_active ? 'badge--active' : 'badge--inactive'
+                    }`}
                   >
                     {job.is_active ? 'Activa' : 'Inactiva'}
                   </span>
@@ -67,7 +81,9 @@ const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
                     </button>
 
                     <button
-                      className={`btn-action btn--icon-only ${job.is_active ? 'btn--deactivate' : 'btn--activate'}`}
+                      className={`btn-action btn--icon-only ${
+                        job.is_active ? 'btn--deactivate' : 'btn--activate'
+                      }`}
                       onClick={() => onToggleStatus(job.id)}
                       title={
                         job.is_active
@@ -98,7 +114,6 @@ const JobsTable = ({ jobs, onToggleStatus, onEdit }) => {
         </tbody>
       </table>
 
-      {/* CONTROLES DE PAGINACIÓN */}
       {totalPages > 1 && (
         <div className='cms-pagination'>
           <button

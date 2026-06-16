@@ -1,4 +1,4 @@
-//src/components/Cms/UserTable.scss
+// src/components/Cms/UsersTable.scss
 @use '../../styles/variables' as *;
 
 .settings-view {
@@ -8,30 +8,26 @@
   width: 100%;
 }
 
-/* =========================================
-   HEADER BAR (Título y Botón Agregar)
-   ========================================= */
 .settings-header-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: $blanco;
   padding: 1.5rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid $slate-200;
   border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba($negro, 0.05);
 
   .settings-title {
     margin: 0 0 0.25rem 0;
     font-size: 1.25rem;
     font-weight: 600;
-    color: #0f172a;
+    color: $slate-900;
   }
-
   .settings-subtitle {
     margin: 0;
     font-size: 0.875rem;
-    color: #64748b;
+    color: $slate-500;
   }
 }
 
@@ -50,22 +46,18 @@
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-  background-color: #0f172a;
-  color: #ffffff;
-
+  background-color: $slate-900;
+  color: $blanco;
   &:hover {
-    background-color: #1e293b;
+    background-color: $slate-800;
   }
 }
 
-/* =========================================
-   TABLA DE USUARIOS
-   ========================================= */
 .cms-table-wrapper {
-  background-color: #ffffff;
+  background-color: $blanco;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid $slate-200;
+  box-shadow: 0 1px 2px 0 rgba($negro, 0.05);
   overflow: hidden;
 }
 
@@ -74,101 +66,100 @@
   border-collapse: collapse;
   text-align: left;
   font-size: 0.875rem;
-
   th,
   td {
     padding: 0.875rem 1.25rem;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid $slate-200;
   }
-
   tr:last-child td {
     border-bottom: none;
   }
-
   th {
-    background-color: #ffffff;
+    background-color: $blanco;
     font-weight: 500;
-    color: #64748b;
+    color: $slate-500;
     font-size: 0.85rem;
   }
-
   td {
-    color: #334155;
+    color: $slate-700;
   }
-
   .font-medium {
     font-weight: 500;
-    color: #0f172a;
+    color: $slate-900;
   }
-
-  /* Nuevo estilo para el correo ahora que está en su propia columna */
   .user-email {
-    color: #64748b;
+    color: $slate-500;
   }
-
   &__empty {
     text-align: center;
     padding: 4rem;
-    color: #64748b;
+    color: $slate-500;
   }
-
   tbody tr {
     transition: background-color 0.2s ease;
     &:hover {
-      background-color: #f8fafc;
+      background-color: $slate-50;
     }
   }
 }
 
-/* =========================================
-   CELDAS ESPECÍFICAS
-   ========================================= */
-.audit-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  font-size: 0.875rem;
-
-  .audit-creator {
-    font-size: 0.75rem;
-    color: #94a3b8;
-  }
-}
-
-/* 🌟 Etiqueta de Rol Corregida */
-.badge--role {
+// NUEVOS ESTILOS DE ESTADO (IS_ACTIVE)
+.badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem; /* Ligeramente más relleno */
-  border-radius: 100px;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  min-width: 95px; /* Asegura que ambas etiquetas tengan un tamaño base similar */
-
-  &::before,
-  &::after {
-    content: none !important;
-    display: none !important;
+  font-weight: 500;
+  border: 1px solid $slate-200;
+  background-color: $blanco;
+  color: $slate-900;
+  &::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
   }
-
-  &.superadmin {
-    background-color: #d1fae9;
-    color: #049778;
-    border-color: #a6f4d8;
+  &--active::before {
+    background-color: $success-dark;
+    box-shadow: 0 0 4px rgba($success-dark, 0.4);
   }
-
-  &.gth {
-    background-color: #eff6ff;
-    color: #2563eb;
-    border-color: #bfdbfe;
+  &--inactive {
+    color: $slate-500;
+    &::before {
+      background-color: $slate-400;
+    }
   }
 }
 
-/* =========================================
-   ACCIONES (Icon Buttons Estilo Shadcn)
-   ========================================= */
+.row--inactive {
+  background-color: rgba($slate-50, 0.5);
+  td {
+    color: $slate-400;
+  }
+  .font-medium {
+    color: $slate-500;
+  }
+  &:hover {
+    background-color: $slate-100 !important;
+  }
+}
+
+.badge--role {
+  &.superadmin {
+    background-color: $mood-green-light;
+    color: #049778;
+    border-color: $mesh-mint;
+  }
+  &.gth {
+    background-color: $brand-linkedin-bg;
+    color: $info-blue;
+    border-color: $brand-linkedin-border;
+  }
+}
+
 .table-actions {
   display: flex;
   justify-content: center;
@@ -184,52 +175,50 @@
   background-color: transparent;
   border: none;
   transition: all 0.2s ease-in-out;
-
   &.btn--icon-only {
     padding: 0.4rem;
   }
-
   &.btn--edit {
-    color: #475569;
+    color: $slate-600;
     &:hover {
-      background-color: #f1f5f9;
-      color: #0f172a;
+      background-color: $slate-100;
+      color: $slate-900;
     }
   }
-
   &.btn--deactivate {
-    color: #ef4444;
+    color: $error-red;
     &:hover {
-      background-color: #fef2f2;
-      color: #dc2626;
+      background-color: rgba($error-red, 0.05);
+    }
+  }
+  &.btn--activate {
+    color: $success-dark;
+    &:hover {
+      background-color: rgba($success-dark, 0.05);
     }
   }
 }
 
-/* =========================================
-   PAGINACIÓN
-   ========================================= */
 .cms-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 1rem 0;
-  border-top: 1px solid #e2e8f0;
-  background: #ffffff;
-
+  border-top: 1px solid $slate-200;
+  background: $blanco;
   button {
     background: transparent;
-    border: 1px solid #e2e8f0;
+    border: 1px solid $slate-200;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     font-size: 0.85rem;
-    color: #0f172a;
+    color: $slate-900;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
     &:hover:not(:disabled) {
-      background: #f8fafc;
+      background: $slate-50;
     }
     &:disabled {
       opacity: 0.4;
@@ -238,7 +227,7 @@
   }
   span {
     font-size: 0.85rem;
-    color: #64748b;
+    color: $slate-500;
     font-weight: 500;
   }
 }

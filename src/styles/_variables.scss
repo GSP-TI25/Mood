@@ -37,10 +37,12 @@ $slate-900: #0f172a;
  * 1.2 COLORES DE ESTADO (UI FEEDBACK)
  * ==========================================
  */
-$error-red: #dc2626;
-$success-dark: #166534;
+$error-red: #e90101;
+$success-dark: #00d853;
 $success-light: #d1fca6;
 $info-blue: #3b82f6;
+$warning-light: #fef9c3;
+$warning-dark: #ca8a04;
 
 /**
  * ==========================================
@@ -64,6 +66,26 @@ $mood-green-glow: rgba(76, 227, 182, 0.2);
 
 /**
  * ==========================================
+ * 1.5 COLORES DE MARCAS (SOCIAL & APPS)
+ * ==========================================
+ */
+$brand-whatsapp-text: #10b981;
+$brand-whatsapp-bg: #ecfdf5;
+$brand-whatsapp-hover-text: #059669;
+$brand-whatsapp-hover-bg: #d1fae5;
+
+$brand-linkedin-text: #0a66c2;
+$brand-linkedin-bg: #e0f2fe;
+$brand-linkedin-border: #bae6fd;
+
+$brand-github-text: #181717;
+
+$brand-portfolio-text: #db2777;
+$brand-portfolio-bg: #fce7f3;
+$brand-portfolio-border: #fbcfe8;
+
+/**
+ * ==========================================
  * 2. BREAKPOINTS
  * ==========================================
  */
@@ -80,42 +102,42 @@ $bp-desktop: 1200px;
  * ==========================================
  */
 @mixin truncate-lines($lines: 3) {
-	display: -webkit-box;
-	-webkit-line-clamp: $lines;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @mixin shiny-effect(
-	$light-color: rgba(255, 255, 255, 0.7),
-	$duration: 0.6s,
-	$pseudo: "after"
+  $light-color: rgba(255, 255, 255, 0.7),
+  $duration: 0.6s,
+  $pseudo: 'after'
 ) {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-	&::#{$pseudo} {
-		content: "";
-		position: absolute;
-		top: -50%;
-		left: -150%;
-		width: 80%;
-		height: 200%;
-		background: linear-gradient(
-			100deg,
-			rgba(255, 255, 255, 0) 20%,
-			$light-color 50%,
-			rgba(255, 255, 255, 0) 80%
-		);
-		transform: skewX(-25deg);
-		transition: transform $duration ease-in-out;
-		z-index: 1;
-		pointer-events: none;
-	}
+  &::#{$pseudo} {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 80%;
+    height: 200%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 20%,
+      $light-color 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    transform: skewX(-25deg);
+    transition: transform $duration ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+  }
 
-	&:hover::#{$pseudo} {
-		transform: translateX(350%) skewX(-25deg);
-	}
+  &:hover::#{$pseudo} {
+    transform: translateX(350%) skewX(-25deg);
+  }
 }
 
 /**
@@ -128,28 +150,28 @@ $glass-border: rgba(253, 250, 241, 0.6);
 $glass-blur: 12px;
 
 %glass-pill-style {
-	background: $glass-bg;
-	backdrop-filter: blur($glass-blur);
-	-webkit-backdrop-filter: blur($glass-blur);
-	border: 1px solid $glass-border;
-	border-radius: 50px;
-	box-shadow: 0 4px 15px rgba(55, 50, 53, 0.05);
-	transition:
-		background-color 0.3s ease,
-		border-color 0.3s ease,
-		box-shadow 0.3s ease;
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $glass-border;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(55, 50, 53, 0.05);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @mixin glass-pill(
-	$bg: rgba($blanco, 0.7),
-	$border: rgba($negro, 0.03),
-	$shadow: rgba($negro, 0.05),
-	$radius: 14px
+  $bg: rgba($blanco, 0.7),
+  $border: rgba($negro, 0.03),
+  $shadow: rgba($negro, 0.05),
+  $radius: 14px
 ) {
-	background: $bg;
-	backdrop-filter: blur($glass-blur);
-	-webkit-backdrop-filter: blur($glass-blur);
-	border-radius: $radius;
-	box-shadow: 0 4px 15px $shadow;
-	border: 1px solid $border;
+  background: $bg;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border-radius: $radius;
+  box-shadow: 0 4px 15px $shadow;
+  border: 1px solid $border;
 }

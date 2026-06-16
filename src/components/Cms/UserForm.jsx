@@ -1,14 +1,14 @@
-//src/components/Cms/UserForm.jsx
+// src/components/Cms/UserForm.jsx
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { X, Loader2, Save } from 'lucide-react';
+import { toast } from 'react-toastify';
+import roleOptions from '../../data/roleOptions.json';
 import './UserForm.scss';
 
-const roleOptions = [
-  { value: 1, label: 'SuperAdmin' },
-  { value: 2, label: 'GTH' },
-];
-
+/**
+ * Estilos personalizados para el componente React-Select.
+ */
 const selectStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -18,7 +18,7 @@ const selectStyles = {
     '&:hover': { borderColor: state.isFocused ? '#0f172a' : '#94a3b8' },
     borderRadius: '6px',
     fontSize: '0.875rem',
-    minHeight: '38px',
+    minHeight: '30px',
     cursor: 'pointer',
   }),
   option: (provided, state) => ({
@@ -42,26 +42,48 @@ const selectStyles = {
   }),
 };
 
+/**
+ * Componente UserForm.
+ * Formulario administrativo para la creación y edición de usuarios del sistema (GTH / SuperAdmin).
+ *
+ * @param {Object} props
+ * @param {Object} [props.userToEdit] - Datos del usuario si se está en modo edición.
+ * @param {Function} props.onSubmitSuccess - Callback ejecutado al guardar con éxito.
+ * @param {Function} props.onCancel - Callback para cerrar el formulario.
+ */
 const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
     email: '',
     password: '',
-    country: '',
+    country: 'Peru',
     role_id: 2,
   });
 
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
   const [countryOptions, setCountryOptions] = useState([]);
   const [loadingCountries, setLoadingCountries] = useState(true);
 
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('cms_token');
+    return {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+  };
+
+  /**
+   * Obtiene la lista de países disponibles desde el backend.
+   */
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/countries');
+        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${baseUrl}/api/countries`, {
+          headers: getAuthHeaders(),
+        });
+
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.data) {
@@ -70,6 +92,7 @@ const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
         }
       } catch (error) {
         console.error('Error al cargar países:', error);
+        toast.error('Error al cargar la lista de países.');
       } finally {
         setLoadingCountries(false);
       }
@@ -78,13 +101,16 @@ const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
     fetchCountries();
   }, []);
 
+  /**
+   * Pre-puebla los datos si se está editando un usuario existente.
+   */
   useEffect(() => {
     if (userToEdit) {
       setFormData({
         first_name: userToEdit.first_name || '',
         last_name: userToEdit.last_name || '',
         email: userToEdit.email || '',
-        password: '', // 🌟 Siempre iniciamos la contraseña en blanco por seguridad
+        password: '', // Por seguridad, la contraseña nunca se carga
         country: userToEdit.country || '',
         role_id: userToEdit.role_id || 2,
       });
@@ -110,49 +136,54 @@ const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
     }));
   };
 
+  /**
+   * Procesa el envío de los datos del usuario al backend.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMsg('');
 
+    // TODO: Idealmente, currentAdminId debe venir del token descodificado o del contexto AuthContext.
     const currentAdminId = 1;
 
-    // Si estamos editando y no se escribió contraseña, la eliminamos del objeto para no enviarla vacía
     const bodyData = {
       ...formData,
       updated_by: currentAdminId,
       created_by: currentAdminId,
     };
 
+    // Si editamos y la contraseña está vacía, la eliminamos para no sobreescribirla
     if (userToEdit && bodyData.password === '') {
       delete bodyData.password;
     }
 
     try {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const url = userToEdit
-        ? `http://localhost:5000/api/users/${userToEdit.id}`
-        : 'http://localhost:5000/api/users';
+        ? `${baseUrl}/api/users/${userToEdit.id}`
+        : `${baseUrl}/api/users`;
 
       const method = userToEdit ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify(bodyData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        toast.success(
+          `Usuario ${userToEdit ? 'actualizado' : 'creado'} con éxito.`,
+        );
         onSubmitSuccess();
       } else {
-        setErrorMsg(
-          data.message || 'Ocurrió un error al procesar la solicitud.',
-        );
+        toast.error(data.message || 'Ocurrió un error al guardar el usuario.');
       }
     } catch (error) {
       console.error('Error:', error);
-      setErrorMsg('Error de conexión con el servidor.');
+      toast.error('Error de conexión con el servidor.');
     } finally {
       setLoading(false);
     }
@@ -168,14 +199,13 @@ const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
         <button
           className='cms-user-form__btn-close'
           onClick={onCancel}
+          title='Cerrar formulario'
         >
           <X size={20} />
         </button>
       </header>
 
       <div className='cms-user-form__scroll-area'>
-        {errorMsg && <div className='cms-user-form__alert'>{errorMsg}</div>}
-
         <form
           id='user-form'
           onSubmit={handleSubmit}
@@ -216,7 +246,6 @@ const UserForm = ({ userToEdit, onSubmitSuccess, onCancel }) => {
             />
           </div>
 
-          {/* 🌟 CAMPO DE CONTRASEÑA MODIFICADO */}
           <div className='cms-user-form__group'>
             <label>
               {userToEdit

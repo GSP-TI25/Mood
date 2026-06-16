@@ -1,7 +1,7 @@
-//src/components/Cms/ApplicationsTable.jsx
+// src/components/Cms/ApplicationsTable.jsx
 import { useState, useMemo, useEffect } from 'react';
 import Select from 'react-select';
-import { toast } from 'react-toastify'; // 🌟 IMPORTAMOS TOASTIFY
+import { toast } from 'react-toastify';
 import {
   Download,
   Mail,
@@ -13,12 +13,16 @@ import {
   FilterX,
   Globe,
   Save,
-  FileSpreadsheet, // 🌟 Ícono para exportar a Excel/CSV
+  FileSpreadsheet,
 } from 'lucide-react';
 import LinkedinIcon from '../Icons/Linkedin';
 import GithubIcon from '../Icons/Github';
+import statusOptions from '../../data/applicationStatus.json';
 import './ApplicationsTable.scss';
 
+/**
+ * Configuración de estilos para el componente Select de React-Select.
+ */
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -28,7 +32,7 @@ const customSelectStyles = {
     '&:hover': { borderColor: state.isFocused ? '#0f172a' : '#94a3b8' },
     borderRadius: '6px',
     padding: '0 4px',
-    minHeight: '36px', // 🌟 Ajustado a 36px (estándar shadcn)
+    minHeight: '36px',
     fontSize: '0.875rem',
     minWidth: '220px',
     cursor: 'pointer',
@@ -49,7 +53,7 @@ const customSelectStyles = {
     ...provided,
     borderRadius: '6px',
     boxShadow:
-      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)',
     border: '1px solid #e2e8f0',
     overflow: 'hidden',
     zIndex: 9999,
@@ -58,6 +62,9 @@ const customSelectStyles = {
   placeholder: (provided) => ({ ...provided, color: '#64748b' }),
 };
 
+/**
+ * Retorna los colores de la interfaz basados en el estado de la postulación.
+ */
 const getStatusColors = (status) => {
   switch (status) {
     case 'Nuevo':
@@ -70,12 +77,6 @@ const getStatusColors = (status) => {
       return { bg: '#ffffff', text: '#334155', border: '#e2e8f0' };
   }
 };
-
-const statusOptions = [
-  { value: 'Nuevo', label: 'Nuevo' },
-  { value: 'Seguimiento', label: 'Seguimiento' },
-  { value: 'Descartado', label: 'Descartado' },
-];
 
 const statusSelectStyles = {
   control: (provided, state) => {
@@ -125,25 +126,27 @@ const statusSelectStyles = {
     ...provided,
     borderRadius: '8px',
     border: '1px solid #e2e8f0',
-    boxShadow:
-      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
     overflow: 'hidden',
     zIndex: 9999,
   }),
   menuPortal: (base) => ({ ...base, zIndex: 9999 }),
   dropdownIndicator: (provided, state) => {
     const status = state.getValue()[0]?.value || 'Nuevo';
-    const colors = getStatusColors(status);
     return {
       ...provided,
       padding: '2px 8px 2px 4px',
-      color: colors.text,
+      color: getStatusColors(status).text,
       '&:hover': { opacity: 0.8 },
     };
   },
   indicatorSeparator: () => ({ display: 'none' }),
 };
 
+/**
+ * Componente Principal: ApplicationsTable
+ * Gestiona la visualización, filtrado y exportación de las postulaciones.
+ */
 const ApplicationsTable = ({ applications }) => {
   const [localApps, setLocalApps] = useState(applications);
   const [pendingChanges, setPendingChanges] = useState({});
@@ -216,7 +219,6 @@ const ApplicationsTable = ({ applications }) => {
         app.id === appId ? { ...app, status: newStatus } : app,
       ),
     );
-
     const originalApp = applications.find((a) => a.id === appId);
     const originalStatus = originalApp?.status || 'Nuevo';
 
@@ -229,27 +231,32 @@ const ApplicationsTable = ({ applications }) => {
 
   const handleSaveChanges = async () => {
     setIsSaving(true);
+    const token = localStorage.getItem('cms_token');
     try {
       const promises = Object.entries(pendingChanges).map(([appId, status]) =>
-        fetch(`http://localhost:5000/api/applications/${appId}/status`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status }),
-        }),
+        fetch(
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/applications/${appId}/status`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status }),
+          },
+        ),
       );
-
       await Promise.all(promises);
       setPendingChanges({});
-      toast.success('Estados de los postulantes actualizados correctamente'); // 🌟 ALERTA DE ÉXITO
+      toast.success('Estados actualizados correctamente');
     } catch (error) {
       console.error('Error guardando los cambios:', error);
-      toast.error('Ocurrió un error al intentar guardar los cambios.'); // 🌟 ALERTA DE ERROR
+      toast.error('Ocurrió un error al guardar los cambios.');
     } finally {
       setIsSaving(false);
     }
   };
 
-  // 🌟 FUNCIÓN DE EXPORTACIÓN A CSV (EXCEL)
   const exportToCSV = () => {
     const headers = [
       'Candidato',
@@ -262,7 +269,6 @@ const ApplicationsTable = ({ applications }) => {
       'GitHub',
       'Fecha Postulación',
     ];
-
     const rows = filteredApps.map((app) => [
       `"${app.name || ''}"`,
       `"${app.job_title || ''}"`,
@@ -279,22 +285,18 @@ const ApplicationsTable = ({ applications }) => {
       headers.join(','),
       ...rows.map((e) => e.join(',')),
     ].join('\n');
-
     const blob = new Blob(['\uFEFF' + csvContent], {
       type: 'text/csv;charset=utf-8;',
     });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute(
-      'download',
-      `Postulantes_Mood_${new Date().toISOString().split('T')[0]}.csv`,
-    );
+    link.href = url;
+    link.download = `Postulantes_Mood_${new Date().toISOString().split('T')[0]}.csv`;
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    toast.info('Descarga del archivo iniciada'); // 🌟 ALERTA INFORMATIVA OPCIONAL
+    toast.info('Descarga iniciada');
   };
 
   const indexOfLastApp = currentPage * itemsPerPage;
@@ -304,30 +306,19 @@ const ApplicationsTable = ({ applications }) => {
 
   const formatDate = (dateString) => {
     if (!dateString) return '---';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
+    return new Date(dateString).toLocaleDateString('es-ES', {
       day: '2-digit',
       month: 'short',
       year: 'numeric',
     });
   };
 
-  const parseAnswers = (answersData) => {
-    if (!answersData) return {};
-    return typeof answersData === 'string'
-      ? JSON.parse(answersData)
-      : answersData;
-  };
-
-  const openCvModal = (app) => setCvModalApp(app);
-  const closeCvModal = () => setCvModalApp(null);
-
   const openAnswersModal = async (app) => {
     setAnswersModalApp(app);
     setIsLoadingQuestions(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/jobs/${app.job_id}`,
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/jobs/${app.job_id}`,
       );
       if (response.ok) {
         const data = await response.json();
@@ -338,19 +329,12 @@ const ApplicationsTable = ({ applications }) => {
         setJobQuestions(parsedQs);
       }
     } catch (error) {
-      console.error('Error al cargar preguntas:', error);
-      toast.error('Error al cargar las preguntas del formulario.'); // 🌟 ALERTA DE ERROR SECUNDARIA
+      console.error(error);
+      toast.error('Error al cargar cuestionario.');
     } finally {
       setIsLoadingQuestions(false);
     }
   };
-
-  const closeAnswersModal = () => {
-    setAnswersModalApp(null);
-    setJobQuestions([]);
-  };
-
-  const hasChanges = Object.keys(pendingChanges).length > 0;
 
   return (
     <div className='applications-view'>
@@ -369,7 +353,6 @@ const ApplicationsTable = ({ applications }) => {
               isSearchable={false}
             />
           </div>
-
           <div className='filter-group'>
             <label>Desde (Fecha)</label>
             <input
@@ -378,7 +361,6 @@ const ApplicationsTable = ({ applications }) => {
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
-
           <div className='filter-group'>
             <label>Hasta (Fecha)</label>
             <input
@@ -387,7 +369,6 @@ const ApplicationsTable = ({ applications }) => {
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
-
           {(jobFilter || startDate || endDate) && (
             <button
               className='btn-shadcn-ghost'
@@ -399,20 +380,17 @@ const ApplicationsTable = ({ applications }) => {
           )}
         </div>
 
-        {/* 🌟 BOTONES DE ACCIÓN: GUARDAR Y EXPORTAR */}
         <div className='app-filters-right'>
           <button
             className='btn-shadcn-outline'
             onClick={exportToCSV}
-            title='Exportar vista actual a Excel'
+            title='Exportar vista actual'
           >
-            <FileSpreadsheet size={15} />
-            <span>Exportar</span>
+            <FileSpreadsheet size={15} /> <span>Exportar</span>
           </button>
-
           <button
             className='btn-shadcn-primary'
-            disabled={!hasChanges || isSaving}
+            disabled={!Object.keys(pendingChanges).length || isSaving}
             onClick={handleSaveChanges}
           >
             {isSaving ? (
@@ -486,7 +464,7 @@ const ApplicationsTable = ({ applications }) => {
                       <a
                         href={`https://wa.me/${app.phone?.replace(/\D/g, '')}`}
                         target='_blank'
-                        rel='noopener noreferrer'
+                        rel='noreferrer'
                         className='btn-whatsapp'
                       >
                         <MessageCircle size={14} /> {app.phone}
@@ -499,7 +477,7 @@ const ApplicationsTable = ({ applications }) => {
                         <a
                           href={app.linkedin}
                           target='_blank'
-                          rel='noopener noreferrer'
+                          rel='noreferrer'
                           className='icon-link-chip linkedin'
                           title='Ver LinkedIn'
                         >
@@ -510,9 +488,9 @@ const ApplicationsTable = ({ applications }) => {
                         <a
                           href={app.behance}
                           target='_blank'
-                          rel='noopener noreferrer'
+                          rel='noreferrer'
                           className='icon-link-chip portfolio'
-                          title='Ver Portafolio Web / Behance'
+                          title='Ver Portafolio Web'
                         >
                           <Globe size={16} />
                         </a>
@@ -521,7 +499,7 @@ const ApplicationsTable = ({ applications }) => {
                         <a
                           href={app.github}
                           target='_blank'
-                          rel='noopener noreferrer'
+                          rel='noreferrer'
                           className='icon-link-chip github'
                           title='Ver GitHub'
                         >
@@ -536,18 +514,18 @@ const ApplicationsTable = ({ applications }) => {
                   <td style={{ textAlign: 'center' }}>
                     <button
                       className='btn-action btn--icon-only btn--view-cv'
-                      onClick={() => openCvModal(app)}
-                      title='Ver CV del candidato'
+                      onClick={() => setCvModalApp(app)}
+                      title='Ver CV'
                     >
                       <Eye size={16} />
                     </button>
                   </td>
                   <td style={{ textAlign: 'center' }}>
-                    {Object.keys(parseAnswers(app.answers)).length > 0 ? (
+                    {app.answers && Object.keys(app.answers).length > 0 ? (
                       <button
                         className='btn-action btn--icon-only btn--view-answers'
                         onClick={() => openAnswersModal(app)}
-                        title='Ver respuestas del formulario'
+                        title='Ver respuestas'
                       >
                         <FileText size={16} />
                       </button>
@@ -564,8 +542,8 @@ const ApplicationsTable = ({ applications }) => {
                   className='cms-table__empty'
                 >
                   {filteredApps.length === 0 && applications.length > 0
-                    ? 'No hay postulantes que coincidan con estos filtros.'
-                    : 'Aún no hay postulantes registrados en el sistema.'}
+                    ? 'No hay postulantes que coincidan.'
+                    : 'Aún no hay postulantes registrados.'}
                 </td>
               </tr>
             )}
@@ -594,113 +572,136 @@ const ApplicationsTable = ({ applications }) => {
       </div>
 
       {cvModalApp && (
-        <div
-          className='cms-modal-overlay'
-          onClick={closeCvModal}
-        >
-          <div
-            className='cms-modal-content modal-cv'
-            onClick={(e) => e.stopPropagation()}
-          >
-            <header className='cms-modal-header'>
-              <div>
-                <h3>CV de {cvModalApp.name}</h3>
-                <p>Postulante a: {cvModalApp.job_title}</p>
-              </div>
-              <div className='modal-header-actions'>
-                <a
-                  href={cvModalApp.cv_url}
-                  download
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='btn-download-icon'
-                  title='Descargar externo'
-                >
-                  <Download size={18} />
-                </a>
-                <button
-                  className='btn-close'
-                  onClick={closeCvModal}
-                >
-                  <X size={24} />
-                </button>
-              </div>
-            </header>
-            <div className='cms-modal-body'>
-              <iframe
-                src={cvModalApp.cv_url}
-                className='cv-iframe'
-                title={`CV de ${cvModalApp.name}`}
-              ></iframe>
-            </div>
-          </div>
-        </div>
+        <CvViewerModal
+          app={cvModalApp}
+          onClose={() => setCvModalApp(null)}
+        />
       )}
-
       {answersModalApp && (
-        <div
-          className='cms-modal-overlay'
-          onClick={closeAnswersModal}
-        >
-          <div
-            className='cms-modal-content modal-answers'
-            onClick={(e) => e.stopPropagation()}
-          >
-            <header className='cms-modal-header'>
-              <div>
-                <h3>Cuestionario de {answersModalApp.name}</h3>
-                <p>Postulante a: {answersModalApp.job_title}</p>
-              </div>
-              <button
-                className='btn-close'
-                onClick={closeAnswersModal}
-              >
-                <X size={24} />
-              </button>
-            </header>
-            <div className='cms-modal-body'>
-              {isLoadingQuestions ? (
-                <div className='loading-answers'>
-                  <Loader2
-                    className='spinner-icon'
-                    size={32}
-                  />
-                  <p>Cargando cuestionario...</p>
-                </div>
-              ) : jobQuestions.length > 0 ? (
-                <div className='qa-list'>
-                  {jobQuestions.map((q, index) => {
-                    const candidateAnswer = parseAnswers(
-                      answersModalApp.answers,
-                    )[q.id];
-                    const formattedAnswer = Array.isArray(candidateAnswer)
-                      ? candidateAnswer.join(' • ')
-                      : candidateAnswer || 'No respondió';
-                    return (
-                      <div
-                        key={q.id}
-                        className='qa-block'
-                      >
-                        <div className='q-label'>
-                          <span className='q-number'>{index + 1}.</span>{' '}
-                          {q.label}
-                        </div>
-                        <div className='a-text'>{formattedAnswer}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className='no-questions-msg'>
-                  No se encontraron preguntas para esta vacante.
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
+        <AnswersViewerModal
+          app={answersModalApp}
+          jobQuestions={jobQuestions}
+          isLoading={isLoadingQuestions}
+          onClose={() => setAnswersModalApp(null)}
+        />
       )}
     </div>
   );
 };
 
 export default ApplicationsTable;
+
+/**
+ * Sub-Componente: Visor de PDF del Currículum
+ */
+const CvViewerModal = ({ app, onClose }) => (
+  <div
+    className='cms-modal-overlay'
+    onClick={onClose}
+  >
+    <div
+      className='cms-modal-content modal-cv'
+      onClick={(e) => e.stopPropagation()}
+    >
+      <header className='cms-modal-header'>
+        <div>
+          <h3>CV de {app.name}</h3>
+          <p>Postulante a: {app.job_title}</p>
+        </div>
+        <div className='modal-header-actions'>
+          <a
+            href={app.cv_url}
+            download
+            target='_blank'
+            rel='noreferrer'
+            className='btn-download-icon'
+            title='Descargar externo'
+          >
+            <Download size={18} />
+          </a>
+          <button
+            className='btn-close'
+            onClick={onClose}
+          >
+            <X size={24} />
+          </button>
+        </div>
+      </header>
+      <div className='cms-modal-body'>
+        <iframe
+          src={app.cv_url}
+          className='cv-iframe'
+          title={`CV de ${app.name}`}
+        ></iframe>
+      </div>
+    </div>
+  </div>
+);
+
+/**
+ * Sub-Componente: Visor de Respuestas del Cuestionario
+ */
+const AnswersViewerModal = ({ app, jobQuestions, isLoading, onClose }) => {
+  const parseAnswers = (ans) =>
+    typeof ans === 'string' ? JSON.parse(ans) : ans || {};
+
+  return (
+    <div
+      className='cms-modal-overlay'
+      onClick={onClose}
+    >
+      <div
+        className='cms-modal-content modal-answers'
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className='cms-modal-header'>
+          <div>
+            <h3>Cuestionario de {app.name}</h3>
+            <p>Postulante a: {app.job_title}</p>
+          </div>
+          <button
+            className='btn-close'
+            onClick={onClose}
+          >
+            <X size={24} />
+          </button>
+        </header>
+        <div className='cms-modal-body'>
+          {isLoading ? (
+            <div className='loading-answers'>
+              <Loader2
+                className='spinner-icon'
+                size={32}
+              />
+              <p>Cargando cuestionario...</p>
+            </div>
+          ) : jobQuestions.length > 0 ? (
+            <div className='qa-list'>
+              {jobQuestions.map((q, index) => {
+                const candidateAns = parseAnswers(app.answers)[q.id];
+                const formattedAns = Array.isArray(candidateAns)
+                  ? candidateAns.join(' • ')
+                  : candidateAns || 'No respondió';
+                return (
+                  <div
+                    key={q.id}
+                    className='qa-block'
+                  >
+                    <div className='q-label'>
+                      <span className='q-number'>{index + 1}.</span> {q.label}
+                    </div>
+                    <div className='a-text'>{formattedAns}</div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className='no-questions-msg'>
+              No se encontraron preguntas para esta vacante.
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

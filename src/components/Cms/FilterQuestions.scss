@@ -1,5 +1,6 @@
-//src/components/Cms/FilterQuestions.scss
+// src/components/Cms/FilterQuestions.scss
 @use '../../styles/variables' as *;
+@use 'sass:color';
 
 .cms-filter-questions {
   display: flex;
@@ -11,7 +12,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
-    border-bottom: 1px solid rgba($negro, 0.08);
+    border-bottom: 1px solid $slate-200;
     padding-bottom: 1.25rem;
   }
 
@@ -20,14 +21,14 @@
 
     h3 {
       margin: 0 0 0.25rem 0;
-      color: $negro;
+      color: $slate-900;
       font-size: 1.15rem;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
     p {
       margin: 0;
-      color: rgba($negro, 0.5);
+      color: $slate-500;
       font-size: 0.85rem;
       line-height: 1.4;
     }
@@ -40,7 +41,6 @@
   }
 }
 
-/* 🌟 NUEVO BOTÓN ANCHO (Reemplaza al cuadro vacío) */
 .cms-btn-add-block {
   display: flex;
   align-items: center;
@@ -48,10 +48,10 @@
   gap: 0.5rem;
   width: 100%;
   padding: 1.5rem;
-  background-color: #f8fafc;
-  border: 1px dashed rgba($negro, 0.2);
+  background-color: $slate-50;
+  border: 1px dashed $slate-300;
   border-radius: 8px;
-  color: rgba($negro, 0.6);
+  color: $slate-600;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -59,20 +59,19 @@
   outline: none;
 
   &:hover {
-    background-color: #f1f5f9;
-    border-color: rgba($negro, 0.4);
-    color: $negro;
+    background-color: $slate-100;
+    border-color: $slate-400;
+    color: $slate-900;
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px rgba($negro, 0.1);
+    box-shadow: 0 0 0 2px rgba($slate-900, 0.1);
   }
 }
 
-/* CARDS DE PREGUNTAS */
 .question-card {
-  background-color: #ffffff;
-  border: 1px solid rgba($negro, 0.1);
+  background-color: $blanco;
+  border: 1px solid $slate-200;
   border-radius: 8px;
   padding: 1.25rem;
   display: flex;
@@ -81,7 +80,7 @@
   transition: border-color 0.2s;
 
   &:hover {
-    border-color: rgba($negro, 0.2);
+    border-color: $slate-300;
   }
 
   &__header {
@@ -93,24 +92,28 @@
   &__badge {
     font-size: 0.75rem;
     font-weight: 600;
-    background-color: #f1f5f9;
-    color: #475569;
+    background-color: $slate-100;
+    color: $slate-600;
     padding: 2px 8px;
     border-radius: 4px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid $slate-200;
   }
 
   &__delete-btn {
     background: transparent;
     border: none;
-    color: rgba($negro, 0.4);
+    color: $slate-400;
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
-      color: #dc2626;
-      background-color: #fee2e2;
+      color: $error-red;
+      background-color: rgba($error-red, 0.1);
     }
   }
 
@@ -123,7 +126,7 @@
   &__row {
     display: flex;
     gap: 1rem;
-    @media (max-width: 600px) {
+    @media (max-width: $bp-medium-mobile) {
       flex-direction: column;
     }
   }
@@ -136,18 +139,28 @@
     label {
       font-size: 0.8rem;
       font-weight: 500;
-      color: rgba($negro, 0.6);
+      color: $slate-600;
     }
+
     input[type='text'] {
       padding: 0.55rem 0.75rem;
-      border: 1px solid rgba($negro, 0.15);
+      border: 1px solid $slate-300;
       border-radius: 6px;
       font-size: 0.875rem;
       outline: none;
-      background-color: #ffffff;
+      background-color: $blanco;
+      color: $slate-900;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+      &::placeholder {
+        color: $slate-400;
+      }
+
       &:focus {
-        border-color: $negro;
-        box-shadow: 0 0 0 1px $negro;
+        border-color: $slate-900;
+        box-shadow: 0 0 0 1px $slate-900;
       }
     }
   }
@@ -159,7 +172,6 @@
     flex: 2;
   }
 
-  /* Checkbox de Obligatorio */
   &__settings-row {
     display: flex;
     align-items: center;
@@ -172,7 +184,7 @@
     gap: 0.4rem;
     cursor: pointer;
     font-size: 0.8rem;
-    color: rgba($negro, 0.7);
+    color: $slate-700;
 
     input[type='checkbox'] {
       width: 14px;
@@ -181,20 +193,19 @@
     }
   }
 
-  /* Múltiple opción tags e inputs */
   &__options-section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    background-color: #f8fafc;
+    background-color: $slate-50;
     padding: 1rem;
     border-radius: 6px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid $slate-200;
 
     label {
       font-size: 0.8rem;
       font-weight: 500;
-      color: rgba($negro, 0.6);
+      color: $slate-600;
     }
   }
 
@@ -209,23 +220,25 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
+    background-color: $blanco;
+    border: 1px solid $slate-200;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
-    color: $negro;
+    color: $slate-900;
 
     button {
       background: transparent;
       border: none;
       padding: 0;
       cursor: pointer;
-      color: rgba($negro, 0.4);
+      color: $slate-400;
       display: flex;
       align-items: center;
+      transition: color 0.2s;
+
       &:hover {
-        color: #dc2626;
+        color: $error-red;
       }
     }
   }
@@ -237,17 +250,24 @@
     input {
       flex: 1;
       padding: 6px 10px;
-      border: 1px solid rgba($negro, 0.15);
+      border: 1px solid $slate-300;
       border-radius: 6px;
       font-size: 0.85rem;
+      color: $slate-900;
       outline: none;
+      transition: border-color 0.2s;
+
+      &::placeholder {
+        color: $slate-400;
+      }
+
       &:focus {
-        border-color: $negro;
+        border-color: $slate-900;
       }
     }
 
     button {
-      background-color: $negro;
+      background-color: $slate-900;
       color: $blanco;
       border: none;
       padding: 0 12px;
@@ -255,21 +275,22 @@
       font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
+      transition: background-color 0.2s;
+
       &:hover {
-        opacity: 0.9;
+        background-color: $slate-800;
       }
     }
   }
 
-  /* Vista previa */
   &__preview {
     .preview-textarea {
-      background-color: #fafafa;
-      border: 1px dashed rgba($negro, 0.15);
+      background-color: $slate-50;
+      border: 1px dashed $slate-300;
       padding: 12px;
       border-radius: 6px;
       font-size: 0.85rem;
-      color: rgba($negro, 0.4);
+      color: $slate-500;
       font-style: italic;
     }
   }

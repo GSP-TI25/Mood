@@ -182,7 +182,7 @@
 
   &__scroll-top {
     @include shiny-effect(rgba(255, 255, 255, 0.4));
-    background: transparent;
+    background: $bg-dark;
     border: 1px solid rgba($blanco, 0.2);
     color: $blanco;
     width: 45px;

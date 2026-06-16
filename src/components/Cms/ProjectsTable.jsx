@@ -1,9 +1,13 @@
-//src/components/Cms/ProjectsTable.jsx
+// src/components/Cms/ProjectsTable.jsx
 import { useState } from 'react';
 import { Power, PowerOff, Edit } from 'lucide-react';
 import './ProjectsTable.scss';
 
-// 🌟 MAGIA CLOUDINARY: Extraer frame si es video
+/**
+ * Extrae la URL de un frame (miniatura) si el archivo subido es un video en Cloudinary.
+ * @param {string} url - URL original del archivo (imagen o video).
+ * @returns {string} URL transformada a formato .jpg si era video, o la original si era imagen.
+ */
 const getThumbnailUrl = (url) => {
   if (!url) return '';
   if (url.match(/\.(mp4|webm|mov|ogg)$/i)) {
@@ -12,6 +16,16 @@ const getThumbnailUrl = (url) => {
   return url;
 };
 
+/**
+ * Componente ProjectsTable.
+ * Tabla administrativa para listar los proyectos del portafolio (MoodPrint).
+ * Incluye paginación local y botones de acción rápida.
+ *
+ * @param {Object} props
+ * @param {Array} props.projects - Lista de proyectos obtenidos del backend.
+ * @param {Function} props.onToggleStatus - Callback para cambiar la visibilidad del proyecto.
+ * @param {Function} props.onEdit - Callback para abrir el formulario de edición.
+ */
 const ProjectsTable = ({ projects, onToggleStatus, onEdit }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -34,7 +48,7 @@ const ProjectsTable = ({ projects, onToggleStatus, onEdit }) => {
   };
 
   return (
-    <div className='cms-table-wrapper'>
+    <div className='cms-projects-table-wrapper'>
       <table className='cms-table'>
         <thead>
           <tr>
@@ -56,7 +70,6 @@ const ProjectsTable = ({ projects, onToggleStatus, onEdit }) => {
               >
                 <td>
                   <img
-                    // 🌟 USAMOS LA FUNCIÓN AQUÍ PARA QUE EL VIDEO SE VEA COMO IMAGEN
                     src={getThumbnailUrl(project.img_url)}
                     alt={project.title}
                     style={{

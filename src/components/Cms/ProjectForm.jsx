@@ -7,47 +7,37 @@ import {
   Video as VideoIcon,
   Trash2,
 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import categoryOptions from '../../data/projectCategories.json';
 import './ProjectForm.scss';
 
 /**
- * Opciones estáticas para las categorías del proyecto.
- */
-const categoryOptions = [
-  { value: 'Branding', label: 'Branding' },
-  { value: 'Diseño Web', label: 'Diseño Web' },
-  { value: 'Marketing Digital', label: 'Marketing Digital' },
-  { value: 'Social Media', label: 'Social Media' },
-  { value: 'Contenido Audiovisual', label: 'Contenido Audiovisual' },
-];
-
-/**
  * Estilos personalizados para el componente React-Select.
- * Mantiene la coherencia visual con el resto del panel administrativo (Shadcn style).
  */
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
     backgroundColor: '#ffffff',
-    borderColor: state.isFocused ? '#000000' : 'rgba(0, 0, 0, 0.15)',
-    boxShadow: state.isFocused ? '0 0 0 1px #000000' : 'none',
+    borderColor: state.isFocused ? '#0f172a' : '#cbd5e1',
+    boxShadow: state.isFocused ? '0 0 0 1px #0f172a' : 'none',
     borderRadius: '6px',
     padding: '0 2px',
     minHeight: '38px',
     fontSize: '0.875rem',
     cursor: 'pointer',
     '&:hover': {
-      borderColor: state.isFocused ? '#000000' : 'rgba(0, 0, 0, 0.25)',
+      borderColor: state.isFocused ? '#0f172a' : '#94a3b8',
     },
   }),
   option: (provided, state) => ({
     ...provided,
     fontSize: '0.875rem',
     backgroundColor: state.isSelected
-      ? '#000000'
+      ? '#0f172a'
       : state.isFocused
-        ? 'rgba(0,0,0,0.05)'
+        ? '#f8fafc'
         : '#ffffff',
-    color: state.isSelected ? '#ffffff' : '#000000',
+    color: state.isSelected ? '#ffffff' : '#0f172a',
     cursor: 'pointer',
   }),
   menu: (provided) => ({ ...provided, zIndex: 5 }),
@@ -55,9 +45,7 @@ const customSelectStyles = {
 
 /**
  * Utilidad para sanitizar las entradas de texto del usuario.
- * Elimina etiquetas HTML básicas para prevenir ataques XSS (Cross-Site Scripting).
- * @param {string} str - Cadena de texto a sanitizar.
- * @returns {string} Cadena sanitizada.
+ * Previene inyección de etiquetas HTML (XSS).
  */
 const sanitizeInput = (str) => {
   if (!str) return '';
@@ -72,8 +60,14 @@ const sanitizeInput = (str) => {
  * @param {Function} props.onSubmitSuccess - Callback ejecutado tras guardar correctamente.
  * @param {Function} props.onCancel - Callback para cerrar o cancelar el formulario.
  * @param {Object} [props.projectToEdit] - Datos del proyecto si se está en modo edición.
+ * @param {Function} props.onRequestConfirm - Callback para solicitar confirmación al componente padre.
  */
-const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
+const ProjectForm = ({
+  onSubmitSuccess,
+  onCancel,
+  projectToEdit,
+  onRequestConfirm,
+}) => {
   const imageInputRef = useRef(null);
   const videoInputRef = useRef(null);
 
@@ -99,7 +93,7 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
     setFormData({ ...formData, category: selectedOption.value });
 
   /**
-   * Maneja la selección de archivos, validando el tipo MIME y el peso máximo.
+   * Maneja la selección de archivos (Imagen o Video), validando tipo y peso.
    */
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
@@ -109,12 +103,12 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
 
     if (type === 'image') {
       if (!file.type.match(/^image\/(jpeg|jpg|png|webp)$/)) {
-        alert('Formato no soportado. Sólo JPG, PNG y WEBP.');
+        toast.warning('Formato no soportado. Sólo JPG, PNG y WEBP.');
         e.target.value = '';
         return;
       }
       if (sizeInMB > 2) {
-        alert('La imagen no debe superar los 2MB.');
+        toast.warning('La imagen no debe superar los 2MB.');
         e.target.value = '';
         return;
       }
@@ -122,12 +116,12 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
 
     if (type === 'video') {
       if (!file.type.match(/^video\/(mp4|webm)$/)) {
-        alert('Formato de video no soportado. Sólo MP4 y WEBM.');
+        toast.warning('Formato de video no soportado. Sólo MP4 y WEBM.');
         e.target.value = '';
         return;
       }
       if (sizeInMB > 15) {
-        alert('El video no debe superar los 15MB.');
+        toast.warning('El video no debe superar los 15MB.');
         e.target.value = '';
         return;
       }
@@ -145,28 +139,33 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
   };
 
   /**
-   * Prepara y envía los datos del formulario al backend.
+   * Intercepta el submit para validar y solicitar confirmación al padre.
    */
-  const handleFinalSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     if (!imageFile && !imagePreview) {
-      alert('El archivo del proyecto (Imagen o Video) es obligatorio.');
+      toast.warning('El archivo del proyecto (Imagen o Video) es obligatorio.');
       return;
     }
 
-    const confirmPublish = window.confirm(
+    onRequestConfirm(
       projectToEdit
-        ? '¿Guardar cambios?'
+        ? '¿Guardar cambios del proyecto?'
         : '¿Publicar proyecto en el portafolio?',
+      executeSubmit,
     );
-    if (!confirmPublish) return;
+  };
 
+  /**
+   * Procesa el envío de datos al backend.
+   */
+  const executeSubmit = async () => {
     setIsSubmitting(true);
-
     const token = localStorage.getItem('cms_token');
+
     if (!token) {
-      alert('Sesión expirada. Por favor, vuelve a iniciar sesión.');
+      toast.error('Sesión expirada. Por favor, vuelve a iniciar sesión.');
       setIsSubmitting(false);
       return;
     }
@@ -178,7 +177,10 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
     dataToSend.append('date', sanitizeInput(formData.date));
     dataToSend.append('description', sanitizeInput(formData.description));
     dataToSend.append('project_url', sanitizeInput(formData.project_url));
-    if (imageFile) dataToSend.append('img_url', imageFile);
+
+    if (imageFile) {
+      dataToSend.append('img_url', imageFile);
+    }
 
     try {
       const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -194,17 +196,15 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
       });
 
       if (response.ok) {
-        alert('¡Proyecto guardado con éxito!');
+        toast.success('¡Proyecto guardado con éxito!');
         onSubmitSuccess();
       } else {
         const errorData = await response.json();
-        alert(
-          `Error al guardar el proyecto: ${errorData.message || 'Error desconocido'}`,
-        );
+        toast.error(`Error al guardar: ${errorData.message || 'Desconocido'}`);
       }
     } catch (error) {
       console.error(error);
-      alert('Error de conexión al intentar guardar.');
+      toast.error('Error de conexión al intentar guardar.');
     } finally {
       setIsSubmitting(false);
     }
@@ -222,7 +222,7 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
 
       <form
         className='cms-project-form__step-wrapper'
-        onSubmit={handleFinalSubmit}
+        onSubmit={handleFormSubmit}
       >
         <div className='cms-project-form__scroll-area'>
           <div className='cms-project-form__section'>
@@ -301,17 +301,17 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
                     padding: '2rem',
                     borderRadius: '8px',
                     border: '1px dashed #cbd5e1',
-                    backgroundColor: '#fafafa',
+                    backgroundColor: '#f8fafc',
                     cursor: 'pointer',
                     transition: 'background-color 0.2s',
                     gap: '0.5rem',
-                    color: '#334155',
+                    color: '#475569',
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.backgroundColor = '#f1f5f9')
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = '#fafafa')
+                    (e.currentTarget.style.backgroundColor = '#f8fafc')
                   }
                 >
                   <ImageIcon
@@ -338,17 +338,17 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
                     padding: '2rem',
                     borderRadius: '8px',
                     border: '1px dashed #cbd5e1',
-                    backgroundColor: '#fafafa',
+                    backgroundColor: '#f8fafc',
                     cursor: 'pointer',
                     transition: 'background-color 0.2s',
                     gap: '0.5rem',
-                    color: '#334155',
+                    color: '#475569',
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.backgroundColor = '#f1f5f9')
                   }
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = '#fafafa')
+                    (e.currentTarget.style.backgroundColor = '#f8fafc')
                   }
                 >
                   <VideoIcon
@@ -448,7 +448,6 @@ const ProjectForm = ({ onSubmitSuccess, onCancel, projectToEdit }) => {
                 value={formData.description}
                 onChange={handleInputChange}
                 className='textarea-small'
-                style={{ resize: 'none' }}
               ></textarea>
             </div>
           </div>

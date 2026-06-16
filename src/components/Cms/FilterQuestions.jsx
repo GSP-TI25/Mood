@@ -1,37 +1,58 @@
-//src/components/Cms/FilterQuestions.jsx
+// src/components/Cms/FilterQuestions.jsx
 import { useState } from 'react';
 import Select from 'react-select';
 import { Plus, Trash2, X } from 'lucide-react';
+import questionTypeOptions from '../../data/questionTypeOptions.json';
 import './FilterQuestions.scss';
 
-const typeOptions = [
-  { value: 'text', label: 'Respuesta Abierta' },
-  { value: 'multiple', label: 'Opción Múltiple' },
-  { value: 'number', label: 'Numérica (Años, Salario)' },
-];
-
+/**
+ * Estilos personalizados para el componente React-Select.
+ * Mantiene la coherencia visual con el diseño Shadcn.
+ */
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
     backgroundColor: '#ffffff',
-    borderColor: state.isFocused ? '#000000' : 'rgba(0, 0, 0, 0.15)',
-    boxShadow: state.isFocused ? '0 0 0 1px #000000' : 'none',
+    borderColor: state.isFocused ? '#0f172a' : '#cbd5e1',
+    boxShadow: state.isFocused ? '0 0 0 1px #0f172a' : 'none',
     borderRadius: '6px',
     fontSize: '0.875rem',
     minHeight: '36px',
+    cursor: 'pointer',
+    '&:hover': { borderColor: state.isFocused ? '#0f172a' : '#94a3b8' },
   }),
   option: (provided, state) => ({
     ...provided,
     fontSize: '0.875rem',
     backgroundColor: state.isSelected
-      ? '#000000'
+      ? '#0f172a'
       : state.isFocused
-        ? '#f1f5f9'
+        ? '#f8fafc'
         : '#ffffff',
-    color: state.isSelected ? '#ffffff' : '#000000',
+    color: state.isSelected ? '#ffffff' : '#0f172a',
+    cursor: 'pointer',
+    '&:active': { backgroundColor: '#e2e8f0' },
   }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '6px',
+    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+    border: '1px solid #e2e8f0',
+    overflow: 'hidden',
+    zIndex: 5,
+  }),
+  singleValue: (provided) => ({ ...provided, color: '#0f172a' }),
 };
 
+/**
+ * Componente FilterQuestions.
+ * Creador dinámico de cuestionarios de filtrado para las vacantes.
+ * Permite añadir preguntas abiertas, numéricas o de opción múltiple.
+ *
+ * @param {Object} props
+ * @param {Array} props.questions - Lista de preguntas actuales.
+ * @param {Function} props.onChange - Callback que actualiza el estado de las preguntas en el componente padre.
+ */
 const FilterQuestions = ({ questions, onChange }) => {
   const [tempOptionText, setTempOptionText] = useState({});
 
@@ -96,7 +117,6 @@ const FilterQuestions = ({ questions, onChange }) => {
 
   return (
     <div className='cms-filter-questions'>
-      {/* HEADER LIMPIO (Sin el botón) */}
       <div className='cms-filter-questions__header'>
         <div className='cms-filter-questions__header-text'>
           <h3>Preguntas de Filtrado</h3>
@@ -108,7 +128,6 @@ const FilterQuestions = ({ questions, onChange }) => {
       </div>
 
       <div className='cms-filter-questions__list'>
-        {/* LISTA DE PREGUNTAS CREADAS */}
         {questions.map((q, index) => (
           <div
             key={q.id}
@@ -144,8 +163,10 @@ const FilterQuestions = ({ questions, onChange }) => {
                 <div className='question-card__group flex-2'>
                   <label>Tipo de Respuesta</label>
                   <Select
-                    options={typeOptions}
-                    value={typeOptions.find((opt) => opt.value === q.type)}
+                    options={questionTypeOptions}
+                    value={questionTypeOptions.find(
+                      (opt) => opt.value === q.type,
+                    )}
                     onChange={(opt) =>
                       handleUpdateQuestion(q.id, 'type', opt.value)
                     }
@@ -226,7 +247,6 @@ const FilterQuestions = ({ questions, onChange }) => {
           </div>
         ))}
 
-        {/* 🌟 NUEVO BOTÓN ANCHO AL FINAL */}
         <button
           type='button'
           className='cms-btn-add-block'

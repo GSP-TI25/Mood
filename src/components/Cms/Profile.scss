@@ -1,4 +1,4 @@
-//src/components/Cms/Profile.scss
+// src/components/Cms/Profile.scss
 @use '../../styles/variables' as *;
 
 .profile-view {
@@ -6,50 +6,49 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 1100px; /* Ancho máximo para que no se estire demasiado */
+  max-width: 1100px;
 }
 
 .profile-header {
   h2 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #0f172a;
+    color: $slate-900;
     margin-bottom: 0.35rem;
   }
   p {
-    color: #64748b;
+    color: $slate-500;
     font-size: 0.875rem;
     margin: 0;
   }
 }
 
-/* 🌟 GRID DE 2 COLUMNAS */
 .profile-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 1.5rem;
   align-items: start;
 
-  @media (max-width: 900px) {
+  @media (max-width: $bp-tablet) {
     grid-template-columns: 1fr;
   }
 }
 
 .profile-card {
-  background: #ffffff;
+  background: $blanco;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid $slate-200;
+  box-shadow: 0 1px 3px rgba($negro, 0.05);
   padding: 2rem;
 
   h3 {
     margin: 0 0 1rem 0;
     font-size: 1.1rem;
-    color: #0f172a;
+    color: $slate-900;
   }
 }
 
-/* 🌟 COLUMNA IZQUIERDA: IDENTIDAD */
+/* Lado Izquierdo: Identidad visual */
 .identity-card {
   display: flex;
   flex-direction: column;
@@ -63,9 +62,9 @@
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    background-color: #f1f5f9;
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background-color: $slate-100;
+    border: 3px solid $blanco;
+    box-shadow: 0 4px 10px rgba($negro, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,17 +79,14 @@
     .avatar-placeholder {
       font-size: 2.5rem;
       font-weight: 600;
-      color: #64748b;
+      color: $slate-500;
       text-transform: uppercase;
     }
 
     .avatar-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.6); /* Fondo oscuro semitransparente */
+      inset: 0;
+      background: rgba($slate-900, 0.6);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -106,19 +102,19 @@
   .user-fullname {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #0f172a;
+    color: $slate-900;
     margin: 0 0 0.25rem 0;
   }
 
   .user-email {
     font-size: 0.875rem;
-    color: #64748b;
+    color: $slate-500;
     margin: 0 0 1rem 0;
   }
 
   .user-rolebadge {
-    background: #f1f5f9;
-    color: #475569;
+    background: $slate-100;
+    color: $slate-600;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.35rem 0.8rem;
@@ -126,10 +122,10 @@
   }
 }
 
-/* 🌟 COLUMNA DERECHA: FORMULARIO */
+/* Lado Derecho: Formulario */
 .minimal-divider {
   border: none;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid $slate-200;
   margin: 1rem 0 1.5rem 0;
 }
 
@@ -144,7 +140,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: $bp-medium-mobile) {
     grid-template-columns: 1fr;
   }
 }
@@ -157,10 +153,10 @@
   label {
     font-size: 0.85rem;
     font-weight: 500;
-    color: #334155;
+    color: $slate-700;
 
     .hint {
-      color: #94a3b8;
+      color: $slate-400;
       font-weight: normal;
       font-size: 0.75rem;
       margin-left: 0.25rem;
@@ -169,20 +165,21 @@
 
   input {
     padding: 0.6rem 0.8rem;
-    border: 1px solid #cbd5e1;
+    border: 1px solid $slate-300;
     border-radius: 6px;
     font-size: 0.875rem;
-    color: #0f172a;
+    color: $slate-900;
     transition: all 0.2s;
-    background-color: #ffffff;
+    background-color: $blanco;
 
     &:focus {
       outline: none;
-      border-color: #0f172a;
-      box-shadow: 0 0 0 1px #0f172a;
+      border-color: $slate-900;
+      box-shadow: 0 0 0 1px $slate-900;
     }
+
     &::placeholder {
-      color: #94a3b8;
+      color: $slate-400;
     }
   }
 }
@@ -195,12 +192,12 @@
   .btn-save {
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* Centramos todo el contenido siempre */
+    justify-content: center;
     gap: 0.5rem;
-    background: #0f172a;
-    color: white;
-    height: 40px; /* 🌟 Fijamos altura exacta para que no se estire */
-    min-width: 160px; /* 🌟 Fijamos ancho mínimo para que no baile el texto */
+    background: $slate-900;
+    color: $blanco;
+    height: 40px;
+    min-width: 160px;
     padding: 0 1.5rem;
     border: none;
     border-radius: 6px;
@@ -208,10 +205,10 @@
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
-    white-space: nowrap; /* 🌟 Evita que el texto baje de línea */
+    white-space: nowrap;
 
     &:hover:not(:disabled) {
-      background: #1e293b;
+      background: $slate-800;
     }
     &:disabled {
       opacity: 0.7;
@@ -229,78 +226,5 @@
         transform: rotate(360deg);
       }
     }
-  }
-}
-
-/* 🌟 SISTEMA DE NOTIFICACIONES TOAST (POPUP) */
-.minimalist-toast {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow:
-    0 10px 25px -5px rgba(0, 0, 0, 0.1),
-    0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  z-index: 9999;
-  animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-  .toast-icon {
-    display: flex;
-  }
-
-  p {
-    margin: 0;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #0f172a;
-    padding-right: 1.5rem; /* Espacio para el botón de cerrar */
-  }
-
-  button {
-    background: transparent;
-    border: none;
-    color: #94a3b8;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s;
-    &:hover {
-      color: #0f172a;
-    }
-  }
-
-  &.toast-success .toast-icon {
-    color: #10b981; /* Verde esmeralda minimalista */
-  }
-
-  &.toast-error .toast-icon {
-    color: #ef4444; /* Rojo suave */
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }

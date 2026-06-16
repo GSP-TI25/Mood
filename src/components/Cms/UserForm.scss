@@ -1,18 +1,18 @@
-//src/components/Cms/UserForm.scss
+// src/components/Cms/UserForm.scss
 @use '../../styles/variables' as *;
 
 .cms-user-form {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #ffffff;
+  background-color: $blanco;
   font-family: inherit;
 
   /* Encabezado */
   &__header {
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid #e2e8f0;
-    background: #ffffff;
+    border-bottom: 1px solid $slate-200;
+    background: $blanco;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@
     h2 {
       margin: 0;
       font-size: 1.25rem;
-      color: #0f172a;
+      color: $slate-900;
       font-weight: 600;
       letter-spacing: -0.02em;
     }
@@ -28,14 +28,14 @@
     p {
       margin: 0.25rem 0 0 0;
       font-size: 0.85rem;
-      color: #64748b;
+      color: $slate-500;
     }
   }
 
   &__btn-close {
     background: transparent;
     border: none;
-    color: #64748b;
+    color: $slate-500;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -47,8 +47,8 @@
       color 0.2s;
 
     &:hover {
-      background-color: #f1f5f9;
-      color: #0f172a;
+      background-color: $slate-100;
+      color: $slate-900;
     }
   }
 
@@ -63,7 +63,7 @@
 
     /* Scrollbar minimalista */
     scrollbar-width: thin;
-    scrollbar-color: rgba(15, 23, 42, 0.15) transparent;
+    scrollbar-color: rgba($slate-900, 0.15) transparent;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -73,23 +73,13 @@
       margin: 4px 0;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: rgba(15, 23, 42, 0.15);
+      background-color: rgba($slate-900, 0.15);
       border-radius: 10px;
 
       &:hover {
-        background-color: rgba(15, 23, 42, 0.25);
+        background-color: rgba($slate-900, 0.25);
       }
     }
-  }
-
-  /* Alertas de error */
-  &__alert {
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #dc2626;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
   }
 
   /* Formulario */
@@ -107,18 +97,18 @@
     label {
       font-size: 0.875rem;
       font-weight: 500;
-      color: #0f172a;
+      color: $slate-900;
     }
 
     input {
       padding: 0 0.75rem;
-      height: 38px;
-      border: 1px solid #cbd5e1;
+      height: 40px;
+      border: 1px solid $slate-300;
       border-radius: 6px;
       font-size: 0.875rem;
       font-family: inherit;
-      background-color: #ffffff;
-      color: #0f172a;
+      background-color: $blanco;
+      color: $slate-900;
       outline: none;
       transition:
         border-color 0.2s,
@@ -127,17 +117,17 @@
       box-sizing: border-box;
 
       &::placeholder {
-        color: #94a3b8;
+        color: $slate-400;
       }
 
       &:focus {
-        border-color: #0f172a;
-        box-shadow: 0 0 0 1px #0f172a;
+        border-color: $slate-900;
+        box-shadow: 0 0 0 1px $slate-900;
       }
 
       &:disabled {
-        background-color: #f8fafc;
-        color: #94a3b8;
+        background-color: $slate-50;
+        color: $slate-400;
         cursor: not-allowed;
       }
     }
@@ -145,6 +135,8 @@
 
   &__group-row {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
 
     .cms-user-form__group {
@@ -155,8 +147,8 @@
   /* Pie de página fijo inferior */
   &__actions-fixed {
     padding: 1.25rem 2rem;
-    border-top: 1px solid #e2e8f0;
-    background: #ffffff;
+    border-top: 1px solid $slate-200;
+    background: $blanco;
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
@@ -185,22 +177,22 @@
 
     .btn-cancel {
       background: transparent;
-      border: 1px solid #e2e8f0;
-      color: #0f172a;
+      border: 1px solid $slate-200;
+      color: $slate-900;
 
       &:hover:not(:disabled) {
-        background: #f8fafc;
+        background: $slate-50;
       }
     }
 
     .btn-submit {
-      background: #0f172a;
+      background: $slate-900;
       border: none;
-      color: #ffffff;
+      color: $blanco;
+      flex: 1;
 
       &:hover:not(:disabled) {
-        background: #1e293b;
-        transform: translateY(-1px);
+        background: $slate-800;
       }
 
       .spinner-icon {

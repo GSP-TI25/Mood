@@ -1,0 +1,5 @@
+[
+  { "value": "text", "label": "Respuesta Abierta" },
+  { "value": "multiple", "label": "Opción Múltiple" },
+  { "value": "number", "label": "Numérica (Años, Salario)" }
+]

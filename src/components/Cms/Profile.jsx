@@ -1,18 +1,14 @@
-//src/components/Cms/Profile.jsx
+// src/components/Cms/Profile.jsx
 import { useState, useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Select from 'react-select';
-import {
-  Camera,
-  Save,
-  Loader2,
-  CheckCircle2,
-  AlertCircle,
-  X,
-} from 'lucide-react';
+import { Camera, Save, Loader2 } from 'lucide-react';
+import { toast } from 'react-toastify';
 import './Profile.scss';
 
-// Estilos minimalistas para el select de país
+/**
+ * Estilos personalizados para el componente React-Select.
+ */
 const selectStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -46,6 +42,11 @@ const selectStyles = {
   }),
 };
 
+/**
+ * Componente Profile.
+ * Vista para que el usuario autenticado pueda gestionar sus datos personales,
+ * actualizar su avatar y cambiar su contraseña.
+ */
 const Profile = () => {
   const { user, login } = useContext(AuthContext);
   const fileInputRef = useRef(null);
@@ -60,26 +61,33 @@ const Profile = () => {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState('');
   const [loading, setLoading] = useState(false);
-
   const [countryOptions, setCountryOptions] = useState([]);
-  const [toast, setToast] = useState({ show: false, type: '', text: '' });
 
+  /**
+   * Obtiene la lista de países disponibles desde el backend.
+   */
   useEffect(() => {
-    // 🌟 Petición 100% local
     const fetchCountries = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/countries');
+        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${baseUrl}/api/countries`);
         if (response.ok) {
           const result = await response.json();
-          if (result.success && result.data) setCountryOptions(result.data);
+          if (result.success && result.data) {
+            setCountryOptions(result.data);
+          }
         }
       } catch (error) {
         console.error('Error al cargar países:', error);
+        toast.error('Error al cargar los países.');
       }
     };
     fetchCountries();
   }, []);
 
+  /**
+   * Inicializa el formulario con los datos del usuario logueado.
+   */
   useEffect(() => {
     if (user) {
       setFormData({
@@ -92,13 +100,6 @@ const Profile = () => {
     }
   }, [user]);
 
-  const showToast = (type, text) => {
-    setToast({ show: true, type, text });
-    setTimeout(() => {
-      setToast({ show: false, type: '', text: '' });
-    }, 3500);
-  };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -107,6 +108,9 @@ const Profile = () => {
     setFormData({ ...formData, country: selected ? selected.value : '' });
   };
 
+  /**
+   * Maneja la previsualización del nuevo avatar.
+   */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -115,6 +119,9 @@ const Profile = () => {
     }
   };
 
+  /**
+   * Envía los datos actualizados al backend.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -123,35 +130,42 @@ const Profile = () => {
     data.append('first_name', formData.first_name);
     data.append('last_name', formData.last_name);
     data.append('country', formData.country);
-    if (formData.password) data.append('password', formData.password);
-    if (avatarFile) data.append('avatar', avatarFile);
+
+    if (formData.password) {
+      data.append('password', formData.password);
+    }
+    if (avatarFile) {
+      data.append('avatar', avatarFile);
+    }
 
     try {
-      // 🌟 Petición 100% local
-      const response = await fetch(
-        `http://localhost:5000/api/users/profile/${user.id}`,
-        {
-          method: 'PUT',
-          body: data,
+      const token = localStorage.getItem('cms_token');
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+      const response = await fetch(`${baseUrl}/api/users/profile/${user.id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: data,
+      });
 
       const result = await response.json();
 
       if (response.ok) {
-        showToast('success', '¡Perfil actualizado con éxito!');
+        toast.success('¡Perfil actualizado con éxito!');
 
+        // Actualizamos el contexto global con la nueva data
         const updatedUser = { ...user, ...result.user };
-        const token = localStorage.getItem('cms_token');
         login(token, updatedUser);
 
         setFormData((prev) => ({ ...prev, password: '' }));
       } else {
-        showToast('error', result.message || 'Hubo un problema al guardar.');
+        toast.error(result.message || 'Hubo un problema al guardar.');
       }
     } catch (error) {
       console.error(error);
-      showToast('error', 'Error de conexión con el servidor local.');
+      toast.error('Error de conexión con el servidor.');
     } finally {
       setLoading(false);
     }
@@ -159,32 +173,18 @@ const Profile = () => {
 
   return (
     <div className='profile-view'>
-      {toast.show && (
-        <div className={`minimalist-toast toast-${toast.type}`}>
-          <div className='toast-icon'>
-            {toast.type === 'success' ? (
-              <CheckCircle2 size={20} />
-            ) : (
-              <AlertCircle size={20} />
-            )}
-          </div>
-          <p>{toast.text}</p>
-          <button onClick={() => setToast({ show: false, type: '', text: '' })}>
-            <X size={16} />
-          </button>
-        </div>
-      )}
-
       <header className='profile-header'>
         <h2>Configuración de Perfil</h2>
         <p>Administra tu información pública y credenciales de acceso.</p>
       </header>
 
       <div className='profile-grid'>
+        {/* Lado izquierdo: Identidad visual */}
         <aside className='profile-card identity-card'>
           <div
             className='avatar-wrapper'
             onClick={() => fileInputRef.current.click()}
+            title='Cambiar foto de perfil'
           >
             {avatarPreview ? (
               <img
@@ -207,7 +207,7 @@ const Profile = () => {
           </div>
           <input
             type='file'
-            accept='image/*'
+            accept='image/jpeg, image/png, image/webp'
             ref={fileInputRef}
             onChange={handleImageChange}
             style={{ display: 'none' }}
@@ -219,6 +219,7 @@ const Profile = () => {
           <span className='user-rolebadge'>{user?.role_name || 'Miembro'}</span>
         </aside>
 
+        {/* Lado derecho: Formulario de datos */}
         <section className='profile-card form-card'>
           <h3>Datos Personales</h3>
           <hr className='minimal-divider' />

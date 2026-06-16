@@ -1,75 +1,83 @@
-//src/components/Cms/JobForm.jsx
+// src/components/Cms/JobForm.jsx
 import { useState } from 'react';
 import Select from 'react-select';
-import { toast } from 'react-toastify'; // 🌟 IMPORTAMOS TOASTIFY
+import { toast } from 'react-toastify';
 import {
   List,
   ListOrdered,
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  AlertTriangle, // 🌟 ÍCONO PARA EL MODAL DE CONFIRMACIÓN
 } from 'lucide-react';
 import FilterQuestions from './FilterQuestions';
+import jobOptions from '../../data/jobOptions.json';
 import './JobForm.scss';
 
-const typeOptions = [
-  { value: 'Full-time', label: 'Full-time' },
-  { value: 'Part-time', label: 'Part-time' },
-  { value: 'Freelance', label: 'Freelance' },
-  { value: 'Híbrido', label: 'Híbrido' },
-];
-
-const countryOptions = [
-  { value: 'Peru', label: 'Perú' },
-  { value: 'Colombia', label: 'Colombia' },
-];
-
+/**
+ * Estilos personalizados para el componente React-Select.
+ */
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
     backgroundColor: '#ffffff',
-    borderColor: state.isFocused ? '#000000' : 'rgba(0, 0, 0, 0.15)',
-    boxShadow: state.isFocused ? '0 0 0 1px #000000' : 'none',
+    borderColor: state.isFocused ? '#0f172a' : '#cbd5e1',
+    boxShadow: state.isFocused ? '0 0 0 1px #0f172a' : 'none',
     borderRadius: '6px',
     padding: '0 2px',
     minHeight: '38px',
     fontSize: '0.875rem',
     cursor: 'pointer',
     '&:hover': {
-      borderColor: state.isFocused ? '#000000' : 'rgba(0, 0, 0, 0.25)',
+      borderColor: state.isFocused ? '#0f172a' : '#94a3b8',
     },
   }),
   option: (provided, state) => ({
     ...provided,
     fontSize: '0.875rem',
     backgroundColor: state.isSelected
-      ? '#000000'
+      ? '#0f172a'
       : state.isFocused
-        ? 'rgba(0,0,0,0.05)'
+        ? '#f8fafc'
         : '#ffffff',
-    color: state.isSelected ? '#ffffff' : '#000000',
+    color: state.isSelected ? '#ffffff' : '#0f172a',
     cursor: 'pointer',
     '&:active': {
-      backgroundColor: 'rgba(0,0,0,0.1)',
+      backgroundColor: '#e2e8f0',
     },
   }),
   menu: (provided) => ({
     ...provided,
     borderRadius: '6px',
     boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-    border: '1px solid rgba(0,0,0,0.1)',
+    border: '1px solid #e2e8f0',
     overflow: 'hidden',
     zIndex: 5,
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: '#000000',
+    color: '#0f172a',
   }),
 };
 
-const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
+/**
+ * Componente JobForm.
+ * Formulario multipaso para la creación y edición de vacantes laborales,
+ * incluyendo las preguntas de filtrado para candidatos.
+ *
+ * @param {Object} props
+ * @param {Function} props.onSubmitSuccess - Callback ejecutado tras guardar exitosamente.
+ * @param {Function} props.onCancel - Callback para cerrar el formulario.
+ * @param {Object} [props.jobToEdit] - Datos de la vacante si está en modo edición.
+ * @param {Function} props.onRequestConfirm - Función delegada al padre para mostrar el modal de confirmación.
+ */
+const JobForm = ({
+  onSubmitSuccess,
+  onCancel,
+  jobToEdit,
+  onRequestConfirm,
+}) => {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     title: jobToEdit?.title || '',
@@ -90,13 +98,6 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
       : [],
   });
 
-  // 🌟 ESTADO PARA EL MODAL DE CONFIRMACIÓN PERSONALIZADO
-  const [confirmDialog, setConfirmDialog] = useState({
-    isOpen: false,
-    message: '',
-    onConfirm: null,
-  });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -106,6 +107,9 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
     setFormData({ ...formData, [actionMeta.name]: selectedOption.value });
   };
 
+  /**
+   * Formatea un bloque de texto como lista ordenada o desordenada (viñetas).
+   */
   const handleFormatText = (field, formatType) => {
     const text = formData[field];
     if (!text.trim()) return;
@@ -137,16 +141,12 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
     setStep(1);
   };
 
-  // 🌟 FUNCIÓN HELPER PARA CERRAR EL MODAL
-  const closeConfirm = () => {
-    setConfirmDialog({ isOpen: false, message: '', onConfirm: null });
-  };
-
-  // 🌟 ACTUALIZADO: Manejo del submit final con modal personalizado y toastify
-  const handleFinalSubmit = (e) => {
+  /**
+   * Intercepta el submit para validar y solicitar confirmación al padre.
+   */
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // Validación extra: Verificar si hay preguntas múltiples sin opciones
     const hasEmptyMultipleChoice = formData.filterQuestions.some(
       (q) => q.type === 'multiple' && q.options.length === 0,
     );
@@ -162,79 +162,86 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
       ? '¿Estás seguro de guardar los cambios en esta vacante?'
       : '¿Estás seguro de publicar esta vacante? Asegúrate de que las preguntas de filtrado estén correctas.';
 
-    // 🌟 ABRIR MODAL DE CONFIRMACIÓN EN LUGAR DE window.confirm
-    setConfirmDialog({
-      isOpen: true,
-      message: confirmMessage,
-      onConfirm: async () => {
-        const token = localStorage.getItem('cms_token');
-        const currentDate = new Date();
-        const month = currentDate.toLocaleString('es-ES', { month: 'long' });
-        const year = currentDate.getFullYear();
-        const formattedDate = `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
+    onRequestConfirm(confirmMessage, executeSubmit);
+  };
 
-        const convertToArray = (text) => {
-          return text
-            .split('\n')
-            .map((line) => line.replace(/^[\d\.\•\-\s]+/, '').trim())
-            .filter((line) => line !== '');
-        };
+  /**
+   * Ejecuta la petición al servidor tras la confirmación del usuario.
+   */
+  const executeSubmit = async () => {
+    setIsSubmitting(true);
+    const token = localStorage.getItem('cms_token');
 
-        const dataToSend = {
-          ...formData,
-          category: 'General',
-          date: formattedDate,
-          responsibilities: convertToArray(formData.responsibilities),
-          requirements: convertToArray(formData.requirements),
-          benefits: convertToArray(formData.benefits),
-          questions: formData.filterQuestions,
-        };
+    if (!token) {
+      toast.error('Sesión expirada. Por favor, vuelve a iniciar sesión.');
+      setIsSubmitting(false);
+      return;
+    }
 
-        try {
-          const url = jobToEdit
-            ? `http://localhost:5000/api/jobs/${jobToEdit.id}`
-            : 'http://localhost:5000/api/jobs';
+    const currentDate = new Date();
+    const month = currentDate.toLocaleString('es-ES', { month: 'long' });
+    const year = currentDate.getFullYear();
+    const formattedDate = `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
 
-          const method = jobToEdit ? 'PUT' : 'POST';
+    const convertToArray = (text) => {
+      return text
+        .split('\n')
+        .map((line) => line.replace(/^[\d\.\•\-\s]+/, '').trim())
+        .filter((line) => line !== '');
+    };
 
-          const response = await fetch(url, {
-            method: method,
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(dataToSend),
-          });
+    const dataToSend = {
+      ...formData,
+      category: 'General',
+      date: formattedDate,
+      responsibilities: convertToArray(formData.responsibilities),
+      requirements: convertToArray(formData.requirements),
+      benefits: convertToArray(formData.benefits),
+      questions: formData.filterQuestions,
+    };
 
-          if (response.ok) {
-            toast.success(
-              jobToEdit
-                ? 'Vacante actualizada con éxito'
-                : 'Vacante publicada con éxito',
-            );
-            onSubmitSuccess();
-          } else {
-            toast.error('Hubo un error al procesar la vacante.');
-          }
-        } catch (error) {
-          console.error('Error al guardar:', error);
-          toast.error('Error de conexión con el servidor.');
-        }
-      },
-    });
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const url = jobToEdit
+        ? `${baseUrl}/api/jobs/${jobToEdit.id}`
+        : `${baseUrl}/api/jobs`;
+      const method = jobToEdit ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (response.ok) {
+        toast.success(
+          jobToEdit
+            ? 'Vacante actualizada con éxito'
+            : 'Vacante publicada con éxito',
+        );
+        onSubmitSuccess();
+      } else {
+        const errorData = await response.json();
+        toast.error(`Error al procesar: ${errorData.message || 'Desconocido'}`);
+      }
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      toast.error('Error de conexión con el servidor.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className='cms-job-form'>
-      {/* HEADER COMPARTIDO */}
       <div className='cms-job-form__header-fixed'>
         <h2>{step === 1 ? 'Nueva Vacante' : 'Preguntas Filtro'}</h2>
         <span className='cms-job-form__step-indicator'>Paso {step} de 2</span>
       </div>
 
-      {/* ==============================================
-          PASO 1: DATOS DEL PUESTO
-          ============================================== */}
       {step === 1 && (
         <form
           className='cms-job-form__step-wrapper'
@@ -259,8 +266,8 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
                   <label>Modalidad</label>
                   <Select
                     name='type'
-                    options={typeOptions}
-                    value={typeOptions.find(
+                    options={jobOptions.types}
+                    value={jobOptions.types.find(
                       (opt) => opt.value === formData.type,
                     )}
                     onChange={handleSelectChange}
@@ -272,8 +279,8 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
                   <label>Sede</label>
                   <Select
                     name='country'
-                    options={countryOptions}
-                    value={countryOptions.find(
+                    options={jobOptions.countries}
+                    value={jobOptions.countries.find(
                       (opt) => opt.value === formData.country,
                     )}
                     onChange={handleSelectChange}
@@ -397,13 +404,10 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
         </form>
       )}
 
-      {/* ==============================================
-          PASO 2: PREGUNTAS FILTRO
-          ============================================== */}
       {step === 2 && (
         <form
           className='cms-job-form__step-wrapper'
-          onSubmit={handleFinalSubmit}
+          onSubmit={handleFormSubmit}
         >
           <div className='cms-job-form__scroll-area'>
             <FilterQuestions
@@ -419,59 +423,20 @@ const JobForm = ({ onSubmitSuccess, onCancel, jobToEdit }) => {
               type='button'
               className='btn-cancel'
               onClick={handlePrevStep}
+              disabled={isSubmitting}
             >
               <ArrowLeft size={16} /> Atrás
             </button>
             <button
               type='submit'
               className='btn-submit'
+              disabled={isSubmitting}
             >
-              <CheckCircle2 size={16} /> Publicar Vacante
+              <CheckCircle2 size={16} />{' '}
+              {isSubmitting ? 'Guardando...' : 'Publicar Vacante'}
             </button>
           </div>
         </form>
-      )}
-
-      {/* 🌟 MODAL DE CONFIRMACIÓN PERSONALIZADO 🌟 */}
-      {confirmDialog.isOpen && (
-        <div
-          className='cms-confirm-overlay'
-          onClick={closeConfirm}
-        >
-          <div
-            className='cms-confirm-modal'
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className='cms-confirm-modal__icon'>
-              <AlertTriangle
-                size={32}
-                strokeWidth={2}
-              />
-            </div>
-            <h3>Confirmar Acción</h3>
-            <p>{confirmDialog.message}</p>
-
-            <div className='cms-confirm-modal__actions'>
-              <button
-                type='button'
-                className='btn-cancel'
-                onClick={closeConfirm}
-              >
-                Cancelar
-              </button>
-              <button
-                type='button'
-                className='btn-confirm'
-                onClick={() => {
-                  confirmDialog.onConfirm();
-                  closeConfirm();
-                }}
-              >
-                Aceptar
-              </button>
-            </div>
-          </div>
-        </div>
       )}
     </div>
   );

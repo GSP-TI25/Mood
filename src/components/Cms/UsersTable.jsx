@@ -1,16 +1,25 @@
-//src/components/Cms/UserTable.jsx
+// src/components/Cms/UsersTable.jsx
 import { useState } from 'react';
 import {
   Edit,
-  ShieldAlert,
   ShieldCheck,
   UserPlus,
   Ban,
-  UserStar,
+  UserCheck,
   ShieldUser,
 } from 'lucide-react';
 import './UsersTable.scss';
 
+/**
+ * Componente UsersTable.
+ * Tabla de datos paginada para la gestión de accesos y roles de usuarios.
+ *
+ * @param {Object} props
+ * @param {Array} props.users - Lista de usuarios a renderizar.
+ * @param {Function} props.onEdit - Callback ejecutado al hacer clic en editar usuario.
+ * @param {Function} props.onToggleStatus - Callback ejecutado para activar/desactivar (dar de baja) un usuario.
+ * @param {Function} props.onAddUser - Callback ejecutado al solicitar la creación de un usuario.
+ */
 const UsersTable = ({ users, onEdit, onToggleStatus, onAddUser }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -20,6 +29,9 @@ const UsersTable = ({ users, onEdit, onToggleStatus, onAddUser }) => {
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(users.length / itemsPerPage);
 
+  /**
+   * Formatea una cadena de fecha a un formato legible en español.
+   */
   const formatDate = (dateString) => {
     if (!dateString) return '---';
     const date = new Date(dateString);
@@ -32,7 +44,6 @@ const UsersTable = ({ users, onEdit, onToggleStatus, onAddUser }) => {
 
   return (
     <div className='settings-view'>
-      {/* 🌟 Header de la tabla con el botón de agregar */}
       <div className='settings-header-bar'>
         <div>
           <h2 className='settings-title'>Gestión de Accesos</h2>
@@ -49,89 +60,111 @@ const UsersTable = ({ users, onEdit, onToggleStatus, onAddUser }) => {
         </button>
       </div>
 
-      {/* 🌟 Tabla de Usuarios */}
       <div className='cms-table-wrapper'>
         <table className='cms-table'>
           <thead>
             <tr>
-              {/* Separamos Nombre y Correo */}
               <th>Nombre</th>
               <th>Correo</th>
               <th>Rol</th>
               <th>País</th>
+              <th>Estado</th>
               <th>Última Modificación</th>
               <th style={{ textAlign: 'center' }}>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {currentUsers.length > 0 ? (
-              currentUsers.map((user) => (
-                <tr key={user.id}>
-                  {/* Columna Nombre */}
-                  <td>
-                    <span className='font-medium'>
-                      {user.first_name} {user.last_name}
-                    </span>
-                  </td>
+              currentUsers.map((user) => {
+                // Validación para BD antiguas que no tengan el campo, asumimos true por defecto.
+                const isActive = user.is_active !== false;
 
-                  {/* Columna Correo */}
-                  <td>
-                    <span className='user-email'>{user.email}</span>
-                  </td>
-
-                  {/* Columna Rol */}
-                  <td>
-                    <span
-                      className={`badge badge--role ${user.role_name === 'SuperAdmin' ? 'superadmin' : 'gth'}`}
-                    >
-                      {user.role_name === 'SuperAdmin' ? (
-                        <ShieldUser size={14} />
-                      ) : (
-                        <ShieldCheck size={14} />
-                      )}
-                      {user.role_name || 'Sin Rol'}
-                    </span>
-                  </td>
-
-                  <td>{user.country || '---'}</td>
-
-                  <td>
-                    <div className='audit-info'>
-                      <span>{formatDate(user.updated_at)}</span>
-                      <span className='audit-creator'>
-                        Por: {user.creator_name || 'Sistema'}
+                return (
+                  <tr
+                    key={user.id}
+                    className={!isActive ? 'row--inactive' : ''}
+                  >
+                    <td>
+                      <span className='font-medium'>
+                        {user.first_name} {user.last_name}
                       </span>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td style={{ textAlign: 'center' }}>
-                    <div className='table-actions'>
-                      <button
-                        className='btn-action btn--icon-only btn--edit'
-                        onClick={() => onEdit(user)}
-                        title='Editar usuario'
-                      >
-                        <Edit size={16} />
-                      </button>
+                    <td>
+                      <span className='user-email'>{user.email}</span>
+                    </td>
 
-                      {/* Simulación de botón de desactivar cuenta */}
-                      <button
-                        className='btn-action btn--icon-only btn--deactivate'
-                        onClick={() =>
-                          onToggleStatus && onToggleStatus(user.id)
-                        }
-                        title='Desactivar acceso'
+                    <td>
+                      <span
+                        className={`badge badge--role ${
+                          user.role_name === 'SuperAdmin' ? 'superadmin' : 'gth'
+                        }`}
                       >
-                        <Ban size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
+                        {user.role_name === 'SuperAdmin' ? (
+                          <ShieldUser size={14} />
+                        ) : (
+                          <ShieldCheck size={14} />
+                        )}
+                        {user.role_name || 'Sin Rol'}
+                      </span>
+                    </td>
+
+                    <td>{user.country || '---'}</td>
+
+                    <td>
+                      <span
+                        className={`badge ${isActive ? 'badge--active' : 'badge--inactive'}`}
+                      >
+                        {isActive ? 'Activo' : 'Inactivo'}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div className='audit-info'>
+                        <span>{formatDate(user.updated_at)}</span>
+                        <br></br>
+                        <span className='audit-creator'>
+                          Por: {user.creator_name || 'Sistema'}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td style={{ textAlign: 'center' }}>
+                      <div className='table-actions'>
+                        <button
+                          className='btn-action btn--icon-only btn--edit'
+                          onClick={() => onEdit(user)}
+                          title='Editar usuario'
+                        >
+                          <Edit size={16} />
+                        </button>
+
+                        <button
+                          className={`btn-action btn--icon-only ${
+                            isActive ? 'btn--deactivate' : 'btn--activate'
+                          }`}
+                          onClick={() =>
+                            onToggleStatus && onToggleStatus(user.id)
+                          }
+                          title={
+                            isActive ? 'Desactivar acceso' : 'Reactivar acceso'
+                          }
+                        >
+                          {isActive ? (
+                            <Ban size={16} />
+                          ) : (
+                            <UserCheck size={16} />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td
-                  colSpan='6'
+                  colSpan='7'
                   className='cms-table__empty'
                 >
                   No hay usuarios registrados en el sistema.

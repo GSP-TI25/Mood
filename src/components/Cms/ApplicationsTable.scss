@@ -1,4 +1,4 @@
-//src/components/Cms/ApplicationsTable.scss
+// src/components/Cms/ApplicationsTable.scss
 @use '../../styles/variables' as *;
 
 .applications-view {
@@ -8,9 +8,6 @@
   width: 100%;
 }
 
-/* =========================================
-   BARRA DE FILTROS SUPERIOR
-   ========================================= */
 .app-filters-bar {
   display: flex;
   flex-wrap: wrap;
@@ -18,10 +15,10 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: $blanco;
+  border: 1px solid $slate-200;
   border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba($negro, 0.05);
 }
 
 .app-filters-left {
@@ -34,7 +31,7 @@
 .app-filters-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Separación entre el botón Exportar y Guardar */
+  gap: 0.5rem;
 }
 
 .filter-group {
@@ -45,19 +42,19 @@
   label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #64748b;
+    color: $slate-500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   input[type='date'] {
     padding: 0.4rem 0.75rem;
-    height: 36px; /* Altura Shadcn */
-    border: 1px solid #cbd5e1;
+    height: 36px;
+    border: 1px solid $slate-300;
     border-radius: 6px;
     font-size: 0.875rem;
-    color: #0f172a;
-    background-color: #ffffff;
+    color: $slate-900;
+    background-color: $blanco;
     outline: none;
     min-width: 150px;
     font-family: inherit;
@@ -67,8 +64,8 @@
       box-shadow 0.2s;
 
     &:focus {
-      border-color: #0f172a;
-      box-shadow: 0 0 0 1px #0f172a;
+      border-color: $slate-900;
+      box-shadow: 0 0 0 1px $slate-900;
     }
 
     &::-webkit-calendar-picker-indicator {
@@ -82,9 +79,6 @@
   }
 }
 
-/* =========================================
-   BOTONES ESTILO SHADCN
-   ========================================= */
 .btn-shadcn-ghost {
   display: inline-flex;
   align-items: center;
@@ -94,7 +88,7 @@
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #64748b;
+  color: $slate-500;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -104,8 +98,8 @@
   height: 36px;
 
   &:hover {
-    background-color: #f1f5f9;
-    color: #0f172a;
+    background-color: $slate-100;
+    color: $slate-900;
   }
 }
 
@@ -119,14 +113,14 @@
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  color: $slate-900;
+  background-color: $blanco;
+  border: 1px solid $slate-200;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f8fafc;
+    background-color: $slate-50;
   }
 }
 
@@ -142,23 +136,19 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
-  /* Transición suave para todos los estados */
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-
-  /* Botón activo */
-  background-color: #0f172a;
-  color: #ffffff;
+  background-color: $slate-900;
+  color: $blanco;
 
   &:hover:not(:disabled) {
-    background-color: #1e293b;
+    background-color: $slate-800;
   }
 
-  /* Botón desactivado (sin saltos bruscos) */
   &:disabled {
-    background-color: #f1f5f9;
-    color: #94a3b8;
+    background-color: $slate-100;
+    color: $slate-400;
     cursor: not-allowed;
   }
 
@@ -167,14 +157,11 @@
   }
 }
 
-/* =========================================
-   TABLA DE POSTULANTES
-   ========================================= */
 .cms-table-wrapper {
-  background-color: #ffffff;
+  background-color: $blanco;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid $slate-200;
+  box-shadow: 0 1px 2px 0 rgba($negro, 0.05);
   overflow: hidden;
   width: 100%;
 }
@@ -188,7 +175,7 @@
   th,
   td {
     padding: 0.875rem 1.25rem;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid $slate-200;
   }
 
   tr:last-child td {
@@ -196,29 +183,29 @@
   }
 
   th {
-    background-color: #ffffff;
+    background-color: $blanco;
     font-weight: 500;
-    color: #64748b;
+    color: $slate-500;
     font-size: 0.85rem;
   }
 
   td {
-    color: #334155;
+    color: $slate-700;
   }
   .font-medium {
     font-weight: 500;
-    color: #0f172a;
+    color: $slate-900;
   }
   &__empty {
     text-align: center;
     padding: 4rem;
-    color: #64748b;
+    color: $slate-500;
   }
 
   tbody tr {
     transition: background-color 0.2s ease;
     &:hover {
-      background-color: #f8fafc;
+      background-color: $slate-50;
     }
   }
 }
@@ -232,9 +219,9 @@
   font-size: 0.75rem;
   font-weight: 500;
   width: max-content;
-  border: 1px solid #e2e8f0;
-  background-color: #ffffff;
-  color: #334155;
+  border: 1px solid $slate-200;
+  background-color: $blanco;
+  color: $slate-700;
 
   &::before {
     content: '';
@@ -242,8 +229,8 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #3b82f6;
-    box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+    background-color: $info-blue;
+    box-shadow: 0 0 4px rgba($info-blue, 0.4);
   }
 }
 
@@ -253,7 +240,7 @@
   gap: 0.2rem;
   .app-date {
     font-size: 0.75rem;
-    color: #64748b;
+    color: $slate-500;
   }
 }
 
@@ -267,11 +254,11 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.85rem;
-  color: #475569;
+  color: $slate-600;
   text-decoration: none;
   transition: color 0.2s;
   &:hover {
-    color: #0f172a;
+    color: $slate-900;
   }
 }
 
@@ -281,21 +268,18 @@
   gap: 0.4rem;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #10b981;
-  background-color: #ecfdf5;
+  color: $brand-whatsapp-text;
+  background-color: $brand-whatsapp-bg;
   padding: 0.35rem 0.6rem;
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
   &:hover {
-    background-color: #d1fae5;
-    color: #059669;
+    background-color: $brand-whatsapp-hover-bg;
+    color: $brand-whatsapp-hover-text;
   }
 }
 
-/* =========================================
-   ENLACES (Nuevos Icon Chips)
-   ========================================= */
 .app-links-row {
   display: flex;
   justify-content: center;
@@ -309,44 +293,41 @@
   width: 32px;
   height: 32px;
   border-radius: 6px;
-  background-color: #f1f5f9;
-  color: #64748b;
+  background-color: $slate-100;
+  color: $slate-500;
   text-decoration: none;
   border: 1px solid transparent;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #e2e8f0;
-    color: #0f172a;
+    background-color: $slate-200;
+    color: $slate-900;
   }
 
   &.linkedin:hover {
-    color: #0a66c2;
-    background-color: #e0f2fe;
-    border-color: #bae6fd;
+    color: $brand-linkedin-text;
+    background-color: $brand-linkedin-bg;
+    border-color: $brand-linkedin-border;
   }
 
   &.github:hover {
-    color: #181717;
-    background-color: #e2e8f0;
-    border-color: #cbd5e1;
+    color: $brand-github-text;
+    background-color: $slate-200;
+    border-color: $slate-300;
   }
 
   &.portfolio:hover {
-    color: #db2777;
-    background-color: #fce7f3;
-    border-color: #fbcfe8;
+    color: $brand-portfolio-text;
+    background-color: $brand-portfolio-bg;
+    border-color: $brand-portfolio-border;
   }
 }
 
 .no-data {
-  color: #94a3b8;
+  color: $slate-400;
   font-size: 0.85rem;
 }
 
-/* =========================================
-   ACCIONES (Icon Buttons Estilo Shadcn)
-   ========================================= */
 .btn-action {
   display: inline-flex;
   align-items: center;
@@ -361,7 +342,7 @@
     padding: 0.4rem;
   }
   &.btn--view-cv {
-    color: #3b82f6;
+    color: $info-blue;
     &:hover {
       background-color: #eff6ff;
       color: #2563eb;
@@ -376,30 +357,27 @@
   }
 }
 
-/* =========================================
-   PAGINACIÓN Y MODALES
-   ========================================= */
 .cms-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 1rem 0;
-  border-top: 1px solid #e2e8f0;
-  background: #ffffff;
+  border-top: 1px solid $slate-200;
+  background: $blanco;
 
   button {
     background: transparent;
-    border: 1px solid #e2e8f0;
+    border: 1px solid $slate-200;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     font-size: 0.85rem;
-    color: #0f172a;
+    color: $slate-900;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
     &:hover:not(:disabled) {
-      background: #f8fafc;
+      background: $slate-50;
     }
     &:disabled {
       opacity: 0.4;
@@ -408,18 +386,15 @@
   }
   span {
     font-size: 0.85rem;
-    color: #64748b;
+    color: $slate-500;
     font-weight: 500;
   }
 }
 
 .cms-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(15, 23, 42, 0.4);
+  inset: 0;
+  background-color: rgba($slate-900, 0.4);
   backdrop-filter: blur(2px);
   z-index: 2000;
   display: flex;
@@ -429,11 +404,11 @@
 }
 
 .cms-modal-content {
-  background-color: #ffffff;
+  background-color: $blanco;
   width: 90%;
   max-width: 600px;
   border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba($negro, 0.1);
   display: flex;
   flex-direction: column;
   max-height: 90vh;
@@ -452,30 +427,32 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid #e2e8f0;
-  background-color: #ffffff;
+  border-bottom: 1px solid $slate-200;
+  background-color: $blanco;
 
   h3 {
     margin: 0 0 0.25rem 0;
     font-size: 1.15rem;
-    color: #0f172a;
+    color: $slate-900;
     font-weight: 600;
   }
   p {
     margin: 0;
     font-size: 0.85rem;
-    color: #64748b;
+    color: $slate-500;
   }
+
   .modal-header-actions {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
+
   .btn-download-icon,
   .btn-close {
     background: transparent;
     border: none;
-    color: #64748b;
+    color: $slate-500;
     cursor: pointer;
     padding: 0;
     display: flex;
@@ -484,11 +461,11 @@
       color 0.2s,
       transform 0.2s;
     &:hover {
-      color: #0f172a;
+      color: $slate-900;
     }
   }
   .btn-close:hover {
-    color: #dc2626;
+    color: $error-red;
   }
 }
 
@@ -500,7 +477,7 @@
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba($negro, 0.15);
     border-radius: 10px;
   }
 }
@@ -515,7 +492,7 @@
   height: 100%;
   flex: 1;
   border: none;
-  background-color: #f8fafc;
+  background-color: $slate-50;
 }
 
 .loading-answers {
@@ -524,11 +501,11 @@
   align-items: center;
   justify-content: center;
   padding: 4rem 0;
-  color: #64748b;
+  color: $slate-500;
   .spinner-icon {
     animation: spin 1s linear infinite;
     margin-bottom: 1rem;
-    color: #0f172a;
+    color: $slate-900;
   }
 }
 
@@ -544,27 +521,27 @@
   .q-label {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #0f172a;
+    color: $slate-900;
     line-height: 1.4;
     .q-number {
-      color: #64748b;
+      color: $slate-500;
       margin-right: 0.25rem;
     }
   }
   .a-text {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background-color: $slate-50;
+    border: 1px solid $slate-200;
     padding: 1rem 1.25rem;
     border-radius: 8px;
     font-size: 0.9rem;
-    color: #334155;
+    color: $slate-700;
     line-height: 1.6;
     white-space: pre-wrap;
   }
 }
 .no-questions-msg {
   text-align: center;
-  color: #64748b;
+  color: $slate-500;
   padding: 2rem 0;
 }
 

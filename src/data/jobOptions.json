@@ -1,0 +1,12 @@
+{
+  "types": [
+    { "value": "Full-time", "label": "Full-time" },
+    { "value": "Part-time", "label": "Part-time" },
+    { "value": "Freelance", "label": "Freelance" },
+    { "value": "Híbrido", "label": "Híbrido" }
+  ],
+  "countries": [
+    { "value": "Peru", "label": "Perú" },
+    { "value": "Colombia", "label": "Colombia" }
+  ]
+}
